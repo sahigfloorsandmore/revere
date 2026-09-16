@@ -226,7 +226,7 @@ export default function Services() {
                     className="btn btn-primary service-book-btn"
                   >
                     <Calendar size={16} />
-                    <span>Book on JaneApp</span>
+                    <span>Book Treatment Online</span>
                     <ExternalLink size={13} className="external-link-icon" />
                   </a>
                 </div>

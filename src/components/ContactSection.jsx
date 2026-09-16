@@ -80,13 +80,13 @@ export default function ContactSection() {
         <div className="contact-layout">
           {/* Left Column: Direct Info & Booking Direct Banner */}
           <div className="contact-info-column">
-            {/* JaneApp Fast Booking Alert Box */}
-            <div className="jane-fast-box glass-card">
+            {/* Fast Online Booking Alert Box */}
+            <div className="fast-booking-box glass-card">
               <div className="fast-box-header">
                 <Calendar className="fast-icon text-gold" size={24} />
                 <div>
                   <h4>Looking to Schedule an Appointment?</h4>
-                  <p>Our online JaneApp portal provides real-time calendar availability and instant confirmations.</p>
+                  <p>Our online scheduling portal provides real-time calendar availability and instant confirmations.</p>
                 </div>
               </div>
               <a 
@@ -96,7 +96,7 @@ export default function ContactSection() {
                 className="btn btn-gold fast-book-btn"
               >
                 <Calendar size={18} />
-                <span>Open JaneApp Booking Portal</span>
+                <span>Book Online Instantly</span>
                 <ExternalLink size={14} />
               </a>
             </div>
@@ -309,7 +309,7 @@ export default function ContactSection() {
           gap: 20px;
         }
 
-        .jane-fast-box {
+        .fast-booking-box {
           padding: 28px;
           background: linear-gradient(135deg, #1b4332 0%, #2d6a4f 100%);
           color: #ffffff;

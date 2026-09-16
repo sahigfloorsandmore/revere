@@ -37,7 +37,7 @@ export default function Policies() {
 
             <h4>How to Modify or Cancel Your Booking</h4>
             <ul>
-              <li><strong>Online via JaneApp:</strong> You can easily cancel or reschedule your booking through your JaneApp account up to 24 hours prior to the start time.</li>
+              <li><strong>Online Booking Portal:</strong> You can easily cancel or reschedule your booking online up to 24 hours prior to the start time.</li>
               <li><strong>By Phone:</strong> If you are within the 24-hour window or experiencing an unexpected medical emergency, please immediately call our clinic front desk at <a href="tel:6045030855" className="inline-phone">(604) 503-0855</a> or <a href="tel:2363127451" className="inline-phone">(236) 312-7451</a>.</li>
             </ul>
 
@@ -65,7 +65,7 @@ export default function Policies() {
           <div className="policy-details-text">
             <h4>Bank-Grade PCI-DSS Compliant Encryption</h4>
             <p>
-              All payment credentials entered on JaneApp are encrypted using industry-standard AES-256 bank-level security. 
+              All payment credentials entered during online scheduling are encrypted using industry-standard AES-256 bank-level security. 
               Our staff cannot view your full credit card number, and your card details are never stored on local clinic computers.
             </p>
 
@@ -93,7 +93,7 @@ export default function Policies() {
               In accordance with BC health regulatory standards, all new and returning patients must complete a confidential Health Intake Form online prior to their appointment.
             </p>
             <ul>
-              <li><strong>Automated Email Link:</strong> You will receive a secure digital intake form link via email immediately after confirming your booking on JaneApp.</li>
+              <li><strong>Automated Email Link:</strong> You will receive a secure digital intake form link via email immediately after confirming your appointment online.</li>
               <li><strong>Complete in Advance:</strong> Please submit your form at least 2 hours before arriving so your therapist can review any contraindications, surgeries, or injuries.</li>
               <li><strong>Arrive 5 Minutes Early:</strong> For your first session, please arrive 5–10 minutes early to ensure all direct billing details are registered.</li>
             </ul>
@@ -197,7 +197,7 @@ export default function Policies() {
                 className="btn btn-primary"
               >
                 <Calendar size={17} />
-                <span>Agree & Book Appointment on JaneApp</span>
+                <span>Agree & Book Appointment Online</span>
               </a>
             </div>
           </div>

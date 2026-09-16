@@ -15,7 +15,7 @@ export default function FAQ() {
     },
     {
       q: 'How does ICBC direct billing work for accident recovery?',
-      a: 'If you were involved in a motor vehicle accident in BC, you are pre-approved for immediate ICBC care (including RMT massage and Physiotherapy sessions within the initial 12-week window). Simply provide your ICBC Claim Number, date of accident, and adjustor details when booking on JaneApp or at reception, and we will bill ICBC directly on your behalf.'
+      a: 'If you were involved in a motor vehicle accident in BC, you are pre-approved for immediate ICBC care (including RMT massage and Physiotherapy sessions within the initial 12-week window). Simply provide your ICBC Claim Number, date of accident, and adjustor details when booking online or at reception, and we will bill ICBC directly on your behalf.'
     },
     {
       q: 'What common health conditions do your practitioners treat?',

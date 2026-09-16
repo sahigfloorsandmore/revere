@@ -147,7 +147,7 @@ export default function Navbar() {
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   <Calendar size={18} />
-                  <span>Book on JaneApp</span>
+                  <span>Book Appointment Online</span>
                 </a>
                 <a 
                   href="tel:6045030855" 
