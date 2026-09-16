@@ -22,7 +22,19 @@ export default function AboutUs() {
             <div className="about-image-card main-card glass-card">
               <div className="card-badge">
                 <Sparkles size={14} className="text-gold" />
-                <span>Newton, Surrey Clinic</span>
+                <span>Newton, Surrey Clinic (Suite 210)</span>
+              </div>
+              <div className="about-photo-grid">
+                <img 
+                  src="/images/clinic-treatment-room.jpg" 
+                  alt="Revere Wellness Treatment Room" 
+                  className="about-thumb-img"
+                />
+                <img 
+                  src="/images/clinic-reception.jpg" 
+                  alt="Revere Wellness Reception" 
+                  className="about-thumb-img"
+                />
               </div>
               <h3 className="visual-quote">
                 "Restoring balance, alleviating tension, and empowering lifelong vitality in our community."
@@ -143,12 +155,33 @@ export default function AboutUs() {
         }
 
         .about-image-card {
-          padding: 40px;
+          padding: 36px;
           background: linear-gradient(135deg, #0d2818 0%, #1b4332 100%);
           color: #ffffff;
           border-radius: var(--radius-xl);
           border: 1px solid rgba(82, 183, 136, 0.3);
           box-shadow: 0 25px 50px -12px rgba(13, 40, 24, 0.35);
+        }
+
+        .about-photo-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 12px;
+          margin-bottom: 24px;
+        }
+
+        .about-thumb-img {
+          width: 100%;
+          height: 140px;
+          object-fit: cover;
+          border-radius: var(--radius-md);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+          transition: var(--transition);
+        }
+
+        .about-thumb-img:hover {
+          transform: scale(1.03);
         }
 
         .card-badge {

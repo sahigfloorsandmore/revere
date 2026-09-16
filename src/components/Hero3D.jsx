@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { 
   Calendar, 
   ShieldCheck, 
@@ -10,18 +10,45 @@ import {
   CreditCard,
   Play,
   Pause,
-  ExternalLink
+  ChevronLeft,
+  ChevronRight,
+  ExternalLink,
+  Camera
 } from 'lucide-react';
 
 export default function Hero3D() {
   const [isPlaying, setIsPlaying] = useState(true);
+  const [activePhotoIndex, setActivePhotoIndex] = useState(0);
   const videoRef = useRef(null);
 
   const JANEAPP_URL = "https://reverewellness.janeapp.com/";
 
-  // High quality streaming video loop for massage therapy & physiotherapy wellness
-  const VIDEO_SRC = "https://assets.mixkit.co/videos/preview/mixkit-hands-of-a-masseuse-massaging-a-person-41271-large.mp4";
-  const FALLBACK_VIDEO_SRC = "https://assets.mixkit.co/videos/preview/mixkit-masseur-giving-a-massage-to-a-client-41270-large.mp4";
+  // Authentic photos from reverewellness.ca hero carousel
+  const clinicHeroPhotos = [
+    {
+      src: "/images/clinic-reception.jpg",
+      title: "Clinic Reception & Lounge",
+      caption: "Spacious front reception and comfortable waiting lounge at Suite 210."
+    },
+    {
+      src: "/images/clinic-treatment-room.jpg",
+      title: "Private Therapy Rooms",
+      caption: "Quiet, climate-controlled treatment suites equipped with adjustable hydraulic tables."
+    },
+    {
+      src: "/images/clinic-room-bed.jpg",
+      title: "Clinical Treatment Bed & Setup",
+      caption: "Hygienic, comfortable massage table with fresh linens and peaceful ambiance."
+    }
+  ];
+
+  // Auto-advance photo carousel every 5 seconds
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActivePhotoIndex((prev) => (prev + 1) % clinicHeroPhotos.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, [clinicHeroPhotos.length]);
 
   const toggleVideoPlay = () => {
     if (videoRef.current) {
@@ -32,6 +59,14 @@ export default function Hero3D() {
       }
       setIsPlaying(!isPlaying);
     }
+  };
+
+  const nextPhoto = () => {
+    setActivePhotoIndex((prev) => (prev + 1) % clinicHeroPhotos.length);
+  };
+
+  const prevPhoto = () => {
+    setActivePhotoIndex((prev) => (prev - 1 + clinicHeroPhotos.length) % clinicHeroPhotos.length);
   };
 
   return (
@@ -45,14 +80,14 @@ export default function Hero3D() {
           loop
           muted
           playsInline
-          poster="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=1920&q=80"
+          poster="/images/clinic-reception.jpg"
         >
-          <source src={VIDEO_SRC} type="video/mp4" />
-          <source src={FALLBACK_VIDEO_SRC} type="video/mp4" />
+          <source src="https://assets.mixkit.co/videos/preview/mixkit-hands-of-a-masseuse-massaging-a-person-41271-large.mp4" type="video/mp4" />
+          <source src="https://assets.mixkit.co/videos/preview/mixkit-masseur-giving-a-massage-to-a-client-41270-large.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
         
-        {/* Luxury Dark Emerald & Charcoal Gradient Masks */}
+        {/* Luxury Dark Emerald & Charcoal Gradient Tint */}
         <div className="video-overlay-tint"></div>
         <div className="video-overlay-pattern"></div>
       </div>
@@ -136,55 +171,74 @@ export default function Hero3D() {
           </div>
         </div>
 
-        {/* Right Column: Floating Luxury Scheduling Card */}
+        {/* Right Column: Authentic Clinic Photos Showcase + Quick Booking */}
         <div className="hero-right-column">
-          <div className="booking-feature-card glass-card-dark">
-            <div className="card-top-tag">
-              <div className="status-live-dot"></div>
-              <span>Instant Online Booking on JaneApp</span>
+          {/* Clinic Photo Carousel Card */}
+          <div className="clinic-photo-card glass-card-dark">
+            <div className="photo-card-header">
+              <div className="photo-badge">
+                <Camera size={15} className="text-gold" />
+                <span>Inside Our Surrey Clinic</span>
+              </div>
+              <div className="photo-nav-arrows">
+                <button onClick={prevPhoto} aria-label="Previous photo" className="arrow-btn">
+                  <ChevronLeft size={16} />
+                </button>
+                <span className="photo-counter">{activePhotoIndex + 1}/{clinicHeroPhotos.length}</span>
+                <button onClick={nextPhoto} aria-label="Next photo" className="arrow-btn">
+                  <ChevronRight size={16} />
+                </button>
+              </div>
             </div>
 
-            <h3 className="card-heading">Ready for Relief & Restoration?</h3>
-            <p className="card-sub">
-              Select your therapist, pick your desired time slot, and confirm your session in seconds.
-            </p>
+            {/* Photo Frame */}
+            <div className="photo-frame-container">
+              <img 
+                src={clinicHeroPhotos[activePhotoIndex].src} 
+                alt={clinicHeroPhotos[activePhotoIndex].title}
+                className="clinic-active-img"
+              />
+              <div className="photo-caption-bar">
+                <strong>{clinicHeroPhotos[activePhotoIndex].title}</strong>
+                <p>{clinicHeroPhotos[activePhotoIndex].caption}</p>
+              </div>
+            </div>
 
-            <ul className="card-perks-list">
-              <li>
-                <CheckCircle2 size={16} className="perk-check" />
-                <span><strong>No upfront charge</strong> (card on file for 24h cancellation)</span>
-              </li>
-              <li>
-                <CheckCircle2 size={16} className="perk-check" />
-                <span><strong>Direct insurance billing</strong> submitted on checkout</span>
-              </li>
-              <li>
-                <CheckCircle2 size={16} className="perk-check" />
-                <span><strong>Zero-tolerance</strong> safe, licensed & clinical environment</span>
-              </li>
-            </ul>
+            {/* Photo Dots */}
+            <div className="photo-dots-row">
+              {clinicHeroPhotos.map((_, idx) => (
+                <button
+                  key={idx}
+                  className={`photo-dot ${activePhotoIndex === idx ? 'active-dot' : ''}`}
+                  onClick={() => setActivePhotoIndex(idx)}
+                  aria-label={`View photo ${idx + 1}`}
+                />
+              ))}
+            </div>
 
-            <a 
-              href={JANEAPP_URL} 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="btn btn-gold card-book-btn"
-            >
-              <Calendar size={18} />
-              <span>Select Therapist on JaneApp</span>
-              <ExternalLink size={14} className="ext-icon" />
-            </a>
-
-            {/* Video Controls Toggle */}
-            <div className="video-control-strip">
-              <button 
-                onClick={toggleVideoPlay} 
-                className="video-toggle-btn"
-                title={isPlaying ? "Pause video background" : "Play video background"}
+            {/* Instant Booking Action */}
+            <div className="photo-card-action">
+              <a 
+                href={JANEAPP_URL} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="btn btn-gold hero-card-book-btn"
               >
-                {isPlaying ? <Pause size={14} /> : <Play size={14} />}
-                <span>{isPlaying ? 'Pause Background Video' : 'Play Background Video'}</span>
-              </button>
+                <Calendar size={18} />
+                <span>Book a Session in This Clinic</span>
+                <ExternalLink size={14} />
+              </a>
+
+              <div className="video-control-row">
+                <button 
+                  onClick={toggleVideoPlay} 
+                  className="video-toggle-link"
+                  title={isPlaying ? "Pause background video" : "Play background video"}
+                >
+                  {isPlaying ? <Pause size={13} /> : <Play size={13} />}
+                  <span>{isPlaying ? 'Pause video' : 'Play video'}</span>
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -196,7 +250,7 @@ export default function Hero3D() {
           min-height: calc(100vh - 120px);
           display: flex;
           align-items: center;
-          padding: 80px 0 110px 0;
+          padding: 70px 0 100px 0;
           overflow: hidden;
           background: #0d2818;
           color: #ffffff;
@@ -215,7 +269,7 @@ export default function Hero3D() {
           height: 100%;
           object-fit: cover;
           object-position: center;
-          filter: brightness(0.65) contrast(1.1);
+          filter: brightness(0.6) contrast(1.1);
           transform: scale(1.02);
         }
 
@@ -224,9 +278,9 @@ export default function Hero3D() {
           inset: 0;
           background: linear-gradient(
             135deg, 
-            rgba(13, 40, 24, 0.90) 0%, 
-            rgba(10, 13, 14, 0.78) 60%, 
-            rgba(27, 67, 50, 0.72) 100%
+            rgba(13, 40, 24, 0.92) 0%, 
+            rgba(10, 13, 14, 0.82) 60%, 
+            rgba(27, 67, 50, 0.78) 100%
           );
         }
 
@@ -242,8 +296,8 @@ export default function Hero3D() {
           position: relative;
           z-index: 2;
           display: grid;
-          grid-template-columns: 1.25fr 0.85fr;
-          gap: 50px;
+          grid-template-columns: 1.25fr 0.95fr;
+          gap: 48px;
           align-items: center;
         }
 
@@ -272,7 +326,7 @@ export default function Hero3D() {
         }
 
         .hero-heading {
-          font-size: clamp(2.6rem, 5vw, 4rem);
+          font-size: clamp(2.5rem, 4.8vw, 3.8rem);
           line-height: 1.12;
           color: #ffffff;
           margin-bottom: 20px;
@@ -287,10 +341,10 @@ export default function Hero3D() {
         }
 
         .hero-lead {
-          font-size: 1.15rem;
+          font-size: 1.12rem;
           color: #d8f3dc;
           line-height: 1.7;
-          margin-bottom: 36px;
+          margin-bottom: 34px;
           opacity: 0.95;
         }
 
@@ -298,7 +352,7 @@ export default function Hero3D() {
           display: flex;
           align-items: center;
           gap: 16px;
-          margin-bottom: 44px;
+          margin-bottom: 40px;
           flex-wrap: wrap;
         }
 
@@ -366,98 +420,153 @@ export default function Hero3D() {
           color: #b7e4c7;
         }
 
-        /* Right Column Feature Card */
-        .booking-feature-card {
-          padding: 36px;
+        /* Clinic Photo Card */
+        .clinic-photo-card {
+          padding: 24px;
           border-radius: var(--radius-xl);
-          background: rgba(18, 24, 27, 0.82);
+          background: rgba(18, 24, 27, 0.85);
           backdrop-filter: blur(20px);
           -webkit-backdrop-filter: blur(20px);
-          border: 1px solid rgba(255, 255, 255, 0.15);
-          box-shadow: 0 30px 60px rgba(0, 0, 0, 0.45);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
         }
 
-        .card-top-tag {
+        .photo-card-header {
           display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 16px;
+        }
+
+        .photo-badge {
+          display: inline-flex;
           align-items: center;
           gap: 8px;
           font-size: 0.82rem;
           font-weight: 700;
-          color: #74c69d;
+          color: #e9c46a;
           text-transform: uppercase;
           letter-spacing: 0.08em;
-          margin-bottom: 16px;
         }
 
-        .status-live-dot {
+        .photo-nav-arrows {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+        }
+
+        .arrow-btn {
+          width: 28px;
+          height: 28px;
+          border-radius: 50%;
+          background: rgba(255, 255, 255, 0.12);
+          color: #ffffff;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: var(--transition);
+        }
+
+        .arrow-btn:hover {
+          background: #388242;
+        }
+
+        .photo-counter {
+          font-size: 0.78rem;
+          color: #a1b0a6;
+          font-weight: 600;
+        }
+
+        .photo-frame-container {
+          position: relative;
+          width: 100%;
+          height: 250px;
+          border-radius: var(--radius-md);
+          overflow: hidden;
+          background: #000;
+          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        .clinic-active-img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: transform 0.4s ease;
+        }
+
+        .clinic-active-img:hover {
+          transform: scale(1.03);
+        }
+
+        .photo-caption-bar {
+          position: absolute;
+          bottom: 0;
+          inset-x: 0;
+          padding: 12px 16px;
+          background: linear-gradient(180deg, transparent 0%, rgba(10, 13, 14, 0.9) 100%);
+        }
+
+        .photo-caption-bar strong {
+          display: block;
+          font-size: 0.94rem;
+          color: #ffffff;
+        }
+
+        .photo-caption-bar p {
+          font-size: 0.78rem;
+          color: #dce4de;
+          margin: 2px 0 0 0;
+        }
+
+        .photo-dots-row {
+          display: flex;
+          justify-content: center;
+          gap: 8px;
+          margin: 16px 0;
+        }
+
+        .photo-dot {
           width: 8px;
           height: 8px;
           border-radius: 50%;
-          background: #52b788;
-          box-shadow: 0 0 10px #52b788;
+          background: rgba(255, 255, 255, 0.25);
+          transition: var(--transition);
         }
 
-        .card-heading {
-          font-size: 1.45rem;
-          color: #ffffff;
-          margin-bottom: 8px;
+        .photo-dot.active-dot {
+          background: #e9c46a;
+          width: 24px;
+          border-radius: 4px;
         }
 
-        .card-sub {
-          font-size: 0.92rem;
-          color: #dce4de;
-          line-height: 1.55;
-          margin-bottom: 22px;
-        }
-
-        .card-perks-list {
-          list-style: none;
+        .photo-card-action {
           display: flex;
           flex-direction: column;
           gap: 12px;
-          margin-bottom: 28px;
         }
 
-        .card-perks-list li {
-          display: flex;
-          align-items: flex-start;
-          gap: 10px;
-          font-size: 0.88rem;
-          color: #f2f9f5;
-          line-height: 1.45;
-        }
-
-        .perk-check {
-          color: #52b788;
-          flex-shrink: 0;
-          margin-top: 2px;
-        }
-
-        .card-book-btn {
+        .hero-card-book-btn {
           width: 100%;
-          padding: 15px;
-          font-size: 1.02rem;
+          padding: 14px;
+          font-size: 0.98rem;
           font-weight: 700;
-          margin-bottom: 18px;
         }
 
-        .video-control-strip {
+        .video-control-row {
           display: flex;
           justify-content: center;
-          border-top: 1px solid rgba(255, 255, 255, 0.1);
-          padding-top: 14px;
         }
 
-        .video-toggle-btn {
+        .video-toggle-link {
           display: inline-flex;
           align-items: center;
           gap: 6px;
-          font-size: 0.78rem;
+          font-size: 0.76rem;
           color: #a1b0a6;
           transition: var(--transition);
         }
 
-        .video-toggle-btn:hover {
+        .video-toggle-link:hover {
           color: #ffffff;
         }
 
@@ -478,6 +587,9 @@ export default function Hero3D() {
           .hero-trust-bar {
             grid-template-columns: 1fr;
             gap: 14px;
+          }
+          .photo-frame-container {
+            height: 200px;
           }
         }
       `}</style>

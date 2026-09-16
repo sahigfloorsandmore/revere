@@ -56,22 +56,11 @@ export default function Navbar() {
         <div className="nav-wrapper nav-container">
           {/* Official Brand Logo */}
           <a href="#" className="brand-logo">
-            <div className="brand-logo-badge">
-              <svg className="revere-sun-svg" viewBox="0 0 120 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                {/* Sun rays radiating out */}
-                <line x1="28" y1="26" x2="16" y2="12" stroke="white" strokeWidth="6" strokeLinecap="round"/>
-                <line x1="46" y1="18" x2="46" y2="2" stroke="white" strokeWidth="6" strokeLinecap="round"/>
-                <line x1="64" y1="26" x2="76" y2="12" stroke="white" strokeWidth="6" strokeLinecap="round"/>
-                {/* Spiral R symbol */}
-                <path d="M52 46 C52 38 60 34 68 34 C76 34 84 40 84 48 C84 56 76 62 68 62 H44 V86" stroke="white" strokeWidth="7" strokeLinecap="round" strokeLinejoin="round"/>
-                <path d="M66 62 L82 86" stroke="white" strokeWidth="7" strokeLinecap="round"/>
-                <circle cx="52" cy="62" r="24" stroke="white" strokeWidth="6" strokeDasharray="120 40" strokeLinecap="round"/>
-              </svg>
-            </div>
-            <div className="brand-text">
-              <span className="brand-name">Revere</span>
-              <span className="brand-sub">Massage & Wellness</span>
-            </div>
+            <img 
+              src="/images/revere-logo.png" 
+              alt="Revere Massage & Wellness" 
+              className="brand-logo-img"
+            />
           </a>
 
           {/* Desktop Nav Links */}
@@ -252,46 +241,22 @@ export default function Navbar() {
           gap: 20px;
         }
 
-        /* Brand Logo with Green Badge */
+        /* Brand Logo with Official Header Image */
         .brand-logo {
           display: flex;
           align-items: center;
-          gap: 12px;
           flex-shrink: 0;
         }
-        .brand-logo-badge {
-          width: 44px;
-          height: 44px;
-          border-radius: 10px;
-          background: #388242;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          padding: 6px;
-          box-shadow: 0 4px 12px rgba(56, 130, 66, 0.35);
+        .brand-logo-img {
+          height: 52px;
+          width: auto;
+          object-fit: contain;
+          border-radius: 6px;
+          transition: var(--transition);
         }
-        .revere-sun-svg {
-          width: 100%;
-          height: 100%;
-        }
-        .brand-text {
-          display: flex;
-          flex-direction: column;
-        }
-        .brand-name {
-          font-family: var(--font-sans);
-          font-size: 1.55rem;
-          font-weight: 800;
-          color: #0d2818;
-          line-height: 1;
-          letter-spacing: -0.02em;
-        }
-        .brand-sub {
-          font-size: 0.72rem;
-          font-weight: 600;
-          color: #388242;
-          letter-spacing: 0.06em;
-          margin-top: 3px;
+        .brand-logo-img:hover {
+          opacity: 0.95;
+          transform: scale(1.02);
         }
 
         /* Desktop Nav List */
