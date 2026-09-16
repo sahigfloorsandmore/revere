@@ -240,29 +240,30 @@ export default function Navbar() {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          height: 84px;
+          height: 90px;
           gap: 20px;
         }
 
-        /* Official Brand Logo with Green Badge */
+        /* Official Brand Logo with Enhanced Visibility */
         .brand-logo {
           display: inline-flex;
           align-items: center;
           background: #388242;
-          padding: 8px 16px;
-          border-radius: 10px;
-          box-shadow: 0 4px 14px rgba(56, 130, 66, 0.28);
+          padding: 9px 20px;
+          border-radius: 12px;
+          box-shadow: 0 4px 16px rgba(56, 130, 66, 0.32);
           transition: var(--transition);
           flex-shrink: 0;
         }
         .brand-logo:hover {
           background: #2d6a4f;
-          transform: translateY(-1px);
-          box-shadow: 0 6px 18px rgba(56, 130, 66, 0.38);
+          transform: translateY(-2px);
+          box-shadow: 0 8px 22px rgba(56, 130, 66, 0.45);
         }
         .brand-logo-img {
-          height: 36px;
+          height: 48px;
           width: auto;
+          max-width: 260px;
           object-fit: contain;
           display: block;
         }
@@ -445,6 +446,9 @@ export default function Navbar() {
           .nav-link {
             font-size: 0.88rem;
           }
+          .brand-logo-img {
+            height: 44px;
+          }
         }
 
         @media (max-width: 1040px) {
@@ -457,6 +461,12 @@ export default function Navbar() {
           .mobile-toggle-btn {
             display: block;
           }
+          .nav-container {
+            height: 80px;
+          }
+          .brand-logo-img {
+            height: 42px;
+          }
         }
 
         @media (max-width: 768px) {
@@ -468,6 +478,27 @@ export default function Navbar() {
           }
           .btn-book-header {
             padding: 9px 12px;
+          }
+          .brand-logo {
+            padding: 7px 14px;
+          }
+          .brand-logo-img {
+            height: 38px;
+            max-width: 200px;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .nav-container {
+            padding: 0 16px;
+            height: 74px;
+          }
+          .brand-logo {
+            padding: 6px 12px;
+          }
+          .brand-logo-img {
+            height: 34px;
+            max-width: 175px;
           }
         }
       `}</style>

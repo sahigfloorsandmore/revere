@@ -241,11 +241,12 @@ export default function Footer() {
 
         .footer-brand-link {
           display: inline-block;
-          margin-bottom: 18px;
+          margin-bottom: 20px;
         }
         .footer-logo-img {
-          height: 44px;
+          height: 52px;
           width: auto;
+          max-width: 280px;
           object-fit: contain;
           display: block;
         }
