@@ -7,7 +7,7 @@ import {
   Menu, 
   X, 
   ShieldCheck, 
-  Sparkles,
+  ChevronDown,
   ExternalLink
 } from 'lucide-react';
 
@@ -27,16 +27,16 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Top Announcement & Quick Contact Bar */}
+      {/* Top Notification Bar */}
       <div className="top-banner">
-        <div className="container banner-content">
+        <div className="nav-wrapper banner-content">
           <div className="banner-left">
             <span className="banner-badge">
-              <ShieldCheck size={14} className="icon-gold" /> ICBC Approved & Direct Billing Available
+              <ShieldCheck size={14} className="icon-gold" /> ICBC Approved & Direct Billing to 20+ Insurers
             </span>
-            <span className="banner-divider">|</span>
+            <span className="banner-divider">•</span>
             <span className="banner-item">
-              <Clock size={14} /> Mon–Sun: 6:30 AM – 8:00 PM
+              <Clock size={14} /> Open 7 Days: 6:30 AM – 8:00 PM
             </span>
           </div>
           <div className="banner-right">
@@ -45,24 +45,32 @@ export default function Navbar() {
             </a>
             <span className="banner-divider">|</span>
             <a href="#location" className="banner-link">
-              <MapPin size={13} /> Surrey, BC (Suite 210 - 7110 120 St)
+              <MapPin size={13} /> Suite 210 - 7110 120 St, Surrey
             </a>
           </div>
         </div>
       </div>
 
-      {/* Main Navigation Bar */}
+      {/* Main Clean Navigation Bar */}
       <header className={`navbar-header ${isScrolled ? 'navbar-scrolled' : ''}`}>
-        <div className="container nav-container">
-          {/* Brand Logo */}
+        <div className="nav-wrapper nav-container">
+          {/* Official Brand Logo */}
           <a href="#" className="brand-logo">
-            <div className="logo-symbol">
-              <div className="logo-glow"></div>
-              <Sparkles size={20} className="symbol-spark" />
+            <div className="brand-logo-badge">
+              <svg className="revere-sun-svg" viewBox="0 0 120 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                {/* Sun rays radiating out */}
+                <line x1="28" y1="26" x2="16" y2="12" stroke="white" strokeWidth="6" strokeLinecap="round"/>
+                <line x1="46" y1="18" x2="46" y2="2" stroke="white" strokeWidth="6" strokeLinecap="round"/>
+                <line x1="64" y1="26" x2="76" y2="12" stroke="white" strokeWidth="6" strokeLinecap="round"/>
+                {/* Spiral R symbol */}
+                <path d="M52 46 C52 38 60 34 68 34 C76 34 84 40 84 48 C84 56 76 62 68 62 H44 V86" stroke="white" strokeWidth="7" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M66 62 L82 86" stroke="white" strokeWidth="7" strokeLinecap="round"/>
+                <circle cx="52" cy="62" r="24" stroke="white" strokeWidth="6" strokeDasharray="120 40" strokeLinecap="round"/>
+              </svg>
             </div>
             <div className="brand-text">
-              <span className="brand-name">REVERE</span>
-              <span className="brand-tagline">MASSAGE & WELLNESS</span>
+              <span className="brand-name">Revere</span>
+              <span className="brand-sub">Massage & Wellness</span>
             </div>
           </a>
 
@@ -77,28 +85,28 @@ export default function Navbar() {
             <a href="#contact" className="nav-link">Contact</a>
           </nav>
 
-          {/* Action CTAs */}
+          {/* Right Action CTAs */}
           <div className="nav-actions">
             <a 
               href="tel:6045030855" 
-              className="btn btn-outline nav-phone-btn"
+              className="nav-phone-pill"
               title="Call Revere Wellness"
             >
-              <Phone size={16} />
+              <Phone size={15} />
               <span>(604) 503-0855</span>
             </a>
             <a 
               href={JANEAPP_URL} 
               target="_blank" 
               rel="noopener noreferrer" 
-              className="btn btn-primary nav-book-btn"
+              className="btn-book-header"
             >
-              <Calendar size={17} />
+              <Calendar size={16} />
               <span>Book Appointment</span>
-              <ExternalLink size={14} className="external-icon" />
+              <ExternalLink size={13} className="ext-icon" />
             </a>
             <button 
-              className="mobile-toggle" 
+              className="mobile-toggle-btn" 
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-label="Toggle navigation menu"
             >
@@ -114,8 +122,8 @@ export default function Navbar() {
           <div className="mobile-drawer" onClick={(e) => e.stopPropagation()}>
             <div className="drawer-header">
               <div className="brand-text">
-                <span className="brand-name">REVERE</span>
-                <span className="brand-tagline">MASSAGE & WELLNESS</span>
+                <span className="brand-name" style={{ color: '#0d2818' }}>Revere</span>
+                <span className="brand-sub" style={{ color: '#40916c' }}>Massage & Wellness</span>
               </div>
               <button 
                 className="drawer-close-btn" 
@@ -128,11 +136,11 @@ export default function Navbar() {
 
             <div className="drawer-body">
               <nav className="mobile-nav-links">
-                <a href="#services" onClick={() => setMobileMenuOpen(false)}>Treatments & Services</a>
+                <a href="#services" onClick={() => setMobileMenuOpen(false)}>Therapeutic Services</a>
                 <a href="#about" onClick={() => setMobileMenuOpen(false)}>About Our Clinic</a>
-                <a href="#insurance" onClick={() => setMobileMenuOpen(false)}>ICBC & Direct Billing</a>
+                <a href="#insurance" onClick={() => setMobileMenuOpen(false)}>Direct Billing & ICBC</a>
                 <a href="#policies" onClick={() => setMobileMenuOpen(false)}>Clinic Policies</a>
-                <a href="#location" onClick={() => setMobileMenuOpen(false)}>Location & Free Parking</a>
+                <a href="#location" onClick={() => setMobileMenuOpen(false)}>Free Parking & Location</a>
                 <a href="#faqs" onClick={() => setMobileMenuOpen(false)}>Frequently Asked Questions</a>
                 <a href="#contact" onClick={() => setMobileMenuOpen(false)}>Contact Us</a>
               </nav>
@@ -142,21 +150,23 @@ export default function Navbar() {
                   href={JANEAPP_URL} 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  className="btn btn-primary drawer-book-btn"
+                  className="btn btn-primary"
+                  style={{ width: '100%' }}
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   <Calendar size={18} />
-                  <span>Book Online via JaneApp</span>
+                  <span>Book on JaneApp</span>
                 </a>
                 <a 
                   href="tel:6045030855" 
-                  className="btn btn-outline drawer-call-btn"
+                  className="btn btn-outline"
+                  style={{ width: '100%' }}
                 >
                   <Phone size={18} />
-                  <span>Call Reception: (604) 503-0855</span>
+                  <span>Call: (604) 503-0855</span>
                 </a>
                 <div className="drawer-hours">
-                  <Clock size={14} /> Open 7 Days: 6:30 AM – 8:00 PM
+                  <Clock size={14} /> Open Mon–Sun: 6:30 AM – 8:00 PM
                 </div>
               </div>
             </div>
@@ -165,11 +175,18 @@ export default function Navbar() {
       )}
 
       <style>{`
+        .nav-wrapper {
+          width: 100%;
+          max-width: 1380px;
+          margin: 0 auto;
+          padding: 0 24px;
+        }
+
         .top-banner {
           background: #0d2818;
           color: #d8f3dc;
           font-size: 0.8rem;
-          padding: 7px 0;
+          padding: 8px 0;
           border-bottom: 1px solid rgba(82, 183, 136, 0.2);
         }
         .banner-content {
@@ -190,7 +207,7 @@ export default function Navbar() {
           font-weight: 600;
         }
         .banner-divider {
-          opacity: 0.3;
+          opacity: 0.35;
         }
         .banner-item {
           display: inline-flex;
@@ -212,53 +229,50 @@ export default function Navbar() {
           color: #e9c46a;
         }
 
+        /* Navbar Header */
         .navbar-header {
           position: sticky;
           top: 0;
           z-index: 1000;
-          background: rgba(255, 255, 255, 0.88);
+          background: rgba(255, 255, 255, 0.95);
           backdrop-filter: blur(20px);
           -webkit-backdrop-filter: blur(20px);
-          border-bottom: 1px solid rgba(27, 67, 50, 0.08);
+          border-bottom: 1px solid rgba(0, 0, 0, 0.06);
           transition: var(--transition);
         }
         .navbar-scrolled {
-          background: rgba(255, 255, 255, 0.96);
-          box-shadow: 0 10px 30px -10px rgba(13, 40, 24, 0.12);
+          background: #ffffff;
+          box-shadow: 0 8px 25px -5px rgba(0, 0, 0, 0.08);
         }
         .nav-container {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          height: 80px;
+          height: 84px;
+          gap: 20px;
         }
+
+        /* Brand Logo with Green Badge */
         .brand-logo {
           display: flex;
           align-items: center;
-          gap: 14px;
+          gap: 12px;
+          flex-shrink: 0;
         }
-        .logo-symbol {
+        .brand-logo-badge {
           width: 44px;
           height: 44px;
-          border-radius: 12px;
-          background: linear-gradient(135deg, #1b4332 0%, #2d6a4f 100%);
+          border-radius: 10px;
+          background: #388242;
           display: flex;
           align-items: center;
           justify-content: center;
-          position: relative;
-          box-shadow: 0 6px 16px rgba(45, 106, 79, 0.3);
+          padding: 6px;
+          box-shadow: 0 4px 12px rgba(56, 130, 66, 0.35);
         }
-        .logo-glow {
-          position: absolute;
-          inset: -2px;
-          border-radius: 14px;
-          background: linear-gradient(135deg, #c5a059, #52b788);
-          opacity: 0.4;
-          z-index: -1;
-          filter: blur(4px);
-        }
-        .symbol-spark {
-          color: #dfc27d;
+        .revere-sun-svg {
+          width: 100%;
+          height: 100%;
         }
         .brand-text {
           display: flex;
@@ -266,69 +280,106 @@ export default function Navbar() {
         }
         .brand-name {
           font-family: var(--font-sans);
-          font-size: 1.4rem;
+          font-size: 1.55rem;
           font-weight: 800;
-          letter-spacing: 0.12em;
-          color: var(--primary-900);
+          color: #0d2818;
           line-height: 1;
+          letter-spacing: -0.02em;
         }
-        .brand-tagline {
-          font-size: 0.68rem;
+        .brand-sub {
+          font-size: 0.72rem;
           font-weight: 600;
-          letter-spacing: 0.2em;
-          color: var(--gold-600);
+          color: #388242;
+          letter-spacing: 0.06em;
           margin-top: 3px;
         }
+
+        /* Desktop Nav List */
         .desktop-nav {
           display: flex;
           align-items: center;
-          gap: 24px;
+          gap: 22px;
+          flex-wrap: nowrap;
         }
         .nav-link {
-          font-size: 0.92rem;
+          font-size: 0.93rem;
           font-weight: 600;
-          color: var(--neutral-700);
-          transition: var(--transition);
-          position: relative;
+          color: #2b3b32;
+          white-space: nowrap;
           padding: 8px 0;
+          position: relative;
+          transition: var(--transition);
         }
         .nav-link::after {
           content: '';
           position: absolute;
           bottom: 0;
           left: 0;
-          width: 0%;
-          height: 2px;
-          background: var(--primary-600);
+          width: 0;
+          height: 2.5px;
+          background: #388242;
           transition: var(--transition);
           border-radius: 2px;
         }
         .nav-link:hover {
-          color: var(--primary-800);
+          color: #388242;
         }
         .nav-link:hover::after {
           width: 100%;
         }
+
+        /* Action Buttons */
         .nav-actions {
           display: flex;
           align-items: center;
           gap: 12px;
+          flex-shrink: 0;
         }
-        .nav-phone-btn {
-          padding: 10px 18px;
+        .nav-phone-pill {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          padding: 9px 16px;
+          border-radius: 9999px;
           font-size: 0.88rem;
+          font-weight: 600;
+          color: #1b4332;
+          background: #f0f7f3;
+          border: 1.5px solid #b7e4c7;
+          transition: var(--transition);
+          white-space: nowrap;
         }
-        .nav-book-btn {
-          padding: 11px 22px;
-          font-size: 0.9rem;
+        .nav-phone-pill:hover {
+          background: #388242;
+          color: #ffffff;
+          border-color: #388242;
         }
-        .external-icon {
-          opacity: 0.7;
-          margin-left: 2px;
+        .btn-book-header {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          padding: 10px 22px;
+          border-radius: 9999px;
+          font-size: 0.92rem;
+          font-weight: 700;
+          background: linear-gradient(135deg, #1b4332 0%, #2d6a4f 100%);
+          color: #ffffff;
+          box-shadow: 0 4px 14px rgba(27, 67, 50, 0.25);
+          transition: var(--transition);
+          white-space: nowrap;
+          border: 1px solid rgba(255, 255, 255, 0.2);
         }
-        .mobile-toggle {
+        .btn-book-header:hover {
+          background: linear-gradient(135deg, #2d6a4f 0%, #40916c 100%);
+          transform: translateY(-2px);
+          box-shadow: 0 8px 20px rgba(27, 67, 50, 0.35);
+        }
+        .ext-icon {
+          opacity: 0.75;
+        }
+        .mobile-toggle-btn {
           display: none;
-          color: var(--primary-900);
+          color: #0d2818;
           padding: 6px;
         }
 
@@ -336,7 +387,7 @@ export default function Navbar() {
         .mobile-drawer-overlay {
           position: fixed;
           inset: 0;
-          background: rgba(10, 13, 14, 0.6);
+          background: rgba(10, 13, 14, 0.65);
           backdrop-filter: blur(6px);
           z-index: 2000;
           display: flex;
@@ -345,12 +396,12 @@ export default function Navbar() {
         }
         .mobile-drawer {
           width: 100%;
-          max-width: 380px;
+          max-width: 360px;
           height: 100%;
           background: #ffffff;
           display: flex;
           flex-direction: column;
-          box-shadow: -10px 0 40px rgba(0, 0, 0, 0.2);
+          box-shadow: -10px 0 40px rgba(0, 0, 0, 0.25);
           animation: slideLeft 0.3s ease-out;
         }
         .drawer-header {
@@ -378,15 +429,15 @@ export default function Navbar() {
           gap: 16px;
         }
         .mobile-nav-links a {
-          font-size: 1.1rem;
+          font-size: 1.05rem;
           font-weight: 600;
           color: var(--neutral-800);
-          padding: 10px 0;
+          padding: 8px 0;
           border-bottom: 1px solid var(--neutral-100);
           transition: var(--transition);
         }
         .mobile-nav-links a:hover {
-          color: var(--primary-700);
+          color: #388242;
           padding-left: 6px;
         }
         .drawer-footer {
@@ -395,15 +446,12 @@ export default function Navbar() {
           gap: 12px;
           margin-top: 30px;
         }
-        .drawer-book-btn, .drawer-call-btn {
-          width: 100%;
-        }
         .drawer-hours {
           display: flex;
           align-items: center;
           justify-content: center;
           gap: 6px;
-          font-size: 0.85rem;
+          font-size: 0.82rem;
           color: var(--neutral-600);
           margin-top: 8px;
         }
@@ -417,14 +465,23 @@ export default function Navbar() {
           to { transform: translateX(0); }
         }
 
-        @media (max-width: 1024px) {
+        @media (max-width: 1200px) {
+          .desktop-nav {
+            gap: 14px;
+          }
+          .nav-link {
+            font-size: 0.88rem;
+          }
+        }
+
+        @media (max-width: 1040px) {
           .desktop-nav {
             display: none;
           }
-          .nav-phone-btn {
+          .nav-phone-pill {
             display: none;
           }
-          .mobile-toggle {
+          .mobile-toggle-btn {
             display: block;
           }
         }
@@ -433,14 +490,11 @@ export default function Navbar() {
           .banner-right {
             display: none;
           }
-          .top-banner {
-            font-size: 0.75rem;
-          }
-          .nav-book-btn span {
+          .btn-book-header span {
             display: none;
           }
-          .nav-book-btn {
-            padding: 10px 14px;
+          .btn-book-header {
+            padding: 9px 12px;
           }
         }
       `}</style>
