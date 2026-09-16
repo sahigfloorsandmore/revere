@@ -110,10 +110,13 @@ export default function Navbar() {
         <div className="mobile-drawer-overlay" onClick={() => setMobileMenuOpen(false)}>
           <div className="mobile-drawer" onClick={(e) => e.stopPropagation()}>
             <div className="drawer-header">
-              <div className="brand-text">
-                <span className="brand-name" style={{ color: '#0d2818' }}>Revere</span>
-                <span className="brand-sub" style={{ color: '#40916c' }}>Massage & Wellness</span>
-              </div>
+              <a href="#" className="brand-logo" onClick={() => setMobileMenuOpen(false)}>
+                <img 
+                  src="/images/revere-logo.png" 
+                  alt="Revere Massage & Wellness" 
+                  className="brand-logo-img"
+                />
+              </a>
               <button 
                 className="drawer-close-btn" 
                 onClick={() => setMobileMenuOpen(false)}
@@ -241,22 +244,27 @@ export default function Navbar() {
           gap: 20px;
         }
 
-        /* Brand Logo with Official Header Image */
+        /* Official Brand Logo with Green Badge */
         .brand-logo {
-          display: flex;
+          display: inline-flex;
           align-items: center;
+          background: #388242;
+          padding: 8px 16px;
+          border-radius: 10px;
+          box-shadow: 0 4px 14px rgba(56, 130, 66, 0.28);
+          transition: var(--transition);
           flex-shrink: 0;
         }
+        .brand-logo:hover {
+          background: #2d6a4f;
+          transform: translateY(-1px);
+          box-shadow: 0 6px 18px rgba(56, 130, 66, 0.38);
+        }
         .brand-logo-img {
-          height: 52px;
+          height: 36px;
           width: auto;
           object-fit: contain;
-          border-radius: 6px;
-          transition: var(--transition);
-        }
-        .brand-logo-img:hover {
-          opacity: 0.95;
-          transform: scale(1.02);
+          display: block;
         }
 
         /* Desktop Nav List */

@@ -55,15 +55,13 @@ export default function Footer() {
           <div className="footer-grid">
             {/* Column 1: Clinic Brand */}
             <div className="footer-col brand-col">
-              <div className="footer-logo">
-                <div className="logo-symbol-sm">
-                  <Sparkles size={16} className="text-gold" />
-                </div>
-                <div className="brand-text">
-                  <span className="brand-title">REVERE</span>
-                  <span className="brand-subtitle">MASSAGE & WELLNESS</span>
-                </div>
-              </div>
+              <a href="#" className="footer-brand-link">
+                <img 
+                  src="/images/revere-logo.png" 
+                  alt="Revere Massage & Wellness" 
+                  className="footer-logo-img"
+                />
+              </a>
               <p className="footer-about">
                 Newton Surrey’s dedicated multidisciplinary clinic providing high-calibre Registered Massage Therapy, 
                 Physiotherapy, IMS, and chronic pain management in a tranquil, professional setting.
@@ -241,37 +239,15 @@ export default function Footer() {
           margin-bottom: 50px;
         }
 
-        .footer-logo {
-          display: flex;
-          align-items: center;
-          gap: 12px;
-          margin-bottom: 16px;
+        .footer-brand-link {
+          display: inline-block;
+          margin-bottom: 18px;
         }
-
-        .logo-symbol-sm {
-          width: 36px;
-          height: 36px;
-          border-radius: 10px;
-          background: linear-gradient(135deg, #1b4332 0%, #2d6a4f 100%);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-
-        .brand-title {
-          font-size: 1.2rem;
-          font-weight: 800;
-          color: #ffffff;
-          letter-spacing: 0.1em;
+        .footer-logo-img {
+          height: 44px;
+          width: auto;
+          object-fit: contain;
           display: block;
-          line-height: 1;
-        }
-
-        .brand-subtitle {
-          font-size: 0.62rem;
-          font-weight: 600;
-          letter-spacing: 0.18em;
-          color: #e9c46a;
         }
 
         .footer-about {
