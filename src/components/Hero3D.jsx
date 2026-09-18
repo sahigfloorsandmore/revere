@@ -4,16 +4,17 @@ import {
   ShieldCheck, 
   Clock, 
   MapPin, 
-  CheckCircle2, 
   Sparkles, 
-  ArrowRight,
-  CreditCard,
-  Play,
-  Pause,
-  ChevronLeft,
-  ChevronRight,
-  ExternalLink,
-  Camera
+  ArrowRight, 
+  CreditCard, 
+  Play, 
+  Pause, 
+  ChevronLeft, 
+  ChevronRight, 
+  ExternalLink, 
+  Camera,
+  Star,
+  Activity
 } from 'lucide-react';
 
 export default function Hero3D() {
@@ -22,6 +23,7 @@ export default function Hero3D() {
   const videoRef = useRef(null);
 
   const JANEAPP_URL = "https://reverewellness.janeapp.com/";
+  const GOOGLE_REVIEW_URL = "https://www.google.com/maps/search/?api=1&query=Revere+Massage+and+Wellness+Centre+Surrey";
 
   // Authentic photos from reverewellness.ca hero carousel
   const clinicHeroPhotos = [
@@ -71,7 +73,7 @@ export default function Hero3D() {
 
   return (
     <section className="hero-section">
-      {/* Background Cinematic Video */}
+      {/* Background Cinematic Video with welcoming therapist & client touch */}
       <div className="hero-video-wrapper">
         <video
           ref={videoRef}
@@ -87,18 +89,34 @@ export default function Hero3D() {
           Your browser does not support the video tag.
         </video>
         
-        {/* Luxury Dark Emerald & Charcoal Gradient Tint */}
+        {/* Luxury Dark Emerald & Sano-style Deep Charcoal Gradient Tint */}
         <div className="video-overlay-tint"></div>
         <div className="video-overlay-pattern"></div>
       </div>
 
       <div className="container hero-container">
-        {/* Left Column: Hero Narrative */}
+        {/* Left Column: Hero Narrative & Key Offerings */}
         <div className="hero-content">
-          {/* Top Pill Badge */}
-          <div className="hero-pill-badge">
-            <Sparkles size={15} className="pill-gold-icon" />
-            <span>Newton Surrey’s Dedicated Wellness & RMT Sanctuary</span>
+          {/* Top Trust Header: 5.0 Google Reviews & Clinic Sanctuary Badge */}
+          <div className="hero-badge-row">
+            <a 
+              href={GOOGLE_REVIEW_URL} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="hero-google-badge"
+            >
+              <div className="stars-mini">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} size={13} fill="#f4b400" color="#f4b400" />
+                ))}
+              </div>
+              <span className="google-score-tag">5.0 Star Google Rating</span>
+            </a>
+
+            <div className="hero-pill-badge">
+              <Sparkles size={14} className="pill-gold-icon" />
+              <span>Surrey’s Dedicated Healthcare Sanctuary</span>
+            </div>
           </div>
 
           {/* Main Headline */}
@@ -107,11 +125,9 @@ export default function Hero3D() {
             <span className="gold-gradient-text">Exceptional Healing.</span>
           </h1>
 
-          {/* Subtitle */}
+          {/* Requested Exact Main Paragraph */}
           <p className="hero-lead">
-            Experience therapeutic relief through expert Registered Massage Therapy (RMT), 
-            advanced Physiotherapy, IMS, and specialized modalities. 
-            We offer stress-free direct billing to 20+ insurers and process ICBC claims effortlessly.
+            <strong>Registered Massage Therapy (RMT), Physiotherapy & Active Rehabilitation.</strong> Our treatments are complemented by specialized modalities, including Intramuscular Stimulation (IMS), Shockwave Therapy, and other targeted treatment techniques, to support your recovery and overall wellness.
           </p>
 
           {/* Primary & Secondary Call to Actions */}
@@ -128,10 +144,10 @@ export default function Hero3D() {
             </a>
 
             <a 
-              href="#services" 
+              href="#core-services" 
               className="btn btn-outline hero-sec-cta"
             >
-              <span>Explore Treatments</span>
+              <span>Explore Our 3 Core Services</span>
             </a>
           </div>
 
@@ -236,7 +252,7 @@ export default function Hero3D() {
                   title={isPlaying ? "Pause background video" : "Play background video"}
                 >
                   {isPlaying ? <Pause size={13} /> : <Play size={13} />}
-                  <span>{isPlaying ? 'Pause video' : 'Play video'}</span>
+                  <span>{isPlaying ? 'Pause background video' : 'Play background video'}</span>
                 </button>
               </div>
             </div>
@@ -250,7 +266,7 @@ export default function Hero3D() {
           min-height: calc(100vh - 120px);
           display: flex;
           align-items: center;
-          padding: 70px 0 100px 0;
+          padding: 60px 0 90px 0;
           overflow: hidden;
           background: #0d2818;
           color: #ffffff;
@@ -269,7 +285,7 @@ export default function Hero3D() {
           height: 100%;
           object-fit: cover;
           object-position: center;
-          filter: brightness(0.6) contrast(1.1);
+          filter: brightness(0.58) contrast(1.1);
           transform: scale(1.02);
         }
 
@@ -278,9 +294,9 @@ export default function Hero3D() {
           inset: 0;
           background: linear-gradient(
             135deg, 
-            rgba(13, 40, 24, 0.92) 0%, 
-            rgba(10, 13, 14, 0.82) 60%, 
-            rgba(27, 67, 50, 0.78) 100%
+            rgba(13, 40, 24, 0.93) 0%, 
+            rgba(10, 13, 14, 0.84) 60%, 
+            rgba(27, 67, 50, 0.80) 100%
           );
         }
 
@@ -289,36 +305,69 @@ export default function Hero3D() {
           inset: 0;
           background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
           background-size: 24px 24px;
-          opacity: 0.4;
+          opacity: 0.35;
         }
 
         .hero-container {
           position: relative;
           z-index: 2;
           display: grid;
-          grid-template-columns: 1.25fr 0.95fr;
-          gap: 48px;
+          grid-template-columns: 1.28fr 0.92fr;
+          gap: 46px;
           align-items: center;
         }
 
         .hero-content {
-          max-width: 660px;
+          max-width: 680px;
+        }
+
+        .hero-badge-row {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          margin-bottom: 22px;
+          flex-wrap: wrap;
+        }
+
+        .hero-google-badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          background: rgba(255, 255, 255, 0.15);
+          backdrop-filter: blur(12px);
+          border: 1px solid rgba(244, 180, 0, 0.5);
+          padding: 7px 16px;
+          border-radius: var(--radius-full);
+          transition: var(--transition);
+        }
+        .hero-google-badge:hover {
+          background: rgba(255, 255, 255, 0.25);
+          transform: translateY(-1px);
+        }
+
+        .stars-mini {
+          display: flex;
+          gap: 2px;
+        }
+
+        .google-score-tag {
+          font-size: 0.82rem;
+          font-weight: 700;
+          color: #ffffff;
         }
 
         .hero-pill-badge {
           display: inline-flex;
           align-items: center;
-          gap: 8px;
-          background: rgba(255, 255, 255, 0.12);
+          gap: 6px;
+          background: rgba(82, 183, 136, 0.16);
           backdrop-filter: blur(10px);
-          border: 1px solid rgba(223, 194, 125, 0.4);
-          padding: 8px 18px;
+          border: 1px solid rgba(82, 183, 136, 0.35);
+          padding: 7px 16px;
           border-radius: var(--radius-full);
-          font-size: 0.84rem;
+          font-size: 0.82rem;
           font-weight: 600;
-          color: #f4ebd9;
-          margin-bottom: 24px;
-          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+          color: #d8f3dc;
         }
 
         .pill-gold-icon {
@@ -326,10 +375,10 @@ export default function Hero3D() {
         }
 
         .hero-heading {
-          font-size: clamp(2.5rem, 4.8vw, 3.8rem);
+          font-size: clamp(2.4rem, 4.6vw, 3.7rem);
           line-height: 1.12;
           color: #ffffff;
-          margin-bottom: 20px;
+          margin-bottom: 18px;
           font-weight: 800;
           letter-spacing: -0.025em;
         }
@@ -341,24 +390,27 @@ export default function Hero3D() {
         }
 
         .hero-lead {
-          font-size: 1.12rem;
+          font-size: 1.1rem;
           color: #d8f3dc;
           line-height: 1.7;
           margin-bottom: 34px;
           opacity: 0.95;
+        }
+        .hero-lead strong {
+          color: #ffffff;
         }
 
         .hero-buttons-row {
           display: flex;
           align-items: center;
           gap: 16px;
-          margin-bottom: 40px;
+          margin-bottom: 38px;
           flex-wrap: wrap;
         }
 
         .hero-main-cta {
-          padding: 16px 36px;
-          font-size: 1.05rem;
+          padding: 16px 34px;
+          font-size: 1.02rem;
           font-weight: 700;
         }
 
@@ -370,8 +422,8 @@ export default function Hero3D() {
         }
 
         .hero-sec-cta {
-          padding: 16px 28px;
-          font-size: 1rem;
+          padding: 16px 26px;
+          font-size: 0.98rem;
           background: rgba(255, 255, 255, 0.12);
           color: #ffffff;
           border-color: rgba(255, 255, 255, 0.3);
@@ -386,8 +438,8 @@ export default function Hero3D() {
         .hero-trust-bar {
           display: grid;
           grid-template-columns: repeat(2, 1fr);
-          gap: 20px;
-          padding-top: 24px;
+          gap: 18px;
+          padding-top: 22px;
           border-top: 1px solid rgba(255, 255, 255, 0.18);
         }
 
@@ -411,12 +463,12 @@ export default function Hero3D() {
 
         .trust-cell strong {
           display: block;
-          font-size: 0.94rem;
+          font-size: 0.92rem;
           color: #ffffff;
         }
 
         .trust-cell span {
-          font-size: 0.8rem;
+          font-size: 0.78rem;
           color: #b7e4c7;
         }
 
@@ -480,7 +532,7 @@ export default function Hero3D() {
         .photo-frame-container {
           position: relative;
           width: 100%;
-          height: 250px;
+          height: 240px;
           border-radius: var(--radius-md);
           overflow: hidden;
           background: #000;
@@ -570,7 +622,7 @@ export default function Hero3D() {
           color: #ffffff;
         }
 
-        @media (max-width: 1024px) {
+        @media (max-width: 1040px) {
           .hero-container {
             grid-template-columns: 1fr;
             gap: 40px;
@@ -582,14 +634,14 @@ export default function Hero3D() {
 
         @media (max-width: 640px) {
           .hero-section {
-            padding: 50px 0 70px 0;
+            padding: 40px 0 60px 0;
           }
           .hero-trust-bar {
             grid-template-columns: 1fr;
             gap: 14px;
           }
           .photo-frame-container {
-            height: 200px;
+            height: 190px;
           }
         }
       `}</style>

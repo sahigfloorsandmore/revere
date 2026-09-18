@@ -1,6 +1,8 @@
 import React from 'react';
 import Navbar from './components/Navbar';
 import Hero3D from './components/Hero3D';
+import CoreServicesPillars from './components/CoreServicesPillars';
+import GoogleReviews from './components/GoogleReviews';
 import InsurancePartners from './components/InsurancePartners';
 import Services from './components/Services';
 import AboutUs from './components/AboutUs';
@@ -9,6 +11,7 @@ import LocationParking from './components/LocationParking';
 import FAQ from './components/FAQ';
 import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
+import ChatBotWidget from './components/ChatBotWidget';
 
 export default function App() {
   return (
@@ -16,6 +19,8 @@ export default function App() {
       <Navbar />
       <main>
         <Hero3D />
+        <CoreServicesPillars />
+        <GoogleReviews />
         <InsurancePartners />
         <Services />
         <AboutUs />
@@ -25,6 +30,7 @@ export default function App() {
         <ContactSection />
       </main>
       <Footer />
+      <ChatBotWidget />
     </div>
   );
 }

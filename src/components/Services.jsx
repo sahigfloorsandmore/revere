@@ -9,7 +9,8 @@ import {
   Layers, 
   Heart,
   ExternalLink,
-  Flame
+  Flame,
+  ArrowRight
 } from 'lucide-react';
 
 export default function Services() {
@@ -21,23 +22,23 @@ export default function Services() {
     {
       id: 'deep-tissue',
       category: 'rmt',
-      title: 'Deep Tissue Massage Therapy',
-      subtitle: 'Targeted Chronic Tension & Myofascial Release',
-      description: 'Focuses on realigning deeper layers of muscle tissue and fascia. Ideal for persistent aches, postural strain, contracted areas such as stiff neck and upper back, low back tightness, and sore shoulders.',
+      title: 'Deep Tissue Massage',
+      subtitle: 'Targeted Chronic Tension & Muscle Release',
+      description: 'Realigns deeper layers of muscles and connective tissue. Ideal for stiff necks, tight shoulders, and chronic lower back pain.',
       durations: ['30 Min', '45 Min', '60 Min'],
-      benefits: ['Releases chronic muscle adhesions', 'Improves blood circulation & flexibility', 'Relieves postural strain and headaches'],
+      benefits: ['Releases deep stubborn adhesions', 'Alleviates tension headaches & postural strain', 'Improves blood circulation & mobility'],
       icon: Activity,
-      badge: 'Most Popular',
+      badge: 'RMT Registered',
       badgeColor: 'badge-green'
     },
     {
       id: 'swedish',
       category: 'rmt',
       title: 'Swedish Relaxation Massage',
-      subtitle: 'Gentle, Calming & Restorative Bodywork',
-      description: 'A classic full-body therapeutic modality using long, smooth strokes, kneading, and circular motions. Designed to melt away daily stress, lower cortisol levels, and boost lymphatic drainage.',
+      subtitle: 'Gentle, Calming & Restorative Care',
+      description: 'Long, fluid strokes and rhythmic pressure to calm the central nervous system, improve lymphatic drainage, and relieve daily stress.',
       durations: ['30 Min', '45 Min', '60 Min'],
-      benefits: ['Reduces systemic stress & anxiety', 'Enhances lymphatic fluid circulation', 'Soothes nervous system fatigue'],
+      benefits: ['Lowers stress & cortisol levels', 'Enhances lymphatic fluid circulation', 'Deeply soothes nervous system fatigue'],
       icon: Heart,
       badge: 'Restorative',
       badgeColor: 'badge-gold'
@@ -45,86 +46,86 @@ export default function Services() {
     {
       id: 'prenatal',
       category: 'rmt',
-      title: 'Prenatal Massage',
-      subtitle: 'Nurturing Care for Expectant Mothers',
-      description: 'Specialized supportive bodywork adapted for every stage of pregnancy using tailored cushions and side-lying positioning. Relieves sciatic nerve pain, lumbar strain, and leg swelling safely.',
+      title: 'Prenatal & Postnatal Massage',
+      subtitle: 'Nurturing Care for Expectant & New Mothers',
+      description: 'Specialized supportive bodywork using safe side-lying positioning and cushions to alleviate hip strain, sciatica, and nursing tension.',
       durations: ['45 Min', '60 Min'],
-      benefits: ['Alleviates pregnancy back & hip aches', 'Reduces peripheral swelling & edema', 'Improves sleep and nervous system relaxation'],
+      benefits: ['Relieves pregnancy low back & pelvic strain', 'Reduces peripheral swelling & leg edema', 'Restores core and postural vitality postpartum'],
       icon: Sparkles,
       badge: 'Pregnancy Safe',
       badgeColor: 'badge-green'
     },
     {
-      id: 'postnatal',
+      id: 'sports-massage',
       category: 'rmt',
-      title: 'Postnatal Massage',
-      subtitle: 'Restoring Strength & Structural Alignment',
-      description: 'Tailored recovery therapy after childbirth. Focuses on releasing nursing neck and shoulder tension, re-establishing core-pelvic balance, and restoring muscular vitality.',
+      title: 'Sports Massage Therapy',
+      subtitle: 'Athletic Recovery & Range of Motion',
+      description: 'Dynamic stretching, myofascial release, and rapid muscle flushing to accelerate recovery and optimize athletic performance.',
       durations: ['45 Min', '60 Min'],
-      benefits: ['Relieves upper back strain from nursing', 'Restores pelvic and lumbar stability', 'Aids emotional restoration and vitality'],
-      icon: Layers,
-      badge: 'Postpartum Care',
+      benefits: ['Accelerates post-training muscle recovery', 'Restores joint flexibility & range of motion', 'Helps prevent acute muscle strains'],
+      icon: Activity,
+      badge: 'Performance',
+      badgeColor: 'badge-gold'
+    },
+    {
+      id: 'physiotherapy',
+      category: 'physio-kin',
+      title: 'Physiotherapy Assessment & Rehab',
+      subtitle: 'Clinical Musculoskeletal Evaluation',
+      description: 'Detailed diagnostic assessment, joint mobilization, and evidence-based manual therapy for spinal injuries, whiplash, and sports trauma.',
+      durations: ['45 Min', '60 Min'],
+      benefits: ['Evidence-based exercise prescription', 'Manual joint mobilization & alignment', 'Pre-approved direct billing to ICBC'],
+      icon: Activity,
+      badge: 'ICBC Covered',
       badgeColor: 'badge-green'
     },
     {
-      id: 'sports-massage',
-      category: 'rmt',
-      title: 'Sports Massage & Rehab',
-      subtitle: 'Athletic Recovery, Mobility & Performance',
-      description: 'Combines dynamic stretching, active release, and rapid muscle flushing. Ideal for athletes preparing for an event, recovering from high-intensity training, or rehabilitating sports injuries.',
+      id: 'kinesiology-active',
+      category: 'physio-kin',
+      title: 'Kinesiology & Active Rehab',
+      subtitle: '1-on-1 Guided Movement & Strength',
+      description: 'Individualized functional exercise therapy to rebuild spinal stability, correct muscular imbalances, and return safely to work and sport.',
       durations: ['45 Min', '60 Min'],
-      benefits: ['Accelerates post-training muscle recovery', 'Restores joint range of motion', 'Helps prevent acute muscle strains & tears'],
+      benefits: ['Customized progressive movement plans', 'Core stabilization & postural correction', 'Direct billing for ICBC active recovery'],
       icon: Activity,
-      badge: 'High Performance',
+      badge: 'Active Rehab',
+      badgeColor: 'badge-green'
+    },
+    {
+      id: 'ims-dry-needling',
+      category: 'specialized',
+      title: 'Intramuscular Stimulation (IMS)',
+      subtitle: 'Deep Trigger Point Dry Needling',
+      description: 'Fine acupuncture needles inserted into hypertonic muscle bands to stimulate a twitch response that immediately resets contracted muscle fibers.',
+      durations: ['30 Min', '45 Min'],
+      benefits: ['Deactivates deep chronic trigger points', 'Relieves nerve root irritation & sciatica', 'Restores natural muscle length & function'],
+      icon: Zap,
+      badge: 'Specialized Tech',
+      badgeColor: 'badge-gold'
+    },
+    {
+      id: 'shockwave',
+      category: 'specialized',
+      title: 'Radial Shockwave Therapy',
+      subtitle: 'Acoustic Waves for Chronic Tendonitis',
+      description: 'High-energy acoustic sound waves penetrate connective tissue to stimulate new blood vessel growth and break down calcifications.',
+      durations: ['30 Min'],
+      benefits: ['Heals chronic plantar fasciitis', 'Treats stubborn tennis/golfer’s elbow', 'Dissolves calcific shoulder tendinopathy'],
+      icon: Zap,
+      badge: 'Specialized Tech',
       badgeColor: 'badge-gold'
     },
     {
       id: 'hot-stone',
       category: 'specialized',
       title: 'Hot Stone Therapy',
-      subtitle: 'Deep Thermal Muscle Melting Therapy',
-      description: 'Smooth, heated volcanic basalt stones are strategically placed and glided across key energy points. The radiant thermal heat penetrates deep into muscle bellies to dissolve stubborn tension.',
+      subtitle: 'Deep Thermal Basalt Stone Therapy',
+      description: 'Smooth, heated volcanic basalt stones glide over key energy points to melt away deep muscular knots through radiant thermal heat.',
       durations: ['60 Min'],
-      benefits: ['Deep thermal relaxation of tight muscles', 'Promotes deep restorative sleep', 'Increases blood flow without excessive pressure'],
+      benefits: ['Deep thermal relaxation of tense muscles', 'Promotes deep restorative sleep', 'Increases circulation without excessive pressure'],
       icon: Flame,
       badge: 'Luxury Ritual',
       badgeColor: 'badge-gold'
-    },
-    {
-      id: 'ims-dry-needling',
-      category: 'physio',
-      title: 'Intramuscular Stimulation (IMS)',
-      subtitle: 'Neuropathic Pain Relief & Trigger Point Needling',
-      description: 'Utilizes fine acupuncture needles inserted deep into tight muscle bands (trigger points) without medication. Stimulates a local twitch response that instantly resets hypertonic muscle fibers.',
-      durations: ['30 Min', '45 Min'],
-      benefits: ['Deactivates deep chronic trigger points', 'Relieves nerve root irritation & sciatica', 'Restores normal muscle length and function'],
-      icon: Zap,
-      badge: 'Clinical Grade',
-      badgeColor: 'badge-green'
-    },
-    {
-      id: 'shockwave',
-      category: 'physio',
-      title: 'Radial Shockwave Therapy',
-      subtitle: 'Acoustic Wave Treatment for Chronic Tendonitis',
-      description: 'High-energy acoustic sound waves penetrate stubborn connective tissue to stimulate new blood vessel growth (neovascularization), break down calcifications, and trigger tissue regeneration.',
-      durations: ['30 Min'],
-      benefits: ['Treats chronic plantar fasciitis', 'Heals stubborn tennis/golfer’s elbow', 'Dissolves shoulder calcific tendinopathy'],
-      icon: Zap,
-      badge: 'Advanced Tech',
-      badgeColor: 'badge-gold'
-    },
-    {
-      id: 'physiotherapy',
-      category: 'physio',
-      title: 'Comprehensive Physiotherapy',
-      subtitle: 'Musculoskeletal Assessment & Rehabilitation',
-      description: 'One-on-one clinical evaluation and hands-on rehabilitation for motor vehicle accidents (ICBC), sports trauma, disc injuries, arthritis, and postural imbalances.',
-      durations: ['45 Min', '60 Min'],
-      benefits: ['Evidence-based exercise prescription', 'Manual joint mobilization techniques', 'Direct billing to ICBC and private insurers'],
-      icon: Activity,
-      badge: 'ICBC Covered',
-      badgeColor: 'badge-green'
     }
   ];
 
@@ -133,17 +134,17 @@ export default function Services() {
     : servicesData.filter(s => s.category === activeCategory);
 
   return (
-    <section id="services" className="services-section section-padding">
+    <section id="services" className="services-section">
       <div className="container">
         {/* Section Header */}
         <div className="section-header">
           <div className="section-tag">
-            <Sparkles size={14} /> Our Healing Treatments
+            <Sparkles size={14} /> Comprehensive Treatment Directory
           </div>
-          <h2 className="section-title">Therapeutic Services Crafted for Your Wellbeing</h2>
+          <h2 className="section-title">Explore All Services & Specialized Modalities</h2>
           <p className="section-desc">
-            Whether you are recovering from an injury, managing chronic discomfort, or seeking deep restoration,
-            our licensed practitioners provide personalized clinical care.
+            Learn more about our individual treatment techniques, durations, and clinical benefits. 
+            All treatments are eligible for direct billing to 20+ insurance providers and ICBC claims.
           </p>
         </div>
 
@@ -153,25 +154,25 @@ export default function Services() {
             className={`filter-btn ${activeCategory === 'all' ? 'active' : ''}`}
             onClick={() => setActiveCategory('all')}
           >
-            All Services
+            All Treatments ({servicesData.length})
           </button>
           <button 
             className={`filter-btn ${activeCategory === 'rmt' ? 'active' : ''}`}
             onClick={() => setActiveCategory('rmt')}
           >
-            Registered Massage Therapy (RMT)
+            Massage Therapy (RMT)
           </button>
           <button 
-            className={`filter-btn ${activeCategory === 'physio' ? 'active' : ''}`}
-            onClick={() => setActiveCategory('physio')}
+            className={`filter-btn ${activeCategory === 'physio-kin' ? 'active' : ''}`}
+            onClick={() => setActiveCategory('physio-kin')}
           >
-            Physiotherapy & Modalities
+            Physiotherapy & Kinesiology
           </button>
           <button 
             className={`filter-btn ${activeCategory === 'specialized' ? 'active' : ''}`}
             onClick={() => setActiveCategory('specialized')}
           >
-            Specialized Therapies
+            Specialized Modalities (IMS / Shockwave)
           </button>
         </div>
 
@@ -211,7 +212,7 @@ export default function Services() {
                 <div className="service-card-footer">
                   <div className="service-durations">
                     <Clock size={15} className="text-neutral-500" />
-                    <span>Available Durations:</span>
+                    <span>Session Durations:</span>
                     <div className="duration-tags">
                       {service.durations.map((d, idx) => (
                         <span key={idx} className="duration-tag">{d}</span>
@@ -238,7 +239,8 @@ export default function Services() {
 
       <style>{`
         .services-section {
-          background: linear-gradient(180deg, #ffffff 0%, #f4f8f5 100%);
+          padding: 80px 0 100px 0;
+          background: #ffffff;
           position: relative;
         }
 
@@ -247,7 +249,7 @@ export default function Services() {
           align-items: center;
           justify-content: center;
           gap: 12px;
-          margin-bottom: 48px;
+          margin-bottom: 44px;
           flex-wrap: wrap;
         }
 
@@ -255,22 +257,23 @@ export default function Services() {
           padding: 10px 22px;
           font-size: 0.9rem;
           font-weight: 600;
-          color: var(--neutral-700);
-          background: #ffffff;
-          border: 1.5px solid var(--neutral-300);
+          color: #4a5b51;
+          background: #f7faf8;
+          border: 1.5px solid #dce8e0;
           border-radius: var(--radius-full);
           transition: var(--transition);
         }
 
         .filter-btn:hover {
-          border-color: var(--primary-500);
-          color: var(--primary-800);
+          border-color: #388242;
+          color: #0d2818;
+          background: #ffffff;
         }
 
         .filter-btn.active {
-          background: var(--primary-800);
+          background: #1b4332;
           color: #ffffff;
-          border-color: var(--primary-800);
+          border-color: #1b4332;
           box-shadow: 0 4px 14px rgba(27, 67, 50, 0.25);
         }
 
@@ -281,76 +284,81 @@ export default function Services() {
         }
 
         .service-card {
-          padding: 32px;
+          padding: 30px;
+          background: #FAF9F6;
           display: flex;
           flex-direction: column;
           justify-content: space-between;
           transition: var(--transition);
-          border: 1px solid rgba(27, 67, 50, 0.08);
+          border: 1px solid rgba(0, 0, 0, 0.07);
+          border-radius: var(--radius-xl);
           position: relative;
         }
 
         .service-card:hover {
           transform: translateY(-6px);
-          box-shadow: 0 24px 48px -12px rgba(27, 67, 50, 0.15);
-          border-color: var(--primary-300);
+          box-shadow: 0 20px 45px -10px rgba(13, 40, 24, 0.12);
+          border-color: #52b788;
+          background: #ffffff;
         }
 
         .service-card-top {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          margin-bottom: 20px;
+          margin-bottom: 18px;
         }
 
         .service-icon-box {
-          width: 46px;
-          height: 46px;
+          width: 44px;
+          height: 44px;
           border-radius: 12px;
-          background: var(--primary-100);
+          background: #e8f5ee;
           display: flex;
           align-items: center;
           justify-content: center;
         }
 
         .service-icon {
-          color: var(--primary-800);
+          color: #2d6a4f;
         }
 
         .service-card-title {
-          font-size: 1.35rem;
-          color: var(--primary-900);
+          font-size: 1.3rem;
+          color: #0d2818;
           margin-bottom: 4px;
+          font-weight: 800;
         }
 
         .service-card-subtitle {
           display: block;
-          font-size: 0.82rem;
-          font-weight: 600;
-          color: var(--gold-600);
+          font-size: 0.8rem;
+          font-weight: 700;
+          color: #b38b34;
           text-transform: uppercase;
           letter-spacing: 0.05em;
-          margin-bottom: 14px;
+          margin-bottom: 12px;
         }
 
         .service-card-desc {
-          font-size: 0.94rem;
-          color: var(--neutral-600);
-          line-height: 1.6;
-          margin-bottom: 20px;
+          font-size: 0.92rem;
+          color: #55665c;
+          line-height: 1.55;
+          margin-bottom: 18px;
         }
 
         .service-benefits {
-          background: var(--neutral-100);
-          padding: 16px;
+          background: #ffffff;
+          padding: 14px 16px;
           border-radius: var(--radius-md);
-          margin-bottom: 24px;
+          margin-bottom: 22px;
+          border: 1px solid #eef3f0;
         }
 
         .service-benefits strong {
           display: block;
-          font-size: 0.84rem;
-          color: var(--primary-900);
+          font-size: 0.82rem;
+          color: #0d2818;
           margin-bottom: 8px;
         }
 
@@ -358,35 +366,35 @@ export default function Services() {
           list-style: none;
           display: flex;
           flex-direction: column;
-          gap: 8px;
+          gap: 7px;
         }
 
         .service-benefits li {
           display: flex;
           align-items: flex-start;
           gap: 8px;
-          font-size: 0.83rem;
-          color: var(--neutral-700);
+          font-size: 0.82rem;
+          color: #2b3b32;
         }
 
         .benefit-check {
-          color: var(--primary-600);
+          color: #2d6a4f;
           flex-shrink: 0;
           margin-top: 2px;
         }
 
         .service-card-footer {
-          border-top: 1px solid var(--neutral-200);
-          padding-top: 20px;
+          border-top: 1px solid #eaf0ec;
+          padding-top: 18px;
         }
 
         .service-durations {
           display: flex;
           align-items: center;
           gap: 8px;
-          font-size: 0.82rem;
-          color: var(--neutral-600);
-          margin-bottom: 16px;
+          font-size: 0.8rem;
+          color: #55665c;
+          margin-bottom: 14px;
           flex-wrap: wrap;
         }
 
@@ -397,12 +405,12 @@ export default function Services() {
 
         .duration-tag {
           background: #ffffff;
-          border: 1px solid var(--neutral-300);
-          padding: 3px 8px;
+          border: 1px solid #d2dfd6;
+          padding: 2px 7px;
           border-radius: 6px;
           font-weight: 600;
-          color: var(--primary-900);
-          font-size: 0.78rem;
+          color: #0d2818;
+          font-size: 0.76rem;
         }
 
         .service-book-btn {

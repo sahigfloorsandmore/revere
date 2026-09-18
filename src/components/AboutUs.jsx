@@ -7,7 +7,10 @@ import {
   Check, 
   MapPin, 
   Users,
-  Calendar
+  Calendar,
+  Briefcase,
+  Mail,
+  ArrowRight
 } from 'lucide-react';
 
 export default function AboutUs() {
@@ -16,6 +19,7 @@ export default function AboutUs() {
   return (
     <section id="about" className="about-section section-padding">
       <div className="container">
+        {/* Main Story Grid */}
         <div className="about-grid">
           {/* Left Column: Visual & Story Highlights */}
           <div className="about-visuals">
@@ -86,7 +90,7 @@ export default function AboutUs() {
             </p>
             <p className="about-body">
               Located conveniently in Newton, Surrey (directly across from Krispy Kreme and Walmart on 120th Street), 
-              our clinic was founded to provide a peaceful oasis from the stresses of modern life while delivering targeted 
+              our clinic provides a serene haven from the stresses of daily life while delivering targeted 
               rehabilitation for acute injuries, chronic muscular tension, and post-accident recovery.
             </p>
 
@@ -102,15 +106,15 @@ export default function AboutUs() {
               <div className="pillar-item">
                 <div className="pillar-check"><Check size={14} /></div>
                 <div>
-                  <strong>Collaborative Multidisciplinary Care</strong>
-                  <p>Seamlessly integrate RMT bodywork, Physiotherapy assessments, IMS, and therapeutic modalities under one welcoming roof.</p>
+                  <strong>Multidisciplinary Clinical Collaboration</strong>
+                  <p>Seamlessly integrate RMT bodywork, Physiotherapy assessments, Kinesiology active rehab, and specialized modalities under one roof.</p>
                 </div>
               </div>
 
               <div className="pillar-item">
                 <div className="pillar-check"><Check size={14} /></div>
                 <div>
-                  <strong>Stress-Free Insurance Direct Billing</strong>
+                  <strong>Stress-Free Direct Billing</strong>
                   <p>We process ICBC claims and direct bill over 20 extended health plans so you can concentrate purely on your recovery.</p>
                 </div>
               </div>
@@ -133,11 +137,34 @@ export default function AboutUs() {
             </div>
           </div>
         </div>
+
+        {/* Join Our Team / Careers Callout (SB Comment) */}
+        <div id="careers" className="careers-card glass-card">
+          <div className="careers-left">
+            <div className="careers-icon-box">
+              <Briefcase size={26} className="careers-icon" />
+            </div>
+            <div>
+              <span className="careers-tag">Careers at Revere</span>
+              <h3 className="careers-title">Join Our Collaborative Healthcare Team</h3>
+              <p className="careers-desc">
+                We are actively welcoming passionate <strong>Registered Massage Therapists (RMTs)</strong>, 
+                <strong>Physiotherapists</strong>, and <strong>Kinesiologists</strong> to join our growing clinic in Newton, Surrey. 
+                Enjoy competitive splits, fully equipped private hydraulic rooms, reception booking support, linen service, and flexible schedules.
+              </p>
+            </div>
+          </div>
+          <a href="mailto:info@reverewellness.ca?subject=Career%20Inquiry%20-%20Revere%20Wellness" className="btn btn-primary careers-btn">
+            <Mail size={16} />
+            <span>Apply via info@reverewellness.ca</span>
+            <ArrowRight size={15} />
+          </a>
+        </div>
       </div>
 
       <style>{`
         .about-section {
-          background: #ffffff;
+          background: #FAF9F6;
           position: relative;
         }
 
@@ -146,6 +173,7 @@ export default function AboutUs() {
           grid-template-columns: 1fr 1.15fr;
           gap: 60px;
           align-items: center;
+          margin-bottom: 50px;
         }
 
         .about-visuals {
@@ -246,15 +274,16 @@ export default function AboutUs() {
           display: flex;
           align-items: flex-start;
           gap: 16px;
-          background: var(--neutral-50);
-          border: 1px solid var(--neutral-300);
+          background: #ffffff;
+          border: 1px solid #e0ebe3;
+          border-radius: var(--radius-lg);
         }
 
         .safety-icon-box {
           width: 48px;
           height: 48px;
           border-radius: 12px;
-          background: var(--primary-100);
+          background: #e8f5ee;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -265,6 +294,7 @@ export default function AboutUs() {
           font-size: 1rem;
           color: var(--primary-900);
           margin-bottom: 6px;
+          font-weight: 800;
         }
 
         .safety-text {
@@ -278,6 +308,7 @@ export default function AboutUs() {
           color: var(--primary-900);
           margin-bottom: 20px;
           line-height: 1.2;
+          font-weight: 800;
         }
 
         .about-lead {
@@ -312,8 +343,8 @@ export default function AboutUs() {
           width: 22px;
           height: 22px;
           border-radius: 50%;
-          background: var(--primary-100);
-          color: var(--primary-800);
+          background: #e8f5ee;
+          color: #2d6a4f;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -342,10 +373,84 @@ export default function AboutUs() {
           flex-wrap: wrap;
         }
 
-        @media (max-width: 1024px) {
+        /* Careers Card */
+        .careers-card {
+          padding: 36px 40px;
+          background: #ffffff;
+          border: 1px solid #dce8e0;
+          border-radius: var(--radius-xl);
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          gap: 32px;
+          box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
+        }
+
+        .careers-left {
+          display: flex;
+          align-items: flex-start;
+          gap: 20px;
+        }
+
+        .careers-icon-box {
+          width: 52px;
+          height: 52px;
+          border-radius: 14px;
+          background: #e8f5ee;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: #2d6a4f;
+          flex-shrink: 0;
+        }
+
+        .careers-tag {
+          display: inline-block;
+          font-size: 0.76rem;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 0.1em;
+          color: #388242;
+          margin-bottom: 6px;
+        }
+
+        .careers-title {
+          font-size: 1.35rem;
+          color: #0d2818;
+          font-weight: 800;
+          margin-bottom: 8px;
+        }
+
+        .careers-desc {
+          font-size: 0.92rem;
+          color: #55665c;
+          line-height: 1.6;
+          max-width: 680px;
+          margin: 0;
+        }
+
+        .careers-btn {
+          padding: 13px 24px;
+          font-size: 0.92rem;
+          flex-shrink: 0;
+          white-space: nowrap;
+        }
+
+        @media (max-width: 1040px) {
           .about-grid {
             grid-template-columns: 1fr;
             gap: 40px;
+          }
+          .careers-card {
+            flex-direction: column;
+            text-align: center;
+          }
+          .careers-left {
+            flex-direction: column;
+            align-items: center;
+          }
+          .careers-btn {
+            width: 100%;
           }
         }
       `}</style>
