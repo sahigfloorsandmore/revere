@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { 
   Calendar, 
   ShieldCheck, 
@@ -9,21 +9,57 @@ import {
   CreditCard, 
   Play, 
   Pause, 
+  RotateCcw,
   Star
 } from 'lucide-react';
 
 export default function Hero3D() {
+  const [activeVideoIndex, setActiveVideoIndex] = useState(0); // 0: Logo Reveal, 1: Promo Video
   const [isPlaying, setIsPlaying] = useState(true);
-  const videoRef = useRef(null);
+  
+  const video1Ref = useRef(null); // Calm elegant logo reveal video
+  const video2Ref = useRef(null); // Cinematic multi-shot promo video
 
   const JANEAPP_URL = "https://reverewellness.janeapp.com/";
 
+  // Auto-play initial logo reveal video on mount
+  useEffect(() => {
+    if (video1Ref.current) {
+      video1Ref.current.play().catch(() => {
+        // Handle browser autoplay policy gracefully
+      });
+    }
+  }, []);
+
+  // When video 1 ends, smoothly transition to video 2
+  const handleVideo1Ended = () => {
+    setActiveVideoIndex(1);
+    if (video2Ref.current) {
+      video2Ref.current.currentTime = 0;
+      video2Ref.current.play().catch(() => {});
+    }
+  };
+
+  // Replay intro video sequence
+  const replayIntro = () => {
+    setActiveVideoIndex(0);
+    if (video2Ref.current) {
+      video2Ref.current.pause();
+    }
+    if (video1Ref.current) {
+      video1Ref.current.currentTime = 0;
+      video1Ref.current.play().catch(() => {});
+    }
+    setIsPlaying(true);
+  };
+
   const toggleVideoPlay = () => {
-    if (videoRef.current) {
+    const currentRef = activeVideoIndex === 0 ? video1Ref.current : video2Ref.current;
+    if (currentRef) {
       if (isPlaying) {
-        videoRef.current.pause();
+        currentRef.pause();
       } else {
-        videoRef.current.play();
+        currentRef.play().catch(() => {});
       }
       setIsPlaying(!isPlaying);
     }
@@ -31,20 +67,34 @@ export default function Hero3D() {
 
   return (
     <section className="hero-section">
-      {/* Background Cinematic Video with welcoming therapist & client touch */}
+      {/* Background Sequential Cinematic Videos */}
       <div className="hero-video-wrapper">
+        
+        {/* Video 1: Calm Elegant Logo Reveal (Plays First) */}
         <video
-          ref={videoRef}
-          className="hero-video-element"
+          ref={video1Ref}
+          className={`hero-video-element video-layer ${activeVideoIndex === 0 ? 'video-visible' : 'video-hidden'}`}
           autoPlay
+          muted
+          playsInline
+          onEnded={handleVideo1Ended}
+          poster="/images/clinic-reception.jpg"
+        >
+          <source src="/videos/hero-logo-reveal.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+
+        {/* Video 2: Cinematic Multi-Shot Treatment Promo (Plays Second & Loops) */}
+        <video
+          ref={video2Ref}
+          className={`hero-video-element video-layer ${activeVideoIndex === 1 ? 'video-visible' : 'video-hidden'}`}
           loop
           muted
           playsInline
+          preload="auto"
           poster="/images/clinic-reception.jpg"
         >
           <source src="/videos/hero-promo.mp4" type="video/mp4" />
-          <source src="https://assets.mixkit.co/videos/preview/mixkit-hands-of-a-masseuse-massaging-a-person-41271-large.mp4" type="video/mp4" />
-          <source src="https://assets.mixkit.co/videos/preview/mixkit-masseur-giving-a-massage-to-a-client-41270-large.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
         
@@ -145,16 +195,29 @@ export default function Hero3D() {
         </div>
       </div>
 
-      {/* Minimal Floating Video Control in bottom corner */}
-      <button 
-        onClick={toggleVideoPlay} 
-        className="video-toggle-floating"
-        aria-label={isPlaying ? "Pause background video" : "Play background video"}
-        title={isPlaying ? "Pause background video" : "Play background video"}
-      >
-        {isPlaying ? <Pause size={14} /> : <Play size={14} />}
-        <span>{isPlaying ? 'Pause Video' : 'Play Video'}</span>
-      </button>
+      {/* Floating Controls in bottom right corner */}
+      <div className="hero-video-controls-group">
+        {activeVideoIndex === 1 && (
+          <button 
+            onClick={replayIntro}
+            className="video-toggle-floating"
+            title="Replay Logo Reveal Video"
+          >
+            <RotateCcw size={13} />
+            <span>Replay Intro</span>
+          </button>
+        )}
+
+        <button 
+          onClick={toggleVideoPlay} 
+          className="video-toggle-floating"
+          aria-label={isPlaying ? "Pause background video" : "Play background video"}
+          title={isPlaying ? "Pause background video" : "Play background video"}
+        >
+          {isPlaying ? <Pause size={13} /> : <Play size={13} />}
+          <span>{isPlaying ? 'Pause Video' : 'Play Video'}</span>
+        </button>
+      </div>
 
       <style>{`
         .hero-section {
@@ -185,9 +248,27 @@ export default function Hero3D() {
           transform: scale(1.02);
         }
 
+        .video-layer {
+          position: absolute;
+          inset: 0;
+          transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .video-visible {
+          opacity: 1;
+          z-index: 2;
+        }
+
+        .video-hidden {
+          opacity: 0;
+          z-index: 1;
+          pointer-events: none;
+        }
+
         .video-overlay-tint {
           position: absolute;
           inset: 0;
+          z-index: 3;
           background: linear-gradient(
             135deg, 
             rgba(13, 40, 24, 0.58) 0%, 
@@ -199,6 +280,7 @@ export default function Hero3D() {
         .video-overlay-pattern {
           position: absolute;
           inset: 0;
+          z-index: 3;
           background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
           background-size: 24px 24px;
           opacity: 0.15;
@@ -206,7 +288,7 @@ export default function Hero3D() {
 
         .hero-container {
           position: relative;
-          z-index: 2;
+          z-index: 4;
           display: flex;
           justify-content: flex-start;
           align-items: center;
@@ -378,16 +460,22 @@ export default function Hero3D() {
           color: #b7e4c7;
         }
 
-        /* Minimal Floating Video Control */
-        .video-toggle-floating {
+        /* Floating Video Controls */
+        .hero-video-controls-group {
           position: absolute;
           bottom: 24px;
           right: 32px;
-          z-index: 5;
+          z-index: 10;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+        }
+
+        .video-toggle-floating {
           display: inline-flex;
           align-items: center;
           gap: 8px;
-          background: rgba(0, 0, 0, 0.4);
+          background: rgba(0, 0, 0, 0.45);
           backdrop-filter: blur(10px);
           border: 1px solid rgba(255, 255, 255, 0.2);
           color: #d1ded5;
@@ -399,7 +487,7 @@ export default function Hero3D() {
         }
 
         .video-toggle-floating:hover {
-          background: rgba(0, 0, 0, 0.7);
+          background: rgba(0, 0, 0, 0.75);
           color: #ffffff;
           border-color: rgba(255, 255, 255, 0.4);
         }
@@ -419,7 +507,7 @@ export default function Hero3D() {
             grid-template-columns: 1fr;
             gap: 14px;
           }
-          .video-toggle-floating {
+          .hero-video-controls-group {
             display: none;
           }
         }
