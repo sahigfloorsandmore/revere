@@ -174,7 +174,7 @@ export default function CoreServicesPillars() {
 
       <style>{`
         .core-pillars-section {
-          padding: 90px 0 60px 0;
+          padding: 105px 0 70px 0;
           background: #FAF9F6;
           position: relative;
         }
@@ -438,6 +438,9 @@ export default function CoreServicesPillars() {
         }
 
         @media (max-width: 1040px) {
+          .core-pillars-section {
+            padding-top: 115px;
+          }
           .pillars-grid {
             grid-template-columns: 1fr;
             max-width: 580px;
@@ -453,6 +456,12 @@ export default function CoreServicesPillars() {
           }
           .strip-btn {
             width: 100%;
+          }
+        }
+
+        @media (max-width: 640px) {
+          .core-pillars-section {
+            padding-top: 145px;
           }
         }
       `}</style>

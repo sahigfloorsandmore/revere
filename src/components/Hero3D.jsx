@@ -74,8 +74,8 @@ export default function Hero3D() {
         <div className="video-overlay-pattern"></div>
       </div>
 
+      {/* Main Hero Content */}
       <div className="container hero-container">
-        {/* Hero Narrative & Key Offerings */}
         <div className="hero-content">
           {/* Top Trust Header: 4.8 Google Reviews & Clinic Sanctuary Badge */}
           <div className="hero-badge-row">
@@ -135,36 +135,40 @@ export default function Hero3D() {
               <span>Explore Our 3 Core Services</span>
             </a>
           </div>
+        </div>
+      </div>
 
-          {/* Key Trust Grid */}
-          <div className="hero-trust-bar">
-            <div className="trust-cell">
-              <ShieldCheck size={22} className="cell-icon-green" />
-              <div>
+      {/* Overlapping Floating Trust Bar (Bridges Hero & Next Section) */}
+      <div className="hero-overlap-wrapper">
+        <div className="container">
+          <div className="hero-trust-bar glass-trust-card">
+            <div className="trust-cell cell-1">
+              <ShieldCheck size={28} className="cell-icon-green" />
+              <div className="trust-cell-body">
                 <strong>ICBC Approved</strong>
                 <span>Direct billing for RMT & Physio</span>
               </div>
             </div>
 
-            <div className="trust-cell">
-              <CreditCard size={22} className="cell-icon-gold" />
-              <div>
+            <div className="trust-cell cell-2">
+              <CreditCard size={28} className="cell-icon-gold" />
+              <div className="trust-cell-body">
                 <strong>Direct Billing</strong>
                 <span>To 20+ extended health insurers</span>
               </div>
             </div>
 
-            <div className="trust-cell">
-              <Clock size={22} className="cell-icon-green" />
-              <div>
+            <div className="trust-cell cell-3">
+              <Clock size={28} className="cell-icon-green" />
+              <div className="trust-cell-body">
                 <strong>Open 7 Days</strong>
                 <span>6:30 AM – 8:00 PM</span>
               </div>
             </div>
 
-            <div className="trust-cell">
-              <MapPin size={22} className="cell-icon-gold" />
-              <div>
+            <div className="trust-cell cell-4">
+              <MapPin size={28} className="cell-icon-gold" />
+              <div className="trust-cell-body">
                 <strong>Free Parking</strong>
                 <span>Basement Stalls #36, 37, 38</span>
               </div>
@@ -176,11 +180,11 @@ export default function Hero3D() {
       <style>{`
         .hero-section {
           position: relative;
-          min-height: calc(100vh - 120px);
+          min-height: calc(100vh - 80px);
           display: flex;
-          align-items: center;
-          padding: 80px 0 100px 0;
-          overflow: hidden;
+          flex-direction: column;
+          justify-content: space-between;
+          padding: 80px 0 0 0;
           background: #0d2818;
           color: #ffffff;
         }
@@ -246,10 +250,12 @@ export default function Hero3D() {
           display: flex;
           justify-content: flex-start;
           align-items: center;
+          padding-top: 10px;
+          padding-bottom: 30px;
         }
 
         .hero-content {
-          max-width: 820px;
+          max-width: 840px;
         }
 
         .hero-badge-row {
@@ -383,7 +389,7 @@ export default function Hero3D() {
           display: flex;
           align-items: center;
           gap: 16px;
-          margin-bottom: 44px;
+          margin-bottom: 24px;
           flex-wrap: wrap;
         }
 
@@ -416,62 +422,129 @@ export default function Hero3D() {
           text-shadow: none;
         }
 
-        /* Trust Bar */
+        /* Overlapping Trust Bar Card */
+        .hero-overlap-wrapper {
+          position: relative;
+          z-index: 10;
+          width: 100%;
+          margin-bottom: -54px;
+          margin-top: 20px;
+        }
+
         .hero-trust-bar {
           display: grid;
           grid-template-columns: repeat(4, 1fr);
-          gap: 18px;
-          padding: 20px 24px;
-          border-radius: var(--radius-lg);
-          background: rgba(13, 40, 24, 0.5);
-          backdrop-filter: blur(14px);
-          border: 1px solid rgba(255, 255, 255, 0.18);
-          max-width: 820px;
+          gap: 22px;
+          padding: 26px 36px;
+          border-radius: var(--radius-xl);
+          background: linear-gradient(135deg, rgba(13, 40, 24, 0.97) 0%, rgba(20, 56, 36, 0.95) 100%);
+          backdrop-filter: blur(24px);
+          -webkit-backdrop-filter: blur(24px);
+          border: 1.5px solid rgba(116, 198, 157, 0.35);
+          box-shadow: 0 24px 60px -10px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.08);
+          animation: trustBarReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) 1.2s both;
+        }
+
+        @keyframes trustBarReveal {
+          0% {
+            opacity: 0;
+            transform: translateY(35px);
+            filter: blur(8px);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0);
+            filter: blur(0);
+          }
         }
 
         .trust-cell {
           display: flex;
           align-items: flex-start;
-          gap: 12px;
+          gap: 16px;
+          animation: trustCellPop 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+        }
+
+        .cell-1 { animation-delay: 1.3s; }
+        .cell-2 { animation-delay: 1.5s; }
+        .cell-3 { animation-delay: 1.7s; }
+        .cell-4 { animation-delay: 1.9s; }
+
+        @keyframes trustCellPop {
+          0% {
+            opacity: 0;
+            transform: translateY(18px);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        .trust-cell-body {
+          display: flex;
+          flex-direction: column;
+          gap: 3px;
         }
 
         .cell-icon-green {
           color: #74c69d;
           flex-shrink: 0;
-          margin-top: 2px;
+          margin-top: 3px;
+          filter: drop-shadow(0 2px 8px rgba(82, 183, 136, 0.4));
         }
 
         .cell-icon-gold {
-          color: #e9c46a;
+          color: #dfc27d;
           flex-shrink: 0;
-          margin-top: 2px;
+          margin-top: 3px;
+          filter: drop-shadow(0 2px 8px rgba(223, 194, 125, 0.4));
         }
 
         .trust-cell strong {
           display: block;
-          font-size: 0.92rem;
+          font-size: 1.12rem;
+          font-weight: 800;
           color: #ffffff;
+          letter-spacing: -0.01em;
+          line-height: 1.2;
         }
 
         .trust-cell span {
-          font-size: 0.78rem;
-          color: #b7e4c7;
+          font-size: 0.92rem;
+          color: #c4ebd0;
+          font-weight: 500;
+          line-height: 1.45;
         }
 
         @media (max-width: 1040px) {
           .hero-trust-bar {
             grid-template-columns: repeat(2, 1fr);
-            gap: 16px;
+            gap: 20px;
+            padding: 22px 24px;
+          }
+          .hero-overlap-wrapper {
+            margin-bottom: -70px;
           }
         }
 
         @media (max-width: 640px) {
           .hero-section {
-            padding: 50px 0 70px 0;
+            padding: 50px 0 0 0;
           }
           .hero-trust-bar {
             grid-template-columns: 1fr;
-            gap: 14px;
+            gap: 16px;
+            padding: 20px;
+          }
+          .hero-overlap-wrapper {
+            margin-bottom: -110px;
+          }
+          .trust-cell strong {
+            font-size: 1.05rem;
+          }
+          .trust-cell span {
+            font-size: 0.88rem;
           }
         }
       `}</style>
