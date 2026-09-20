@@ -387,14 +387,28 @@ export default function Hero3D() {
 
         .hero-buttons-row {
           display: flex;
+          justify-content: center;
           align-items: center;
-          gap: 16px;
-          margin-bottom: 24px;
+          gap: 20px;
+          margin: 40px auto 28px auto;
+          width: 100%;
           flex-wrap: wrap;
+          animation: heroButtonsFadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) 1.2s both;
+        }
+
+        @keyframes heroButtonsFadeIn {
+          0% {
+            opacity: 0;
+            transform: translateY(22px);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0);
+          }
         }
 
         .hero-main-cta {
-          padding: 17px 36px;
+          padding: 17px 38px;
           font-size: 1.05rem;
           font-weight: 700;
         }
@@ -407,7 +421,7 @@ export default function Hero3D() {
         }
 
         .hero-sec-cta {
-          padding: 17px 28px;
+          padding: 17px 30px;
           font-size: 1rem;
           background: rgba(13, 40, 24, 0.55);
           backdrop-filter: blur(8px);
