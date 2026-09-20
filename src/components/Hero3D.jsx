@@ -74,10 +74,9 @@ export default function Hero3D() {
         <div className="video-overlay-pattern"></div>
       </div>
 
-      {/* Main Hero Content */}
-      <div className="container hero-container">
-        <div className="hero-content">
-          {/* Top Trust Header: 4.8 Google Reviews & Clinic Sanctuary Badge */}
+      {/* Top Center Badges (In Upper Red Box Zone) */}
+      <div className="hero-top-badges-bar">
+        <div className="container">
           <div className="hero-badge-row">
             <a 
               href="#reviews"
@@ -96,7 +95,12 @@ export default function Hero3D() {
               <span>Surrey’s Dedicated Healthcare Sanctuary</span>
             </div>
           </div>
+        </div>
+      </div>
 
+      {/* Main Hero Content */}
+      <div className="container hero-container">
+        <div className="hero-content">
           {/* Main Headline with Staggered Entrance Animation */}
           <h1 className="hero-heading">
             <span className="hero-word-row">
@@ -239,25 +243,19 @@ export default function Hero3D() {
           opacity: 0.15;
         }
 
-        .hero-container {
+        .hero-top-badges-bar {
           position: relative;
-          z-index: 4;
-          display: flex;
-          justify-content: flex-start;
-          align-items: center;
+          z-index: 5;
+          width: 100%;
           padding-top: 10px;
-          padding-bottom: 30px;
-        }
-
-        .hero-content {
-          max-width: 840px;
+          margin-bottom: 24px;
         }
 
         .hero-badge-row {
           display: flex;
           align-items: center;
           gap: 16px;
-          margin: 0 auto 36px auto;
+          margin: 0 auto;
           flex-wrap: wrap;
           justify-content: center;
           width: 100%;
@@ -325,6 +323,20 @@ export default function Hero3D() {
         .pill-gold-icon {
           color: #e9c46a;
           filter: drop-shadow(0 2px 6px rgba(233, 196, 106, 0.5));
+        }
+
+        .hero-container {
+          position: relative;
+          z-index: 4;
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          padding-top: 0;
+          padding-bottom: 20px;
+        }
+
+        .hero-content {
+          max-width: 840px;
         }
 
         .hero-heading {
