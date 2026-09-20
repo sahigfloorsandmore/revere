@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import { 
   Calendar, 
   ShieldCheck, 
@@ -9,48 +9,14 @@ import {
   CreditCard, 
   Play, 
   Pause, 
-  ChevronLeft, 
-  ChevronRight, 
-  ExternalLink, 
-  Camera,
-  Star,
-  Activity
+  Star
 } from 'lucide-react';
 
 export default function Hero3D() {
   const [isPlaying, setIsPlaying] = useState(true);
-  const [activePhotoIndex, setActivePhotoIndex] = useState(0);
   const videoRef = useRef(null);
 
   const JANEAPP_URL = "https://reverewellness.janeapp.com/";
-  const GOOGLE_REVIEW_URL = "https://www.google.com/maps/search/?api=1&query=Revere+Massage+and+Wellness+Centre+Surrey";
-
-  // Authentic photos from reverewellness.ca hero carousel
-  const clinicHeroPhotos = [
-    {
-      src: "/images/clinic-reception.jpg",
-      title: "Clinic Reception & Lounge",
-      caption: "Spacious front reception and comfortable waiting lounge at Suite 210."
-    },
-    {
-      src: "/images/clinic-treatment-room.jpg",
-      title: "Private Therapy Rooms",
-      caption: "Quiet, climate-controlled treatment suites equipped with adjustable hydraulic tables."
-    },
-    {
-      src: "/images/clinic-room-bed.jpg",
-      title: "Clinical Treatment Bed & Setup",
-      caption: "Hygienic, comfortable massage table with fresh linens and peaceful ambiance."
-    }
-  ];
-
-  // Auto-advance photo carousel every 5 seconds
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setActivePhotoIndex((prev) => (prev + 1) % clinicHeroPhotos.length);
-    }, 5000);
-    return () => clearInterval(timer);
-  }, [clinicHeroPhotos.length]);
 
   const toggleVideoPlay = () => {
     if (videoRef.current) {
@@ -61,14 +27,6 @@ export default function Hero3D() {
       }
       setIsPlaying(!isPlaying);
     }
-  };
-
-  const nextPhoto = () => {
-    setActivePhotoIndex((prev) => (prev + 1) % clinicHeroPhotos.length);
-  };
-
-  const prevPhoto = () => {
-    setActivePhotoIndex((prev) => (prev - 1 + clinicHeroPhotos.length) % clinicHeroPhotos.length);
   };
 
   return (
@@ -96,7 +54,7 @@ export default function Hero3D() {
       </div>
 
       <div className="container hero-container">
-        {/* Left Column: Hero Narrative & Key Offerings */}
+        {/* Hero Narrative & Key Offerings */}
         <div className="hero-content">
           {/* Top Trust Header: 4.8 Google Reviews & Clinic Sanctuary Badge */}
           <div className="hero-badge-row">
@@ -185,79 +143,18 @@ export default function Hero3D() {
             </div>
           </div>
         </div>
-
-        {/* Right Column: Authentic Clinic Photos Showcase + Quick Booking */}
-        <div className="hero-right-column">
-          {/* Clinic Photo Carousel Card */}
-          <div className="clinic-photo-card glass-card-dark">
-            <div className="photo-card-header">
-              <div className="photo-badge">
-                <Camera size={15} className="text-gold" />
-                <span>Inside Our Surrey Clinic</span>
-              </div>
-              <div className="photo-nav-arrows">
-                <button onClick={prevPhoto} aria-label="Previous photo" className="arrow-btn">
-                  <ChevronLeft size={16} />
-                </button>
-                <span className="photo-counter">{activePhotoIndex + 1}/{clinicHeroPhotos.length}</span>
-                <button onClick={nextPhoto} aria-label="Next photo" className="arrow-btn">
-                  <ChevronRight size={16} />
-                </button>
-              </div>
-            </div>
-
-            {/* Photo Frame */}
-            <div className="photo-frame-container">
-              <img 
-                src={clinicHeroPhotos[activePhotoIndex].src} 
-                alt={clinicHeroPhotos[activePhotoIndex].title}
-                className="clinic-active-img"
-              />
-              <div className="photo-caption-bar">
-                <strong>{clinicHeroPhotos[activePhotoIndex].title}</strong>
-                <p>{clinicHeroPhotos[activePhotoIndex].caption}</p>
-              </div>
-            </div>
-
-            {/* Photo Dots */}
-            <div className="photo-dots-row">
-              {clinicHeroPhotos.map((_, idx) => (
-                <button
-                  key={idx}
-                  className={`photo-dot ${activePhotoIndex === idx ? 'active-dot' : ''}`}
-                  onClick={() => setActivePhotoIndex(idx)}
-                  aria-label={`View photo ${idx + 1}`}
-                />
-              ))}
-            </div>
-
-            {/* Instant Booking Action */}
-            <div className="photo-card-action">
-              <a 
-                href={JANEAPP_URL} 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="btn btn-gold hero-card-book-btn"
-              >
-                <Calendar size={18} />
-                <span>Book a Session in This Clinic</span>
-                <ExternalLink size={14} />
-              </a>
-
-              <div className="video-control-row">
-                <button 
-                  onClick={toggleVideoPlay} 
-                  className="video-toggle-link"
-                  title={isPlaying ? "Pause background video" : "Play background video"}
-                >
-                  {isPlaying ? <Pause size={13} /> : <Play size={13} />}
-                  <span>{isPlaying ? 'Pause background video' : 'Play background video'}</span>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
+
+      {/* Minimal Floating Video Control in bottom corner */}
+      <button 
+        onClick={toggleVideoPlay} 
+        className="video-toggle-floating"
+        aria-label={isPlaying ? "Pause background video" : "Play background video"}
+        title={isPlaying ? "Pause background video" : "Play background video"}
+      >
+        {isPlaying ? <Pause size={14} /> : <Play size={14} />}
+        <span>{isPlaying ? 'Pause Video' : 'Play Video'}</span>
+      </button>
 
       <style>{`
         .hero-section {
@@ -265,7 +162,7 @@ export default function Hero3D() {
           min-height: calc(100vh - 120px);
           display: flex;
           align-items: center;
-          padding: 60px 0 90px 0;
+          padding: 80px 0 100px 0;
           overflow: hidden;
           background: #0d2818;
           color: #ffffff;
@@ -293,9 +190,9 @@ export default function Hero3D() {
           inset: 0;
           background: linear-gradient(
             135deg, 
-            rgba(13, 40, 24, 0.50) 0%, 
-            rgba(10, 13, 14, 0.35) 50%, 
-            rgba(27, 67, 50, 0.45) 100%
+            rgba(13, 40, 24, 0.58) 0%, 
+            rgba(10, 13, 14, 0.40) 50%, 
+            rgba(27, 67, 50, 0.50) 100%
           );
         }
 
@@ -310,21 +207,20 @@ export default function Hero3D() {
         .hero-container {
           position: relative;
           z-index: 2;
-          display: grid;
-          grid-template-columns: 1.28fr 0.92fr;
-          gap: 46px;
+          display: flex;
+          justify-content: flex-start;
           align-items: center;
         }
 
         .hero-content {
-          max-width: 680px;
+          max-width: 820px;
         }
 
         .hero-badge-row {
           display: flex;
           align-items: center;
           gap: 12px;
-          margin-bottom: 22px;
+          margin-bottom: 24px;
           flex-wrap: wrap;
         }
 
@@ -374,13 +270,13 @@ export default function Hero3D() {
         }
 
         .hero-heading {
-          font-size: clamp(2.4rem, 4.6vw, 3.7rem);
+          font-size: clamp(2.6rem, 5vw, 4.1rem);
           line-height: 1.12;
           color: #ffffff;
-          margin-bottom: 18px;
+          margin-bottom: 20px;
           font-weight: 800;
           letter-spacing: -0.025em;
-          text-shadow: 0 4px 18px rgba(0, 0, 0, 0.75);
+          text-shadow: 0 4px 20px rgba(0, 0, 0, 0.75);
         }
 
         .gold-gradient-text {
@@ -391,11 +287,12 @@ export default function Hero3D() {
         }
 
         .hero-lead {
-          font-size: 1.1rem;
+          font-size: 1.14rem;
           color: #ffffff;
-          line-height: 1.7;
-          margin-bottom: 34px;
-          text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+          line-height: 1.75;
+          margin-bottom: 36px;
+          max-width: 760px;
+          text-shadow: 0 2px 10px rgba(0, 0, 0, 0.85);
         }
         .hero-lead strong {
           color: #ffffff;
@@ -406,13 +303,13 @@ export default function Hero3D() {
           display: flex;
           align-items: center;
           gap: 16px;
-          margin-bottom: 38px;
+          margin-bottom: 44px;
           flex-wrap: wrap;
         }
 
         .hero-main-cta {
-          padding: 16px 34px;
-          font-size: 1.02rem;
+          padding: 17px 36px;
+          font-size: 1.05rem;
           font-weight: 700;
         }
 
@@ -424,12 +321,12 @@ export default function Hero3D() {
         }
 
         .hero-sec-cta {
-          padding: 16px 26px;
-          font-size: 0.98rem;
-          background: rgba(13, 40, 24, 0.5);
+          padding: 17px 28px;
+          font-size: 1rem;
+          background: rgba(13, 40, 24, 0.55);
           backdrop-filter: blur(8px);
           color: #ffffff;
-          border: 1.5px solid rgba(255, 255, 255, 0.4);
+          border: 1.5px solid rgba(255, 255, 255, 0.45);
           text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
         }
         .hero-sec-cta:hover {
@@ -442,13 +339,14 @@ export default function Hero3D() {
         /* Trust Bar */
         .hero-trust-bar {
           display: grid;
-          grid-template-columns: repeat(2, 1fr);
+          grid-template-columns: repeat(4, 1fr);
           gap: 18px;
-          padding: 18px;
+          padding: 20px 24px;
           border-radius: var(--radius-lg);
-          background: rgba(13, 40, 24, 0.45);
-          backdrop-filter: blur(12px);
-          border: 1px solid rgba(255, 255, 255, 0.15);
+          background: rgba(13, 40, 24, 0.5);
+          backdrop-filter: blur(14px);
+          border: 1px solid rgba(255, 255, 255, 0.18);
+          max-width: 820px;
         }
 
         .trust-cell {
@@ -480,176 +378,49 @@ export default function Hero3D() {
           color: #b7e4c7;
         }
 
-        /* Clinic Photo Card */
-        .clinic-photo-card {
-          padding: 24px;
-          border-radius: var(--radius-xl);
-          background: rgba(18, 24, 27, 0.85);
-          backdrop-filter: blur(20px);
-          -webkit-backdrop-filter: blur(20px);
-          border: 1px solid rgba(255, 255, 255, 0.2);
-          box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
-        }
-
-        .photo-card-header {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          margin-bottom: 16px;
-        }
-
-        .photo-badge {
-          display: inline-flex;
-          align-items: center;
-          gap: 8px;
-          font-size: 0.82rem;
-          font-weight: 700;
-          color: #e9c46a;
-          text-transform: uppercase;
-          letter-spacing: 0.08em;
-        }
-
-        .photo-nav-arrows {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-        }
-
-        .arrow-btn {
-          width: 28px;
-          height: 28px;
-          border-radius: 50%;
-          background: rgba(255, 255, 255, 0.12);
-          color: #ffffff;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          transition: var(--transition);
-        }
-
-        .arrow-btn:hover {
-          background: #388242;
-        }
-
-        .photo-counter {
-          font-size: 0.78rem;
-          color: #a1b0a6;
-          font-weight: 600;
-        }
-
-        .photo-frame-container {
-          position: relative;
-          width: 100%;
-          height: 240px;
-          border-radius: var(--radius-md);
-          overflow: hidden;
-          background: #000;
-          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
-        }
-
-        .clinic-active-img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          transition: transform 0.4s ease;
-        }
-
-        .clinic-active-img:hover {
-          transform: scale(1.03);
-        }
-
-        .photo-caption-bar {
+        /* Minimal Floating Video Control */
+        .video-toggle-floating {
           position: absolute;
-          bottom: 0;
-          inset-x: 0;
-          padding: 12px 16px;
-          background: linear-gradient(180deg, transparent 0%, rgba(10, 13, 14, 0.9) 100%);
-        }
-
-        .photo-caption-bar strong {
-          display: block;
-          font-size: 0.94rem;
-          color: #ffffff;
-        }
-
-        .photo-caption-bar p {
-          font-size: 0.78rem;
-          color: #dce4de;
-          margin: 2px 0 0 0;
-        }
-
-        .photo-dots-row {
-          display: flex;
-          justify-content: center;
-          gap: 8px;
-          margin: 16px 0;
-        }
-
-        .photo-dot {
-          width: 8px;
-          height: 8px;
-          border-radius: 50%;
-          background: rgba(255, 255, 255, 0.25);
-          transition: var(--transition);
-        }
-
-        .photo-dot.active-dot {
-          background: #e9c46a;
-          width: 24px;
-          border-radius: 4px;
-        }
-
-        .photo-card-action {
-          display: flex;
-          flex-direction: column;
-          gap: 12px;
-        }
-
-        .hero-card-book-btn {
-          width: 100%;
-          padding: 14px;
-          font-size: 0.98rem;
-          font-weight: 700;
-        }
-
-        .video-control-row {
-          display: flex;
-          justify-content: center;
-        }
-
-        .video-toggle-link {
+          bottom: 24px;
+          right: 32px;
+          z-index: 5;
           display: inline-flex;
           align-items: center;
-          gap: 6px;
-          font-size: 0.76rem;
-          color: #a1b0a6;
+          gap: 8px;
+          background: rgba(0, 0, 0, 0.4);
+          backdrop-filter: blur(10px);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          color: #d1ded5;
+          padding: 8px 14px;
+          border-radius: 9999px;
+          font-size: 0.78rem;
+          cursor: pointer;
           transition: var(--transition);
         }
 
-        .video-toggle-link:hover {
+        .video-toggle-floating:hover {
+          background: rgba(0, 0, 0, 0.7);
           color: #ffffff;
+          border-color: rgba(255, 255, 255, 0.4);
         }
 
         @media (max-width: 1040px) {
-          .hero-container {
-            grid-template-columns: 1fr;
-            gap: 40px;
-          }
-          .hero-content {
-            max-width: 100%;
+          .hero-trust-bar {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
           }
         }
 
         @media (max-width: 640px) {
           .hero-section {
-            padding: 40px 0 60px 0;
+            padding: 50px 0 70px 0;
           }
           .hero-trust-bar {
             grid-template-columns: 1fr;
             gap: 14px;
           }
-          .photo-frame-container {
-            height: 190px;
+          .video-toggle-floating {
+            display: none;
           }
         }
       `}</style>
