@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { 
   Heart, 
   Activity, 
@@ -13,6 +13,31 @@ import {
 
 export default function CoreServicesPillars() {
   const JANEAPP_URL = "https://reverewellness.janeapp.com/";
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    // Safety fallback to ensure cards reveal smoothly
+    const timer = setTimeout(() => setIsVisible(true), 2000);
+
+    return () => {
+      observer.disconnect();
+      clearTimeout(timer);
+    };
+  }, []);
 
   const pillars = [
     {
@@ -72,7 +97,7 @@ export default function CoreServicesPillars() {
   ];
 
   return (
-    <section id="core-services" className="core-pillars-section">
+    <section id="core-services" ref={sectionRef} className="core-pillars-section">
       <div className="container">
         {/* Section Header */}
         <div className="pillars-header">
@@ -87,10 +112,14 @@ export default function CoreServicesPillars() {
           </p>
         </div>
 
-        {/* 3 Prominent Pillar Cards */}
+        {/* 3 Prominent Pillar Cards with One-by-One Staggered Entrance */}
         <div className="pillars-grid">
-          {pillars.map((pillar) => (
-            <div key={pillar.id} className="pillar-card glass-card">
+          {pillars.map((pillar, index) => (
+            <div 
+              key={pillar.id} 
+              className={`pillar-card glass-card ${isVisible ? 'pillar-card-visible' : 'pillar-card-hidden'}`}
+              style={{ animationDelay: `${index * 0.28 + 0.15}s` }}
+            >
               {/* Card Image */}
               <div className="pillar-img-wrapper">
                 <img 
@@ -230,6 +259,28 @@ export default function CoreServicesPillars() {
           display: flex;
           flex-direction: column;
           transition: var(--transition);
+        }
+
+        .pillar-card-hidden {
+          opacity: 0;
+          transform: translateY(40px);
+        }
+
+        .pillar-card-visible {
+          animation: pillarCardCascade 1.1s cubic-bezier(0.16, 1, 0.3, 1) both;
+        }
+
+        @keyframes pillarCardCascade {
+          0% {
+            opacity: 0;
+            transform: translateY(45px) scale(0.94);
+            filter: blur(8px);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            filter: blur(0);
+          }
         }
 
         .pillar-card:hover {
