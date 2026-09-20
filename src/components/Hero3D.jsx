@@ -109,11 +109,6 @@ export default function Hero3D() {
               <span className="hero-word word-4">Healing.</span>
             </span>
           </h1>
-
-          {/* Requested Exact Main Paragraph */}
-          <p className="hero-lead">
-            <strong>Registered Massage Therapy (RMT), Physiotherapy & Active Rehabilitation.</strong> Our treatments are complemented by specialized modalities, including Intramuscular Stimulation (IMS), Shockwave Therapy, and other targeted treatment techniques, to support your recovery and overall wellness.
-          </p>
         </div>
       </div>
 

@@ -83,8 +83,7 @@ export default function CoreServicesPillars() {
             Tailored Care Built Around Three Foundations
           </h2>
           <p className="pillars-lead">
-            Whether you are recovering from an acute injury, managing chronic discomfort, or strengthening your body, 
-            our multidisciplinary clinical team in Newton, Surrey provides personalized, one-on-one care.
+            <strong>Registered Massage Therapy (RMT), Physiotherapy & Active Rehabilitation.</strong> Our treatments are complemented by specialized modalities, including Intramuscular Stimulation (IMS), Shockwave Therapy, and other targeted treatment techniques, to support your recovery and overall wellness.
           </p>
         </div>
 
