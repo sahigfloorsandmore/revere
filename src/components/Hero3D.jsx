@@ -18,18 +18,19 @@ export default function Hero3D() {
 
   const JANEAPP_URL = "https://reverewellness.janeapp.com/";
 
-  // Auto-play initial logo reveal video on mount
+  // Auto-play initial logo reveal video on mount at 1.5x speed
   useEffect(() => {
     if (video1Ref.current) {
+      video1Ref.current.playbackRate = 1.5;
       video1Ref.current.play().catch(() => {
         // Handle browser autoplay policy gracefully
       });
     }
 
-    // Safety timeout: ensure headline reveals even if video onEnded is delayed
+    // Safety timeout: ensure headline reveals even if video onEnded is delayed (adjusted for 1.5x speed)
     const timer = setTimeout(() => {
       setActiveVideoIndex(1);
-    }, 7000);
+    }, 4800);
     return () => clearTimeout(timer);
   }, []);
 
@@ -47,13 +48,15 @@ export default function Hero3D() {
       {/* Background Sequential Cinematic Videos */}
       <div className="hero-video-wrapper">
         
-        {/* Video 1: Calm Elegant Logo Reveal (Plays First) */}
+        {/* Video 1: Calm Elegant Logo Reveal (Plays First at 1.5x Speed) */}
         <video
           ref={video1Ref}
           className={`hero-video-element video-layer ${activeVideoIndex === 0 ? 'video-visible' : 'video-hidden'}`}
           autoPlay
           muted
           playsInline
+          onLoadedMetadata={(e) => { e.currentTarget.playbackRate = 1.5; }}
+          onPlay={(e) => { e.currentTarget.playbackRate = 1.5; }}
           onEnded={handleVideo1Ended}
           poster="/images/clinic-reception.jpg"
         >
