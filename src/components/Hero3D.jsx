@@ -286,7 +286,7 @@ export default function Hero3D() {
           height: 100%;
           object-fit: cover;
           object-position: center;
-          filter: brightness(0.58) contrast(1.1);
+          filter: brightness(0.92) contrast(1.05);
           transform: scale(1.02);
         }
 
@@ -295,18 +295,18 @@ export default function Hero3D() {
           inset: 0;
           background: linear-gradient(
             135deg, 
-            rgba(13, 40, 24, 0.93) 0%, 
-            rgba(10, 13, 14, 0.84) 60%, 
-            rgba(27, 67, 50, 0.80) 100%
+            rgba(13, 40, 24, 0.50) 0%, 
+            rgba(10, 13, 14, 0.35) 50%, 
+            rgba(27, 67, 50, 0.45) 100%
           );
         }
 
         .video-overlay-pattern {
           position: absolute;
           inset: 0;
-          background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+          background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
           background-size: 24px 24px;
-          opacity: 0.35;
+          opacity: 0.15;
         }
 
         .hero-container {
@@ -382,23 +382,26 @@ export default function Hero3D() {
           margin-bottom: 18px;
           font-weight: 800;
           letter-spacing: -0.025em;
+          text-shadow: 0 4px 18px rgba(0, 0, 0, 0.75);
         }
 
         .gold-gradient-text {
-          background: linear-gradient(135deg, #e9c46a 0%, #dfc27d 40%, #74c69d 100%);
+          background: linear-gradient(135deg, #f3d082 0%, #dfc27d 40%, #95d5b2 100%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
+          filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.5));
         }
 
         .hero-lead {
           font-size: 1.1rem;
-          color: #d8f3dc;
+          color: #ffffff;
           line-height: 1.7;
           margin-bottom: 34px;
-          opacity: 0.95;
+          text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
         }
         .hero-lead strong {
           color: #ffffff;
+          font-weight: 700;
         }
 
         .hero-buttons-row {
@@ -425,14 +428,17 @@ export default function Hero3D() {
         .hero-sec-cta {
           padding: 16px 26px;
           font-size: 0.98rem;
-          background: rgba(255, 255, 255, 0.12);
+          background: rgba(13, 40, 24, 0.5);
+          backdrop-filter: blur(8px);
           color: #ffffff;
-          border-color: rgba(255, 255, 255, 0.3);
+          border: 1.5px solid rgba(255, 255, 255, 0.4);
+          text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
         }
         .hero-sec-cta:hover {
           background: #ffffff;
           color: #0d2818;
           border-color: #ffffff;
+          text-shadow: none;
         }
 
         /* Trust Bar */
@@ -440,8 +446,11 @@ export default function Hero3D() {
           display: grid;
           grid-template-columns: repeat(2, 1fr);
           gap: 18px;
-          padding-top: 22px;
-          border-top: 1px solid rgba(255, 255, 255, 0.18);
+          padding: 18px;
+          border-radius: var(--radius-lg);
+          background: rgba(13, 40, 24, 0.45);
+          backdrop-filter: blur(12px);
+          border: 1px solid rgba(255, 255, 255, 0.15);
         }
 
         .trust-cell {
