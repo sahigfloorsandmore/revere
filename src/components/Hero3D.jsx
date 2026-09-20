@@ -83,8 +83,8 @@ export default function Hero3D() {
         <div className="video-overlay-pattern"></div>
       </div>
 
-      {/* Top Center Badges (In Upper Red Box Zone) */}
-      <div className={`hero-top-badges-bar ${activeVideoIndex === 1 ? 'badges-reveal' : 'badges-pending'}`}>
+      {/* Top Center Badges (In Upper Red Box Zone - Animates during first video) */}
+      <div className="hero-top-badges-bar">
         <div className="container">
           <div className="hero-badge-row">
             <a 
@@ -260,16 +260,6 @@ export default function Hero3D() {
           margin-bottom: 24px;
         }
 
-        .badges-pending {
-          opacity: 0;
-          visibility: hidden;
-        }
-
-        .badges-reveal {
-          opacity: 1;
-          visibility: visible;
-        }
-
         .hero-badge-row {
           display: flex;
           align-items: center;
@@ -280,19 +270,19 @@ export default function Hero3D() {
           width: 100%;
         }
 
-        .badges-reveal .badge-item-1 {
-          animation: badgeFloatDown 1.1s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both;
+        .badge-item-1 {
+          animation: badgeFloatDown 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
         }
 
-        .badges-reveal .badge-item-2 {
-          animation: badgeFloatDown 1.1s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both;
+        .badge-item-2 {
+          animation: badgeFloatDown 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.65s both;
         }
 
         @keyframes badgeFloatDown {
           0% {
             opacity: 0;
-            transform: translateY(-24px) scale(0.92);
-            filter: blur(8px) brightness(1.3);
+            transform: translateY(-28px) scale(0.92);
+            filter: blur(10px) brightness(1.35);
           }
           100% {
             opacity: 1;
