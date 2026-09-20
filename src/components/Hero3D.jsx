@@ -99,7 +99,7 @@ export default function Hero3D() {
 
           {/* Main Headline */}
           <h1 className="hero-heading">
-            Restorative Therapy. <br />
+            Restorative <span className="hero-heading-accent">Therapy.</span> <br />
             <span className="hero-heading-accent">Exceptional</span> Healing.
           </h1>
 
