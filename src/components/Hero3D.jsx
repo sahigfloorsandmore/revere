@@ -98,12 +98,10 @@ export default function Hero3D() {
       <div className="container hero-container">
         {/* Left Column: Hero Narrative & Key Offerings */}
         <div className="hero-content">
-          {/* Top Trust Header: 5.0 Google Reviews & Clinic Sanctuary Badge */}
+          {/* Top Trust Header: 4.8 Google Reviews & Clinic Sanctuary Badge */}
           <div className="hero-badge-row">
             <a 
-              href={GOOGLE_REVIEW_URL} 
-              target="_blank" 
-              rel="noopener noreferrer" 
+              href="#reviews"
               className="hero-google-badge"
             >
               <div className="stars-mini">
@@ -111,7 +109,7 @@ export default function Hero3D() {
                   <Star key={i} size={13} fill="#f4b400" color="#f4b400" />
                 ))}
               </div>
-              <span className="google-score-tag">5.0 Star Google Rating</span>
+              <span className="google-score-tag">4.8 ★ Google Rating (672+ Reviews)</span>
             </a>
 
             <div className="hero-pill-badge">

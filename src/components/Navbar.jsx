@@ -170,7 +170,7 @@ export default function Navbar() {
                     <div className="dropdown-icon-box gold"><Star size={16} /></div>
                     <div>
                       <strong>Google Reviews</strong>
-                      <p>5.0 Star verified patient testimonials</p>
+                      <p>4.8 ★ Rating • 672+ Patient Reviews</p>
                     </div>
                   </a>
                   <a href="#careers" className="dropdown-item" onClick={() => setAboutDropdownOpen(false)}>
@@ -246,7 +246,7 @@ export default function Navbar() {
                 
                 <div className="mobile-nav-group-title" style={{ marginTop: '12px' }}>Clinic Information</div>
                 <a href="#about" onClick={() => setMobileMenuOpen(false)}>About Revere & Our Team</a>
-                <a href="#reviews" onClick={() => setMobileMenuOpen(false)}>5-Star Google Reviews</a>
+                <a href="#reviews" onClick={() => setMobileMenuOpen(false)}>Google Reviews (4.8 ★ • 672+ Reviews)</a>
                 <a href="#insurance" onClick={() => setMobileMenuOpen(false)}>Direct Billing & ICBC</a>
                 <a href="#policies" onClick={() => setMobileMenuOpen(false)}>Clinic Policies (24h Cancellation)</a>
                 <a href="#location" onClick={() => setMobileMenuOpen(false)}>Free Parking (Stalls 36-38)</a>
