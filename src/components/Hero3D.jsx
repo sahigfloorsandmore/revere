@@ -7,15 +7,11 @@ import {
   Sparkles, 
   ArrowRight, 
   CreditCard, 
-  Play, 
-  Pause, 
-  RotateCcw,
   Star
 } from 'lucide-react';
 
 export default function Hero3D() {
   const [activeVideoIndex, setActiveVideoIndex] = useState(0); // 0: Logo Reveal, 1: Promo Video
-  const [isPlaying, setIsPlaying] = useState(true);
   
   const video1Ref = useRef(null); // Calm elegant logo reveal video
   const video2Ref = useRef(null); // Cinematic multi-shot promo video
@@ -37,31 +33,6 @@ export default function Hero3D() {
     if (video2Ref.current) {
       video2Ref.current.currentTime = 0;
       video2Ref.current.play().catch(() => {});
-    }
-  };
-
-  // Replay intro video sequence
-  const replayIntro = () => {
-    setActiveVideoIndex(0);
-    if (video2Ref.current) {
-      video2Ref.current.pause();
-    }
-    if (video1Ref.current) {
-      video1Ref.current.currentTime = 0;
-      video1Ref.current.play().catch(() => {});
-    }
-    setIsPlaying(true);
-  };
-
-  const toggleVideoPlay = () => {
-    const currentRef = activeVideoIndex === 0 ? video1Ref.current : video2Ref.current;
-    if (currentRef) {
-      if (isPlaying) {
-        currentRef.pause();
-      } else {
-        currentRef.play().catch(() => {});
-      }
-      setIsPlaying(!isPlaying);
     }
   };
 
@@ -193,30 +164,6 @@ export default function Hero3D() {
             </div>
           </div>
         </div>
-      </div>
-
-      {/* Floating Controls in bottom right corner */}
-      <div className="hero-video-controls-group">
-        {activeVideoIndex === 1 && (
-          <button 
-            onClick={replayIntro}
-            className="video-toggle-floating"
-            title="Replay Logo Reveal Video"
-          >
-            <RotateCcw size={13} />
-            <span>Replay Intro</span>
-          </button>
-        )}
-
-        <button 
-          onClick={toggleVideoPlay} 
-          className="video-toggle-floating"
-          aria-label={isPlaying ? "Pause background video" : "Play background video"}
-          title={isPlaying ? "Pause background video" : "Play background video"}
-        >
-          {isPlaying ? <Pause size={13} /> : <Play size={13} />}
-          <span>{isPlaying ? 'Pause Video' : 'Play Video'}</span>
-        </button>
       </div>
 
       <style>{`
@@ -460,38 +407,6 @@ export default function Hero3D() {
           color: #b7e4c7;
         }
 
-        /* Floating Video Controls */
-        .hero-video-controls-group {
-          position: absolute;
-          bottom: 24px;
-          right: 32px;
-          z-index: 10;
-          display: flex;
-          align-items: center;
-          gap: 10px;
-        }
-
-        .video-toggle-floating {
-          display: inline-flex;
-          align-items: center;
-          gap: 8px;
-          background: rgba(0, 0, 0, 0.45);
-          backdrop-filter: blur(10px);
-          border: 1px solid rgba(255, 255, 255, 0.2);
-          color: #d1ded5;
-          padding: 8px 14px;
-          border-radius: 9999px;
-          font-size: 0.78rem;
-          cursor: pointer;
-          transition: var(--transition);
-        }
-
-        .video-toggle-floating:hover {
-          background: rgba(0, 0, 0, 0.75);
-          color: #ffffff;
-          border-color: rgba(255, 255, 255, 0.4);
-        }
-
         @media (max-width: 1040px) {
           .hero-trust-bar {
             grid-template-columns: repeat(2, 1fr);
@@ -506,9 +421,6 @@ export default function Hero3D() {
           .hero-trust-bar {
             grid-template-columns: 1fr;
             gap: 14px;
-          }
-          .hero-video-controls-group {
-            display: none;
           }
         }
       `}</style>
