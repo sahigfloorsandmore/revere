@@ -100,7 +100,7 @@ export default function Hero3D() {
           {/* Main Headline */}
           <h1 className="hero-heading">
             Restorative Therapy. <br />
-            <span className="gold-gradient-text">Exceptional Healing.</span>
+            <span className="hero-heading-accent">Exceptional Healing.</span>
           </h1>
 
           {/* Requested Exact Main Paragraph */}
@@ -308,11 +308,9 @@ export default function Hero3D() {
           text-shadow: 0 4px 20px rgba(0, 0, 0, 0.75);
         }
 
-        .gold-gradient-text {
-          background: linear-gradient(135deg, #f3d082 0%, #dfc27d 40%, #95d5b2 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.5));
+        .hero-heading-accent {
+          color: #74c69d;
+          text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
         }
 
         .hero-lead {
