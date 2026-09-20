@@ -25,6 +25,12 @@ export default function Hero3D() {
         // Handle browser autoplay policy gracefully
       });
     }
+
+    // Safety timeout: ensure headline reveals even if video onEnded is delayed
+    const timer = setTimeout(() => {
+      setActiveVideoIndex(1);
+    }, 7000);
+    return () => clearTimeout(timer);
   }, []);
 
   // When video 1 ends, smoothly transition to video 2
@@ -101,8 +107,8 @@ export default function Hero3D() {
       {/* Main Hero Content */}
       <div className="container hero-container">
         <div className="hero-content">
-          {/* Main Headline with Staggered Entrance Animation */}
-          <h1 className="hero-heading">
+          {/* Main Headline appears after the first video */}
+          <h1 className={`hero-heading ${activeVideoIndex === 1 ? 'hero-heading-reveal' : 'hero-heading-pending'}`}>
             <span className="hero-word-row">
               <span className="hero-word word-1">Restorative</span>{' '}
               <span className="hero-word word-2 hero-heading-accent">Therapy.</span>
@@ -120,7 +126,7 @@ export default function Hero3D() {
       <div className="hero-overlap-wrapper">
         <div className="container">
           {/* Primary & Secondary Call to Actions in Bottom Zone */}
-          <div className="hero-buttons-row">
+          <div className={`hero-buttons-row ${activeVideoIndex === 1 ? 'hero-buttons-reveal' : 'hero-buttons-pending'}`}>
             <a 
               href={JANEAPP_URL} 
               target="_blank" 
@@ -347,6 +353,17 @@ export default function Hero3D() {
           font-weight: 800;
           letter-spacing: -0.025em;
           text-shadow: 0 4px 20px rgba(0, 0, 0, 0.75);
+          transition: opacity 0.5s ease;
+        }
+
+        .hero-heading-pending {
+          opacity: 0;
+          visibility: hidden;
+        }
+
+        .hero-heading-reveal {
+          opacity: 1;
+          visibility: visible;
         }
 
         .hero-word-row {
@@ -354,25 +371,25 @@ export default function Hero3D() {
           vertical-align: bottom;
         }
 
-        .hero-word {
+        .hero-heading-reveal .hero-word {
           display: inline-block;
           animation: heroWordDramaticReveal 1.6s cubic-bezier(0.16, 1, 0.3, 1) both;
           will-change: transform, opacity, filter, letter-spacing;
         }
 
-        .word-1 {
+        .hero-heading-reveal .word-1 {
           animation-delay: 0.35s;
         }
 
-        .word-2 {
+        .hero-heading-reveal .word-2 {
           animation-delay: 0.95s;
         }
 
-        .word-3 {
+        .hero-heading-reveal .word-3 {
           animation-delay: 1.65s;
         }
 
-        .word-4 {
+        .hero-heading-reveal .word-4 {
           animation-delay: 2.25s;
         }
 
@@ -400,19 +417,6 @@ export default function Hero3D() {
           text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
         }
 
-        .hero-lead {
-          font-size: 1.14rem;
-          color: #ffffff;
-          line-height: 1.75;
-          margin-bottom: 20px;
-          max-width: 760px;
-          text-shadow: 0 2px 10px rgba(0, 0, 0, 0.85);
-        }
-        .hero-lead strong {
-          color: #ffffff;
-          font-weight: 700;
-        }
-
         /* Overlapping Trust Bar Card & Bottom Actions */
         .hero-overlap-wrapper {
           position: relative;
@@ -420,6 +424,17 @@ export default function Hero3D() {
           width: 100%;
           margin-bottom: -54px;
           margin-top: 24px;
+        }
+
+        .hero-buttons-pending {
+          opacity: 0;
+          visibility: hidden;
+        }
+
+        .hero-buttons-reveal {
+          opacity: 1;
+          visibility: visible;
+          animation: heroButtonsFadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) 0.8s both;
         }
 
         .hero-buttons-row {
@@ -430,7 +445,6 @@ export default function Hero3D() {
           margin: 0 auto 24px auto;
           width: 100%;
           flex-wrap: wrap;
-          animation: heroButtonsFadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) 1.2s both;
         }
 
         @keyframes heroButtonsFadeIn {
