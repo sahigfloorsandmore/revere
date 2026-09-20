@@ -129,10 +129,10 @@ export default function Hero3D() {
             </a>
 
             <a 
-              href="#core-services" 
+              href="#services" 
               className="btn btn-outline hero-sec-cta"
             >
-              <span>Explore Our 3 Core Services</span>
+              <span>Explore All Our Services</span>
             </a>
           </div>
         </div>
