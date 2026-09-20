@@ -84,12 +84,12 @@ export default function Hero3D() {
       </div>
 
       {/* Top Center Badges (In Upper Red Box Zone) */}
-      <div className="hero-top-badges-bar">
+      <div className={`hero-top-badges-bar ${activeVideoIndex === 1 ? 'badges-reveal' : 'badges-pending'}`}>
         <div className="container">
           <div className="hero-badge-row">
             <a 
               href="#reviews"
-              className="hero-google-badge"
+              className="hero-google-badge badge-item-1"
             >
               <div className="stars-mini">
                 {[...Array(5)].map((_, i) => (
@@ -99,7 +99,7 @@ export default function Hero3D() {
               <span className="google-score-tag">4.8 ★ Google Rating (672+ Reviews)</span>
             </a>
 
-            <div className="hero-pill-badge">
+            <div className="hero-pill-badge badge-item-2">
               <Sparkles size={16} className="pill-gold-icon" />
               <span>Surrey’s Dedicated Healthcare Sanctuary</span>
             </div>
@@ -260,6 +260,16 @@ export default function Hero3D() {
           margin-bottom: 24px;
         }
 
+        .badges-pending {
+          opacity: 0;
+          visibility: hidden;
+        }
+
+        .badges-reveal {
+          opacity: 1;
+          visibility: visible;
+        }
+
         .hero-badge-row {
           display: flex;
           align-items: center;
@@ -268,17 +278,26 @@ export default function Hero3D() {
           flex-wrap: wrap;
           justify-content: center;
           width: 100%;
-          animation: heroBadgeRowFadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
         }
 
-        @keyframes heroBadgeRowFadeIn {
+        .badges-reveal .badge-item-1 {
+          animation: badgeFloatDown 1.1s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both;
+        }
+
+        .badges-reveal .badge-item-2 {
+          animation: badgeFloatDown 1.1s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both;
+        }
+
+        @keyframes badgeFloatDown {
           0% {
             opacity: 0;
-            transform: translateY(-12px);
+            transform: translateY(-24px) scale(0.92);
+            filter: blur(8px) brightness(1.3);
           }
           100% {
             opacity: 1;
-            transform: translateY(0);
+            transform: translateY(0) scale(1);
+            filter: blur(0) brightness(1);
           }
         }
 
