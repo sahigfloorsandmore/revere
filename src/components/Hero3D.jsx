@@ -84,6 +84,7 @@ export default function Hero3D() {
           playsInline
           poster="/images/clinic-reception.jpg"
         >
+          <source src="/videos/hero-promo.mp4" type="video/mp4" />
           <source src="https://assets.mixkit.co/videos/preview/mixkit-hands-of-a-masseuse-massaging-a-person-41271-large.mp4" type="video/mp4" />
           <source src="https://assets.mixkit.co/videos/preview/mixkit-masseur-giving-a-massage-to-a-client-41270-large.mp4" type="video/mp4" />
           Your browser does not support the video tag.
