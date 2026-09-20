@@ -114,8 +114,13 @@ export default function Hero3D() {
           <p className="hero-lead">
             <strong>Registered Massage Therapy (RMT), Physiotherapy & Active Rehabilitation.</strong> Our treatments are complemented by specialized modalities, including Intramuscular Stimulation (IMS), Shockwave Therapy, and other targeted treatment techniques, to support your recovery and overall wellness.
           </p>
+        </div>
+      </div>
 
-          {/* Primary & Secondary Call to Actions */}
+      {/* Overlapping Floating Trust Bar & Actions (Bridges Hero & Next Section) */}
+      <div className="hero-overlap-wrapper">
+        <div className="container">
+          {/* Primary & Secondary Call to Actions in Bottom Zone */}
           <div className="hero-buttons-row">
             <a 
               href={JANEAPP_URL} 
@@ -135,12 +140,7 @@ export default function Hero3D() {
               <span>Explore All Our Services</span>
             </a>
           </div>
-        </div>
-      </div>
 
-      {/* Overlapping Floating Trust Bar (Bridges Hero & Next Section) */}
-      <div className="hero-overlap-wrapper">
-        <div className="container">
           <div className="hero-trust-bar glass-trust-card">
             <div className="trust-cell cell-1">
               <ShieldCheck size={28} className="cell-icon-green" />
@@ -376,7 +376,7 @@ export default function Hero3D() {
           font-size: 1.14rem;
           color: #ffffff;
           line-height: 1.75;
-          margin-bottom: 36px;
+          margin-bottom: 20px;
           max-width: 760px;
           text-shadow: 0 2px 10px rgba(0, 0, 0, 0.85);
         }
@@ -385,12 +385,21 @@ export default function Hero3D() {
           font-weight: 700;
         }
 
+        /* Overlapping Trust Bar Card & Bottom Actions */
+        .hero-overlap-wrapper {
+          position: relative;
+          z-index: 10;
+          width: 100%;
+          margin-bottom: -54px;
+          margin-top: 24px;
+        }
+
         .hero-buttons-row {
           display: flex;
           justify-content: center;
           align-items: center;
           gap: 20px;
-          margin: 40px auto 28px auto;
+          margin: 0 auto 24px auto;
           width: 100%;
           flex-wrap: wrap;
           animation: heroButtonsFadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) 1.2s both;
