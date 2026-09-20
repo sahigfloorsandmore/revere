@@ -317,40 +317,47 @@ export default function Hero3D() {
 
         .hero-word-row {
           display: inline-block;
+          vertical-align: bottom;
         }
 
         .hero-word {
           display: inline-block;
-          animation: heroWordFadeIn 0.85s cubic-bezier(0.16, 1, 0.3, 1) both;
-          will-change: transform, opacity, filter;
+          animation: heroWordDramaticReveal 1.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+          will-change: transform, opacity, filter, letter-spacing;
         }
 
         .word-1 {
-          animation-delay: 0.15s;
+          animation-delay: 0.35s;
         }
 
         .word-2 {
-          animation-delay: 0.38s;
+          animation-delay: 0.95s;
         }
 
         .word-3 {
-          animation-delay: 0.62s;
+          animation-delay: 1.65s;
         }
 
         .word-4 {
-          animation-delay: 0.85s;
+          animation-delay: 2.25s;
         }
 
-        @keyframes heroWordFadeIn {
+        @keyframes heroWordDramaticReveal {
           0% {
             opacity: 0;
-            transform: translateY(24px) scale(0.96);
-            filter: blur(8px);
+            transform: translateY(38px) scale(0.92);
+            filter: blur(14px) brightness(1.35);
+            letter-spacing: 0.06em;
+          }
+          40% {
+            opacity: 0.75;
+            filter: blur(4px) brightness(1.15);
           }
           100% {
             opacity: 1;
             transform: translateY(0) scale(1);
-            filter: blur(0);
+            filter: blur(0) brightness(1);
+            letter-spacing: -0.025em;
           }
         }
 
