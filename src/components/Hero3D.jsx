@@ -85,14 +85,14 @@ export default function Hero3D() {
             >
               <div className="stars-mini">
                 {[...Array(5)].map((_, i) => (
-                  <Star key={i} size={13} fill="#f4b400" color="#f4b400" />
+                  <Star key={i} size={16} fill="#f4b400" color="#f4b400" />
                 ))}
               </div>
               <span className="google-score-tag">4.8 ★ Google Rating (672+ Reviews)</span>
             </a>
 
             <div className="hero-pill-badge">
-              <Sparkles size={14} className="pill-gold-icon" />
+              <Sparkles size={16} className="pill-gold-icon" />
               <span>Surrey’s Dedicated Healthcare Sanctuary</span>
             </div>
           </div>
@@ -256,54 +256,74 @@ export default function Hero3D() {
         .hero-badge-row {
           display: flex;
           align-items: center;
-          gap: 12px;
-          margin-bottom: 24px;
+          gap: 16px;
+          margin-bottom: 34px;
           flex-wrap: wrap;
+          justify-content: flex-start;
+          animation: heroBadgeRowFadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+        }
+
+        @keyframes heroBadgeRowFadeIn {
+          0% {
+            opacity: 0;
+            transform: translateY(-12px);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0);
+          }
         }
 
         .hero-google-badge {
           display: inline-flex;
           align-items: center;
-          gap: 8px;
-          background: rgba(255, 255, 255, 0.15);
-          backdrop-filter: blur(12px);
-          border: 1px solid rgba(244, 180, 0, 0.5);
-          padding: 7px 16px;
+          gap: 10px;
+          background: rgba(255, 255, 255, 0.18);
+          backdrop-filter: blur(14px);
+          -webkit-backdrop-filter: blur(14px);
+          border: 1.5px solid rgba(244, 180, 0, 0.65);
+          padding: 10px 22px;
           border-radius: var(--radius-full);
+          box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.35);
           transition: var(--transition);
         }
         .hero-google-badge:hover {
-          background: rgba(255, 255, 255, 0.25);
-          transform: translateY(-1px);
+          background: rgba(255, 255, 255, 0.28);
+          transform: translateY(-2px);
+          box-shadow: 0 12px 28px -4px rgba(0, 0, 0, 0.45);
         }
 
         .stars-mini {
           display: flex;
-          gap: 2px;
+          gap: 3px;
         }
 
         .google-score-tag {
-          font-size: 0.82rem;
-          font-weight: 700;
+          font-size: 0.95rem;
+          font-weight: 750;
           color: #ffffff;
+          letter-spacing: -0.01em;
         }
 
         .hero-pill-badge {
           display: inline-flex;
           align-items: center;
-          gap: 6px;
-          background: rgba(82, 183, 136, 0.16);
-          backdrop-filter: blur(10px);
-          border: 1px solid rgba(82, 183, 136, 0.35);
-          padding: 7px 16px;
+          gap: 8px;
+          background: rgba(82, 183, 136, 0.22);
+          backdrop-filter: blur(14px);
+          -webkit-backdrop-filter: blur(14px);
+          border: 1.5px solid rgba(82, 183, 136, 0.45);
+          padding: 10px 22px;
           border-radius: var(--radius-full);
-          font-size: 0.82rem;
-          font-weight: 600;
-          color: #d8f3dc;
+          font-size: 0.95rem;
+          font-weight: 700;
+          color: #ffffff;
+          box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.35);
         }
 
         .pill-gold-icon {
           color: #e9c46a;
+          filter: drop-shadow(0 2px 6px rgba(233, 196, 106, 0.5));
         }
 
         .hero-heading {
