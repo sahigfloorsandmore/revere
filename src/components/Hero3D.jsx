@@ -97,10 +97,17 @@ export default function Hero3D() {
             </div>
           </div>
 
-          {/* Main Headline */}
+          {/* Main Headline with Staggered Entrance Animation */}
           <h1 className="hero-heading">
-            Restorative <span className="hero-heading-accent">Therapy.</span> <br />
-            <span className="hero-heading-accent">Exceptional</span> Healing.
+            <span className="hero-word-row">
+              <span className="hero-word word-1">Restorative</span>{' '}
+              <span className="hero-word word-2 hero-heading-accent">Therapy.</span>
+            </span>
+            <br />
+            <span className="hero-word-row">
+              <span className="hero-word word-3 hero-heading-accent">Exceptional</span>{' '}
+              <span className="hero-word word-4">Healing.</span>
+            </span>
           </h1>
 
           {/* Requested Exact Main Paragraph */}
@@ -306,6 +313,45 @@ export default function Hero3D() {
           font-weight: 800;
           letter-spacing: -0.025em;
           text-shadow: 0 4px 20px rgba(0, 0, 0, 0.75);
+        }
+
+        .hero-word-row {
+          display: inline-block;
+        }
+
+        .hero-word {
+          display: inline-block;
+          animation: heroWordFadeIn 0.85s cubic-bezier(0.16, 1, 0.3, 1) both;
+          will-change: transform, opacity, filter;
+        }
+
+        .word-1 {
+          animation-delay: 0.15s;
+        }
+
+        .word-2 {
+          animation-delay: 0.38s;
+        }
+
+        .word-3 {
+          animation-delay: 0.62s;
+        }
+
+        .word-4 {
+          animation-delay: 0.85s;
+        }
+
+        @keyframes heroWordFadeIn {
+          0% {
+            opacity: 0;
+            transform: translateY(24px) scale(0.96);
+            filter: blur(8px);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            filter: blur(0);
+          }
         }
 
         .hero-heading-accent {
