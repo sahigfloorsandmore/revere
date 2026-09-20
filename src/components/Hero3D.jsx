@@ -257,9 +257,10 @@ export default function Hero3D() {
           display: flex;
           align-items: center;
           gap: 16px;
-          margin-bottom: 34px;
+          margin: 0 auto 36px auto;
           flex-wrap: wrap;
-          justify-content: flex-start;
+          justify-content: center;
+          width: 100%;
           animation: heroBadgeRowFadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
         }
 
