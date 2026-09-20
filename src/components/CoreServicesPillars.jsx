@@ -128,9 +128,6 @@ export default function CoreServicesPillars() {
                   className="pillar-photo"
                   onError={(e) => { e.target.src = pillar.fallbackImage; }}
                 />
-                <span className={`pillar-badge ${pillar.badgeColor}`}>
-                  {pillar.badge}
-                </span>
               </div>
 
               {/* Card Content */}
