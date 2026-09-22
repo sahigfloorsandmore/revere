@@ -301,11 +301,14 @@ export default function Navbar() {
         }
 
         .top-banner {
-          background: #0d2818;
+          background: rgba(13, 40, 24, 0.92);
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
           color: #d8f3dc;
           font-size: 0.82rem;
           padding: 9px 0;
           border-bottom: 1px solid rgba(82, 183, 136, 0.2);
+          transition: all 0.3s ease;
         }
         .banner-content {
           display: flex;
@@ -358,18 +361,21 @@ export default function Navbar() {
           width: 100%;
         }
 
-        /* Navbar Header */
+        /* Navbar Header with Transparent Background */
         .navbar-header {
           position: relative;
-          background: rgba(255, 255, 255, 0.96);
-          backdrop-filter: blur(20px);
-          -webkit-backdrop-filter: blur(20px);
-          border-bottom: 1px solid rgba(0, 0, 0, 0.07);
-          transition: var(--transition);
+          background: transparent;
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+          border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+          transition: all 0.3s ease;
         }
         .navbar-scrolled {
-          background: #ffffff;
-          box-shadow: 0 8px 30px -5px rgba(0, 0, 0, 0.1);
+          background: rgba(255, 255, 255, 0.88);
+          backdrop-filter: blur(20px);
+          -webkit-backdrop-filter: blur(20px);
+          box-shadow: 0 8px 30px -5px rgba(0, 0, 0, 0.08);
+          border-bottom: 1px solid rgba(0, 0, 0, 0.07);
         }
         .nav-container {
           display: flex;
