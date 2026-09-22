@@ -8,16 +8,85 @@ import {
   Sparkles, 
   ArrowRight, 
   CreditCard, 
-  Star
+  Star,
+  Activity,
+  Heart,
+  Zap,
+  Flame
 } from 'lucide-react';
 
 export default function Hero3D() {
   const [activeVideoIndex, setActiveVideoIndex] = useState(0); // 0: Logo Reveal, 1: Promo Video
+  const [currentServiceIndex, setCurrentServiceIndex] = useState(0);
+  const [isServiceAnimating, setIsServiceAnimating] = useState(false);
   
   const video1Ref = useRef(null); // Calm elegant logo reveal video
   const video2Ref = useRef(null); // Cinematic multi-shot promo video
 
   const JANEAPP_URL = "https://reverewellness.janeapp.com/";
+
+  const heroServices = [
+    {
+      id: 'rmt',
+      tag: 'Core Discipline 01',
+      title: 'Massage Therapy (RMT)',
+      highlight: 'Deep Tissue, Swedish, Prenatal & Sports Bodywork',
+      category: 'rmt',
+      icon: Heart,
+      iconColor: 'icon-green',
+      directBilling: 'Covered by ICBC & Extended Health'
+    },
+    {
+      id: 'physio',
+      tag: 'Core Discipline 02',
+      title: 'Physiotherapy & Rehab',
+      highlight: 'Clinical Evaluation, Joint Mobilization & Injury Recovery',
+      category: 'physio-kin',
+      icon: Activity,
+      iconColor: 'icon-sage',
+      directBilling: 'Pre-Approved Direct Billing to ICBC'
+    },
+    {
+      id: 'kinesiology',
+      tag: 'Core Discipline 03',
+      title: 'Kinesiology & Active Rehab',
+      highlight: '1-on-1 Guided Exercise Therapy & Functional Movement',
+      category: 'physio-kin',
+      icon: Activity,
+      iconColor: 'icon-gold',
+      directBilling: 'Direct Billing & ICBC Active Recovery'
+    },
+    {
+      id: 'ims',
+      tag: 'Specialized Modality',
+      title: 'IMS / Dry Needling',
+      highlight: 'Intramuscular Stimulation to Reset Chronic Knots',
+      category: 'specialized',
+      icon: Zap,
+      iconColor: 'icon-gold',
+      directBilling: 'Fast Trigger Point Relief'
+    },
+    {
+      id: 'shockwave',
+      tag: 'Specialized Modality',
+      title: 'Radial Shockwave Therapy',
+      highlight: 'Acoustic Soundwaves for Tendonitis & Plantar Fasciitis',
+      category: 'specialized',
+      icon: Zap,
+      iconColor: 'icon-green',
+      directBilling: 'Evidence-Based Tissue Healing'
+    },
+    {
+      id: 'hot-stone',
+      tag: 'Restorative Therapy',
+      title: 'Hot Stone Therapy',
+      highlight: 'Deep Heated Basalt Stones for Muscular Tension Release',
+      category: 'specialized',
+      icon: Flame,
+      iconColor: 'icon-gold',
+      directBilling: 'Deep Thermal Relaxation'
+    }
+  ];
 
   // Auto-play initial logo reveal video on mount at 1.5x speed
   useEffect(() => {
@@ -34,6 +103,19 @@ export default function Hero3D() {
     }, 4800);
     return () => clearTimeout(timer);
   }, []);
+
+  // Cycle through all services automatically with cinematic timing
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIsServiceAnimating(true);
+      setTimeout(() => {
+        setCurrentServiceIndex((prev) => (prev + 1) % heroServices.length);
+        setIsServiceAnimating(false);
+      }, 300);
+    }, 3600);
+
+    return () => clearInterval(interval);
+  }, [heroServices.length]);
 
   // When video 1 ends, smoothly transition to video 2
   const handleVideo1Ended = () => {
@@ -84,7 +166,7 @@ export default function Hero3D() {
         <div className="video-overlay-pattern"></div>
       </div>
 
-      {/* Main Hero Content - Split Layout */}
+      {/* Main Hero Content - Split Layout with Center Animated Services */}
       <div className="container hero-container">
         <div className={`hero-headline-wrapper ${activeVideoIndex === 1 ? 'hero-heading-reveal' : 'hero-heading-pending'}`}>
           {/* Top-Left: Restorative Therapy */}
@@ -93,6 +175,51 @@ export default function Hero3D() {
               <span className="hero-word word-1">Restorative</span>{' '}
               <span className="hero-word word-2 hero-heading-accent">Therapy.</span>
             </h1>
+          </div>
+
+          {/* Center Cinematic Service Showcase (Animates All Services One by One in Middle Marked Box) */}
+          <div className="hero-center-showcase">
+            <Link 
+              to={`/services?cat=${heroServices[currentServiceIndex].category}`}
+              className={`service-cycler-card ${isServiceAnimating ? 'service-card-exit' : 'service-card-enter'}`}
+              title={`Explore ${heroServices[currentServiceIndex].title}`}
+            >
+              <div className="cycler-header">
+                <span className="cycler-tag">
+                  <Sparkles size={13} className="text-gold" />
+                  <span>{heroServices[currentServiceIndex].tag}</span>
+                </span>
+                <span className="cycler-counter">
+                  {currentServiceIndex + 1} / {heroServices.length}
+                </span>
+              </div>
+
+              <div className="cycler-main">
+                <div className={`cycler-icon-box ${heroServices[currentServiceIndex].iconColor}`}>
+                  {React.createElement(heroServices[currentServiceIndex].icon, { size: 26 })}
+                </div>
+                <div className="cycler-text">
+                  <h3 className="cycler-title">{heroServices[currentServiceIndex].title}</h3>
+                  <p className="cycler-highlight">{heroServices[currentServiceIndex].highlight}</p>
+                </div>
+              </div>
+
+              <div className="cycler-footer">
+                <span className="cycler-meta">
+                  <ShieldCheck size={14} className="text-green-icon" />
+                  <span>{heroServices[currentServiceIndex].directBilling}</span>
+                </span>
+                <span className="cycler-link">
+                  <span>Explore Service</span>
+                  <ArrowRight size={14} className="cycler-arrow" />
+                </span>
+              </div>
+
+              {/* Cinematic Progress Bar Indicator */}
+              <div className="cycler-progress-track">
+                <div key={currentServiceIndex} className="cycler-progress-bar"></div>
+              </div>
+            </Link>
           </div>
 
           {/* Bottom-Right (Red Marked Spot): Exceptional Healing */}
@@ -332,6 +459,213 @@ export default function Hero3D() {
           margin-top: 15px;
         }
 
+        /* Center Cinematic Animated Services Showcase */
+        .hero-center-showcase {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin: 12px auto;
+          z-index: 5;
+          width: 100%;
+          max-width: 500px;
+        }
+
+        .service-cycler-card {
+          width: 100%;
+          background: rgba(13, 40, 24, 0.82);
+          backdrop-filter: blur(24px);
+          -webkit-backdrop-filter: blur(24px);
+          border: 1.5px solid rgba(116, 198, 157, 0.42);
+          border-radius: var(--radius-2xl);
+          padding: 24px 28px 20px 28px;
+          box-shadow: 0 24px 60px -15px rgba(0, 0, 0, 0.65), 0 0 40px rgba(82, 183, 136, 0.25);
+          display: flex;
+          flex-direction: column;
+          gap: 14px;
+          position: relative;
+          overflow: hidden;
+          transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+          text-decoration: none;
+          color: #ffffff;
+        }
+
+        .service-cycler-card:hover {
+          transform: translateY(-4px) scale(1.02);
+          box-shadow: 0 28px 70px -15px rgba(0, 0, 0, 0.75), 0 0 50px rgba(116, 198, 157, 0.4);
+          border-color: #74c69d;
+        }
+
+        .service-card-enter {
+          animation: serviceCinematicEnter 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+        }
+
+        .service-card-exit {
+          animation: serviceCinematicExit 0.3s cubic-bezier(0.4, 0, 1, 1) both;
+        }
+
+        @keyframes serviceCinematicEnter {
+          0% {
+            opacity: 0;
+            transform: translateY(22px) scale(0.94);
+            filter: blur(12px) brightness(1.3);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            filter: blur(0) brightness(1);
+          }
+        }
+
+        @keyframes serviceCinematicExit {
+          0% {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            filter: blur(0);
+          }
+          100% {
+            opacity: 0;
+            transform: translateY(-18px) scale(0.95);
+            filter: blur(10px);
+          }
+        }
+
+        .cycler-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+
+        .cycler-tag {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          font-size: 0.78rem;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 0.1em;
+          color: #e9c46a;
+          background: rgba(233, 196, 106, 0.15);
+          padding: 4px 12px;
+          border-radius: var(--radius-full);
+          border: 1px solid rgba(233, 196, 106, 0.3);
+        }
+
+        .cycler-counter {
+          font-size: 0.78rem;
+          font-weight: 700;
+          color: rgba(216, 243, 220, 0.75);
+          letter-spacing: 0.05em;
+        }
+
+        .cycler-main {
+          display: flex;
+          align-items: center;
+          gap: 18px;
+        }
+
+        .cycler-icon-box {
+          width: 52px;
+          height: 52px;
+          border-radius: 16px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+          box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+        .cycler-icon-box.icon-green {
+          background: linear-gradient(135deg, rgba(45, 106, 79, 0.85), rgba(82, 183, 136, 0.85));
+          color: #ffffff;
+          border: 1px solid rgba(116, 198, 157, 0.5);
+        }
+        .cycler-icon-box.icon-sage {
+          background: linear-gradient(135deg, rgba(27, 67, 50, 0.85), rgba(56, 130, 66, 0.85));
+          color: #d8f3dc;
+          border: 1px solid rgba(82, 183, 136, 0.5);
+        }
+        .cycler-icon-box.icon-gold {
+          background: linear-gradient(135deg, rgba(179, 139, 52, 0.85), rgba(233, 196, 106, 0.85));
+          color: #ffffff;
+          border: 1px solid rgba(233, 196, 106, 0.5);
+        }
+
+        .cycler-text {
+          flex: 1;
+        }
+
+        .cycler-title {
+          font-size: 1.32rem;
+          font-weight: 800;
+          color: #ffffff;
+          margin: 0 0 4px 0;
+          line-height: 1.25;
+          letter-spacing: -0.01em;
+        }
+
+        .cycler-highlight {
+          font-size: 0.86rem;
+          color: #d8f3dc;
+          margin: 0;
+          line-height: 1.4;
+          opacity: 0.92;
+        }
+
+        .cycler-footer {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding-top: 12px;
+          border-top: 1px solid rgba(255, 255, 255, 0.12);
+          font-size: 0.82rem;
+        }
+
+        .cycler-meta {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          color: #b7e4c7;
+          font-weight: 600;
+        }
+        .text-green-icon {
+          color: #74c69d;
+        }
+
+        .cycler-link {
+          display: inline-flex;
+          align-items: center;
+          gap: 5px;
+          color: #e9c46a;
+          font-weight: 700;
+          transition: gap 0.2s ease;
+        }
+        .service-cycler-card:hover .cycler-arrow {
+          transform: translateX(4px);
+        }
+        .cycler-arrow {
+          transition: transform 0.2s ease;
+        }
+
+        /* Cinematic Progress Indicator Bar */
+        .cycler-progress-track {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          height: 3.5px;
+          background: rgba(255, 255, 255, 0.12);
+        }
+
+        .cycler-progress-bar {
+          height: 100%;
+          background: linear-gradient(90deg, #52b788, #e9c46a);
+          animation: cyclerProgressBarFill 3.6s linear infinite;
+        }
+
+        @keyframes cyclerProgressBarFill {
+          0% { width: 0%; }
+          100% { width: 100%; }
+        }
+
         .hero-heading-right {
           align-self: flex-end;
           text-align: right;
@@ -405,83 +739,13 @@ export default function Hero3D() {
           text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
         }
 
-        /* Overlapping Trust Bar Card & Bottom Actions */
-        .hero-overlap-wrapper {
-          position: relative;
-          z-index: 10;
-          width: 100%;
-          margin-bottom: -54px;
-          margin-top: 24px;
-        }
-
-        .hero-buttons-pending {
-          opacity: 0;
-          visibility: hidden;
-        }
-
-        .hero-buttons-reveal {
-          opacity: 1;
-          visibility: visible;
-          animation: heroButtonsFadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) 0.8s both;
-        }
-
-        .hero-buttons-row {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          gap: 20px;
-          margin: 0 auto 24px auto;
-          width: 100%;
-          flex-wrap: wrap;
-        }
-
-        @keyframes heroButtonsFadeIn {
-          0% {
-            opacity: 0;
-            transform: translateY(22px);
-          }
-          100% {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        .hero-main-cta {
-          padding: 17px 38px;
-          font-size: 1.05rem;
-          font-weight: 700;
-        }
-
-        .cta-arrow {
-          transition: transform 0.2s ease;
-        }
-        .hero-main-cta:hover .cta-arrow {
-          transform: translateX(4px);
-        }
-
-        .hero-sec-cta {
-          padding: 17px 30px;
-          font-size: 1rem;
-          background: rgba(13, 40, 24, 0.55);
-          backdrop-filter: blur(8px);
-          color: #ffffff;
-          border: 1.5px solid rgba(255, 255, 255, 0.45);
-          text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
-        }
-        .hero-sec-cta:hover {
-          background: #ffffff;
-          color: #0d2818;
-          border-color: #ffffff;
-          text-shadow: none;
-        }
-
         /* Overlapping Trust Bar Card */
         .hero-overlap-wrapper {
           position: relative;
           z-index: 10;
           width: 100%;
           margin-bottom: -54px;
-          margin-top: 20px;
+          margin-top: 24px;
         }
 
         .hero-trust-bar {
@@ -575,6 +839,15 @@ export default function Hero3D() {
             margin-top: -125px;
             padding: 142px 0 0 0;
           }
+          .hero-heading-left,
+          .hero-heading-right {
+            text-align: center;
+            align-self: center;
+            max-width: 100%;
+          }
+          .hero-heading-right {
+            margin-bottom: 12px;
+          }
           .hero-trust-bar {
             grid-template-columns: repeat(2, 1fr);
             gap: 20px;
@@ -589,6 +862,30 @@ export default function Hero3D() {
           .hero-section {
             margin-top: -116px;
             padding: 130px 0 0 0;
+          }
+          .hero-center-showcase {
+            max-width: 100%;
+            margin: 16px 0;
+          }
+          .service-cycler-card {
+            padding: 18px 20px 16px 20px;
+            gap: 12px;
+          }
+          .cycler-icon-box {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+          }
+          .cycler-title {
+            font-size: 1.15rem;
+          }
+          .cycler-highlight {
+            font-size: 0.8rem;
+          }
+          .cycler-footer {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 8px;
           }
           .hero-trust-bar {
             grid-template-columns: 1fr;
