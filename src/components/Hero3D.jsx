@@ -84,18 +84,6 @@ export default function Hero3D() {
         <div className="video-overlay-pattern"></div>
       </div>
 
-      {/* Top Center Badge (Animates during first video) */}
-      <div className="hero-top-badges-bar">
-        <div className="container">
-          <div className="hero-badge-row">
-            <div className="hero-pill-badge badge-item-2">
-              <Sparkles size={16} className="pill-gold-icon" />
-              <span>Surrey’s Dedicated Healthcare Sanctuary</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
       {/* Main Hero Content */}
       <div className="container hero-container">
         <div className="hero-content">
