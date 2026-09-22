@@ -347,16 +347,17 @@ export default function Hero3D() {
           display: flex;
           justify-content: center;
           align-items: center;
-          margin: 10px auto;
+          margin: 0 auto;
           z-index: 5;
           width: 100%;
-          max-width: 860px;
-          min-height: 230px;
+          max-width: 1220px;
+          min-height: 735px;
+          position: relative;
         }
 
         .carousel-3d-wrapper {
           width: 100%;
-          height: 220px;
+          height: 735px;
           display: flex;
           justify-content: center;
           align-items: center;
@@ -530,6 +531,17 @@ export default function Hero3D() {
           line-height: 1.45;
         }
 
+        @media (max-width: 1280px) {
+          .hero-center-showcase {
+            min-height: 620px;
+          }
+          .carousel-3d-wrapper {
+            height: 620px;
+            transform: scale(0.85);
+            transform-origin: center center;
+          }
+        }
+
         @media (max-width: 1040px) {
           .hero-section {
             margin-top: -125px;
@@ -546,10 +558,12 @@ export default function Hero3D() {
           }
           .hero-center-showcase {
             max-width: 100%;
-            min-height: 220px;
+            min-height: 540px;
           }
           .carousel-3d-wrapper {
-            height: 210px;
+            height: 540px;
+            transform: scale(0.72);
+            transform-origin: center center;
           }
           .hero-trust-bar {
             grid-template-columns: repeat(2, 1fr);
@@ -568,11 +582,13 @@ export default function Hero3D() {
           }
           .hero-center-showcase {
             max-width: 100%;
-            min-height: 195px;
-            margin: 8px 0;
+            min-height: 420px;
+            margin: 0;
           }
           .carousel-3d-wrapper {
-            height: 190px;
+            height: 420px;
+            transform: scale(0.55);
+            transform-origin: center center;
           }
           .hero-trust-bar {
             grid-template-columns: 1fr;
