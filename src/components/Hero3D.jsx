@@ -347,9 +347,7 @@ export default function Hero3D() {
           text-align: left;
           max-width: 650px;
           margin-top: 15px;
-        }
-
-        /* Center Video Asset (In Middle Marked Box) */
+        /* Center Video Asset with Transparent Background */
         .hero-center-media {
           display: flex;
           justify-content: center;
@@ -357,6 +355,7 @@ export default function Hero3D() {
           margin: 10px auto;
           z-index: 5;
           animation: centerMediaFadeIn 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.6s both;
+          pointer-events: none;
         }
 
         @keyframes centerMediaFadeIn {
@@ -373,29 +372,24 @@ export default function Hero3D() {
         }
 
         .hero-center-video-card {
-          width: clamp(260px, 32vw, 380px);
+          width: clamp(280px, 36vw, 440px);
           aspect-ratio: 16/9;
-          border-radius: var(--radius-xl);
-          overflow: hidden;
-          box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.55), 0 0 35px rgba(116, 198, 157, 0.28);
-          border: 2px solid rgba(116, 198, 157, 0.45);
-          background: rgba(13, 40, 24, 0.65);
-          backdrop-filter: blur(12px);
-          -webkit-backdrop-filter: blur(12px);
-          transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
-        }
-
-        .hero-center-video-card:hover {
-          transform: scale(1.03);
-          box-shadow: 0 25px 60px -10px rgba(0, 0, 0, 0.65), 0 0 45px rgba(116, 198, 157, 0.45);
-          border-color: #74c69d;
+          border-radius: 0;
+          overflow: visible;
+          box-shadow: none;
+          border: none;
+          background: transparent;
+          backdrop-filter: none;
+          -webkit-backdrop-filter: none;
         }
 
         .hero-center-video {
           width: 100%;
           height: 100%;
-          object-fit: cover;
+          object-fit: contain;
           display: block;
+          mix-blend-mode: screen;
+          filter: drop-shadow(0 0 24px rgba(116, 198, 157, 0.35));
         }
 
         .hero-heading-right {
