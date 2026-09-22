@@ -62,7 +62,7 @@ export default function Navbar() {
     <>
       <div className="sticky-navbar-wrapper">
         {/* Enhanced Top Information Bar */}
-        <div className="top-banner">
+        <div className={`top-banner ${isScrolled ? 'top-banner-scrolled' : 'top-banner-clear'}`}>
           <div className="nav-wrapper banner-content">
             <div className="banner-left">
               <Link to="/#reviews" className="banner-google-rating" title="Read our 672+ Google Reviews">
@@ -106,7 +106,7 @@ export default function Navbar() {
         </div>
 
         {/* Main Clean Navigation Bar */}
-        <header className={`navbar-header ${isScrolled ? 'navbar-scrolled' : ''}`}>
+        <header className={`navbar-header ${isScrolled ? 'navbar-scrolled' : 'navbar-clear'}`}>
           <div className="nav-wrapper nav-container">
             {/* Official Brand Logo */}
             <Link to="/" className="brand-logo" aria-label="Revere Massage and Wellness Centre">
@@ -317,13 +317,19 @@ export default function Navbar() {
         }
 
         .top-banner {
-          background: transparent;
-          color: #d8f3dc;
           font-size: 0.82rem;
           padding: 9px 0;
-          border-bottom: none;
-          transition: var(--transition);
+          transition: all 0.35s ease;
         }
+        .top-banner-clear {
+          background: transparent;
+          border-bottom: none;
+        }
+        .top-banner-scrolled {
+          background: #0d2818;
+          border-bottom: 1px solid rgba(82, 183, 136, 0.25);
+        }
+
         .banner-content {
           display: flex;
           justify-content: space-between;
@@ -399,31 +405,56 @@ export default function Navbar() {
           color: #e9c46a;
         }
 
-        /* Sticky Unified Navbar Wrapper (Top Banner + Main Navbar) */
+        /* Sticky Unified Navbar Wrapper */
         .sticky-navbar-wrapper {
           position: sticky;
           top: 0;
           z-index: 1000;
           width: 100%;
-          background: transparent;
         }
 
-        /* Navbar Header with Completely No Background Color */
+        /* Navbar Header Dynamic Transition */
         .navbar-header {
           position: relative;
-          background: transparent;
-          backdrop-filter: none;
-          -webkit-backdrop-filter: none;
-          border-bottom: none;
-          box-shadow: none;
-          transition: var(--transition);
+          transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .navbar-scrolled {
+
+        /* Top State: Completely Clear */
+        .navbar-clear {
           background: transparent;
           backdrop-filter: none;
           -webkit-backdrop-filter: none;
-          box-shadow: none;
           border-bottom: none;
+          box-shadow: none;
+        }
+        .navbar-clear .nav-link {
+          color: #ffffff;
+          text-shadow: 0 1px 4px rgba(0, 0, 0, 0.45);
+        }
+        .navbar-clear .nav-link:hover {
+          color: #74c69d;
+        }
+        .navbar-clear .mobile-toggle-btn {
+          color: #ffffff;
+        }
+
+        /* Scrolled State: Full Background with Shadow & Clean Dark Text */
+        .navbar-scrolled {
+          background: rgba(255, 255, 255, 0.96);
+          backdrop-filter: blur(20px);
+          -webkit-backdrop-filter: blur(20px);
+          box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.12);
+          border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        }
+        .navbar-scrolled .nav-link {
+          color: #2b3b32;
+          text-shadow: none;
+        }
+        .navbar-scrolled .nav-link:hover {
+          color: #388242;
+        }
+        .navbar-scrolled .mobile-toggle-btn {
+          color: #0d2818;
         }
         .nav-container {
           display: flex;
