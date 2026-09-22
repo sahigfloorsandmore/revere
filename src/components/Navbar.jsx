@@ -60,39 +60,40 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Enhanced Top Information Bar */}
-      <div className="top-banner">
-        <div className="nav-wrapper banner-content">
-          <div className="banner-left">
-            <span className="banner-badge">
-              <ShieldCheck size={14} className="icon-gold" /> ICBC Approved & Direct Billing
-            </span>
-            <span className="banner-divider">•</span>
-            <span className="banner-item">
-              <Clock size={14} /> Open 7 Days: <strong>6:30 AM – 8:00 PM</strong>
-            </span>
-          </div>
-          <div className="banner-right">
-            <a href="tel:6045030855" className="banner-link">
-              <Phone size={13} /> (604) 503-0855
-            </a>
-            <span className="banner-divider">|</span>
-            <a href="mailto:info@reverewellness.ca" className="banner-link">
-              <Mail size={13} /> info@reverewellness.ca
-            </a>
-            <span className="banner-divider">|</span>
-            <Link to="/#location" className="banner-link">
-              <MapPin size={13} /> Suite 210 - 7110 120 St, Surrey, BC
-            </Link>
+      <div className="sticky-navbar-wrapper">
+        {/* Enhanced Top Information Bar */}
+        <div className="top-banner">
+          <div className="nav-wrapper banner-content">
+            <div className="banner-left">
+              <span className="banner-badge">
+                <ShieldCheck size={14} className="icon-gold" /> ICBC Approved & Direct Billing
+              </span>
+              <span className="banner-divider">•</span>
+              <span className="banner-item">
+                <Clock size={14} /> Open 7 Days: <strong>6:30 AM – 8:00 PM</strong>
+              </span>
+            </div>
+            <div className="banner-right">
+              <a href="tel:6045030855" className="banner-link">
+                <Phone size={13} /> (604) 503-0855
+              </a>
+              <span className="banner-divider">|</span>
+              <a href="mailto:info@reverewellness.ca" className="banner-link">
+                <Mail size={13} /> info@reverewellness.ca
+              </a>
+              <span className="banner-divider">|</span>
+              <Link to="/#location" className="banner-link">
+                <MapPin size={13} /> Suite 210 - 7110 120 St, Surrey, BC
+              </Link>
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Main Clean Navigation Bar */}
-      <header className={`navbar-header ${isScrolled ? 'navbar-scrolled' : ''}`}>
-        <div className="nav-wrapper nav-container">
-          {/* Official Brand Logo */}
-          <Link to="/" className="brand-logo" aria-label="Revere Massage and Wellness Centre">
+        {/* Main Clean Navigation Bar */}
+        <header className={`navbar-header ${isScrolled ? 'navbar-scrolled' : ''}`}>
+          <div className="nav-wrapper nav-container">
+            {/* Official Brand Logo */}
+            <Link to="/" className="brand-logo" aria-label="Revere Massage and Wellness Centre">
             <img 
               src="/images/revere-logo.png" 
               alt="Revere Massage & Wellness" 
@@ -220,6 +221,7 @@ export default function Navbar() {
           </div>
         </div>
       </header>
+    </div>
 
       {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
@@ -348,11 +350,17 @@ export default function Navbar() {
           color: #e9c46a;
         }
 
-        /* Navbar Header */
-        .navbar-header {
+        /* Sticky Unified Navbar Wrapper (Top Banner + Main Navbar) */
+        .sticky-navbar-wrapper {
           position: sticky;
           top: 0;
           z-index: 1000;
+          width: 100%;
+        }
+
+        /* Navbar Header */
+        .navbar-header {
+          position: relative;
           background: rgba(255, 255, 255, 0.96);
           backdrop-filter: blur(20px);
           -webkit-backdrop-filter: blur(20px);
