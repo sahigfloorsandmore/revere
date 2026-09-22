@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { 
   Sparkles, 
   Calendar, 
@@ -13,8 +14,26 @@ import {
   ArrowRight
 } from 'lucide-react';
 
-export default function Services() {
-  const [activeCategory, setActiveCategory] = useState('all');
+export default function Services({ showHeader = true }) {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const urlCat = searchParams.get('cat');
+  const [activeCategory, setActiveCategory] = useState(urlCat || 'all');
+
+  useEffect(() => {
+    if (urlCat) {
+      setActiveCategory(urlCat);
+    }
+  }, [urlCat]);
+
+  const handleCategoryChange = (cat) => {
+    setActiveCategory(cat);
+    if (cat === 'all') {
+      searchParams.delete('cat');
+      setSearchParams(searchParams, { replace: true });
+    } else {
+      setSearchParams({ cat }, { replace: true });
+    }
+  };
 
   const JANEAPP_URL = "https://reverewellness.janeapp.com/";
 
@@ -152,25 +171,25 @@ export default function Services() {
         <div className="services-filter-tabs">
           <button 
             className={`filter-btn ${activeCategory === 'all' ? 'active' : ''}`}
-            onClick={() => setActiveCategory('all')}
+            onClick={() => handleCategoryChange('all')}
           >
             All Treatments ({servicesData.length})
           </button>
           <button 
             className={`filter-btn ${activeCategory === 'rmt' ? 'active' : ''}`}
-            onClick={() => setActiveCategory('rmt')}
+            onClick={() => handleCategoryChange('rmt')}
           >
             Massage Therapy (RMT)
           </button>
           <button 
             className={`filter-btn ${activeCategory === 'physio-kin' ? 'active' : ''}`}
-            onClick={() => setActiveCategory('physio-kin')}
+            onClick={() => handleCategoryChange('physio-kin')}
           >
             Physiotherapy & Kinesiology
           </button>
           <button 
             className={`filter-btn ${activeCategory === 'specialized' ? 'active' : ''}`}
-            onClick={() => setActiveCategory('specialized')}
+            onClick={() => handleCategoryChange('specialized')}
           >
             Specialized Modalities (IMS / Shockwave)
           </button>

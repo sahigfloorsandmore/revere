@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { 
   Calendar, 
   ShieldCheck, 
@@ -141,12 +142,12 @@ export default function Hero3D() {
               <ArrowRight size={18} className="cta-arrow" />
             </a>
 
-            <a 
-              href="#services" 
+            <Link 
+              to="/services" 
               className="btn btn-outline hero-sec-cta"
             >
               <span>Explore All Our Services</span>
-            </a>
+            </Link>
           </div>
 
           <div className="hero-trust-bar glass-trust-card">

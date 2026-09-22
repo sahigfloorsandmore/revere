@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { 
   Heart, 
   Activity, 
@@ -190,10 +191,10 @@ export default function CoreServicesPillars() {
               </p>
             </div>
           </div>
-          <a href="#services" className="btn btn-outline strip-btn">
+          <Link to="/services?cat=specialized" className="btn btn-outline strip-btn">
             <span>Explore All Specialized Modalities</span>
             <ArrowRight size={16} />
-          </a>
+          </Link>
         </div>
       </div>
 

@@ -1,13 +1,14 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { 
   Sparkles, 
   Calendar, 
   Phone, 
   Mail, 
   MapPin, 
-  Clock,
-  ShieldCheck,
-  ArrowUp
+  Clock, 
+  ShieldCheck, 
+  ArrowUp 
 } from 'lucide-react';
 
 export default function Footer() {
@@ -92,13 +93,13 @@ export default function Footer() {
             <div className="footer-col">
               <h4 className="footer-col-title">Quick Navigation</h4>
               <ul className="footer-links">
-                <li><a href="#services">Therapeutic Services</a></li>
-                <li><a href="#about">About Our Clinic</a></li>
-                <li><a href="#insurance">ICBC & Direct Billing</a></li>
-                <li><a href="#policies">24-Hour Cancellation Policy</a></li>
-                <li><a href="#location">Free Basement Parking</a></li>
-                <li><a href="#faqs">Frequently Asked Questions</a></li>
-                <li><a href="#contact">Contact & Location</a></li>
+                <li><Link to="/services">All Services & Durations</Link></li>
+                <li><Link to="/#about">About Our Clinic</Link></li>
+                <li><Link to="/#insurance">ICBC & Direct Billing</Link></li>
+                <li><Link to="/#policies">24-Hour Cancellation Policy</Link></li>
+                <li><Link to="/#location">Free Basement Parking</Link></li>
+                <li><Link to="/#faqs">Frequently Asked Questions</Link></li>
+                <li><Link to="/#contact">Contact & Location</Link></li>
               </ul>
             </div>
 
@@ -106,14 +107,14 @@ export default function Footer() {
             <div className="footer-col">
               <h4 className="footer-col-title">Specialized Services</h4>
               <ul className="footer-links">
-                <li><a href="#services">Deep Tissue Massage</a></li>
-                <li><a href="#services">Swedish Relaxation</a></li>
-                <li><a href="#services">Prenatal & Postnatal Massage</a></li>
-                <li><a href="#services">Sports Injury Recovery</a></li>
-                <li><a href="#services">Hot Stone Therapy</a></li>
-                <li><a href="#services">IMS / Dry Needling</a></li>
-                <li><a href="#services">Shockwave Therapy</a></li>
-                <li><a href="#services">Physiotherapy & ICBC Rehab</a></li>
+                <li><Link to="/services?cat=rmt">Deep Tissue Massage</Link></li>
+                <li><Link to="/services?cat=rmt">Swedish Relaxation</Link></li>
+                <li><Link to="/services?cat=rmt">Prenatal & Postnatal Massage</Link></li>
+                <li><Link to="/services?cat=rmt">Sports Injury Recovery</Link></li>
+                <li><Link to="/services?cat=specialized">Hot Stone Therapy</Link></li>
+                <li><Link to="/services?cat=specialized">IMS / Dry Needling</Link></li>
+                <li><Link to="/services?cat=specialized">Shockwave Therapy</Link></li>
+                <li><Link to="/services?cat=physio-kin">Physiotherapy & ICBC Rehab</Link></li>
               </ul>
             </div>
 

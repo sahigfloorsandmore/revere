@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { 
   Phone, 
   Mail, 
@@ -23,6 +24,7 @@ export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
   const [aboutDropdownOpen, setAboutDropdownOpen] = useState(false);
+  const location = useLocation();
 
   const servicesTimeoutRef = useRef(null);
   const aboutTimeoutRef = useRef(null);
@@ -54,6 +56,8 @@ export default function Navbar() {
     aboutTimeoutRef.current = setTimeout(() => setAboutDropdownOpen(false), 200);
   };
 
+  const isServicesPage = location.pathname === '/services';
+
   return (
     <>
       {/* Enhanced Top Information Bar */}
@@ -77,9 +81,9 @@ export default function Navbar() {
               <Mail size={13} /> info@reverewellness.ca
             </a>
             <span className="banner-divider">|</span>
-            <a href="#location" className="banner-link">
+            <Link to="/#location" className="banner-link">
               <MapPin size={13} /> Suite 210 - 7110 120 St, Surrey, BC
-            </a>
+            </Link>
           </div>
         </div>
       </div>
@@ -88,13 +92,13 @@ export default function Navbar() {
       <header className={`navbar-header ${isScrolled ? 'navbar-scrolled' : ''}`}>
         <div className="nav-wrapper nav-container">
           {/* Official Brand Logo */}
-          <a href="#" className="brand-logo" aria-label="Revere Massage and Wellness Centre">
+          <Link to="/" className="brand-logo" aria-label="Revere Massage and Wellness Centre">
             <img 
               src="/images/revere-logo.png" 
               alt="Revere Massage & Wellness" 
               className="brand-logo-img"
             />
-          </a>
+          </Link>
 
           {/* Desktop Nav Links with Clean Dropdowns */}
           <nav className="desktop-nav">
@@ -104,44 +108,47 @@ export default function Navbar() {
               onMouseEnter={handleServicesEnter}
               onMouseLeave={handleServicesLeave}
             >
-              <a href="#services" className="nav-link dropdown-trigger">
+              <Link 
+                to="/services" 
+                className={`nav-link dropdown-trigger ${isServicesPage ? 'active-nav-link' : ''}`}
+              >
                 <span>Services</span>
                 <ChevronDown size={14} className={`chevron ${servicesDropdownOpen ? 'rotate' : ''}`} />
-              </a>
+              </Link>
               {servicesDropdownOpen && (
                 <div className="dropdown-menu glass-card">
-                  <a href="#core-services" className="dropdown-item" onClick={() => setServicesDropdownOpen(false)}>
+                  <Link to="/services?cat=rmt" className="dropdown-item" onClick={() => setServicesDropdownOpen(false)}>
                     <div className="dropdown-icon-box green"><Heart size={16} /></div>
                     <div>
                       <strong>Massage Therapy (RMT)</strong>
                       <p>Deep Tissue, Swedish, Prenatal & Sports</p>
                     </div>
-                  </a>
-                  <a href="#core-services" className="dropdown-item" onClick={() => setServicesDropdownOpen(false)}>
+                  </Link>
+                  <Link to="/services?cat=physio-kin" className="dropdown-item" onClick={() => setServicesDropdownOpen(false)}>
                     <div className="dropdown-icon-box sage"><Activity size={16} /></div>
                     <div>
-                      <strong>Physiotherapy</strong>
-                      <p>Clinical rehab, joint mobility & ICBC</p>
+                      <strong>Physiotherapy & Rehab</strong>
+                      <p>Clinical assessment, joint mobility & ICBC</p>
                     </div>
-                  </a>
-                  <a href="#core-services" className="dropdown-item" onClick={() => setServicesDropdownOpen(false)}>
+                  </Link>
+                  <Link to="/services?cat=physio-kin" className="dropdown-item" onClick={() => setServicesDropdownOpen(false)}>
                     <div className="dropdown-icon-box gold"><Activity size={16} /></div>
                     <div>
                       <strong>Kinesiology & Active Rehab</strong>
                       <p>1-on-1 functional movement & exercise therapy</p>
                     </div>
-                  </a>
-                  <a href="#specialized-services" className="dropdown-item" onClick={() => setServicesDropdownOpen(false)}>
+                  </Link>
+                  <Link to="/services?cat=specialized" className="dropdown-item" onClick={() => setServicesDropdownOpen(false)}>
                     <div className="dropdown-icon-box dark"><Zap size={16} /></div>
                     <div>
                       <strong>Specialized Modalities</strong>
-                      <p>IMS / Needling, Shockwave & Laser</p>
+                      <p>IMS / Needling, Shockwave & Hot Stone</p>
                     </div>
-                  </a>
+                  </Link>
                   <div className="dropdown-footer">
-                    <a href="#services" onClick={() => setServicesDropdownOpen(false)}>
+                    <Link to="/services" onClick={() => setServicesDropdownOpen(false)}>
                       View All Treatments & Durations →
-                    </a>
+                    </Link>
                   </div>
                 </div>
               )}
@@ -153,42 +160,42 @@ export default function Navbar() {
               onMouseEnter={handleAboutEnter}
               onMouseLeave={handleAboutLeave}
             >
-              <a href="#about" className="nav-link dropdown-trigger">
+              <Link to="/#about" className="nav-link dropdown-trigger">
                 <span>About Us</span>
                 <ChevronDown size={14} className={`chevron ${aboutDropdownOpen ? 'rotate' : ''}`} />
-              </a>
+              </Link>
               {aboutDropdownOpen && (
                 <div className="dropdown-menu glass-card about-dropdown">
-                  <a href="#about" className="dropdown-item" onClick={() => setAboutDropdownOpen(false)}>
+                  <Link to="/#about" className="dropdown-item" onClick={() => setAboutDropdownOpen(false)}>
                     <div className="dropdown-icon-box green"><Users size={16} /></div>
                     <div>
                       <strong>Our Clinic Story</strong>
                       <p>Newton Surrey's dedicated recovery sanctuary</p>
                     </div>
-                  </a>
-                  <a href="#reviews" className="dropdown-item" onClick={() => setAboutDropdownOpen(false)}>
+                  </Link>
+                  <Link to="/#reviews" className="dropdown-item" onClick={() => setAboutDropdownOpen(false)}>
                     <div className="dropdown-icon-box gold"><Star size={16} /></div>
                     <div>
                       <strong>Google Reviews</strong>
                       <p>4.8 ★ Rating • 672+ Patient Reviews</p>
                     </div>
-                  </a>
-                  <a href="#careers" className="dropdown-item" onClick={() => setAboutDropdownOpen(false)}>
+                  </Link>
+                  <Link to="/#about" className="dropdown-item" onClick={() => setAboutDropdownOpen(false)}>
                     <div className="dropdown-icon-box sage"><Briefcase size={16} /></div>
                     <div>
-                      <strong>Join Our Team</strong>
-                      <p>Career opportunities for RMTs & Physios</p>
+                      <strong>Our Team & Philosophy</strong>
+                      <p>Compassionate care & clinical excellence</p>
                     </div>
-                  </a>
+                  </Link>
                 </div>
               )}
             </div>
 
-            <a href="#insurance" className="nav-link">Direct Billing & ICBC</a>
-            <a href="#policies" className="nav-link">Policies</a>
-            <a href="#location" className="nav-link">Parking & Location</a>
-            <a href="#faqs" className="nav-link">FAQs</a>
-            <a href="#contact" className="nav-link">Contact</a>
+            <Link to="/#insurance" className="nav-link">Direct Billing & ICBC</Link>
+            <Link to="/#policies" className="nav-link">Policies</Link>
+            <Link to="/#location" className="nav-link">Parking & Location</Link>
+            <Link to="/#faqs" className="nav-link">FAQs</Link>
+            <Link to="/#contact" className="nav-link">Contact</Link>
           </nav>
 
           {/* Right Action: Single Big Book Appointment Button */}
@@ -219,13 +226,13 @@ export default function Navbar() {
         <div className="mobile-drawer-overlay" onClick={() => setMobileMenuOpen(false)}>
           <div className="mobile-drawer" onClick={(e) => e.stopPropagation()}>
             <div className="drawer-header">
-              <a href="#" className="brand-logo" onClick={() => setMobileMenuOpen(false)}>
+              <Link to="/" className="brand-logo" onClick={() => setMobileMenuOpen(false)}>
                 <img 
                   src="/images/revere-logo.png" 
                   alt="Revere Massage & Wellness" 
                   className="brand-logo-img"
                 />
-              </a>
+              </Link>
               <button 
                 className="drawer-close-btn" 
                 onClick={() => setMobileMenuOpen(false)}
@@ -238,20 +245,20 @@ export default function Navbar() {
             <div className="drawer-body">
               <nav className="mobile-nav-links">
                 <div className="mobile-nav-group-title">Treatments & Care</div>
-                <a href="#core-services" onClick={() => setMobileMenuOpen(false)}>• Massage Therapy (RMT)</a>
-                <a href="#core-services" onClick={() => setMobileMenuOpen(false)}>• Physiotherapy</a>
-                <a href="#core-services" onClick={() => setMobileMenuOpen(false)}>• Kinesiology & Active Rehab</a>
-                <a href="#specialized-services" onClick={() => setMobileMenuOpen(false)}>• Specialized Modalities (IMS / Shockwave)</a>
-                <a href="#services" onClick={() => setMobileMenuOpen(false)}>• All Services & Durations</a>
+                <Link to="/services?cat=rmt" onClick={() => setMobileMenuOpen(false)}>• Massage Therapy (RMT)</Link>
+                <Link to="/services?cat=physio-kin" onClick={() => setMobileMenuOpen(false)}>• Physiotherapy</Link>
+                <Link to="/services?cat=physio-kin" onClick={() => setMobileMenuOpen(false)}>• Kinesiology & Active Rehab</Link>
+                <Link to="/services?cat=specialized" onClick={() => setMobileMenuOpen(false)}>• Specialized Modalities (IMS / Shockwave)</Link>
+                <Link to="/services" onClick={() => setMobileMenuOpen(false)}>• Explore All Services & Durations →</Link>
                 
                 <div className="mobile-nav-group-title" style={{ marginTop: '12px' }}>Clinic Information</div>
-                <a href="#about" onClick={() => setMobileMenuOpen(false)}>About Revere & Our Team</a>
-                <a href="#reviews" onClick={() => setMobileMenuOpen(false)}>Google Reviews (4.8 ★ • 672+ Reviews)</a>
-                <a href="#insurance" onClick={() => setMobileMenuOpen(false)}>Direct Billing & ICBC</a>
-                <a href="#policies" onClick={() => setMobileMenuOpen(false)}>Clinic Policies (24h Cancellation)</a>
-                <a href="#location" onClick={() => setMobileMenuOpen(false)}>Free Parking (Stalls 36-38)</a>
-                <a href="#faqs" onClick={() => setMobileMenuOpen(false)}>FAQs</a>
-                <a href="#contact" onClick={() => setMobileMenuOpen(false)}>Contact Us</a>
+                <Link to="/#about" onClick={() => setMobileMenuOpen(false)}>About Revere & Our Team</Link>
+                <Link to="/#reviews" onClick={() => setMobileMenuOpen(false)}>Google Reviews (4.8 ★ • 672+ Reviews)</Link>
+                <Link to="/#insurance" onClick={() => setMobileMenuOpen(false)}>Direct Billing & ICBC</Link>
+                <Link to="/#policies" onClick={() => setMobileMenuOpen(false)}>Clinic Policies (24h Cancellation)</Link>
+                <Link to="/#location" onClick={() => setMobileMenuOpen(false)}>Free Parking (Stalls 36-38)</Link>
+                <Link to="/#faqs" onClick={() => setMobileMenuOpen(false)}>FAQs</Link>
+                <Link to="/#contact" onClick={() => setMobileMenuOpen(false)}>Contact Us</Link>
               </nav>
 
               <div className="drawer-footer">
