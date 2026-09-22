@@ -102,30 +102,9 @@ export default function Hero3D() {
         </div>
       </div>
 
-      {/* Overlapping Floating Trust Bar & Actions (Bridges Hero & Next Section) */}
+      {/* Overlapping Floating Trust Bar (Bridges Hero & Next Section) */}
       <div className="hero-overlap-wrapper">
         <div className="container">
-          {/* Primary & Secondary Call to Actions in Bottom Zone */}
-          <div className={`hero-buttons-row ${activeVideoIndex === 1 ? 'hero-buttons-reveal' : 'hero-buttons-pending'}`}>
-            <a 
-              href={JANEAPP_URL} 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="btn btn-gold hero-main-cta"
-            >
-              <Calendar size={20} />
-              <span>Book Appointment Online</span>
-              <ArrowRight size={18} className="cta-arrow" />
-            </a>
-
-            <Link 
-              to="/services" 
-              className="btn btn-outline hero-sec-cta"
-            >
-              <span>Explore All Our Services</span>
-            </Link>
-          </div>
-
           <div className="hero-trust-bar glass-trust-card">
             <div className="trust-cell cell-1">
               <ShieldCheck size={28} className="cell-icon-green" />
