@@ -84,7 +84,7 @@ export default function Hero3D() {
         <div className="video-overlay-pattern"></div>
       </div>
 
-      {/* Main Hero Content - Split Layout with Center Video */}
+      {/* Main Hero Content - Split Layout */}
       <div className="container hero-container">
         <div className={`hero-headline-wrapper ${activeVideoIndex === 1 ? 'hero-heading-reveal' : 'hero-heading-pending'}`}>
           {/* Top-Left: Restorative Therapy */}
@@ -93,23 +93,6 @@ export default function Hero3D() {
               <span className="hero-word word-1">Restorative</span>{' '}
               <span className="hero-word word-2 hero-heading-accent">Therapy.</span>
             </h1>
-          </div>
-
-          {/* Center Floating Animation Video (In Middle Marked Box) */}
-          <div className="hero-center-media">
-            <div className="hero-center-video-card">
-              <video
-                className="hero-center-video"
-                autoPlay
-                loop
-                muted
-                playsInline
-                preload="auto"
-              >
-                <source src="/videos/calm-elegant-white-hand.mp4" type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
-            </div>
           </div>
 
           {/* Bottom-Right (Red Marked Spot): Exceptional Healing */}
@@ -347,49 +330,6 @@ export default function Hero3D() {
           text-align: left;
           max-width: 650px;
           margin-top: 15px;
-        /* Center Video Asset with Transparent Background */
-        .hero-center-media {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          margin: 10px auto;
-          z-index: 5;
-          animation: centerMediaFadeIn 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.6s both;
-          pointer-events: none;
-        }
-
-        @keyframes centerMediaFadeIn {
-          0% {
-            opacity: 0;
-            transform: scale(0.88) translateY(20px);
-            filter: blur(10px);
-          }
-          100% {
-            opacity: 1;
-            transform: scale(1) translateY(0);
-            filter: blur(0);
-          }
-        }
-
-        .hero-center-video-card {
-          width: clamp(280px, 36vw, 440px);
-          aspect-ratio: 16/9;
-          border-radius: 0;
-          overflow: visible;
-          box-shadow: none;
-          border: none;
-          background: transparent;
-          backdrop-filter: none;
-          -webkit-backdrop-filter: none;
-        }
-
-        .hero-center-video {
-          width: 100%;
-          height: 100%;
-          object-fit: contain;
-          display: block;
-          mix-blend-mode: screen;
-          filter: drop-shadow(0 0 24px rgba(116, 198, 157, 0.35));
         }
 
         .hero-heading-right {
