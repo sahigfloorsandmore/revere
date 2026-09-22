@@ -68,20 +68,25 @@ export default function Navbar() {
               <Link to="/#reviews" className="banner-google-rating" title="Read our 672+ Google Reviews">
                 <div className="banner-stars">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} size={13} fill="#f4b400" color="#f4b400" />
+                    <Star key={i} size={12} fill="#f4b400" color="#f4b400" />
                   ))}
                 </div>
                 <span className="banner-rating-text">
                   <strong>4.8 ★</strong> Google Rating (672+ Reviews)
                 </span>
+                <span className="banner-rating-text-mobile">
+                  <strong>4.8 ★</strong> (672+ Reviews)
+                </span>
               </Link>
               <span className="banner-divider">•</span>
               <span className="banner-badge">
-                <ShieldCheck size={14} className="icon-gold" /> ICBC Approved & Direct Billing
+                <ShieldCheck size={13} className="icon-gold" /> 
+                <span className="badge-text-desktop">ICBC Approved & Direct Billing</span>
+                <span className="badge-text-mobile">ICBC Direct Billing</span>
               </span>
-              <span className="banner-divider">•</span>
-              <span className="banner-item">
-                <Clock size={14} /> Open 7 Days: <strong>6:30 AM – 8:00 PM</strong>
+              <span className="banner-divider banner-hide-tablet">•</span>
+              <span className="banner-item banner-hide-tablet">
+                <Clock size={13} /> Open 7 Days: <strong>6:30 AM – 8:00 PM</strong>
               </span>
             </div>
             <div className="banner-right">
@@ -351,6 +356,15 @@ export default function Navbar() {
         .banner-rating-text strong {
           color: #f4b400;
           font-weight: 700;
+        }
+        .banner-rating-text-mobile {
+          display: none;
+        }
+        .badge-text-desktop {
+          display: inline;
+        }
+        .badge-text-mobile {
+          display: none;
         }
         .banner-badge {
           display: inline-flex;
@@ -724,11 +738,48 @@ export default function Navbar() {
           .brand-logo-img {
             height: 42px;
           }
+          .banner-hide-tablet {
+            display: none !important;
+          }
         }
 
         @media (max-width: 768px) {
+          .top-banner {
+            padding: 7px 0;
+            font-size: 0.78rem;
+          }
+          .banner-content {
+            justify-content: center;
+          }
+          .banner-left {
+            justify-content: center;
+            width: 100%;
+            gap: 10px;
+            flex-wrap: nowrap;
+          }
           .banner-right {
-            display: none;
+            display: none !important;
+          }
+          .banner-hide-tablet {
+            display: none !important;
+          }
+          .banner-rating-text {
+            display: none !important;
+          }
+          .banner-rating-text-mobile {
+            display: inline !important;
+            color: #ffffff;
+            font-size: 0.78rem;
+          }
+          .banner-rating-text-mobile strong {
+            color: #f4b400;
+            font-weight: 700;
+          }
+          .badge-text-desktop {
+            display: none !important;
+          }
+          .badge-text-mobile {
+            display: inline !important;
           }
           .btn-book-header span {
             display: none;
@@ -746,6 +797,16 @@ export default function Navbar() {
         }
 
         @media (max-width: 480px) {
+          .top-banner {
+            padding: 6px 0;
+            font-size: 0.72rem;
+          }
+          .banner-left {
+            gap: 6px;
+          }
+          .banner-rating-text-mobile {
+            font-size: 0.72rem;
+          }
           .nav-container {
             padding: 0 16px;
             height: 76px;
