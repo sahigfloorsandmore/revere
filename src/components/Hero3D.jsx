@@ -84,22 +84,10 @@ export default function Hero3D() {
         <div className="video-overlay-pattern"></div>
       </div>
 
-      {/* Top Center Badges (In Upper Red Box Zone - Animates during first video) */}
+      {/* Top Center Badge (Animates during first video) */}
       <div className="hero-top-badges-bar">
         <div className="container">
           <div className="hero-badge-row">
-            <a 
-              href="#reviews"
-              className="hero-google-badge badge-item-1"
-            >
-              <div className="stars-mini">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} size={16} fill="#f4b400" color="#f4b400" />
-                ))}
-              </div>
-              <span className="google-score-tag">4.8 ★ Google Rating (672+ Reviews)</span>
-            </a>
-
             <div className="hero-pill-badge badge-item-2">
               <Sparkles size={16} className="pill-gold-icon" />
               <span>Surrey’s Dedicated Healthcare Sanctuary</span>

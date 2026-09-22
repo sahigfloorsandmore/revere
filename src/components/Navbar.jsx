@@ -65,6 +65,17 @@ export default function Navbar() {
         <div className="top-banner">
           <div className="nav-wrapper banner-content">
             <div className="banner-left">
+              <Link to="/#reviews" className="banner-google-rating" title="Read our 672+ Google Reviews">
+                <div className="banner-stars">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} size={13} fill="#f4b400" color="#f4b400" />
+                  ))}
+                </div>
+                <span className="banner-rating-text">
+                  <strong>4.8 ★</strong> Google Rating (672+ Reviews)
+                </span>
+              </Link>
+              <span className="banner-divider">•</span>
               <span className="banner-badge">
                 <ShieldCheck size={14} className="icon-gold" /> ICBC Approved & Direct Billing
               </span>
@@ -317,6 +328,29 @@ export default function Navbar() {
           display: flex;
           align-items: center;
           gap: 14px;
+        }
+        .banner-google-rating {
+          display: inline-flex;
+          align-items: center;
+          gap: 7px;
+          color: #ffffff;
+          font-weight: 500;
+          transition: var(--transition);
+        }
+        .banner-google-rating:hover {
+          color: #e9c46a;
+        }
+        .banner-stars {
+          display: inline-flex;
+          align-items: center;
+          gap: 2px;
+        }
+        .banner-rating-text {
+          color: #ffffff;
+        }
+        .banner-rating-text strong {
+          color: #f4b400;
+          font-weight: 700;
         }
         .banner-badge {
           display: inline-flex;
