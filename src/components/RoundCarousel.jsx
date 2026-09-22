@@ -123,16 +123,16 @@ export const DEFAULT_SERVICES = [
 
 export function OriginkitBase_RoundCarousel({
   items = DEFAULT_SERVICES,
-  imageWidth = 411,
-  imageHeight = 460,
-  spacing = 1,
+  imageWidth = 320,
+  imageHeight = 265,
+  spacing = 1.1,
   speed = 0.8,
   direction = "right",
   drag = true,
   sensitivity = 5,
   tilt = 4,
-  perspective = 400,
-  cornerRadius = 47,
+  perspective = 550,
+  cornerRadius = 32,
   innerDim = 0,
   background = "transparent",
   style = {},
@@ -227,7 +227,8 @@ export function OriginkitBase_RoundCarousel({
         ...style,
         width: "100%",
         maxWidth: "1220px",
-        height: "735px",
+        height: "100%",
+        minHeight: "100%",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -278,19 +279,19 @@ export function OriginkitBase_RoundCarousel({
                   transformStyle: "preserve-3d",
                 }}
               >
-                {/* Front Face: High-End Cinematic Editorial Card */}
+                {/* Front Face: High-End Compact Editorial Glass Card */}
                 <div
                   style={{
                     ...faceBase,
                     background: "linear-gradient(180deg, rgba(13, 40, 24, 0.95) 0%, rgba(9, 26, 16, 0.98) 100%)",
-                    border: "2px solid rgba(116, 198, 157, 0.45)",
-                    boxShadow: "0 24px 60px -15px rgba(0, 0, 0, 0.75), 0 0 35px rgba(82, 183, 136, 0.28)",
-                    backdropFilter: "blur(24px)",
-                    WebkitBackdropFilter: "blur(24px)",
+                    border: "1.5px solid rgba(116, 198, 157, 0.45)",
+                    boxShadow: "0 18px 45px -10px rgba(0, 0, 0, 0.75), 0 0 28px rgba(82, 183, 136, 0.25)",
+                    backdropFilter: "blur(20px)",
+                    WebkitBackdropFilter: "blur(20px)",
                     display: "flex",
                     flexDirection: "column",
                     justifyContent: "space-between",
-                    padding: "24px 26px 20px 26px",
+                    padding: "16px 18px 14px 18px",
                     color: "#ffffff",
                   }}
                 >
@@ -302,11 +303,11 @@ export function OriginkitBase_RoundCarousel({
                         top: 0,
                         left: 0,
                         right: 0,
-                        height: "180px",
+                        height: "120px",
                         backgroundImage: `url(${item.src})`,
                         backgroundSize: "cover",
                         backgroundPosition: "center",
-                        opacity: 0.2,
+                        opacity: 0.18,
                         zIndex: 0,
                         maskImage: "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%)",
                         WebkitMaskImage: "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%)",
@@ -320,51 +321,50 @@ export function OriginkitBase_RoundCarousel({
                       style={{
                         display: "inline-flex",
                         alignItems: "center",
-                        gap: "5px",
-                        fontSize: "0.78rem",
+                        gap: "4px",
+                        fontSize: "0.72rem",
                         fontWeight: "800",
                         textTransform: "uppercase",
-                        letterSpacing: "0.1em",
+                        letterSpacing: "0.08em",
                         color: "#e9c46a",
                         background: "rgba(233, 196, 106, 0.16)",
-                        padding: "5px 12px",
+                        padding: "3px 10px",
                         borderRadius: "999px",
-                        border: "1.5px solid rgba(233, 196, 106, 0.4)",
+                        border: "1px solid rgba(233, 196, 106, 0.4)",
                       }}
                     >
-                      <Sparkles size={12} color="#e9c46a" />
+                      <Sparkles size={11} color="#e9c46a" />
                       {item.tag}
                     </span>
 
                     <div
                       style={{
-                        width: "42px",
-                        height: "42px",
-                        borderRadius: "14px",
+                        width: "32px",
+                        height: "32px",
+                        borderRadius: "10px",
                         background: "linear-gradient(135deg, rgba(116, 198, 157, 0.25), rgba(82, 183, 136, 0.15))",
-                        border: "1.5px solid rgba(116, 198, 157, 0.5)",
+                        border: "1px solid rgba(116, 198, 157, 0.5)",
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
                         color: item.color || "#74c69d",
-                        boxShadow: "0 6px 16px rgba(0,0,0,0.3)",
                       }}
                     >
-                      <IconComponent size={20} />
+                      <IconComponent size={16} />
                     </div>
                   </div>
 
                   {/* Middle Content */}
-                  <div style={{ position: "relative", zIndex: 1, margin: "10px 0" }}>
+                  <div style={{ position: "relative", zIndex: 1, margin: "6px 0" }}>
                     <span
                       style={{
                         display: "block",
-                        fontSize: "0.8rem",
+                        fontSize: "0.74rem",
                         fontWeight: "700",
                         color: "#74c69d",
                         textTransform: "uppercase",
-                        letterSpacing: "0.08em",
-                        marginBottom: "4px",
+                        letterSpacing: "0.06em",
+                        marginBottom: "2px",
                       }}
                     >
                       {item.subtitle}
@@ -372,13 +372,13 @@ export function OriginkitBase_RoundCarousel({
 
                     <h3
                       style={{
-                        fontSize: "1.48rem",
+                        fontSize: "1.18rem",
                         fontWeight: "800",
                         color: "#ffffff",
-                        margin: "0 0 8px 0",
-                        lineHeight: 1.22,
+                        margin: "0 0 4px 0",
+                        lineHeight: 1.2,
                         letterSpacing: "-0.015em",
-                        textShadow: "0 2px 10px rgba(0,0,0,0.5)",
+                        textShadow: "0 2px 8px rgba(0,0,0,0.5)",
                       }}
                     >
                       {item.title}
@@ -386,29 +386,19 @@ export function OriginkitBase_RoundCarousel({
 
                     <p
                       style={{
-                        fontSize: "0.86rem",
+                        fontSize: "0.78rem",
                         color: "#d8f3dc",
-                        margin: "0 0 10px 0",
-                        lineHeight: 1.45,
+                        margin: 0,
+                        lineHeight: 1.35,
                         opacity: 0.94,
+                        display: "-webkit-box",
+                        WebkitLineClamp: 2,
+                        WebkitBoxOrient: "vertical",
+                        overflow: "hidden",
                       }}
                     >
                       {item.highlight}
                     </p>
-
-                    {/* Feature bullet list */}
-                    {item.bullets && (
-                      <div style={{ display: "flex", flexDirection: "column", gap: "6px", marginTop: "8px" }}>
-                        {item.bullets.map((bullet, bIdx) => (
-                          <div key={bIdx} style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-                            <CheckCircle2 size={14} color="#74c69d" style={{ flexShrink: 0 }} />
-                            <span style={{ fontSize: "0.82rem", color: "#e8f7ee", fontWeight: "500" }}>
-                              {bullet}
-                            </span>
-                          </div>
-                        ))}
-                      </div>
-                    )}
                   </div>
 
                   {/* Footer & Actions */}
@@ -416,11 +406,11 @@ export function OriginkitBase_RoundCarousel({
                     style={{
                       position: "relative",
                       zIndex: 1,
-                      paddingTop: "12px",
-                      borderTop: "1px solid rgba(255, 255, 255, 0.14)",
+                      paddingTop: "8px",
+                      borderTop: "1px solid rgba(255, 255, 255, 0.12)",
                       display: "flex",
                       flexDirection: "column",
-                      gap: "10px",
+                      gap: "6px",
                     }}
                   >
                     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
@@ -428,22 +418,22 @@ export function OriginkitBase_RoundCarousel({
                         style={{
                           display: "inline-flex",
                           alignItems: "center",
-                          gap: "5px",
-                          fontSize: "0.78rem",
+                          gap: "4px",
+                          fontSize: "0.72rem",
                           color: "#95d5b2",
                           fontWeight: "700",
                         }}
                       >
-                        <ShieldCheck size={14} color="#74c69d" />
+                        <ShieldCheck size={12} color="#74c69d" />
                         {item.badge}
                       </span>
 
-                      <span style={{ fontSize: "0.75rem", color: "rgba(255,255,255,0.6)", fontWeight: "600" }}>
+                      <span style={{ fontSize: "0.7rem", color: "rgba(255,255,255,0.6)", fontWeight: "600" }}>
                         {i + 1} / {count}
                       </span>
                     </div>
 
-                    <div style={{ display: "flex", gap: "8px" }}>
+                    <div style={{ display: "flex", gap: "6px" }}>
                       <a
                         href={JANEAPP_URL}
                         target="_blank"
@@ -455,23 +445,23 @@ export function OriginkitBase_RoundCarousel({
                         }}
                         style={{
                           flex: 1,
-                          padding: "10px 14px",
-                          borderRadius: "12px",
+                          padding: "7px 12px",
+                          borderRadius: "10px",
                           background: "linear-gradient(135deg, #2d6a4f, #52b788)",
                           color: "#ffffff",
                           fontWeight: "700",
-                          fontSize: "0.86rem",
+                          fontSize: "0.78rem",
                           textAlign: "center",
                           textDecoration: "none",
                           display: "flex",
                           alignItems: "center",
                           justifyContent: "center",
-                          gap: "5px",
-                          boxShadow: "0 4px 14px rgba(45, 106, 79, 0.45)",
+                          gap: "4px",
+                          boxShadow: "0 3px 10px rgba(45, 106, 79, 0.4)",
                         }}
                       >
-                        <Calendar size={14} />
-                        <span>Book Now</span>
+                        <Calendar size={12} />
+                        <span>Book</span>
                       </a>
 
                       <Link
@@ -482,22 +472,22 @@ export function OriginkitBase_RoundCarousel({
                           }
                         }}
                         style={{
-                          padding: "10px 14px",
-                          borderRadius: "12px",
+                          padding: "7px 12px",
+                          borderRadius: "10px",
                           background: "rgba(255, 255, 255, 0.08)",
-                          border: "1.5px solid rgba(255, 255, 255, 0.25)",
+                          border: "1px solid rgba(255, 255, 255, 0.25)",
                           color: "#e9c46a",
                           fontWeight: "700",
-                          fontSize: "0.86rem",
+                          fontSize: "0.78rem",
                           textDecoration: "none",
                           display: "flex",
                           alignItems: "center",
                           justifyContent: "center",
-                          gap: "4px",
+                          gap: "3px",
                         }}
                       >
                         <span>Details</span>
-                        <ArrowRight size={14} />
+                        <ArrowRight size={12} />
                       </Link>
                     </div>
                   </div>
@@ -509,7 +499,7 @@ export function OriginkitBase_RoundCarousel({
                     ...faceBase,
                     transform: "rotateY(180deg)",
                     backgroundColor: "#000000",
-                    border: "1.5px solid rgba(116, 198, 157, 0.15)",
+                    border: "1px solid rgba(116, 198, 157, 0.15)",
                     filter: `brightness(${innerDim / 10})`,
                     display: "flex",
                     alignItems: "center",
@@ -518,8 +508,8 @@ export function OriginkitBase_RoundCarousel({
                 >
                   <div
                     style={{
-                      width: "50px",
-                      height: "50px",
+                      width: "40px",
+                      height: "40px",
                       borderRadius: "50%",
                       background: "rgba(82, 183, 136, 0.18)",
                       display: "flex",
@@ -528,7 +518,7 @@ export function OriginkitBase_RoundCarousel({
                       color: "rgba(116, 198, 157, 0.6)",
                     }}
                   >
-                    <Sparkles size={24} />
+                    <Sparkles size={18} />
                   </div>
                 </div>
               </div>
@@ -541,16 +531,16 @@ export function OriginkitBase_RoundCarousel({
 }
 
 const __originkitPresetProps = {
-  imageWidth: 411,
-  imageHeight: 460,
-  spacing: 1,
+  imageWidth: 320,
+  imageHeight: 265,
+  spacing: 1.1,
   speed: 0.8,
   direction: "right",
   drag: true,
   sensitivity: 5,
   tilt: 4,
-  perspective: 400,
-  cornerRadius: 47,
+  perspective: 550,
+  cornerRadius: 32,
   innerDim: 0,
   background: "transparent",
 };

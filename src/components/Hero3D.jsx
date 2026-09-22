@@ -157,14 +157,18 @@ export default function Hero3D() {
       <style>{`
         .hero-section {
           position: relative;
+          height: 100vh;
           min-height: 100vh;
+          max-height: 100vh;
           display: flex;
           flex-direction: column;
           justify-content: space-between;
           margin-top: -136px;
-          padding: 154px 0 0 0;
+          padding: 136px 0 0 0;
           background: #0d2818;
           color: #ffffff;
+          overflow: hidden;
+          box-sizing: border-box;
         }
 
         /* Video Background */
@@ -222,97 +226,6 @@ export default function Hero3D() {
           opacity: 0.15;
         }
 
-        .hero-top-badges-bar {
-          position: relative;
-          z-index: 5;
-          width: 100%;
-          padding-top: 10px;
-          margin-bottom: 24px;
-        }
-
-        .hero-badge-row {
-          display: flex;
-          align-items: center;
-          gap: 16px;
-          margin: 0 auto;
-          flex-wrap: wrap;
-          justify-content: center;
-          width: 100%;
-        }
-
-        .badge-item-1 {
-          animation: badgeFloatDown 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
-        }
-
-        .badge-item-2 {
-          animation: badgeFloatDown 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.65s both;
-        }
-
-        @keyframes badgeFloatDown {
-          0% {
-            opacity: 0;
-            transform: translateY(-28px) scale(0.92);
-            filter: blur(10px) brightness(1.35);
-          }
-          100% {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-            filter: blur(0) brightness(1);
-          }
-        }
-
-        .hero-google-badge {
-          display: inline-flex;
-          align-items: center;
-          gap: 10px;
-          background: rgba(255, 255, 255, 0.18);
-          backdrop-filter: blur(14px);
-          -webkit-backdrop-filter: blur(14px);
-          border: 1.5px solid rgba(244, 180, 0, 0.65);
-          padding: 10px 22px;
-          border-radius: var(--radius-full);
-          box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.35);
-          transition: var(--transition);
-        }
-        .hero-google-badge:hover {
-          background: rgba(255, 255, 255, 0.28);
-          transform: translateY(-2px);
-          box-shadow: 0 12px 28px -4px rgba(0, 0, 0, 0.45);
-        }
-
-        .stars-mini {
-          display: flex;
-          gap: 3px;
-        }
-
-        .google-score-tag {
-          font-size: 0.95rem;
-          font-weight: 750;
-          color: #ffffff;
-          letter-spacing: -0.01em;
-        }
-
-        .hero-pill-badge {
-          display: inline-flex;
-          align-items: center;
-          gap: 8px;
-          background: rgba(82, 183, 136, 0.22);
-          backdrop-filter: blur(14px);
-          -webkit-backdrop-filter: blur(14px);
-          border: 1.5px solid rgba(82, 183, 136, 0.45);
-          padding: 10px 22px;
-          border-radius: var(--radius-full);
-          font-size: 0.95rem;
-          font-weight: 700;
-          color: #ffffff;
-          box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.35);
-        }
-
-        .pill-gold-icon {
-          color: #e9c46a;
-          filter: drop-shadow(0 2px 6px rgba(233, 196, 106, 0.5));
-        }
-
         .hero-container {
           position: relative;
           z-index: 4;
@@ -320,9 +233,10 @@ export default function Hero3D() {
           display: flex;
           flex-direction: column;
           justify-content: space-between;
-          padding-top: 10px;
-          padding-bottom: 20px;
+          padding-top: 4px;
+          padding-bottom: 8px;
           width: 100%;
+          min-height: 0;
         }
 
         .hero-headline-wrapper {
@@ -331,7 +245,7 @@ export default function Hero3D() {
           justify-content: space-between;
           flex: 1;
           width: 100%;
-          min-height: 280px;
+          min-height: 0;
           transition: opacity 0.5s ease;
         }
 
@@ -339,7 +253,7 @@ export default function Hero3D() {
           align-self: flex-start;
           text-align: left;
           max-width: 650px;
-          margin-top: 15px;
+          margin-top: 2px;
         }
 
         /* Center 3D Round Carousel Showcase */
@@ -347,17 +261,20 @@ export default function Hero3D() {
           display: flex;
           justify-content: center;
           align-items: center;
-          margin: 0 auto;
+          margin: auto;
           z-index: 5;
           width: 100%;
           max-width: 1220px;
-          min-height: 735px;
+          flex: 1;
+          min-height: 0;
           position: relative;
         }
 
         .carousel-3d-wrapper {
           width: 100%;
-          height: 735px;
+          height: 100%;
+          min-height: 250px;
+          max-height: 310px;
           display: flex;
           justify-content: center;
           align-items: center;
@@ -367,12 +284,12 @@ export default function Hero3D() {
           align-self: flex-end;
           text-align: right;
           max-width: 650px;
-          margin-bottom: 20px;
+          margin-bottom: 6px;
         }
 
         .hero-heading-line {
-          font-size: clamp(2.4rem, 4.6vw, 4rem);
-          line-height: 1.15;
+          font-size: clamp(1.8rem, 3.4vw, 3.1rem);
+          line-height: 1.12;
           color: #ffffff;
           margin: 0;
           font-weight: 800;
@@ -436,26 +353,27 @@ export default function Hero3D() {
           text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
         }
 
-        /* Overlapping Trust Bar Card */
+        /* Floating Trust Bar at bottom edge of single-page hero */
         .hero-overlap-wrapper {
           position: relative;
           z-index: 10;
           width: 100%;
-          margin-bottom: -54px;
-          margin-top: 24px;
+          margin-bottom: 0px;
+          margin-top: 0px;
+          padding-bottom: 4px;
         }
 
         .hero-trust-bar {
           display: grid;
           grid-template-columns: repeat(4, 1fr);
-          gap: 22px;
-          padding: 26px 36px;
-          border-radius: var(--radius-xl);
-          background: linear-gradient(135deg, rgba(13, 40, 24, 0.97) 0%, rgba(20, 56, 36, 0.95) 100%);
-          backdrop-filter: blur(24px);
-          -webkit-backdrop-filter: blur(24px);
+          gap: 18px;
+          padding: 12px 28px;
+          border-radius: var(--radius-lg);
+          background: linear-gradient(135deg, rgba(13, 40, 24, 0.96) 0%, rgba(20, 56, 36, 0.94) 100%);
+          backdrop-filter: blur(20px);
+          -webkit-backdrop-filter: blur(20px);
           border: 1.5px solid rgba(116, 198, 157, 0.35);
-          box-shadow: 0 24px 60px -10px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.08);
+          box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.08);
           animation: trustBarReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) 1.2s both;
         }
 
@@ -474,8 +392,8 @@ export default function Hero3D() {
 
         .trust-cell {
           display: flex;
-          align-items: flex-start;
-          gap: 16px;
+          align-items: center;
+          gap: 12px;
           animation: trustCellPop 1s cubic-bezier(0.16, 1, 0.3, 1) both;
         }
 
@@ -498,26 +416,24 @@ export default function Hero3D() {
         .trust-cell-body {
           display: flex;
           flex-direction: column;
-          gap: 3px;
+          gap: 2px;
         }
 
         .cell-icon-green {
           color: #74c69d;
           flex-shrink: 0;
-          margin-top: 3px;
-          filter: drop-shadow(0 2px 8px rgba(82, 183, 136, 0.4));
+          filter: drop-shadow(0 2px 6px rgba(82, 183, 136, 0.4));
         }
 
         .cell-icon-gold {
           color: #dfc27d;
           flex-shrink: 0;
-          margin-top: 3px;
-          filter: drop-shadow(0 2px 8px rgba(223, 194, 125, 0.4));
+          filter: drop-shadow(0 2px 6px rgba(223, 194, 125, 0.4));
         }
 
         .trust-cell strong {
           display: block;
-          font-size: 1.12rem;
+          font-size: 0.98rem;
           font-weight: 800;
           color: #ffffff;
           letter-spacing: -0.01em;
@@ -525,27 +441,19 @@ export default function Hero3D() {
         }
 
         .trust-cell span {
-          font-size: 0.92rem;
+          font-size: 0.8rem;
           color: #c4ebd0;
           font-weight: 500;
-          line-height: 1.45;
-        }
-
-        @media (max-width: 1280px) {
-          .hero-center-showcase {
-            min-height: 620px;
-          }
-          .carousel-3d-wrapper {
-            height: 620px;
-            transform: scale(0.85);
-            transform-origin: center center;
-          }
+          line-height: 1.35;
         }
 
         @media (max-width: 1040px) {
           .hero-section {
-            margin-top: -125px;
-            padding: 142px 0 0 0;
+            height: auto;
+            min-height: 100vh;
+            max-height: none;
+            padding: 140px 0 20px 0;
+            overflow: visible;
           }
           .hero-heading-left,
           .hero-heading-right {
@@ -557,52 +465,36 @@ export default function Hero3D() {
             margin-bottom: 12px;
           }
           .hero-center-showcase {
-            max-width: 100%;
-            min-height: 540px;
-          }
-          .carousel-3d-wrapper {
-            height: 540px;
-            transform: scale(0.72);
-            transform-origin: center center;
+            margin: 12px auto;
+            min-height: 280px;
           }
           .hero-trust-bar {
             grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            padding: 22px 24px;
-          }
-          .hero-overlap-wrapper {
-            margin-bottom: -70px;
+            gap: 16px;
+            padding: 16px 20px;
           }
         }
 
         @media (max-width: 640px) {
           .hero-section {
-            margin-top: -116px;
-            padding: 130px 0 0 0;
+            padding: 125px 0 16px 0;
+          }
+          .hero-heading-line {
+            font-size: clamp(1.6rem, 6vw, 2.2rem);
           }
           .hero-center-showcase {
-            max-width: 100%;
-            min-height: 420px;
-            margin: 0;
-          }
-          .carousel-3d-wrapper {
-            height: 420px;
-            transform: scale(0.55);
-            transform-origin: center center;
+            min-height: 270px;
           }
           .hero-trust-bar {
             grid-template-columns: 1fr;
-            gap: 16px;
-            padding: 20px;
-          }
-          .hero-overlap-wrapper {
-            margin-bottom: -110px;
+            gap: 12px;
+            padding: 14px 16px;
           }
           .trust-cell strong {
-            font-size: 1.05rem;
+            font-size: 0.92rem;
           }
           .trust-cell span {
-            font-size: 0.88rem;
+            font-size: 0.78rem;
           }
         }
       `}</style>
