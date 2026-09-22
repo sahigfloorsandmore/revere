@@ -189,11 +189,12 @@ export default function Hero3D() {
       <style>{`
         .hero-section {
           position: relative;
-          min-height: calc(100vh - 80px);
+          min-height: 100vh;
           display: flex;
           flex-direction: column;
           justify-content: space-between;
-          padding: 80px 0 0 0;
+          margin-top: -136px;
+          padding: 154px 0 0 0;
           background: #0d2818;
           color: #ffffff;
         }
@@ -596,6 +597,10 @@ export default function Hero3D() {
         }
 
         @media (max-width: 1040px) {
+          .hero-section {
+            margin-top: -125px;
+            padding: 142px 0 0 0;
+          }
           .hero-trust-bar {
             grid-template-columns: repeat(2, 1fr);
             gap: 20px;
@@ -608,7 +613,8 @@ export default function Hero3D() {
 
         @media (max-width: 640px) {
           .hero-section {
-            padding: 50px 0 0 0;
+            margin-top: -116px;
+            padding: 130px 0 0 0;
           }
           .hero-trust-bar {
             grid-template-columns: 1fr;

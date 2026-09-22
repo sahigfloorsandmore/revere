@@ -128,7 +128,8 @@ export default function ServicesPage() {
         .services-hero {
           background: linear-gradient(135deg, #0d2818 0%, #1b4332 50%, #2d6a4f 100%);
           color: #ffffff;
-          padding: 44px 0 64px 0;
+          margin-top: -136px;
+          padding: 160px 0 64px 0;
           position: relative;
           overflow: hidden;
         }
@@ -367,6 +368,13 @@ export default function ServicesPage() {
           color: #ffffff;
         }
 
+        @media (max-width: 1040px) {
+          .services-hero {
+            margin-top: -125px;
+            padding-top: 148px;
+          }
+        }
+
         @media (max-width: 900px) {
           .assurance-card {
             flex-direction: column;
@@ -381,6 +389,13 @@ export default function ServicesPage() {
           }
           .assurance-right .btn {
             width: 100%;
+          }
+        }
+
+        @media (max-width: 640px) {
+          .services-hero {
+            margin-top: -116px;
+            padding-top: 136px;
           }
         }
       `}</style>
