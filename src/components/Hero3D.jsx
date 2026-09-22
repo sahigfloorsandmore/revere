@@ -256,7 +256,7 @@ export default function Hero3D() {
           margin-top: 2px;
         }
 
-        /* Center 3D Round Carousel Showcase */
+        /* Center Single Card Showcase */
         .hero-center-showcase {
           display: flex;
           justify-content: center;
@@ -264,7 +264,7 @@ export default function Hero3D() {
           margin: auto;
           z-index: 5;
           width: 100%;
-          max-width: 1220px;
+          max-width: 580px;
           flex: 1;
           min-height: 0;
           position: relative;
@@ -272,9 +272,6 @@ export default function Hero3D() {
 
         .carousel-3d-wrapper {
           width: 100%;
-          height: 100%;
-          min-height: 250px;
-          max-height: 310px;
           display: flex;
           justify-content: center;
           align-items: center;
