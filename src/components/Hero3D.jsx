@@ -84,21 +84,41 @@ export default function Hero3D() {
         <div className="video-overlay-pattern"></div>
       </div>
 
-      {/* Main Hero Content */}
+      {/* Main Hero Content - Split Layout with Center Video */}
       <div className="container hero-container">
-        <div className="hero-content">
-          {/* Main Headline appears after the first video */}
-          <h1 className={`hero-heading ${activeVideoIndex === 1 ? 'hero-heading-reveal' : 'hero-heading-pending'}`}>
-            <span className="hero-word-row">
+        <div className={`hero-headline-wrapper ${activeVideoIndex === 1 ? 'hero-heading-reveal' : 'hero-heading-pending'}`}>
+          {/* Top-Left: Restorative Therapy */}
+          <div className="hero-heading-left">
+            <h1 className="hero-heading-line">
               <span className="hero-word word-1">Restorative</span>{' '}
               <span className="hero-word word-2 hero-heading-accent">Therapy.</span>
-            </span>
-            <br />
-            <span className="hero-word-row">
+            </h1>
+          </div>
+
+          {/* Center Floating Animation Video (In Middle Marked Box) */}
+          <div className="hero-center-media">
+            <div className="hero-center-video-card">
+              <video
+                className="hero-center-video"
+                autoPlay
+                loop
+                muted
+                playsInline
+                preload="auto"
+              >
+                <source src="/videos/calm-elegant-white-hand.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </div>
+
+          {/* Bottom-Right (Red Marked Spot): Exceptional Healing */}
+          <div className="hero-heading-right">
+            <h2 className="hero-heading-line">
               <span className="hero-word word-3 hero-heading-accent">Exceptional</span>{' '}
               <span className="hero-word word-4">Healing.</span>
-            </span>
-          </h1>
+            </h2>
+          </div>
         </div>
       </div>
 
@@ -303,26 +323,96 @@ export default function Hero3D() {
         .hero-container {
           position: relative;
           z-index: 4;
+          flex: 1;
           display: flex;
-          justify-content: flex-start;
-          align-items: center;
-          padding-top: 0;
+          flex-direction: column;
+          justify-content: space-between;
+          padding-top: 10px;
           padding-bottom: 20px;
+          width: 100%;
         }
 
-        .hero-content {
-          max-width: 840px;
+        .hero-headline-wrapper {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          flex: 1;
+          width: 100%;
+          min-height: 280px;
+          transition: opacity 0.5s ease;
         }
 
-        .hero-heading {
-          font-size: clamp(2.6rem, 5vw, 4.1rem);
-          line-height: 1.12;
-          color: #ffffff;
+        .hero-heading-left {
+          align-self: flex-start;
+          text-align: left;
+          max-width: 650px;
+          margin-top: 15px;
+        }
+
+        /* Center Video Asset (In Middle Marked Box) */
+        .hero-center-media {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin: 10px auto;
+          z-index: 5;
+          animation: centerMediaFadeIn 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.6s both;
+        }
+
+        @keyframes centerMediaFadeIn {
+          0% {
+            opacity: 0;
+            transform: scale(0.88) translateY(20px);
+            filter: blur(10px);
+          }
+          100% {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+            filter: blur(0);
+          }
+        }
+
+        .hero-center-video-card {
+          width: clamp(260px, 32vw, 380px);
+          aspect-ratio: 16/9;
+          border-radius: var(--radius-xl);
+          overflow: hidden;
+          box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.55), 0 0 35px rgba(116, 198, 157, 0.28);
+          border: 2px solid rgba(116, 198, 157, 0.45);
+          background: rgba(13, 40, 24, 0.65);
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
+          transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+        }
+
+        .hero-center-video-card:hover {
+          transform: scale(1.03);
+          box-shadow: 0 25px 60px -10px rgba(0, 0, 0, 0.65), 0 0 45px rgba(116, 198, 157, 0.45);
+          border-color: #74c69d;
+        }
+
+        .hero-center-video {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          display: block;
+        }
+
+        .hero-heading-right {
+          align-self: flex-end;
+          text-align: right;
+          max-width: 650px;
           margin-bottom: 20px;
+        }
+
+        .hero-heading-line {
+          font-size: clamp(2.4rem, 4.6vw, 4rem);
+          line-height: 1.15;
+          color: #ffffff;
+          margin: 0;
           font-weight: 800;
           letter-spacing: -0.025em;
-          text-shadow: 0 4px 20px rgba(0, 0, 0, 0.75);
-          transition: opacity 0.5s ease;
+          text-shadow: 0 4px 24px rgba(0, 0, 0, 0.85);
         }
 
         .hero-heading-pending {
@@ -333,11 +423,6 @@ export default function Hero3D() {
         .hero-heading-reveal {
           opacity: 1;
           visibility: visible;
-        }
-
-        .hero-word-row {
-          display: inline-block;
-          vertical-align: bottom;
         }
 
         .hero-heading-reveal .hero-word {
