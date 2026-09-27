@@ -209,8 +209,8 @@ export default function LocationParking() {
           display: inline-block;
           font-size: 0.78rem;
           font-weight: 600;
-          background: var(--gold-300);
-          color: var(--gold-700);
+          background: #f1dfc7;
+          color: #5c4033;
           padding: 4px 10px;
           border-radius: 6px;
         }
@@ -257,14 +257,14 @@ export default function LocationParking() {
           display: flex;
           align-items: flex-start;
           gap: 12px;
-          background: #fff8e6;
-          border: 1px solid #ffe199;
+          background: #fdfaf6;
+          border: 1px solid #d8b28d;
           padding: 14px 16px;
           border-radius: var(--radius-md);
         }
 
         .gate-icon {
-          color: var(--gold-600);
+          color: #b58963;
           flex-shrink: 0;
           margin-top: 2px;
         }
@@ -272,13 +272,13 @@ export default function LocationParking() {
         .gate-notice-box strong {
           display: block;
           font-size: 0.86rem;
-          color: #7a5800;
+          color: #5c4033;
           margin-bottom: 2px;
         }
 
         .gate-notice-box p {
           font-size: 0.82rem;
-          color: #614600;
+          color: #7d5b3e;
           line-height: 1.45;
           margin: 0;
         }

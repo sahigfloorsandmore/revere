@@ -99,7 +99,7 @@ export default function FAQ() {
 
       <style>{`
         .faq-section {
-          background: linear-gradient(180deg, #f4f8f5 0%, #ffffff 100%);
+          background: linear-gradient(180deg, #f4f7f3 0%, #fdfaf6 100%);
         }
 
         .faq-container {
@@ -111,7 +111,7 @@ export default function FAQ() {
         }
 
         .faq-item {
-          border: 1px solid var(--neutral-300);
+          border: 1px solid #cbdbca;
           border-radius: var(--radius-md);
           overflow: hidden;
           transition: var(--transition);
@@ -119,8 +119,8 @@ export default function FAQ() {
         }
 
         .faq-item-open {
-          border-color: var(--primary-400);
-          box-shadow: 0 10px 24px -6px rgba(27, 67, 50, 0.1);
+          border-color: #88a183;
+          box-shadow: 0 10px 24px -6px rgba(24, 32, 23, 0.1);
         }
 
         .faq-question-btn {
@@ -138,7 +138,7 @@ export default function FAQ() {
         .faq-question-text {
           font-size: 1.08rem;
           font-weight: 700;
-          color: var(--primary-900);
+          color: #182017;
           line-height: 1.4;
         }
 
@@ -146,18 +146,18 @@ export default function FAQ() {
           width: 32px;
           height: 32px;
           border-radius: 50%;
-          background: var(--neutral-100);
+          background: #f4f7f3;
           display: flex;
           align-items: center;
           justify-content: center;
-          color: var(--primary-700);
+          color: #425240;
           flex-shrink: 0;
           transition: var(--transition);
         }
 
         .faq-item-open .faq-toggle-icon {
-          background: var(--primary-800);
-          color: #ffffff;
+          background: #232d22;
+          color: #f8efe4;
         }
 
         .faq-answer-panel {
@@ -169,7 +169,7 @@ export default function FAQ() {
           font-size: 0.96rem;
           color: var(--neutral-700);
           line-height: 1.7;
-          border-top: 1px solid var(--neutral-200);
+          border-top: 1px solid #e5ece4;
           padding-top: 16px;
           margin: 0;
         }
@@ -183,7 +183,7 @@ export default function FAQ() {
           align-items: center;
           gap: 24px;
           background: #ffffff;
-          border: 1px solid var(--neutral-300);
+          border: 1px solid #cbdbca;
         }
 
         .footer-card-content {

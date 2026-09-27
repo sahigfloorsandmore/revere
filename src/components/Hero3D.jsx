@@ -165,7 +165,7 @@ export default function Hero3D() {
           justify-content: space-between;
           margin-top: -136px;
           padding: 136px 0 0 0;
-          background: #0d2818;
+          background: #1c241b;
           color: #ffffff;
           overflow: hidden;
           box-sizing: border-box;
@@ -211,9 +211,9 @@ export default function Hero3D() {
           z-index: 3;
           background: linear-gradient(
             135deg, 
-            rgba(13, 40, 24, 0.58) 0%, 
-            rgba(10, 13, 14, 0.40) 50%, 
-            rgba(27, 67, 50, 0.50) 100%
+            rgba(31, 42, 30, 0.65) 0%, 
+            rgba(18, 24, 18, 0.45) 50%, 
+            rgba(49, 61, 48, 0.55) 100%
           );
         }
 
@@ -221,7 +221,7 @@ export default function Hero3D() {
           position: absolute;
           inset: 0;
           z-index: 3;
-          background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+          background-image: radial-gradient(rgba(216, 178, 141, 0.08) 1px, transparent 1px);
           background-size: 24px 24px;
           opacity: 0.15;
         }
@@ -346,7 +346,7 @@ export default function Hero3D() {
         }
 
         .hero-heading-accent {
-          color: #74c69d;
+          color: #d8b28d;
           text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
         }
 
@@ -366,10 +366,10 @@ export default function Hero3D() {
           gap: 18px;
           padding: 12px 28px;
           border-radius: var(--radius-lg);
-          background: linear-gradient(135deg, rgba(13, 40, 24, 0.96) 0%, rgba(20, 56, 36, 0.94) 100%);
+          background: linear-gradient(135deg, rgba(31, 42, 30, 0.96) 0%, rgba(42, 56, 41, 0.94) 100%);
           backdrop-filter: blur(20px);
           -webkit-backdrop-filter: blur(20px);
-          border: 1.5px solid rgba(116, 198, 157, 0.35);
+          border: 1.5px solid rgba(216, 178, 141, 0.35);
           box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.08);
           animation: trustBarReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) 1.2s both;
         }
@@ -417,15 +417,15 @@ export default function Hero3D() {
         }
 
         .cell-icon-green {
-          color: #74c69d;
+          color: #88a183;
           flex-shrink: 0;
-          filter: drop-shadow(0 2px 6px rgba(82, 183, 136, 0.4));
+          filter: drop-shadow(0 2px 6px rgba(136, 161, 131, 0.4));
         }
 
         .cell-icon-gold {
-          color: #dfc27d;
+          color: #d8b28d;
           flex-shrink: 0;
-          filter: drop-shadow(0 2px 6px rgba(223, 194, 125, 0.4));
+          filter: drop-shadow(0 2px 6px rgba(216, 178, 141, 0.4));
         }
 
         .trust-cell strong {
@@ -439,7 +439,7 @@ export default function Hero3D() {
 
         .trust-cell span {
           font-size: 0.8rem;
-          color: #c4ebd0;
+          color: #e5ece4;
           font-weight: 500;
           line-height: 1.35;
         }

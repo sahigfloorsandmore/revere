@@ -184,11 +184,11 @@ export default function AboutUs() {
 
         .about-image-card {
           padding: 36px;
-          background: linear-gradient(135deg, #0d2818 0%, #1b4332 100%);
+          background: linear-gradient(135deg, #1c241b 0%, #313d30 100%);
           color: #ffffff;
           border-radius: var(--radius-xl);
-          border: 1px solid rgba(82, 183, 136, 0.3);
-          box-shadow: 0 25px 50px -12px rgba(13, 40, 24, 0.35);
+          border: 1px solid rgba(216, 178, 141, 0.35);
+          box-shadow: 0 25px 50px -12px rgba(35, 45, 34, 0.35);
         }
 
         .about-photo-grid {
@@ -203,7 +203,7 @@ export default function AboutUs() {
           height: 140px;
           object-fit: cover;
           border-radius: var(--radius-md);
-          border: 1px solid rgba(255, 255, 255, 0.2);
+          border: 1px solid rgba(216, 178, 141, 0.25);
           box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
           transition: var(--transition);
         }
@@ -216,12 +216,13 @@ export default function AboutUs() {
           display: inline-flex;
           align-items: center;
           gap: 6px;
-          background: rgba(255, 255, 255, 0.1);
+          background: rgba(216, 178, 141, 0.15);
           padding: 6px 14px;
           border-radius: var(--radius-full);
           font-size: 0.8rem;
           font-weight: 600;
-          color: #e9c46a;
+          color: #d8b28d;
+          border: 1px solid rgba(216, 178, 141, 0.35);
           margin-bottom: 24px;
         }
 
@@ -230,14 +231,14 @@ export default function AboutUs() {
           font-size: 1.65rem;
           font-style: italic;
           line-height: 1.4;
-          color: #f2f9f5;
+          color: #f4f7f3;
           margin-bottom: 12px;
           font-weight: 400;
         }
 
         .visual-author {
           font-size: 0.88rem;
-          color: var(--primary-300);
+          color: #d8b28d;
           margin-bottom: 30px;
         }
 
@@ -246,7 +247,7 @@ export default function AboutUs() {
           grid-template-columns: repeat(3, 1fr);
           gap: 16px;
           padding-top: 24px;
-          border-top: 1px solid rgba(255, 255, 255, 0.15);
+          border-top: 1px solid rgba(216, 178, 141, 0.25);
         }
 
         .stat-box {
@@ -257,13 +258,13 @@ export default function AboutUs() {
           display: block;
           font-size: 1.8rem;
           font-weight: 800;
-          color: #e9c46a;
+          color: #d8b28d;
           line-height: 1;
         }
 
         .stat-label {
           font-size: 0.72rem;
-          color: var(--primary-200);
+          color: #cbdbca;
           text-transform: uppercase;
           letter-spacing: 0.05em;
           margin-top: 4px;
@@ -275,7 +276,7 @@ export default function AboutUs() {
           align-items: flex-start;
           gap: 16px;
           background: #ffffff;
-          border: 1px solid #e0ebe3;
+          border: 1px solid rgba(216, 178, 141, 0.25);
           border-radius: var(--radius-lg);
         }
 
@@ -283,7 +284,8 @@ export default function AboutUs() {
           width: 48px;
           height: 48px;
           border-radius: 12px;
-          background: #e8f5ee;
+          background: #e5ece4;
+          color: #425240;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -343,8 +345,8 @@ export default function AboutUs() {
           width: 22px;
           height: 22px;
           border-radius: 50%;
-          background: #e8f5ee;
-          color: #2d6a4f;
+          background: #e5ece4;
+          color: #425240;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -377,13 +379,13 @@ export default function AboutUs() {
         .careers-card {
           padding: 36px 40px;
           background: #ffffff;
-          border: 1px solid #dce8e0;
+          border: 1px solid rgba(216, 178, 141, 0.3);
           border-radius: var(--radius-xl);
           display: flex;
           justify-content: space-between;
           align-items: center;
           gap: 32px;
-          box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 10px 30px -10px rgba(35, 45, 34, 0.05);
         }
 
         .careers-left {
@@ -396,11 +398,11 @@ export default function AboutUs() {
           width: 52px;
           height: 52px;
           border-radius: 14px;
-          background: #e8f5ee;
+          background: #f8efe4;
           display: flex;
           align-items: center;
           justify-content: center;
-          color: #2d6a4f;
+          color: #9e7550;
           flex-shrink: 0;
         }
 
@@ -410,20 +412,20 @@ export default function AboutUs() {
           font-weight: 700;
           text-transform: uppercase;
           letter-spacing: 0.1em;
-          color: #388242;
+          color: #556b52;
           margin-bottom: 6px;
         }
 
         .careers-title {
           font-size: 1.35rem;
-          color: #0d2818;
+          color: #232d22;
           font-weight: 800;
           margin-bottom: 8px;
         }
 
         .careers-desc {
           font-size: 0.92rem;
-          color: #55665c;
+          color: #5d675d;
           line-height: 1.6;
           max-width: 680px;
           margin: 0;

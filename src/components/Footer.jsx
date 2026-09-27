@@ -163,8 +163,8 @@ export default function Footer() {
 
       <style>{`
         .site-footer {
-          background: #0a0d0e;
-          color: #dce4de;
+          background: #182017;
+          color: #cbdbca;
           position: relative;
         }
 
@@ -176,8 +176,8 @@ export default function Footer() {
         .cta-box {
           padding: 48px;
           border-radius: var(--radius-xl);
-          background: linear-gradient(135deg, #12181b 0%, #1b4332 100%);
-          border: 1px solid rgba(82, 183, 136, 0.25);
+          background: linear-gradient(135deg, #232d22 0%, #313d30 100%);
+          border: 1px solid rgba(216, 178, 141, 0.3);
           display: flex;
           justify-content: space-between;
           align-items: center;
@@ -188,7 +188,7 @@ export default function Footer() {
           display: inline-block;
           font-size: 0.82rem;
           font-weight: 700;
-          color: #e9c46a;
+          color: #d8b28d;
           text-transform: uppercase;
           letter-spacing: 0.1em;
           margin-bottom: 8px;
@@ -202,7 +202,7 @@ export default function Footer() {
 
         .cta-sub {
           font-size: 0.96rem;
-          color: var(--neutral-300);
+          color: #cbdbca;
           max-width: 580px;
         }
 
@@ -220,12 +220,12 @@ export default function Footer() {
 
         .cta-phone-btn {
           color: #ffffff;
-          border-color: rgba(255, 255, 255, 0.3);
+          border-color: rgba(216, 178, 141, 0.4);
           background: rgba(255, 255, 255, 0.05);
         }
 
         .cta-phone-btn:hover {
-          background: rgba(255, 255, 255, 0.15);
+          background: rgba(216, 178, 141, 0.2);
           color: #ffffff;
         }
 
@@ -254,7 +254,7 @@ export default function Footer() {
 
         .footer-about {
           font-size: 0.88rem;
-          color: var(--neutral-400);
+          color: #a9bfa4;
           line-height: 1.6;
           margin-bottom: 20px;
         }
@@ -277,7 +277,7 @@ export default function Footer() {
         }
 
         .footer-social-links a:hover {
-          background: var(--primary-600);
+          background: #88a183;
           transform: translateY(-2px);
         }
 
@@ -297,12 +297,12 @@ export default function Footer() {
 
         .footer-links a {
           font-size: 0.88rem;
-          color: var(--neutral-400);
+          color: #a9bfa4;
           transition: var(--transition);
         }
 
         .footer-links a:hover {
-          color: #ffffff;
+          color: #d8b28d;
           padding-left: 4px;
         }
 
@@ -317,22 +317,23 @@ export default function Footer() {
           align-items: flex-start;
           gap: 10px;
           font-size: 0.86rem;
-          color: var(--neutral-300);
+          color: #cbdbca;
           line-height: 1.45;
         }
 
         .contact-icon {
           flex-shrink: 0;
           margin-top: 2px;
+          color: #d8b28d;
         }
 
         .contact-line a {
-          color: var(--neutral-300);
+          color: #cbdbca;
           transition: var(--transition);
         }
 
         .contact-line a:hover {
-          color: #ffffff;
+          color: #d8b28d;
         }
 
         .footer-bottom-bar {
@@ -342,21 +343,21 @@ export default function Footer() {
           padding-top: 24px;
           border-top: 1px solid rgba(255, 255, 255, 0.1);
           font-size: 0.82rem;
-          color: var(--neutral-400);
+          color: #a9bfa4;
         }
 
         .scroll-top-btn {
           display: flex;
           align-items: center;
           gap: 6px;
-          color: var(--neutral-400);
+          color: #a9bfa4;
           font-size: 0.82rem;
           font-weight: 600;
           transition: var(--transition);
         }
 
         .scroll-top-btn:hover {
-          color: #ffffff;
+          color: #d8b28d;
         }
 
         @media (max-width: 1024px) {

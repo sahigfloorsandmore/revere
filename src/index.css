@@ -1,40 +1,57 @@
 :root {
-  --primary-900: #0d2818;
-  --primary-800: #1b4332;
-  --primary-700: #2d6a4f;
-  --primary-600: #40916c;
-  --primary-500: #52b788;
-  --primary-400: #74c69d;
-  --primary-300: #95d5b2;
-  --primary-200: #b7e4c7;
-  --primary-100: #d8f3dc;
-  --primary-50: #f2f9f5;
+  /* Olive Green Palette */
+  --primary-950: #182017;
+  --primary-900: #232d22;
+  --primary-800: #313d30;
+  --primary-700: #425240;
+  --primary-600: #556b52;
+  --primary-500: #6b8267;
+  --primary-400: #88a183;
+  --primary-300: #a9bfa4;
+  --primary-200: #cbdbca;
+  --primary-100: #e5ece4;
+  --primary-50: #f4f7f3;
 
-  --gold-700: #997328;
-  --gold-600: #b38b34;
-  --gold-500: #c5a059;
-  --gold-400: #dfc27d;
-  --gold-300: #f4ebd9;
+  /* Light Oak & Warm Wood Palette */
+  --oak-900: #5c4033;
+  --oak-800: #7d5b3e;
+  --oak-700: #9e7550;
+  --oak-600: #b58963;
+  --oak-500: #c99d75;
+  --oak-400: #d8b28d;
+  --oak-300: #e6caa8;
+  --oak-200: #f1dfc7;
+  --oak-100: #f8efe4;
+  --oak-50: #fdfaf6;
 
-  --dark-950: #0a0d0e;
-  --dark-900: #12181b;
-  --dark-800: #1a2226;
-  --dark-700: #283339;
-  --dark-600: #3f4e56;
+  /* Gold / Light Oak Warm Tones */
+  --gold-700: #9e7550;
+  --gold-600: #b58963;
+  --gold-500: #c99d75;
+  --gold-400: #d8b28d;
+  --gold-300: #f1dfc7;
 
-  --neutral-50: #fcfdfd;
-  --neutral-100: #f5f8f6;
-  --neutral-200: #eaf0ec;
-  --neutral-300: #dce4de;
-  --neutral-400: #a1b0a6;
-  --neutral-600: #58685e;
-  --neutral-700: #38453d;
-  --neutral-800: #242e28;
-  --neutral-900: #141a16;
+  /* Dark Elements */
+  --dark-950: #121814;
+  --dark-900: #1a221d;
+  --dark-800: #242e28;
+  --dark-700: #333f38;
+  --dark-600: #4a5850;
 
-  --glass-bg: rgba(255, 255, 255, 0.82);
-  --glass-border: rgba(255, 255, 255, 0.6);
-  --glass-shadow: 0 20px 40px -15px rgba(27, 67, 50, 0.08);
+  /* Neutrals */
+  --neutral-50: #fbfcfb;
+  --neutral-100: #f5f7f5;
+  --neutral-200: #ebefeb;
+  --neutral-300: #dde3dd;
+  --neutral-400: #a3aea3;
+  --neutral-600: #5d675d;
+  --neutral-700: #3e473e;
+  --neutral-800: #272e27;
+  --neutral-900: #161a16;
+
+  --glass-bg: rgba(255, 255, 255, 0.85);
+  --glass-border: rgba(216, 178, 141, 0.35);
+  --glass-shadow: 0 20px 40px -15px rgba(35, 45, 34, 0.09);
 
   --font-serif: 'Cormorant Garamond', Georgia, serif;
   --font-sans: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -134,10 +151,10 @@ img {
 }
 
 .glass-card-dark {
-  background: rgba(18, 24, 27, 0.75);
+  background: rgba(24, 32, 23, 0.85);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(216, 178, 141, 0.2);
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
   border-radius: var(--radius-lg);
   color: #fff;
@@ -163,7 +180,7 @@ img {
   padding: 6px 16px;
   border-radius: var(--radius-full);
   margin-bottom: 16px;
-  border: 1px solid rgba(82, 183, 136, 0.3);
+  border: 1px solid rgba(136, 161, 131, 0.35);
 }
 
 .section-title {
@@ -198,34 +215,34 @@ img {
 .btn-primary {
   background: linear-gradient(135deg, var(--primary-700) 0%, var(--primary-800) 100%);
   color: #ffffff;
-  box-shadow: 0 8px 24px -4px rgba(45, 106, 79, 0.38);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 24px -4px rgba(66, 82, 64, 0.42);
+  border: 1px solid rgba(216, 178, 141, 0.3);
 }
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 12px 30px -4px rgba(45, 106, 79, 0.5);
+  box-shadow: 0 12px 30px -4px rgba(66, 82, 64, 0.55);
   background: linear-gradient(135deg, var(--primary-600) 0%, var(--primary-700) 100%);
 }
 
 .btn-gold {
-  background: linear-gradient(135deg, var(--gold-500) 0%, var(--gold-600) 100%);
+  background: linear-gradient(135deg, var(--oak-500) 0%, var(--oak-600) 100%);
   color: #ffffff;
-  box-shadow: 0 8px 24px -4px rgba(197, 160, 89, 0.4);
+  box-shadow: 0 8px 24px -4px rgba(181, 137, 99, 0.42);
   border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .btn-gold:hover {
   transform: translateY(-2px);
-  box-shadow: 0 12px 32px -4px rgba(197, 160, 89, 0.55);
-  background: linear-gradient(135deg, var(--gold-400) 0%, var(--gold-500) 100%);
+  box-shadow: 0 12px 32px -4px rgba(181, 137, 99, 0.58);
+  background: linear-gradient(135deg, var(--oak-400) 0%, var(--oak-500) 100%);
 }
 
 .btn-outline {
   background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(10px);
   color: var(--primary-800);
-  border: 1.5px solid var(--primary-300);
+  border: 1.5px solid var(--oak-400);
 }
 
 .btn-outline:hover {
@@ -261,8 +278,8 @@ img {
 }
 
 .badge-gold {
-  background: var(--gold-300);
-  color: var(--gold-700);
+  background: var(--oak-100);
+  color: var(--oak-800);
 }
 
 /* Keyframes */

@@ -206,7 +206,7 @@ export default function Policies() {
 
       <style>{`
         .policies-section {
-          background: #f8faf9;
+          background: #fdfaf6;
         }
 
         .policies-wrapper {
@@ -215,13 +215,13 @@ export default function Policies() {
           border-radius: var(--radius-xl);
           overflow: hidden;
           background: #ffffff;
-          border: 1px solid var(--neutral-300);
-          box-shadow: 0 20px 40px -15px rgba(27, 67, 50, 0.08);
+          border: 1px solid #cbdbca;
+          box-shadow: 0 20px 40px -15px rgba(24, 32, 23, 0.08);
         }
 
         .policy-tabs-nav {
-          background: var(--neutral-100);
-          border-right: 1px solid var(--neutral-200);
+          background: #f4f7f3;
+          border-right: 1px solid #e5ece4;
           padding: 24px 16px;
           display: flex;
           flex-direction: column;
@@ -243,14 +243,14 @@ export default function Policies() {
         }
 
         .policy-tab-btn:hover {
-          background: rgba(82, 183, 136, 0.12);
-          color: var(--primary-900);
+          background: rgba(136, 161, 131, 0.18);
+          color: #182017;
         }
 
         .policy-tab-btn.active {
-          background: var(--primary-800);
-          color: #ffffff;
-          box-shadow: 0 4px 12px rgba(27, 67, 50, 0.25);
+          background: #232d22;
+          color: #f8efe4;
+          box-shadow: 0 4px 12px rgba(24, 32, 23, 0.25);
         }
 
         .policy-support-box {
@@ -258,33 +258,33 @@ export default function Policies() {
           padding: 16px;
           background: #ffffff;
           border-radius: var(--radius-md);
-          border: 1px solid var(--neutral-300);
+          border: 1px solid #cbdbca;
           display: flex;
           gap: 12px;
           align-items: flex-start;
         }
 
         .support-icon {
-          color: var(--primary-700);
+          color: #425240;
           margin-top: 2px;
         }
 
         .policy-support-box strong {
           display: block;
           font-size: 0.86rem;
-          color: var(--primary-900);
+          color: #182017;
         }
 
         .policy-support-box p {
           font-size: 0.78rem;
-          color: var(--neutral-600);
+          color: #556b52;
           margin: 2px 0 4px 0;
         }
 
         .support-phone {
           font-size: 0.9rem;
           font-weight: 700;
-          color: var(--primary-700);
+          color: #425240;
         }
 
         .policy-content-panel {
@@ -295,9 +295,9 @@ export default function Policies() {
 
         .policy-panel-title {
           font-size: 1.6rem;
-          color: var(--primary-900);
+          color: #182017;
           margin-bottom: 24px;
-          border-bottom: 1px solid var(--neutral-200);
+          border-bottom: 1px solid #e5ece4;
           padding-bottom: 16px;
         }
 
@@ -311,23 +311,23 @@ export default function Policies() {
         }
 
         .alert-warning {
-          background: #fff8e6;
-          border: 1px solid #ffe199;
-          color: #7a5800;
+          background: #fdfaf6;
+          border: 1px solid #d8b28d;
+          color: #5c4033;
         }
 
         .alert-warning .callout-icon {
-          color: #c5a059;
+          color: #b58963;
         }
 
         .alert-info {
-          background: #f0f7f3;
-          border: 1px solid #b7e4c7;
-          color: var(--primary-900);
+          background: #f4f7f3;
+          border: 1px solid #cbdbca;
+          color: #182017;
         }
 
         .alert-info .callout-icon {
-          color: var(--primary-700);
+          color: #425240;
         }
 
         .policy-callout strong {

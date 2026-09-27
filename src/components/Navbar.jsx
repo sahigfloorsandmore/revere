@@ -326,8 +326,8 @@ export default function Navbar() {
           border-bottom: none;
         }
         .top-banner-scrolled {
-          background: #0d2818;
-          border-bottom: 1px solid rgba(82, 183, 136, 0.25);
+          background: #1f2a1e;
+          border-bottom: 1px solid rgba(216, 178, 141, 0.25);
         }
 
         .banner-content {
@@ -349,7 +349,7 @@ export default function Navbar() {
           transition: var(--transition);
         }
         .banner-google-rating:hover {
-          color: #e9c46a;
+          color: #d8b28d;
         }
         .banner-stars {
           display: inline-flex;
@@ -360,7 +360,7 @@ export default function Navbar() {
           color: #ffffff;
         }
         .banner-rating-text strong {
-          color: #f4b400;
+          color: #e0a96d;
           font-weight: 700;
         }
         .banner-rating-text-mobile {
@@ -376,7 +376,7 @@ export default function Navbar() {
           display: inline-flex;
           align-items: center;
           gap: 6px;
-          color: #e9c46a;
+          color: #d8b28d;
           font-weight: 600;
         }
         .banner-divider {
@@ -395,14 +395,14 @@ export default function Navbar() {
           display: inline-flex;
           align-items: center;
           gap: 6px;
-          color: #d8f3dc;
+          color: #e5ece4;
           transition: var(--transition);
         }
         .banner-link:hover {
           color: #ffffff;
         }
         .icon-gold {
-          color: #e9c46a;
+          color: #d8b28d;
         }
 
         /* Sticky Unified Navbar Wrapper */
@@ -432,29 +432,29 @@ export default function Navbar() {
           text-shadow: 0 1px 4px rgba(0, 0, 0, 0.45);
         }
         .navbar-clear .nav-link:hover {
-          color: #74c69d;
+          color: #d8b28d;
         }
         .navbar-clear .mobile-toggle-btn {
           color: #ffffff;
         }
 
-        /* Scrolled State: Full Background with Shadow & Clean Dark Text */
+        /* Scrolled State: Full Background with Light Oak Shadow & Clean Dark Olive Text */
         .navbar-scrolled {
-          background: rgba(255, 255, 255, 0.96);
+          background: rgba(253, 250, 246, 0.96);
           backdrop-filter: blur(20px);
           -webkit-backdrop-filter: blur(20px);
-          box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.12);
-          border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+          box-shadow: 0 10px 30px -5px rgba(35, 45, 34, 0.12);
+          border-bottom: 1px solid rgba(216, 178, 141, 0.25);
         }
         .navbar-scrolled .nav-link {
-          color: #2b3b32;
+          color: #232d22;
           text-shadow: none;
         }
         .navbar-scrolled .nav-link:hover {
-          color: #388242;
+          color: #556b52;
         }
         .navbar-scrolled .mobile-toggle-btn {
-          color: #0d2818;
+          color: #232d22;
         }
         .nav-container {
           display: flex;
@@ -468,17 +468,19 @@ export default function Navbar() {
         .brand-logo {
           display: inline-flex;
           align-items: center;
-          background: #388242;
+          background: #425240;
+          border: 1px solid rgba(216, 178, 141, 0.4);
           padding: 9px 20px;
           border-radius: 12px;
-          box-shadow: 0 4px 16px rgba(56, 130, 66, 0.32);
+          box-shadow: 0 4px 16px rgba(45, 58, 44, 0.35);
           transition: var(--transition);
           flex-shrink: 0;
         }
         .brand-logo:hover {
-          background: #2d6a4f;
+          background: #313d30;
+          border-color: #d8b28d;
           transform: translateY(-2px);
-          box-shadow: 0 8px 22px rgba(56, 130, 66, 0.45);
+          box-shadow: 0 8px 22px rgba(45, 58, 44, 0.45);
         }
         .brand-logo-img {
           height: 48px;
@@ -498,7 +500,7 @@ export default function Navbar() {
         .nav-link {
           font-size: 0.94rem;
           font-weight: 600;
-          color: #2b3b32;
+          color: #232d22;
           white-space: nowrap;
           padding: 8px 0;
           position: relative;
@@ -514,12 +516,12 @@ export default function Navbar() {
           left: 0;
           width: 0;
           height: 2.5px;
-          background: #388242;
+          background: #c99d75;
           transition: var(--transition);
           border-radius: 2px;
         }
         .nav-link:hover {
-          color: #388242;
+          color: #556b52;
         }
         .nav-link:hover::after {
           width: 100%;
@@ -544,8 +546,8 @@ export default function Navbar() {
           width: 320px;
           background: #ffffff;
           border-radius: var(--radius-lg);
-          border: 1px solid rgba(0, 0, 0, 0.08);
-          box-shadow: 0 20px 45px -10px rgba(13, 40, 24, 0.18);
+          border: 1px solid rgba(216, 178, 141, 0.3);
+          box-shadow: 0 20px 45px -10px rgba(35, 45, 34, 0.18);
           padding: 12px;
           display: flex;
           flex-direction: column;
@@ -577,7 +579,7 @@ export default function Navbar() {
           transition: var(--transition);
         }
         .dropdown-item:hover {
-          background: #f0f7f3;
+          background: #f4f7f3;
         }
         .dropdown-icon-box {
           width: 32px;
@@ -589,26 +591,26 @@ export default function Navbar() {
           flex-shrink: 0;
           margin-top: 2px;
         }
-        .dropdown-icon-box.green { background: #e8f5ee; color: #2d6a4f; }
-        .dropdown-icon-box.sage { background: #d8f3dc; color: #1b4332; }
-        .dropdown-icon-box.gold { background: #fef7e6; color: #b38b34; }
-        .dropdown-icon-box.dark { background: #f0f3f1; color: #12181b; }
+        .dropdown-icon-box.green { background: #e5ece4; color: #425240; }
+        .dropdown-icon-box.sage { background: #d8b28d22; color: #9e7550; }
+        .dropdown-icon-box.gold { background: #fdfaf6; color: #c99d75; }
+        .dropdown-icon-box.dark { background: #f4f7f3; color: #232d22; }
 
         .dropdown-item strong {
           display: block;
           font-size: 0.9rem;
-          color: #0d2818;
+          color: #232d22;
           line-height: 1.3;
         }
         .dropdown-item p {
           font-size: 0.78rem;
-          color: #58685e;
+          color: #5d675d;
           margin: 2px 0 0 0;
           line-height: 1.35;
         }
 
         .dropdown-footer {
-          border-top: 1px solid #edf2ee;
+          border-top: 1px solid #ebefeb;
           padding-top: 10px;
           margin-top: 4px;
           text-align: center;
@@ -616,11 +618,11 @@ export default function Navbar() {
         .dropdown-footer a {
           font-size: 0.82rem;
           font-weight: 700;
-          color: #388242;
+          color: #556b52;
           transition: var(--transition);
         }
         .dropdown-footer a:hover {
-          color: #1b4332;
+          color: #9e7550;
           text-decoration: underline;
         }
 
@@ -639,24 +641,24 @@ export default function Navbar() {
           border-radius: 9999px;
           font-size: 0.96rem;
           font-weight: 700;
-          background: linear-gradient(135deg, #1b4332 0%, #2d6a4f 100%);
+          background: linear-gradient(135deg, #425240 0%, #232d22 100%);
           color: #ffffff;
-          box-shadow: 0 4px 16px rgba(27, 67, 50, 0.28);
+          box-shadow: 0 4px 16px rgba(35, 45, 34, 0.35);
           transition: var(--transition);
           white-space: nowrap;
-          border: 1px solid rgba(255, 255, 255, 0.2);
+          border: 1px solid rgba(216, 178, 141, 0.35);
         }
         .btn-book-header:hover {
-          background: linear-gradient(135deg, #2d6a4f 0%, #40916c 100%);
+          background: linear-gradient(135deg, #c99d75 0%, #b58963 100%);
           transform: translateY(-2px);
-          box-shadow: 0 8px 24px rgba(27, 67, 50, 0.4);
+          box-shadow: 0 8px 24px rgba(181, 137, 99, 0.45);
         }
         .ext-icon {
           opacity: 0.75;
         }
         .mobile-toggle-btn {
           display: none;
-          color: #0d2818;
+          color: #232d22;
           padding: 6px;
         }
 

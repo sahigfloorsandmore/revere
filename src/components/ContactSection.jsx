@@ -293,7 +293,7 @@ export default function ContactSection() {
 
       <style>{`
         .contact-section {
-          background: #f8faf9;
+          background: #fdfaf6;
         }
 
         .contact-layout {
@@ -311,10 +311,10 @@ export default function ContactSection() {
 
         .fast-booking-box {
           padding: 28px;
-          background: linear-gradient(135deg, #1b4332 0%, #2d6a4f 100%);
+          background: linear-gradient(135deg, #182017 0%, #232d22 100%);
           color: #ffffff;
           border-radius: var(--radius-xl);
-          border: 1px solid rgba(255, 255, 255, 0.2);
+          border: 1px solid rgba(216, 178, 141, 0.3);
         }
 
         .fast-box-header {
@@ -327,6 +327,7 @@ export default function ContactSection() {
         .fast-icon {
           flex-shrink: 0;
           margin-top: 2px;
+          color: #d8b28d;
         }
 
         .fast-box-header h4 {
@@ -337,7 +338,7 @@ export default function ContactSection() {
 
         .fast-box-header p {
           font-size: 0.88rem;
-          color: var(--primary-100);
+          color: #cbdbca;
           line-height: 1.5;
           margin: 0;
         }
@@ -358,7 +359,7 @@ export default function ContactSection() {
           align-items: center;
           gap: 16px;
           background: #ffffff;
-          border: 1px solid var(--neutral-300);
+          border: 1px solid #cbdbca;
           border-radius: var(--radius-lg);
         }
 
@@ -366,11 +367,12 @@ export default function ContactSection() {
           width: 44px;
           height: 44px;
           border-radius: 12px;
-          background: var(--primary-100);
+          background: #e5ece4;
           display: flex;
           align-items: center;
           justify-content: center;
           flex-shrink: 0;
+          color: #425240;
         }
 
         .card-info {

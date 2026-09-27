@@ -350,9 +350,9 @@ export default function GoogleReviews() {
       <style>{`
         .reviews-section {
           padding: 60px 0 90px 0;
-          background: #FAF9F6;
-          border-top: 1px solid #ebf0ec;
-          border-bottom: 1px solid #ebf0ec;
+          background: #fdfaf6;
+          border-top: 1px solid #e5ece4;
+          border-bottom: 1px solid #e5ece4;
         }
 
         .section-title-wrapper {
@@ -362,13 +362,13 @@ export default function GoogleReviews() {
         .section-title {
           font-size: clamp(2rem, 3.5vw, 2.6rem);
           font-weight: 800;
-          color: #0d2818;
+          color: #182017;
           margin: 12px 0;
         }
 
         .section-subtitle {
           font-size: 1.05rem;
-          color: #55665c;
+          color: #556b52;
           max-width: 650px;
           margin: 0 auto;
         }
@@ -377,14 +377,14 @@ export default function GoogleReviews() {
         .reviews-header-card {
           padding: 28px 36px;
           background: #ffffff;
-          border: 1.5px solid rgba(45, 106, 79, 0.15);
+          border: 1.5px solid rgba(85, 107, 82, 0.2);
           border-radius: var(--radius-xl);
           display: flex;
           justify-content: space-between;
           align-items: center;
           gap: 28px;
           margin-bottom: 30px;
-          box-shadow: 0 12px 36px -10px rgba(13, 40, 24, 0.08);
+          box-shadow: 0 12px 36px -10px rgba(24, 32, 23, 0.08);
           flex-wrap: wrap;
         }
 
@@ -399,10 +399,10 @@ export default function GoogleReviews() {
           display: flex;
           align-items: center;
           gap: 12px;
-          background: #f4f8f5;
+          background: #f4f7f3;
           padding: 8px 16px;
           border-radius: 9999px;
-          border: 1px solid #d8e6dc;
+          border: 1px solid #cbdbca;
         }
 
         .badge-text-group {
@@ -413,13 +413,13 @@ export default function GoogleReviews() {
         .badge-source {
           font-size: 0.8rem;
           font-weight: 700;
-          color: #0d2818;
+          color: #182017;
           line-height: 1.2;
         }
 
         .badge-status {
           font-size: 0.72rem;
-          color: #2d6a4f;
+          color: #425240;
           font-weight: 600;
         }
 
@@ -432,7 +432,7 @@ export default function GoogleReviews() {
         .score-number {
           font-size: 2.6rem;
           font-weight: 800;
-          color: #0d2818;
+          color: #182017;
           line-height: 1;
         }
 
@@ -449,7 +449,7 @@ export default function GoogleReviews() {
 
         .reviews-count {
           font-size: 0.85rem;
-          color: #4a5c51;
+          color: #556b52;
         }
 
         .google-metrics-col {
@@ -463,12 +463,12 @@ export default function GoogleReviews() {
           display: inline-flex;
           align-items: center;
           gap: 6px;
-          background: #f8faf9;
-          border: 1px solid #e1ebe4;
+          background: #f8faf7;
+          border: 1px solid #cbdbca;
           padding: 6px 12px;
           border-radius: 8px;
           font-size: 0.8rem;
-          color: #2b3b32;
+          color: #232d22;
         }
 
         .google-action-col {
@@ -481,8 +481,8 @@ export default function GoogleReviews() {
           font-size: 0.9rem;
           font-weight: 700;
           white-space: nowrap;
-          color: #0d2818;
-          border-color: #388242;
+          color: #182017;
+          border-color: #88a183;
           background: #ffffff;
           display: inline-flex;
           align-items: center;
@@ -492,15 +492,15 @@ export default function GoogleReviews() {
         }
 
         .write-review-btn:hover {
-          background: #0d2818;
-          color: #ffffff;
-          border-color: #0d2818;
+          background: #232d22;
+          color: #f8efe4;
+          border-color: #232d22;
           transform: translateY(-2px);
-          box-shadow: 0 6px 16px rgba(13, 40, 24, 0.15);
+          box-shadow: 0 6px 16px rgba(24, 32, 23, 0.15);
         }
 
         .star-icon-gold {
-          color: #f4b400;
+          color: #d8b28d;
         }
 
         /* Filter Bar */
@@ -515,26 +515,26 @@ export default function GoogleReviews() {
         .filter-btn {
           padding: 9px 18px;
           border-radius: 9999px;
-          border: 1px solid #d9e4dc;
+          border: 1px solid #cbdbca;
           background: #ffffff;
           font-size: 0.84rem;
           font-weight: 600;
-          color: #3a4d41;
+          color: #313d30;
           cursor: pointer;
           transition: var(--transition);
         }
 
         .filter-btn:hover {
-          border-color: #388242;
-          color: #0d2818;
-          background: #f4f9f6;
+          border-color: #88a183;
+          color: #182017;
+          background: #f4f7f3;
         }
 
         .filter-btn.active {
-          background: #0d2818;
-          color: #ffffff;
-          border-color: #0d2818;
-          box-shadow: 0 4px 12px rgba(13, 40, 24, 0.15);
+          background: #232d22;
+          color: #f8efe4;
+          border-color: #232d22;
+          box-shadow: 0 4px 12px rgba(24, 32, 23, 0.15);
         }
 
         /* Carousel Container */
@@ -567,8 +567,8 @@ export default function GoogleReviews() {
           padding: 36px 42px;
           background: #ffffff;
           border-radius: var(--radius-xl);
-          border: 1px solid rgba(45, 106, 79, 0.12);
-          box-shadow: 0 14px 40px -12px rgba(13, 40, 24, 0.1);
+          border: 1px solid rgba(85, 107, 82, 0.15);
+          box-shadow: 0 14px 40px -12px rgba(24, 32, 23, 0.08);
           display: flex;
           flex-direction: column;
           position: relative;
@@ -594,8 +594,8 @@ export default function GoogleReviews() {
           gap: 6px;
           font-size: 0.78rem;
           font-weight: 700;
-          color: #2d6a4f;
-          background: #e8f5ee;
+          color: #425240;
+          background: #e5ece4;
           padding: 4px 10px;
           border-radius: 6px;
         }
@@ -610,27 +610,27 @@ export default function GoogleReviews() {
           gap: 10px;
           margin-bottom: 16px;
           padding: 12px 16px;
-          background: #f8faf8;
-          border-left: 3px solid #388242;
+          background: #f8faf7;
+          border-left: 3px solid #88a183;
           border-radius: 0 8px 8px 0;
         }
 
         .quote-icon-decor {
-          color: #388242;
+          color: #6b8267;
           flex-shrink: 0;
           margin-top: 2px;
         }
 
         .review-highlight-text {
           font-size: 1.08rem;
-          color: #0d2818;
+          color: #182017;
           line-height: 1.4;
           font-weight: 700;
         }
 
         .review-comment {
           font-size: 1.02rem;
-          color: #2b3b32;
+          color: #232d22;
           line-height: 1.7;
           margin-bottom: 26px;
           font-style: italic;
@@ -641,22 +641,22 @@ export default function GoogleReviews() {
           align-items: center;
           gap: 16px;
           padding-top: 18px;
-          border-top: 1px solid #edf2ee;
+          border-top: 1px solid #e5ece4;
         }
 
         .author-avatar {
           width: 48px;
           height: 48px;
           border-radius: 50%;
-          background: linear-gradient(135deg, #1b4332 0%, #388242 100%);
-          color: #ffffff;
+          background: linear-gradient(135deg, #313d30 0%, #556b52 100%);
+          color: #f8efe4;
           font-weight: 800;
           display: flex;
           align-items: center;
           justify-content: center;
           font-size: 1.15rem;
           flex-shrink: 0;
-          box-shadow: 0 4px 12px rgba(45, 106, 79, 0.25);
+          box-shadow: 0 4px 12px rgba(49, 61, 48, 0.25);
         }
 
         .author-info {
@@ -667,14 +667,14 @@ export default function GoogleReviews() {
 
         .author-name {
           font-size: 1rem;
-          color: #0d2818;
+          color: #182017;
           font-weight: 700;
         }
 
         .author-meta {
           font-size: 0.82rem;
           font-weight: 600;
-          color: #2d6a4f;
+          color: #556b52;
         }
 
         .author-submeta {
@@ -682,11 +682,11 @@ export default function GoogleReviews() {
           align-items: center;
           gap: 6px;
           font-size: 0.76rem;
-          color: #7b8e83;
+          color: #88a183;
         }
 
         .author-dot {
-          color: #cbd5ce;
+          color: #cbdbca;
         }
 
         /* Carousel Navigation Buttons */
@@ -698,21 +698,21 @@ export default function GoogleReviews() {
           height: 44px;
           border-radius: 50%;
           background: #ffffff;
-          border: 1.5px solid #d2dfd6;
-          color: #0d2818;
+          border: 1.5px solid #cbdbca;
+          color: #182017;
           display: flex;
           align-items: center;
           justify-content: center;
           cursor: pointer;
           z-index: 10;
-          box-shadow: 0 6px 18px rgba(13, 40, 24, 0.12);
+          box-shadow: 0 6px 18px rgba(24, 32, 23, 0.1);
           transition: var(--transition);
         }
 
         .carousel-nav-btn:hover {
-          background: #0d2818;
-          color: #ffffff;
-          border-color: #0d2818;
+          background: #232d22;
+          color: #f8efe4;
+          border-color: #232d22;
           transform: translateY(-50%) scale(1.08);
         }
 
@@ -742,7 +742,7 @@ export default function GoogleReviews() {
           width: 10px;
           height: 10px;
           border-radius: 50%;
-          background: #c8d8cd;
+          background: #cbdbca;
           border: none;
           cursor: pointer;
           transition: var(--transition);
@@ -750,23 +750,23 @@ export default function GoogleReviews() {
         }
 
         .carousel-dot.active {
-          background: #2d6a4f;
+          background: #425240;
           width: 28px;
           border-radius: 5px;
         }
 
         .carousel-status {
           font-size: 0.8rem;
-          color: #6a7c72;
+          color: #556b52;
           display: flex;
           align-items: center;
           gap: 8px;
         }
 
         .paused-badge {
-          background: #f0f4f1;
-          border: 1px solid #d4dfd7;
-          color: #55665c;
+          background: #f4f7f3;
+          border: 1px solid #cbdbca;
+          color: #425240;
           padding: 2px 6px;
           border-radius: 4px;
           font-size: 0.7rem;

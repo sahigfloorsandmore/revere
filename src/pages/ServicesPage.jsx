@@ -120,13 +120,13 @@ export default function ServicesPage() {
 
       <style>{`
         .services-page {
-          background: #FAF9F6;
+          background: #fdfaf6;
           min-height: 100vh;
         }
 
         /* Services Hero */
         .services-hero {
-          background: linear-gradient(135deg, #0d2818 0%, #1b4332 50%, #2d6a4f 100%);
+          background: linear-gradient(135deg, #182017 0%, #232d22 50%, #313d30 100%);
           color: #ffffff;
           margin-top: -136px;
           padding: 160px 0 64px 0;
@@ -138,7 +138,7 @@ export default function ServicesPage() {
           content: '';
           position: absolute;
           inset: 0;
-          background: radial-gradient(circle at 80% 20%, rgba(116, 198, 157, 0.18) 0%, transparent 60%);
+          background: radial-gradient(circle at 80% 20%, rgba(136, 161, 131, 0.18) 0%, transparent 60%);
           pointer-events: none;
         }
 
@@ -151,18 +151,18 @@ export default function ServicesPage() {
         }
 
         .breadcrumb-link {
-          color: #b7e4c7;
+          color: #cbdbca;
           transition: var(--transition);
         }
         .breadcrumb-link:hover {
-          color: #ffffff;
+          color: #f8efe4;
           text-decoration: underline;
         }
         .breadcrumb-sep {
           color: rgba(255, 255, 255, 0.4);
         }
         .breadcrumb-current {
-          color: #ffffff;
+          color: #f8efe4;
           font-weight: 600;
         }
 
@@ -176,10 +176,10 @@ export default function ServicesPage() {
           display: inline-flex;
           align-items: center;
           gap: 7px;
-          background: rgba(255, 255, 255, 0.12);
+          background: rgba(255, 255, 255, 0.1);
           backdrop-filter: blur(8px);
-          border: 1px solid rgba(255, 255, 255, 0.2);
-          color: #d8f3dc;
+          border: 1px solid rgba(216, 178, 141, 0.3);
+          color: #f8efe4;
           font-size: 0.82rem;
           font-weight: 700;
           text-transform: uppercase;
@@ -200,12 +200,12 @@ export default function ServicesPage() {
 
         .services-hero-lead {
           font-size: 1.12rem;
-          color: #d8f3dc;
+          color: #cbdbca;
           line-height: 1.65;
           margin-bottom: 28px;
         }
         .services-hero-lead strong {
-          color: #ffffff;
+          color: #f8efe4;
         }
 
         .services-feature-pills {
@@ -219,21 +219,21 @@ export default function ServicesPage() {
           display: inline-flex;
           align-items: center;
           gap: 8px;
-          background: rgba(13, 40, 24, 0.55);
-          border: 1px solid rgba(116, 198, 157, 0.3);
+          background: rgba(24, 32, 23, 0.65);
+          border: 1px solid rgba(136, 161, 131, 0.35);
           padding: 8px 16px;
           border-radius: var(--radius-full);
           font-size: 0.86rem;
           font-weight: 600;
-          color: #ffffff;
+          color: #f8efe4;
           backdrop-filter: blur(6px);
         }
 
         .text-gold {
-          color: #e9c46a;
+          color: #d8b28d;
         }
         .text-green {
-          color: #74c69d;
+          color: #88a183;
         }
 
         /* Billing Assurance Strip */
@@ -244,8 +244,8 @@ export default function ServicesPage() {
 
         .assurance-card {
           padding: 32px 40px;
-          background: #f7faf8;
-          border: 1.5px solid #dce8e0;
+          background: #f4f7f3;
+          border: 1.5px solid #cbdbca;
           border-radius: var(--radius-xl);
           display: flex;
           justify-content: space-between;
@@ -263,7 +263,7 @@ export default function ServicesPage() {
           width: 58px;
           height: 58px;
           border-radius: 16px;
-          background: #e8f5ee;
+          background: #e5ece4;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -272,14 +272,14 @@ export default function ServicesPage() {
 
         .assurance-left h3 {
           font-size: 1.28rem;
-          color: #0d2818;
+          color: #182017;
           font-weight: 800;
           margin-bottom: 6px;
         }
 
         .assurance-left p {
           font-size: 0.94rem;
-          color: #4a5b51;
+          color: #425240;
           margin: 0;
           max-width: 680px;
           line-height: 1.5;
@@ -292,16 +292,16 @@ export default function ServicesPage() {
         /* CTA Banner */
         .services-cta-section {
           padding: 30px 0 90px 0;
-          background: #FAF9F6;
+          background: #fdfaf6;
         }
 
         .services-cta-card {
-          background: linear-gradient(135deg, #0d2818 0%, #1b4332 100%);
+          background: linear-gradient(135deg, #182017 0%, #232d22 100%);
           border-radius: var(--radius-2xl);
           padding: 60px 40px;
           text-align: center;
           color: #ffffff;
-          box-shadow: 0 24px 50px -15px rgba(13, 40, 24, 0.25);
+          box-shadow: 0 24px 50px -15px rgba(24, 32, 23, 0.25);
           position: relative;
           overflow: hidden;
         }
@@ -310,7 +310,7 @@ export default function ServicesPage() {
           content: '';
           position: absolute;
           inset: 0;
-          background: radial-gradient(circle at 50% 120%, rgba(233, 196, 106, 0.22) 0%, transparent 60%);
+          background: radial-gradient(circle at 50% 120%, rgba(216, 178, 141, 0.2) 0%, transparent 60%);
           pointer-events: none;
         }
 
@@ -320,7 +320,7 @@ export default function ServicesPage() {
           font-weight: 700;
           text-transform: uppercase;
           letter-spacing: 0.12em;
-          color: #e9c46a;
+          color: #d8b28d;
           margin-bottom: 12px;
         }
 
@@ -333,7 +333,7 @@ export default function ServicesPage() {
 
         .services-cta-card p {
           font-size: 1.05rem;
-          color: #d8f3dc;
+          color: #cbdbca;
           max-width: 640px;
           margin: 0 auto 32px auto;
           line-height: 1.6;
@@ -357,14 +357,14 @@ export default function ServicesPage() {
           padding: 15px 28px;
           font-size: 0.98rem;
           font-weight: 600;
-          border: 1.5px solid rgba(255, 255, 255, 0.4);
-          color: #ffffff;
+          border: 1.5px solid rgba(216, 178, 141, 0.4);
+          color: #f8efe4;
           border-radius: var(--radius-full);
           transition: var(--transition);
         }
         .cta-btn-sec:hover {
-          background: rgba(255, 255, 255, 0.15);
-          border-color: #ffffff;
+          background: rgba(216, 178, 141, 0.15);
+          border-color: #d8b28d;
           color: #ffffff;
         }
 
