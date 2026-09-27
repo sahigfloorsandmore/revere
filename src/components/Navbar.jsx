@@ -16,7 +16,8 @@ import {
   Heart,
   Zap,
   Users,
-  Briefcase
+  Briefcase,
+  FileText
 } from 'lucide-react';
 
 export default function Navbar() {
@@ -171,7 +172,7 @@ export default function Navbar() {
               )}
             </div>
 
-            {/* About Us Dropdown */}
+            {/* About Us Dropdown with Story, Reviews, Policies & Contact */}
             <div 
               className="nav-dropdown-wrapper"
               onMouseEnter={handleAboutEnter}
@@ -186,8 +187,8 @@ export default function Navbar() {
                   <Link to="/#about" className="dropdown-item" onClick={() => setAboutDropdownOpen(false)}>
                     <div className="dropdown-icon-box green"><Users size={16} /></div>
                     <div>
-                      <strong>Our Clinic Story</strong>
-                      <p>Newton Surrey's dedicated recovery sanctuary</p>
+                      <strong>Our Story & Team</strong>
+                      <p>Newton Surrey's dedicated recovery clinic</p>
                     </div>
                   </Link>
                   <Link to="/#reviews" className="dropdown-item" onClick={() => setAboutDropdownOpen(false)}>
@@ -197,11 +198,18 @@ export default function Navbar() {
                       <p>4.8 ★ Rating • 672+ Patient Reviews</p>
                     </div>
                   </Link>
-                  <Link to="/#about" className="dropdown-item" onClick={() => setAboutDropdownOpen(false)}>
-                    <div className="dropdown-icon-box sage"><Briefcase size={16} /></div>
+                  <Link to="/#policies" className="dropdown-item" onClick={() => setAboutDropdownOpen(false)}>
+                    <div className="dropdown-icon-box sage"><FileText size={16} /></div>
                     <div>
-                      <strong>Our Team & Philosophy</strong>
-                      <p>Compassionate care & clinical excellence</p>
+                      <strong>Clinic Policies</strong>
+                      <p>24-hour cancellation & terms of care</p>
+                    </div>
+                  </Link>
+                  <Link to="/#contact" className="dropdown-item" onClick={() => setAboutDropdownOpen(false)}>
+                    <div className="dropdown-icon-box dark"><Mail size={16} /></div>
+                    <div>
+                      <strong>Contact Us</strong>
+                      <p>Send direct inquiry or call reception</p>
                     </div>
                   </Link>
                 </div>
@@ -209,10 +217,8 @@ export default function Navbar() {
             </div>
 
             <Link to="/#insurance" className="nav-link">Direct Billing & ICBC</Link>
-            <Link to="/#policies" className="nav-link">Policies</Link>
             <Link to="/#location" className="nav-link">Parking & Location</Link>
             <Link to="/#faqs" className="nav-link">FAQs</Link>
-            <Link to="/#contact" className="nav-link">Contact</Link>
           </nav>
 
           {/* Right Action: Single Big Book Appointment Button */}
@@ -269,14 +275,16 @@ export default function Navbar() {
                 <Link to="/services?cat=specialized" onClick={() => setMobileMenuOpen(false)}>• Specialized Modalities (IMS / Shockwave)</Link>
                 <Link to="/services" onClick={() => setMobileMenuOpen(false)}>• Explore All Services & Durations →</Link>
                 
+                <div className="mobile-nav-group-title" style={{ marginTop: '12px' }}>About Us & Support</div>
+                <Link to="/#about" onClick={() => setMobileMenuOpen(false)}>• Our Story & Team</Link>
+                <Link to="/#reviews" onClick={() => setMobileMenuOpen(false)}>• Google Reviews (4.8 ★ • 672+ Reviews)</Link>
+                <Link to="/#policies" onClick={() => setMobileMenuOpen(false)}>• Clinic Policies (24h Cancellation)</Link>
+                <Link to="/#contact" onClick={() => setMobileMenuOpen(false)}>• Contact Us</Link>
+
                 <div className="mobile-nav-group-title" style={{ marginTop: '12px' }}>Clinic Information</div>
-                <Link to="/#about" onClick={() => setMobileMenuOpen(false)}>About Revere & Our Team</Link>
-                <Link to="/#reviews" onClick={() => setMobileMenuOpen(false)}>Google Reviews (4.8 ★ • 672+ Reviews)</Link>
                 <Link to="/#insurance" onClick={() => setMobileMenuOpen(false)}>Direct Billing & ICBC</Link>
-                <Link to="/#policies" onClick={() => setMobileMenuOpen(false)}>Clinic Policies (24h Cancellation)</Link>
                 <Link to="/#location" onClick={() => setMobileMenuOpen(false)}>Free Parking (Stalls 36-38)</Link>
                 <Link to="/#faqs" onClick={() => setMobileMenuOpen(false)}>FAQs</Link>
-                <Link to="/#contact" onClick={() => setMobileMenuOpen(false)}>Contact Us</Link>
               </nav>
 
               <div className="drawer-footer">
@@ -556,7 +564,7 @@ export default function Navbar() {
           animation: dropFade 0.2s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .about-dropdown {
-          width: 290px;
+          width: 300px;
         }
 
         @keyframes dropFade {
