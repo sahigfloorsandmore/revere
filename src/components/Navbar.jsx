@@ -172,7 +172,7 @@ export default function Navbar() {
               )}
             </div>
 
-            {/* About Us Dropdown with Story, Reviews, Policies & Contact */}
+            {/* About Us Dropdown with Story, Reviews, Parking, Policies & Contact */}
             <div 
               className="nav-dropdown-wrapper"
               onMouseEnter={handleAboutEnter}
@@ -198,6 +198,13 @@ export default function Navbar() {
                       <p>4.8 ★ Rating • 672+ Patient Reviews</p>
                     </div>
                   </Link>
+                  <Link to="/#location" className="dropdown-item" onClick={() => setAboutDropdownOpen(false)}>
+                    <div className="dropdown-icon-box dark"><MapPin size={16} /></div>
+                    <div>
+                      <strong>Parking & Location</strong>
+                      <p>Free stalls #36–38 & driving directions</p>
+                    </div>
+                  </Link>
                   <Link to="/#policies" className="dropdown-item" onClick={() => setAboutDropdownOpen(false)}>
                     <div className="dropdown-icon-box sage"><FileText size={16} /></div>
                     <div>
@@ -206,7 +213,7 @@ export default function Navbar() {
                     </div>
                   </Link>
                   <Link to="/#contact" className="dropdown-item" onClick={() => setAboutDropdownOpen(false)}>
-                    <div className="dropdown-icon-box dark"><Mail size={16} /></div>
+                    <div className="dropdown-icon-box green"><Mail size={16} /></div>
                     <div>
                       <strong>Contact Us</strong>
                       <p>Send direct inquiry or call reception</p>
@@ -217,7 +224,6 @@ export default function Navbar() {
             </div>
 
             <Link to="/#insurance" className="nav-link">Direct Billing & ICBC</Link>
-            <Link to="/#location" className="nav-link">Parking & Location</Link>
             <Link to="/#faqs" className="nav-link">FAQs</Link>
           </nav>
 
@@ -275,15 +281,15 @@ export default function Navbar() {
                 <Link to="/services?cat=specialized" onClick={() => setMobileMenuOpen(false)}>• Specialized Modalities (IMS / Shockwave)</Link>
                 <Link to="/services" onClick={() => setMobileMenuOpen(false)}>• Explore All Services & Durations →</Link>
                 
-                <div className="mobile-nav-group-title" style={{ marginTop: '12px' }}>About Us & Support</div>
+                <div className="mobile-nav-group-title" style={{ marginTop: '12px' }}>About Us & Clinic Info</div>
                 <Link to="/#about" onClick={() => setMobileMenuOpen(false)}>• Our Story & Team</Link>
                 <Link to="/#reviews" onClick={() => setMobileMenuOpen(false)}>• Google Reviews (4.8 ★ • 672+ Reviews)</Link>
+                <Link to="/#location" onClick={() => setMobileMenuOpen(false)}>• Free Parking & Location (Stalls 36-38)</Link>
                 <Link to="/#policies" onClick={() => setMobileMenuOpen(false)}>• Clinic Policies (24h Cancellation)</Link>
                 <Link to="/#contact" onClick={() => setMobileMenuOpen(false)}>• Contact Us</Link>
 
-                <div className="mobile-nav-group-title" style={{ marginTop: '12px' }}>Clinic Information</div>
+                <div className="mobile-nav-group-title" style={{ marginTop: '12px' }}>Insurance & Questions</div>
                 <Link to="/#insurance" onClick={() => setMobileMenuOpen(false)}>Direct Billing & ICBC</Link>
-                <Link to="/#location" onClick={() => setMobileMenuOpen(false)}>Free Parking (Stalls 36-38)</Link>
                 <Link to="/#faqs" onClick={() => setMobileMenuOpen(false)}>FAQs</Link>
               </nav>
 
