@@ -4,7 +4,6 @@ import { Shield, Check, Info, LayoutGrid, ArrowRightLeft, ExternalLink } from 'l
 // Subcomponent to gracefully render Logo.dev logo with fallback
 function InsurerLogo({ domain, name, token, size = 32 }) {
   const [imgError, setImgError] = useState(false);
-  const [imgLoaded, setImgLoaded] = useState(false);
 
   // If no token or image failed to load, show an elegant initial monogram
   if (!token || imgError) {
@@ -20,7 +19,7 @@ function InsurerLogo({ domain, name, token, size = 32 }) {
       <div 
         className="insurer-logo-fallback" 
         style={{ width: `${size}px`, height: `${size}px` }}
-        title={`${name} (Domain: ${domain})`}
+        title={`${name} (${domain})`}
       >
         <span>{initials || name.slice(0, 2).toUpperCase()}</span>
       </div>
@@ -38,10 +37,13 @@ function InsurerLogo({ domain, name, token, size = 32 }) {
       <img
         src={logoUrl}
         alt={`${name} Logo`}
-        loading="lazy"
-        className={`insurer-logo-img ${imgLoaded ? 'loaded' : 'loading'}`}
-        onLoad={() => setImgLoaded(true)}
-        onError={() => setImgError(true)}
+        crossOrigin="anonymous"
+        referrerPolicy="no-referrer"
+        className="insurer-logo-img"
+        onError={(e) => {
+          console.warn(`[Logo.dev] Failed to load logo for ${domain}`);
+          setImgError(true);
+        }}
       />
     </div>
   );
@@ -50,8 +52,8 @@ function InsurerLogo({ domain, name, token, size = 32 }) {
 export default function InsurancePartners() {
   const [viewMode, setViewMode] = useState('marquee'); // 'marquee' | 'grid'
   
-  // Read Logo.dev token from environment (configured in .env)
-  const LOGODEV_TOKEN = import.meta.env.VITE_LOGODEV_PUBLIC_KEY || '';
+  // Read Logo.dev token from environment, with default fallback to user's publishable key
+  const LOGODEV_TOKEN = import.meta.env.VITE_LOGODEV_PUBLIC_KEY || 'pk_Lu6RKwpDTXCSx1fR_T2f1A';
 
   const insurers = [
     { 
@@ -408,15 +410,7 @@ export default function InsurancePartners() {
           width: 100%;
           height: 100%;
           object-fit: contain;
-          transition: opacity 0.3s ease;
-        }
-
-        .insurer-logo-img.loading {
-          opacity: 0;
-        }
-
-        .insurer-logo-img.loaded {
-          opacity: 1;
+          display: block;
         }
 
         .insurer-logo-fallback {
