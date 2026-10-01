@@ -59,12 +59,14 @@ export default function Navbar() {
 
   const isServicesPage = location.pathname === '/services';
   const isPractitionersPage = location.pathname.startsWith('/practitioners');
+  const isHomePage = location.pathname === '/';
+  const isTransparent = isHomePage && !isScrolled;
 
   return (
     <>
       <div className="sticky-navbar-wrapper">
-        {/* Enhanced Top Information Bar */}
-        <div className={`top-banner ${isScrolled ? 'top-banner-scrolled' : 'top-banner-clear'}`}>
+        {/* Enhanced Top Information Bar - Solid for guaranteed readability on all pages */}
+        <div className="top-banner">
           <div className="nav-wrapper banner-content">
             <div className="banner-left">
               <Link to="/#reviews" className="banner-google-rating" title="Read our 672+ Google Reviews">
@@ -108,7 +110,7 @@ export default function Navbar() {
         </div>
 
         {/* Main Clean Navigation Bar */}
-        <header className={`navbar-header ${isScrolled ? 'navbar-scrolled' : 'navbar-clear'}`}>
+        <header className={`navbar-header ${isTransparent ? 'navbar-transparent' : 'navbar-solid'}`}>
           <div className="nav-wrapper nav-container">
             {/* Official Brand Logo */}
             <Link to="/" className="brand-logo" aria-label="Revere Massage and Wellness Centre">
@@ -349,16 +351,10 @@ export default function Navbar() {
 
         .top-banner {
           font-size: 0.82rem;
-          padding: 9px 0;
-          transition: all 0.35s ease;
-        }
-        .top-banner-clear {
-          background: transparent;
-          border-bottom: none;
-        }
-        .top-banner-scrolled {
-          background: #1f2a1e;
+          padding: 8px 0;
+          background: #181c16;
           border-bottom: 1px solid rgba(216, 178, 141, 0.25);
+          color: #ffffff;
         }
 
         .banner-content {
@@ -450,41 +446,49 @@ export default function Navbar() {
           transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        /* Top State: Completely Clear */
-        .navbar-clear {
-          background: transparent;
-          backdrop-filter: none;
-          -webkit-backdrop-filter: none;
-          border-bottom: none;
+        /* Top State on HomePage (Over dark video hero) */
+        .navbar-transparent {
+          background: rgba(24, 28, 22, 0.55);
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
+          border-bottom: 1px solid rgba(216, 178, 141, 0.2);
           box-shadow: none;
         }
-        .navbar-clear .nav-link {
+        .navbar-transparent .nav-link {
           color: #ffffff;
-          text-shadow: 0 1px 4px rgba(0, 0, 0, 0.45);
+          text-shadow: 0 1px 4px rgba(0, 0, 0, 0.65);
         }
-        .navbar-clear .nav-link:hover {
+        .navbar-transparent .nav-link:hover {
           color: #d8b28d;
         }
-        .navbar-clear .mobile-toggle-btn {
+        .navbar-transparent .mobile-toggle-btn {
           color: #ffffff;
         }
 
-        /* Scrolled State: Full Background with Light Oak Shadow & Clean Dark Olive Text */
-        .navbar-scrolled {
-          background: rgba(253, 250, 246, 0.96);
+        /* Solid State (All inner pages + when scrolled on homepage): Luxury porcelain with deep olive text */
+        .navbar-solid {
+          background: rgba(253, 250, 246, 0.98);
           backdrop-filter: blur(20px);
           -webkit-backdrop-filter: blur(20px);
-          box-shadow: 0 10px 30px -5px rgba(51, 50, 19, 0.12);
-          border-bottom: 1px solid rgba(216, 178, 141, 0.25);
+          box-shadow: 0 6px 24px -5px rgba(51, 50, 19, 0.12);
+          border-bottom: 1px solid rgba(216, 178, 141, 0.35);
         }
-        .navbar-scrolled .nav-link {
+        .navbar-solid .nav-link {
           color: var(--primary-900);
           text-shadow: none;
+          font-weight: 600;
         }
-        .navbar-scrolled .nav-link:hover {
+        .navbar-solid .nav-link:hover {
           color: var(--primary-600);
         }
-        .navbar-scrolled .mobile-toggle-btn {
+        .navbar-solid .nav-link.active-nav-link {
+          color: var(--primary-600);
+        }
+        .navbar-solid .nav-link.active-nav-link::after {
+          width: 100%;
+          background: var(--primary-600);
+        }
+        .navbar-solid .mobile-toggle-btn {
           color: var(--primary-900);
         }
         .nav-container {

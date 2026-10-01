@@ -302,7 +302,7 @@ export default function PractitionersPage() {
         .practitioners-hero {
           background: linear-gradient(180deg, var(--primary-900) 0%, var(--primary-950) 100%);
           color: #ffffff;
-          padding: 130px 0 60px 0;
+          padding: 56px 0 60px 0;
           position: relative;
           overflow: hidden;
         }

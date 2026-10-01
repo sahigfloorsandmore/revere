@@ -128,8 +128,7 @@ export default function ServicesPage() {
         .services-hero {
           background: linear-gradient(135deg, var(--primary-950) 0%, var(--primary-900) 50%, var(--primary-800) 100%);
           color: #ffffff;
-          margin-top: -136px;
-          padding: 160px 0 64px 0;
+          padding: 56px 0 64px 0;
           position: relative;
           overflow: hidden;
         }
