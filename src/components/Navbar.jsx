@@ -58,6 +58,7 @@ export default function Navbar() {
   };
 
   const isServicesPage = location.pathname === '/services';
+  const isPractitionersPage = location.pathname.startsWith('/practitioners');
 
   return (
     <>
@@ -172,6 +173,14 @@ export default function Navbar() {
               )}
             </div>
 
+            {/* Practitioners Direct Link */}
+            <Link 
+              to="/practitioners" 
+              className={`nav-link ${isPractitionersPage ? 'active-nav-link' : ''}`}
+            >
+              Practitioners
+            </Link>
+
             {/* About Us Dropdown with Story, Reviews, Parking, Policies & Contact */}
             <div 
               className="nav-dropdown-wrapper"
@@ -184,10 +193,17 @@ export default function Navbar() {
               </Link>
               {aboutDropdownOpen && (
                 <div className="dropdown-menu glass-card about-dropdown">
-                  <Link to="/#about" className="dropdown-item" onClick={() => setAboutDropdownOpen(false)}>
+                  <Link to="/practitioners" className="dropdown-item" onClick={() => setAboutDropdownOpen(false)}>
                     <div className="dropdown-icon-box green"><Users size={16} /></div>
                     <div>
-                      <strong>Our Story & Team</strong>
+                      <strong>Our Practitioners</strong>
+                      <p>Meet our 18 licensed therapists & bios</p>
+                    </div>
+                  </Link>
+                  <Link to="/#about" className="dropdown-item" onClick={() => setAboutDropdownOpen(false)}>
+                    <div className="dropdown-icon-box sage"><FileText size={16} /></div>
+                    <div>
+                      <strong>Our Story & Clinic</strong>
                       <p>Newton Surrey's dedicated recovery clinic</p>
                     </div>
                   </Link>
@@ -282,7 +298,8 @@ export default function Navbar() {
                 <Link to="/services" onClick={() => setMobileMenuOpen(false)}>• Explore All Services & Durations →</Link>
                 
                 <div className="mobile-nav-group-title" style={{ marginTop: '12px' }}>About Us & Clinic Info</div>
-                <Link to="/#about" onClick={() => setMobileMenuOpen(false)}>• Our Story & Team</Link>
+                <Link to="/practitioners" onClick={() => setMobileMenuOpen(false)}>• Meet Our Practitioners & Bios</Link>
+                <Link to="/#about" onClick={() => setMobileMenuOpen(false)}>• Our Story & Clinic</Link>
                 <Link to="/#reviews" onClick={() => setMobileMenuOpen(false)}>• Google Reviews (4.8 ★ • 672+ Reviews)</Link>
                 <Link to="/#location" onClick={() => setMobileMenuOpen(false)}>• Free Parking & Location (Stalls 36-38)</Link>
                 <Link to="/#policies" onClick={() => setMobileMenuOpen(false)}>• Clinic Policies (24h Cancellation)</Link>

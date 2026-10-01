@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { 
   ShieldCheck, 
   Award, 
@@ -121,18 +122,21 @@ export default function AboutUs() {
             </div>
 
             <div className="about-actions">
+              <Link 
+                to="/practitioners" 
+                className="btn btn-primary"
+              >
+                <Users size={18} />
+                <span>Meet Our Practitioners & Bios</span>
+              </Link>
               <a 
                 href={JANEAPP_URL} 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="btn btn-primary"
+                className="btn btn-outline"
               >
                 <Calendar size={18} />
-                <span>Meet Our Practitioners & Book Online</span>
-              </a>
-              <a href="#location" className="btn btn-outline">
-                <MapPin size={18} />
-                <span>Visit Our Clinic</span>
+                <span>Book on JaneApp</span>
               </a>
             </div>
           </div>

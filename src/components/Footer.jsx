@@ -93,6 +93,7 @@ export default function Footer() {
             <div className="footer-col">
               <h4 className="footer-col-title">Quick Navigation</h4>
               <ul className="footer-links">
+                <li><Link to="/practitioners">Our Practitioners & Bios</Link></li>
                 <li><Link to="/services">All Services & Durations</Link></li>
                 <li><Link to="/#about">About Our Clinic</Link></li>
                 <li><Link to="/#insurance">ICBC & Direct Billing</Link></li>
