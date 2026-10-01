@@ -184,11 +184,11 @@ export default function AboutUs() {
 
         .about-image-card {
           padding: 36px;
-          background: linear-gradient(135deg, #1c241b 0%, #313d30 100%);
+          background: linear-gradient(135deg, var(--primary-950) 0%, var(--primary-800) 100%);
           color: #ffffff;
           border-radius: var(--radius-xl);
           border: 1px solid rgba(216, 178, 141, 0.35);
-          box-shadow: 0 25px 50px -12px rgba(35, 45, 34, 0.35);
+          box-shadow: 0 25px 50px -12px rgba(51, 50, 19, 0.35);
         }
 
         .about-photo-grid {
@@ -284,8 +284,8 @@ export default function AboutUs() {
           width: 48px;
           height: 48px;
           border-radius: 12px;
-          background: #e5ece4;
-          color: #425240;
+          background: var(--primary-100);
+          color: var(--primary-700);
           display: flex;
           align-items: center;
           justify-content: center;
@@ -345,8 +345,8 @@ export default function AboutUs() {
           width: 22px;
           height: 22px;
           border-radius: 50%;
-          background: #e5ece4;
-          color: #425240;
+          background: var(--primary-100);
+          color: var(--primary-700);
           display: flex;
           align-items: center;
           justify-content: center;
@@ -385,7 +385,7 @@ export default function AboutUs() {
           justify-content: space-between;
           align-items: center;
           gap: 32px;
-          box-shadow: 0 10px 30px -10px rgba(35, 45, 34, 0.05);
+          box-shadow: 0 10px 30px -10px rgba(51, 50, 19, 0.05);
         }
 
         .careers-left {
@@ -412,13 +412,13 @@ export default function AboutUs() {
           font-weight: 700;
           text-transform: uppercase;
           letter-spacing: 0.1em;
-          color: #556b52;
+          color: var(--primary-600);
           margin-bottom: 6px;
         }
 
         .careers-title {
           font-size: 1.35rem;
-          color: #232d22;
+          color: var(--primary-900);
           font-weight: 800;
           margin-bottom: 8px;
         }

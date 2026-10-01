@@ -163,8 +163,8 @@ export default function Footer() {
 
       <style>{`
         .site-footer {
-          background: #182017;
-          color: #cbdbca;
+          background: var(--primary-950);
+          color: var(--primary-200);
           position: relative;
         }
 
@@ -176,7 +176,7 @@ export default function Footer() {
         .cta-box {
           padding: 48px;
           border-radius: var(--radius-xl);
-          background: linear-gradient(135deg, #232d22 0%, #313d30 100%);
+          background: linear-gradient(135deg, var(--primary-900) 0%, var(--primary-800) 100%);
           border: 1px solid rgba(216, 178, 141, 0.3);
           display: flex;
           justify-content: space-between;
@@ -202,7 +202,7 @@ export default function Footer() {
 
         .cta-sub {
           font-size: 0.96rem;
-          color: #cbdbca;
+          color: var(--primary-200);
           max-width: 580px;
         }
 
@@ -254,7 +254,7 @@ export default function Footer() {
 
         .footer-about {
           font-size: 0.88rem;
-          color: #a9bfa4;
+          color: var(--primary-300);
           line-height: 1.6;
           margin-bottom: 20px;
         }
@@ -277,7 +277,7 @@ export default function Footer() {
         }
 
         .footer-social-links a:hover {
-          background: #88a183;
+          background: var(--primary-600);
           transform: translateY(-2px);
         }
 
@@ -297,7 +297,7 @@ export default function Footer() {
 
         .footer-links a {
           font-size: 0.88rem;
-          color: #a9bfa4;
+          color: var(--primary-300);
           transition: var(--transition);
         }
 
@@ -317,7 +317,7 @@ export default function Footer() {
           align-items: flex-start;
           gap: 10px;
           font-size: 0.86rem;
-          color: #cbdbca;
+          color: var(--primary-200);
           line-height: 1.45;
         }
 
@@ -328,7 +328,7 @@ export default function Footer() {
         }
 
         .contact-line a {
-          color: #cbdbca;
+          color: var(--primary-200);
           transition: var(--transition);
         }
 
@@ -343,14 +343,14 @@ export default function Footer() {
           padding-top: 24px;
           border-top: 1px solid rgba(255, 255, 255, 0.1);
           font-size: 0.82rem;
-          color: #a9bfa4;
+          color: var(--primary-300);
         }
 
         .scroll-top-btn {
           display: flex;
           align-items: center;
           gap: 6px;
-          color: #a9bfa4;
+          color: var(--primary-300);
           font-size: 0.82rem;
           font-weight: 600;
           transition: var(--transition);

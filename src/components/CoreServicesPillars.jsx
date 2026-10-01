@@ -320,12 +320,12 @@ export default function CoreServicesPillars() {
         }
 
         .pill-green {
-          background: rgba(35, 45, 34, 0.88);
-          color: #e5ece4;
+          background: rgba(51, 50, 19, 0.9);
+          color: var(--primary-100);
           border: 1px solid rgba(216, 178, 141, 0.4);
         }
         .pill-sage {
-          background: rgba(66, 82, 64, 0.88);
+          background: rgba(102, 100, 38, 0.9);
           color: #ffffff;
           border: 1px solid rgba(216, 178, 141, 0.35);
         }
@@ -344,7 +344,7 @@ export default function CoreServicesPillars() {
 
         .pillar-card-title {
           font-size: 1.42rem;
-          color: #232d22;
+          color: var(--primary-900);
           font-weight: 800;
           margin-bottom: 4px;
         }
@@ -388,7 +388,7 @@ export default function CoreServicesPillars() {
         }
 
         .check-icon {
-          color: #556b52;
+          color: var(--primary-600);
           flex-shrink: 0;
           margin-top: 2px;
         }
@@ -415,7 +415,7 @@ export default function CoreServicesPillars() {
           color: #b58963;
         }
         .meta-icon-green {
-          color: #556b52;
+          color: var(--primary-600);
         }
 
         .pillar-footer {

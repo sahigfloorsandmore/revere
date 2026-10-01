@@ -296,12 +296,12 @@ export default function ChatBotWidget() {
           display: flex;
           align-items: center;
           gap: 12px;
-          background: linear-gradient(135deg, #182017 0%, #232d22 100%);
+          background: linear-gradient(135deg, var(--primary-950) 0%, var(--primary-900) 100%);
           color: #ffffff;
           padding: 10px 20px 10px 12px;
           border-radius: 9999px;
           border: 1px solid rgba(216, 178, 141, 0.35);
-          box-shadow: 0 12px 32px rgba(24, 32, 23, 0.35);
+          box-shadow: 0 12px 32px rgba(51, 50, 19, 0.35);
           cursor: pointer;
           transition: var(--transition);
           position: relative;
@@ -309,15 +309,15 @@ export default function ChatBotWidget() {
 
         .chatbot-launcher-btn:hover {
           transform: translateY(-3px) scale(1.02);
-          box-shadow: 0 16px 38px rgba(24, 32, 23, 0.45);
-          background: linear-gradient(135deg, #232d22 0%, #313d30 100%);
+          box-shadow: 0 16px 38px rgba(51, 50, 19, 0.45);
+          background: linear-gradient(135deg, var(--primary-900) 0%, var(--primary-800) 100%);
         }
 
         .launcher-icon-box {
           width: 44px;
           height: 44px;
           border-radius: 50%;
-          background: #425240;
+          background: var(--primary-700);
           display: flex;
           align-items: center;
           justify-content: center;
@@ -349,7 +349,7 @@ export default function ChatBotWidget() {
           position: absolute;
           inset: -3px;
           border-radius: 9999px;
-          background: #88a183;
+          background: var(--primary-400);
           opacity: 0.3;
           z-index: -1;
           animation: pulse-ring 2.5s infinite;
@@ -369,8 +369,8 @@ export default function ChatBotWidget() {
           max-height: calc(100vh - 120px);
           background: #ffffff;
           border-radius: var(--radius-xl);
-          border: 1px solid rgba(85, 107, 82, 0.2);
-          box-shadow: 0 25px 60px -10px rgba(24, 32, 23, 0.3);
+          border: 1px solid rgba(127, 125, 49, 0.25);
+          box-shadow: 0 25px 60px -10px rgba(51, 50, 19, 0.3);
           display: flex;
           flex-direction: column;
           overflow: hidden;
@@ -384,7 +384,7 @@ export default function ChatBotWidget() {
 
         .chatbot-header {
           padding: 16px 20px;
-          background: linear-gradient(135deg, #182017 0%, #232d22 100%);
+          background: linear-gradient(135deg, var(--primary-950) 0%, var(--primary-900) 100%);
           color: #ffffff;
           display: flex;
           justify-content: space-between;
@@ -401,7 +401,7 @@ export default function ChatBotWidget() {
           width: 38px;
           height: 38px;
           border-radius: 50%;
-          background: #425240;
+          background: var(--primary-700);
           display: flex;
           align-items: center;
           justify-content: center;
@@ -419,18 +419,18 @@ export default function ChatBotWidget() {
           align-items: center;
           gap: 6px;
           font-size: 0.74rem;
-          color: #cbdbca;
+          color: var(--primary-200);
         }
 
         .online-dot {
           width: 7px;
           height: 7px;
           border-radius: 50%;
-          background: #88a183;
+          background: var(--primary-400);
         }
 
         .chatbot-close-btn {
-          color: #cbdbca;
+          color: var(--primary-200);
           padding: 6px;
           border-radius: 50%;
           transition: var(--transition);
@@ -468,14 +468,14 @@ export default function ChatBotWidget() {
 
         .chat-bubble.bot {
           background: #ffffff;
-          color: #182017;
-          border: 1px solid #cbdbca;
+          color: var(--primary-950);
+          border: 1px solid var(--primary-200);
           border-bottom-left-radius: 4px;
-          box-shadow: 0 4px 12px rgba(24, 32, 23, 0.04);
+          box-shadow: 0 4px 12px rgba(51, 50, 19, 0.04);
         }
 
         .chat-bubble.user {
-          background: #232d22;
+          background: var(--primary-900);
           color: #f8efe4;
           border-bottom-right-radius: 4px;
         }
@@ -489,22 +489,22 @@ export default function ChatBotWidget() {
           border-radius: 8px;
           font-size: 0.8rem;
           font-weight: 700;
-          background: #425240;
+          background: var(--primary-700);
           color: #f8efe4;
           transition: var(--transition);
         }
         .bubble-action-btn:hover {
-          background: #313d30;
+          background: var(--primary-800);
         }
         .bubble-action-btn.secondary {
-          background: #e5ece4;
-          color: #182017;
-          border: 1px solid #cbdbca;
+          background: var(--primary-100);
+          color: var(--primary-950);
+          border: 1px solid var(--primary-200);
         }
 
         .chat-contact-form {
           background: #ffffff;
-          border: 1px solid #cbdbca;
+          border: 1px solid var(--primary-200);
           border-radius: 12px;
           padding: 14px;
           display: flex;
@@ -515,21 +515,21 @@ export default function ChatBotWidget() {
         .form-header-text {
           font-size: 0.8rem;
           font-weight: 700;
-          color: #182017;
+          color: var(--primary-950);
         }
 
         .chat-contact-form input,
         .chat-contact-form textarea {
           width: 100%;
           padding: 8px 12px;
-          border: 1px solid #cbdbca;
+          border: 1px solid var(--primary-200);
           border-radius: 6px;
           font-size: 0.84rem;
           font-family: inherit;
         }
 
         .form-submit-mini {
-          background: #232d22;
+          background: var(--primary-900);
           color: #f8efe4;
           padding: 8px;
           border-radius: 6px;
@@ -544,7 +544,7 @@ export default function ChatBotWidget() {
           gap: 6px;
           padding: 10px 14px;
           background: #ffffff;
-          border-top: 1px solid #e5ece4;
+          border-top: 1px solid var(--primary-100);
           overflow-x: auto;
           white-space: nowrap;
         }
@@ -557,16 +557,16 @@ export default function ChatBotWidget() {
           border-radius: 9999px;
           font-size: 0.76rem;
           font-weight: 600;
-          color: #182017;
-          background: #f4f7f3;
-          border: 1px solid #cbdbca;
+          color: var(--primary-950);
+          background: var(--primary-50);
+          border: 1px solid var(--primary-200);
           cursor: pointer;
           transition: var(--transition);
         }
         .chip-btn:hover {
-          background: #232d22;
+          background: var(--primary-900);
           color: #f8efe4;
-          border-color: #232d22;
+          border-color: var(--primary-900);
         }
 
         /* Input Bar */
@@ -575,14 +575,14 @@ export default function ChatBotWidget() {
           align-items: center;
           padding: 12px 16px;
           background: #ffffff;
-          border-top: 1px solid #e5ece4;
+          border-top: 1px solid var(--primary-100);
           gap: 10px;
         }
 
         .chatbot-input-bar input {
           flex: 1;
           padding: 10px 14px;
-          border: 1.5px solid #cbdbca;
+          border: 1.5px solid var(--primary-200);
           border-radius: 9999px;
           font-size: 0.88rem;
           outline: none;
@@ -590,14 +590,14 @@ export default function ChatBotWidget() {
         }
 
         .chatbot-input-bar input:focus {
-          border-color: #88a183;
+          border-color: var(--primary-400);
         }
 
         .chatbot-input-bar button {
           width: 38px;
           height: 38px;
           border-radius: 50%;
-          background: #425240;
+          background: var(--primary-700);
           color: #f8efe4;
           display: flex;
           align-items: center;
@@ -612,7 +612,7 @@ export default function ChatBotWidget() {
           cursor: not-allowed;
         }
         .chatbot-input-bar button:not(:disabled):hover {
-          background: #232d22;
+          background: var(--primary-900);
         }
 
         @media (max-width: 480px) {

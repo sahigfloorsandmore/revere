@@ -211,9 +211,9 @@ export default function Hero3D() {
           z-index: 3;
           background: linear-gradient(
             135deg, 
-            rgba(31, 42, 30, 0.65) 0%, 
-            rgba(18, 24, 18, 0.45) 50%, 
-            rgba(49, 61, 48, 0.55) 100%
+            rgba(51, 50, 19, 0.68) 0%, 
+            rgba(21, 20, 10, 0.50) 50%, 
+            rgba(76, 75, 28, 0.58) 100%
           );
         }
 
@@ -439,7 +439,7 @@ export default function Hero3D() {
 
         .trust-cell span {
           font-size: 0.8rem;
-          color: #e5ece4;
+          color: var(--primary-100);
           font-weight: 500;
           line-height: 1.35;
         }

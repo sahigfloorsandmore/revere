@@ -220,8 +220,8 @@ export default function Policies() {
         }
 
         .policy-tabs-nav {
-          background: #f4f7f3;
-          border-right: 1px solid #e5ece4;
+          background: var(--primary-50);
+          border-right: 1px solid var(--primary-100);
           padding: 24px 16px;
           display: flex;
           flex-direction: column;
@@ -243,14 +243,14 @@ export default function Policies() {
         }
 
         .policy-tab-btn:hover {
-          background: rgba(136, 161, 131, 0.18);
-          color: #182017;
+          background: rgba(127, 125, 49, 0.15);
+          color: var(--primary-950);
         }
 
         .policy-tab-btn.active {
-          background: #232d22;
+          background: var(--primary-900);
           color: #f8efe4;
-          box-shadow: 0 4px 12px rgba(24, 32, 23, 0.25);
+          box-shadow: 0 4px 12px rgba(51, 50, 19, 0.25);
         }
 
         .policy-support-box {
@@ -258,33 +258,33 @@ export default function Policies() {
           padding: 16px;
           background: #ffffff;
           border-radius: var(--radius-md);
-          border: 1px solid #cbdbca;
+          border: 1px solid var(--primary-200);
           display: flex;
           gap: 12px;
           align-items: flex-start;
         }
 
         .support-icon {
-          color: #425240;
+          color: var(--primary-700);
           margin-top: 2px;
         }
 
         .policy-support-box strong {
           display: block;
           font-size: 0.86rem;
-          color: #182017;
+          color: var(--primary-950);
         }
 
         .policy-support-box p {
           font-size: 0.78rem;
-          color: #556b52;
+          color: var(--primary-600);
           margin: 2px 0 4px 0;
         }
 
         .support-phone {
           font-size: 0.9rem;
           font-weight: 700;
-          color: #425240;
+          color: var(--primary-700);
         }
 
         .policy-content-panel {
@@ -295,9 +295,9 @@ export default function Policies() {
 
         .policy-panel-title {
           font-size: 1.6rem;
-          color: #182017;
+          color: var(--primary-950);
           margin-bottom: 24px;
-          border-bottom: 1px solid #e5ece4;
+          border-bottom: 1px solid var(--primary-100);
           padding-bottom: 16px;
         }
 
@@ -321,13 +321,13 @@ export default function Policies() {
         }
 
         .alert-info {
-          background: #f4f7f3;
-          border: 1px solid #cbdbca;
-          color: #182017;
+          background: var(--primary-50);
+          border: 1px solid var(--primary-200);
+          color: var(--primary-950);
         }
 
         .alert-info .callout-icon {
-          color: #425240;
+          color: var(--primary-700);
         }
 
         .policy-callout strong {

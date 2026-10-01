@@ -43,7 +43,7 @@ export default function HeroCanvas() {
     sunLight.shadow.mapSize.height = 1024;
     scene.add(sunLight);
 
-    const sageLight = new THREE.PointLight(0x74c69d, 3, 10);
+    const sageLight = new THREE.PointLight(0xa6a347, 3, 10);
     sageLight.position.set(-3, 2, 2);
     scene.add(sageLight);
 
@@ -65,10 +65,10 @@ export default function HeroCanvas() {
       });
     };
 
-    const baseStoneMat = createStoneMaterial(0x1b4332, 0.4, 0.1); // Deep Emerald Slate
+    const baseStoneMat = createStoneMaterial(0x333213, 0.4, 0.1); // Deep Warm Olive Slate
     const midStoneMat = createStoneMaterial(0x283339, 0.3, 0.2); // Warm Charcoal River Pebble
     const topStoneMat = createStoneMaterial(0xc5a059, 0.2, 0.4); // Golden Accented Quartz Stone
-    const crownStoneMat = createStoneMaterial(0x52b788, 0.25, 0.3); // Jade Capstone
+    const crownStoneMat = createStoneMaterial(0x7f7d31, 0.25, 0.3); // Olive Jewel Capstone (#7f7d31)
 
     // Geometry function for smooth river stones
     const createPebble = (rx, ry, rz, segments = 32) => {
@@ -111,8 +111,8 @@ export default function HeroCanvas() {
     // Ambient Floating Wellness Halo Rings
     const ringGeo = new THREE.TorusGeometry(1.9, 0.015, 16, 100);
     const ringMat = new THREE.MeshStandardMaterial({
-      color: 0x52b788,
-      emissive: 0x2d6a4f,
+      color: 0x7f7d31,
+      emissive: 0x4c4b1c,
       emissiveIntensity: 0.8,
       roughness: 0.1,
       transparent: true,

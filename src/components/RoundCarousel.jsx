@@ -411,7 +411,7 @@ export default function RoundCarousel({
 
         .single-card-highlight {
           font-size: 0.82rem;
-          color: #e5ece4;
+          color: var(--primary-100);
           margin: 0;
           line-height: 1.4;
           opacity: 0.94;
@@ -448,7 +448,7 @@ export default function RoundCarousel({
         }
 
         .text-green {
-          color: #88a183;
+          color: var(--primary-400);
         }
 
         .single-card-counter {
@@ -466,7 +466,7 @@ export default function RoundCarousel({
           flex: 1;
           padding: 8px 14px;
           border-radius: 12px;
-          background: linear-gradient(135deg, #425240, #556b52);
+          background: linear-gradient(135deg, var(--primary-700), var(--primary-600));
           border: 1px solid rgba(216, 178, 141, 0.35);
           color: #ffffff;
           font-weight: 700;
@@ -477,7 +477,7 @@ export default function RoundCarousel({
           align-items: center;
           justify-content: center;
           gap: 5px;
-          box-shadow: 0 4px 12px rgba(45, 58, 44, 0.4);
+          box-shadow: 0 4px 12px rgba(51, 50, 19, 0.4);
           transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
         }
 
@@ -573,7 +573,7 @@ export default function RoundCarousel({
         }
 
         .carousel-nav-btn:hover {
-          background: #425240;
+          background: var(--primary-700);
           border-color: #d8b28d;
           transform: translateY(-50%) scale(1.1);
           color: #d8b28d;

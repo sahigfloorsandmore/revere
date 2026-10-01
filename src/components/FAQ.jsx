@@ -138,7 +138,7 @@ export default function FAQ() {
         .faq-question-text {
           font-size: 1.08rem;
           font-weight: 700;
-          color: #182017;
+          color: var(--primary-950);
           line-height: 1.4;
         }
 
@@ -146,17 +146,17 @@ export default function FAQ() {
           width: 32px;
           height: 32px;
           border-radius: 50%;
-          background: #f4f7f3;
+          background: var(--primary-50);
           display: flex;
           align-items: center;
           justify-content: center;
-          color: #425240;
+          color: var(--primary-700);
           flex-shrink: 0;
           transition: var(--transition);
         }
 
         .faq-item-open .faq-toggle-icon {
-          background: #232d22;
+          background: var(--primary-900);
           color: #f8efe4;
         }
 
@@ -169,7 +169,7 @@ export default function FAQ() {
           font-size: 0.96rem;
           color: var(--neutral-700);
           line-height: 1.7;
-          border-top: 1px solid #e5ece4;
+          border-top: 1px solid var(--primary-100);
           padding-top: 16px;
           margin: 0;
         }

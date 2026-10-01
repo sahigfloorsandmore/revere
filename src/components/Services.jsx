@@ -276,24 +276,24 @@ export default function Services({ showHeader = true }) {
           padding: 10px 22px;
           font-size: 0.9rem;
           font-weight: 600;
-          color: #313d30;
-          background: #f4f7f3;
-          border: 1.5px solid #cbdbca;
+          color: var(--primary-800);
+          background: var(--primary-50);
+          border: 1.5px solid var(--primary-200);
           border-radius: var(--radius-full);
           transition: var(--transition);
         }
 
         .filter-btn:hover {
-          border-color: #88a183;
-          color: #182017;
+          border-color: var(--primary-400);
+          color: var(--primary-950);
           background: #ffffff;
         }
 
         .filter-btn.active {
-          background: #232d22;
+          background: var(--primary-900);
           color: #f8efe4;
-          border-color: #232d22;
-          box-shadow: 0 4px 14px rgba(24, 32, 23, 0.2);
+          border-color: var(--primary-900);
+          box-shadow: 0 4px 14px rgba(51, 50, 19, 0.2);
         }
 
         .services-grid {
@@ -309,15 +309,15 @@ export default function Services({ showHeader = true }) {
           flex-direction: column;
           justify-content: space-between;
           transition: var(--transition);
-          border: 1px solid rgba(85, 107, 82, 0.15);
+          border: 1px solid rgba(127, 125, 49, 0.18);
           border-radius: var(--radius-xl);
           position: relative;
         }
 
         .service-card:hover {
           transform: translateY(-6px);
-          box-shadow: 0 20px 45px -10px rgba(24, 32, 23, 0.1);
-          border-color: #88a183;
+          box-shadow: 0 20px 45px -10px rgba(51, 50, 19, 0.1);
+          border-color: var(--primary-400);
           background: #ffffff;
         }
 
@@ -332,19 +332,19 @@ export default function Services({ showHeader = true }) {
           width: 44px;
           height: 44px;
           border-radius: 12px;
-          background: #e5ece4;
+          background: var(--primary-100);
           display: flex;
           align-items: center;
           justify-content: center;
         }
 
         .service-icon {
-          color: #425240;
+          color: var(--primary-700);
         }
 
         .service-card-title {
           font-size: 1.3rem;
-          color: #182017;
+          color: var(--primary-950);
           margin-bottom: 4px;
           font-weight: 800;
         }
@@ -361,7 +361,7 @@ export default function Services({ showHeader = true }) {
 
         .service-card-desc {
           font-size: 0.92rem;
-          color: #556b52;
+          color: var(--primary-600);
           line-height: 1.55;
           margin-bottom: 18px;
         }
@@ -371,13 +371,13 @@ export default function Services({ showHeader = true }) {
           padding: 14px 16px;
           border-radius: var(--radius-md);
           margin-bottom: 22px;
-          border: 1px solid #e5ece4;
+          border: 1px solid var(--primary-100);
         }
 
         .service-benefits strong {
           display: block;
           font-size: 0.82rem;
-          color: #182017;
+          color: var(--primary-950);
           margin-bottom: 8px;
         }
 
@@ -393,17 +393,17 @@ export default function Services({ showHeader = true }) {
           align-items: flex-start;
           gap: 8px;
           font-size: 0.82rem;
-          color: #232d22;
+          color: var(--primary-900);
         }
 
         .benefit-check {
-          color: #425240;
+          color: var(--primary-700);
           flex-shrink: 0;
           margin-top: 2px;
         }
 
         .service-card-footer {
-          border-top: 1px solid #e5ece4;
+          border-top: 1px solid var(--primary-100);
           padding-top: 18px;
         }
 
@@ -412,7 +412,7 @@ export default function Services({ showHeader = true }) {
           align-items: center;
           gap: 8px;
           font-size: 0.8rem;
-          color: #556b52;
+          color: var(--primary-600);
           margin-bottom: 14px;
           flex-wrap: wrap;
         }
@@ -424,11 +424,11 @@ export default function Services({ showHeader = true }) {
 
         .duration-tag {
           background: #ffffff;
-          border: 1px solid #cbdbca;
+          border: 1px solid var(--primary-200);
           padding: 2px 7px;
           border-radius: 6px;
           font-weight: 600;
-          color: #182017;
+          color: var(--primary-950);
           font-size: 0.76rem;
         }
 

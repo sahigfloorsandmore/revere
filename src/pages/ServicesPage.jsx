@@ -126,7 +126,7 @@ export default function ServicesPage() {
 
         /* Services Hero */
         .services-hero {
-          background: linear-gradient(135deg, #182017 0%, #232d22 50%, #313d30 100%);
+          background: linear-gradient(135deg, var(--primary-950) 0%, var(--primary-900) 50%, var(--primary-800) 100%);
           color: #ffffff;
           margin-top: -136px;
           padding: 160px 0 64px 0;
@@ -263,7 +263,7 @@ export default function ServicesPage() {
           width: 58px;
           height: 58px;
           border-radius: 16px;
-          background: #e5ece4;
+          background: var(--primary-100);
           display: flex;
           align-items: center;
           justify-content: center;
@@ -272,14 +272,14 @@ export default function ServicesPage() {
 
         .assurance-left h3 {
           font-size: 1.28rem;
-          color: #182017;
+          color: var(--primary-950);
           font-weight: 800;
           margin-bottom: 6px;
         }
 
         .assurance-left p {
           font-size: 0.94rem;
-          color: #425240;
+          color: var(--primary-700);
           margin: 0;
           max-width: 680px;
           line-height: 1.5;
@@ -296,12 +296,12 @@ export default function ServicesPage() {
         }
 
         .services-cta-card {
-          background: linear-gradient(135deg, #182017 0%, #232d22 100%);
+          background: linear-gradient(135deg, var(--primary-950) 0%, var(--primary-900) 100%);
           border-radius: var(--radius-2xl);
           padding: 60px 40px;
           text-align: center;
           color: #ffffff;
-          box-shadow: 0 24px 50px -15px rgba(24, 32, 23, 0.25);
+          box-shadow: 0 24px 50px -15px rgba(31, 30, 10, 0.35);
           position: relative;
           overflow: hidden;
         }

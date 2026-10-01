@@ -311,7 +311,7 @@ export default function ContactSection() {
 
         .fast-booking-box {
           padding: 28px;
-          background: linear-gradient(135deg, #182017 0%, #232d22 100%);
+          background: linear-gradient(135deg, var(--primary-950) 0%, var(--primary-900) 100%);
           color: #ffffff;
           border-radius: var(--radius-xl);
           border: 1px solid rgba(216, 178, 141, 0.3);
@@ -338,7 +338,7 @@ export default function ContactSection() {
 
         .fast-box-header p {
           font-size: 0.88rem;
-          color: #cbdbca;
+          color: var(--primary-200);
           line-height: 1.5;
           margin: 0;
         }
@@ -359,7 +359,7 @@ export default function ContactSection() {
           align-items: center;
           gap: 16px;
           background: #ffffff;
-          border: 1px solid #cbdbca;
+          border: 1px solid var(--primary-200);
           border-radius: var(--radius-lg);
         }
 
@@ -367,12 +367,12 @@ export default function ContactSection() {
           width: 44px;
           height: 44px;
           border-radius: 12px;
-          background: #e5ece4;
+          background: var(--primary-100);
           display: flex;
           align-items: center;
           justify-content: center;
           flex-shrink: 0;
-          color: #425240;
+          color: var(--primary-700);
         }
 
         .card-info {
@@ -414,7 +414,7 @@ export default function ContactSection() {
           background: #ffffff;
           border: 1px solid var(--neutral-300);
           border-radius: var(--radius-xl);
-          box-shadow: 0 20px 40px -15px rgba(27, 67, 50, 0.08);
+          box-shadow: 0 20px 40px -15px rgba(51, 50, 19, 0.08);
         }
 
         .form-title {
@@ -495,7 +495,7 @@ export default function ContactSection() {
         .form-group textarea:focus {
           outline: none;
           border-color: var(--primary-600);
-          box-shadow: 0 0 0 3px rgba(82, 183, 136, 0.2);
+          box-shadow: 0 0 0 3px rgba(127, 125, 49, 0.25);
         }
 
         .radio-group {
