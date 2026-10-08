@@ -829,6 +829,61 @@ export default function AdminPage() {
                             </label>
                           </div>
                         </div>
+
+                        {/* Popup Modal Width Selector */}
+                        <div className="image-fit-control">
+                          <label className="field-label-sm">Popup Modal Card Width:</label>
+                          <div className="card-width-pills">
+                            {[
+                              { id: 'compact', label: 'Compact (440px)', desc: 'Best for vertical flyers' },
+                              { id: 'standard', label: 'Standard (540px)', desc: 'Balanced for all screens' },
+                              { id: 'wide', label: 'Wide (680px)', desc: 'Best for wide banners' }
+                            ].map((w) => (
+                              <button
+                                key={w.id}
+                                type="button"
+                                className={`width-option-btn ${(settings.promoModal.cardWidth || 'standard') === w.id ? 'active' : ''}`}
+                                onClick={() => {
+                                  const updated = {
+                                    ...settings,
+                                    promoModal: { ...settings.promoModal, cardWidth: w.id }
+                                  };
+                                  setSettings(updated);
+                                  saveClinicSettings(updated);
+                                }}
+                              >
+                                <strong>{w.label}</strong>
+                                <span>{w.desc}</span>
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* Toggle to show/hide text below image */}
+                        <div className="image-fit-control">
+                          <label className="field-label-sm">Popup Display Layout:</label>
+                          <div className="display-layout-toggle-card">
+                            <div className="enable-info">
+                              <strong>Show Text Headline & Details Below Image</strong>
+                              <p>Turn this OFF if your uploaded image is already a complete flyer that has all the headline text designed into it.</p>
+                            </div>
+                            <label className="switch">
+                              <input 
+                                type="checkbox"
+                                checked={settings.promoModal.showTextDetails !== false}
+                                onChange={(e) => {
+                                  const updated = {
+                                    ...settings,
+                                    promoModal: { ...settings.promoModal, showTextDetails: e.target.checked }
+                                  };
+                                  setSettings(updated);
+                                  saveClinicSettings(updated);
+                                }}
+                              />
+                              <span className="slider round"></span>
+                            </label>
+                          </div>
+                        </div>
                       </div>
                     )}
 
@@ -1778,28 +1833,34 @@ export default function AdminPage() {
         }
 
         .image-preview-box {
-          border: 1px solid var(--neutral-300);
+          border: 1.5px solid var(--neutral-300);
           border-radius: var(--radius-md);
-          overflow: hidden;
-          background: #141712;
+          background: #f8faf6;
           display: flex;
           flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          overflow: hidden;
         }
         .image-preview-thumb {
-          width: 100%;
+          max-width: 100%;
+          max-height: 340px;
+          width: auto;
           height: auto;
-          max-height: 280px;
           object-fit: contain;
           display: block;
-          margin: 0 auto;
+          margin: 14px auto;
+          border-radius: var(--radius-sm);
         }
         .image-preview-controls {
+          width: 100%;
           padding: 12px 16px;
           background: #ffffff;
           display: flex;
           justify-content: space-between;
           align-items: center;
           border-top: 1px solid var(--neutral-200);
+          box-sizing: border-box;
         }
         .preview-status-text {
           font-size: 0.84rem;
@@ -1877,6 +1938,53 @@ export default function AdminPage() {
           font-size: 0.78rem;
           color: var(--neutral-600);
           line-height: 1.35;
+        }
+
+        /* Card Width Pills */
+        .card-width-pills {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+          gap: 10px;
+        }
+        .width-option-btn {
+          display: flex;
+          flex-direction: column;
+          gap: 3px;
+          padding: 10px 14px;
+          border-radius: var(--radius-md);
+          background: var(--neutral-50);
+          border: 1.5px solid var(--neutral-200);
+          cursor: pointer;
+          text-align: left;
+          transition: var(--transition);
+        }
+        .width-option-btn:hover {
+          background: #ffffff;
+          border-color: var(--primary-400);
+        }
+        .width-option-btn.active {
+          background: var(--primary-50);
+          border-color: var(--primary-600);
+        }
+        .width-option-btn strong {
+          font-size: 0.85rem;
+          color: var(--primary-900);
+        }
+        .width-option-btn span {
+          font-size: 0.75rem;
+          color: var(--neutral-600);
+        }
+
+        /* Display Layout Toggle */
+        .display-layout-toggle-card {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          gap: 16px;
+          padding: 14px 18px;
+          border-radius: var(--radius-md);
+          background: var(--neutral-50);
+          border: 1.5px solid var(--neutral-200);
         }
 
         .code-textarea {

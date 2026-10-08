@@ -26,6 +26,8 @@ export const DEFAULT_SETTINGS = {
     contentType: 'image', // 'image' | 'script'
     imageUrl: '', // Uploaded image data URL or external URL
     imageFit: 'contain', // 'contain' (Always Fit - never cut off) | 'cover' (Crop & Fill) | 'natural' (Full Natural Height)
+    cardWidth: 'standard', // 'compact' (440px) | 'standard' (540px) | 'wide' (660px)
+    showTextDetails: true, // Toggle text block below image
     animationScript: '', // Custom animation code, embed script, or SVG/Lottie/HTML
     ctaText: 'Book Appointment Now',
     ctaUrl: 'https://reverewellness.janeapp.com/',
@@ -33,7 +35,7 @@ export const DEFAULT_SETTINGS = {
     secondaryCtaPhone: '6045030855',
     startDateTime: '', // e.g. "2026-10-01T09:00"
     endDateTime: '',   // e.g. "2026-10-31T20:00"
-    delaySeconds: 3,   // seconds before showing popup
+    delaySeconds: 2,   // seconds before showing popup
     showOncePerSession: true
   },
 

@@ -96,7 +96,10 @@ export default function PromotionalModal({ forceOpen = false, previewData = null
 
   return (
     <div className="promo-modal-overlay" onClick={handleDismiss}>
-      <div className="promo-modal-card glass-card" onClick={(e) => e.stopPropagation()}>
+      <div 
+        className={`promo-modal-card glass-card card-width-${promo.cardWidth || 'standard'} ${promo.showTextDetails === false ? 'flyer-mode' : ''}`} 
+        onClick={(e) => e.stopPropagation()}
+      >
         {/* Close Button */}
         <button 
           className="promo-modal-close-btn" 
@@ -106,9 +109,9 @@ export default function PromotionalModal({ forceOpen = false, previewData = null
           <X size={20} />
         </button>
 
-        {/* Media / Image Banner */}
+        {/* Media / Image Banner - ALWAYS FITS 100% */}
         {promo.contentType === 'image' && promo.imageUrl && (
-          <div className={`promo-media-container fit-${promo.imageFit || 'contain'}`}>
+          <div className="promo-media-container">
             <a 
               href={promo.ctaUrl || 'https://reverewellness.janeapp.com/'} 
               target="_blank" 
@@ -118,7 +121,7 @@ export default function PromotionalModal({ forceOpen = false, previewData = null
               <img 
                 src={promo.imageUrl} 
                 alt={promo.title || 'Special Promotion'} 
-                className={`promo-image-element fit-${promo.imageFit || 'contain'}`}
+                className="promo-image-element"
               />
             </a>
           </div>
@@ -133,7 +136,7 @@ export default function PromotionalModal({ forceOpen = false, previewData = null
         )}
 
         {/* Modal Text & Action Content */}
-        {(promo.title || promo.subtitle || promo.bodyText || promo.ctaUrl || promo.secondaryCtaPhone) && (
+        {promo.showTextDetails !== false && (promo.title || promo.subtitle || promo.bodyText) ? (
           <div className="promo-body-content">
             {promo.badgeText && (
               <div className="promo-badge-tag">
@@ -188,6 +191,36 @@ export default function PromotionalModal({ forceOpen = false, previewData = null
               </button>
             </div>
           </div>
+        ) : (
+          /* Flyer-Only Mode: Action buttons directly under image */
+          (promo.ctaUrl || promo.secondaryCtaPhone) && (
+            <div className="promo-flyer-actions">
+              {promo.ctaUrl && (
+                <a 
+                  href={promo.ctaUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-promo-primary"
+                  onClick={handleDismiss}
+                >
+                  <Calendar size={17} />
+                  <span>{promo.ctaText || 'Book Appointment Now'}</span>
+                  <ExternalLink size={13} />
+                </a>
+              )}
+
+              {promo.secondaryCtaPhone && (
+                <a 
+                  href={`tel:${promo.secondaryCtaPhone}`}
+                  className="btn-promo-secondary"
+                  onClick={handleDismiss}
+                >
+                  <Phone size={16} />
+                  <span>{promo.secondaryCtaText || 'Call Reception'}</span>
+                </a>
+              )}
+            </div>
+          )
         )}
       </div>
 
@@ -202,7 +235,7 @@ export default function PromotionalModal({ forceOpen = false, previewData = null
           display: flex;
           align-items: center;
           justify-content: center;
-          padding: 20px;
+          padding: 18px;
           animation: promoFadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
@@ -212,18 +245,28 @@ export default function PromotionalModal({ forceOpen = false, previewData = null
         }
 
         .promo-modal-card {
-          width: 100%;
-          max-width: 520px;
-          max-height: 92vh;
+          width: auto;
+          max-width: min(92vw, 540px);
+          max-height: 94vh;
           overflow-y: auto;
           background: #ffffff;
           border-radius: var(--radius-xl);
-          box-shadow: 0 30px 70px -15px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55);
           border: 1.5px solid rgba(216, 178, 141, 0.45);
           position: relative;
           display: flex;
           flex-direction: column;
           animation: promoSlideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .promo-modal-card.card-width-compact {
+          max-width: min(92vw, 440px);
+        }
+        .promo-modal-card.card-width-standard {
+          max-width: min(92vw, 540px);
+        }
+        .promo-modal-card.card-width-wide {
+          max-width: min(92vw, 680px);
         }
 
         @keyframes promoSlideUp {
@@ -238,15 +281,15 @@ export default function PromotionalModal({ forceOpen = false, previewData = null
           width: 36px;
           height: 36px;
           border-radius: 50%;
-          background: rgba(24, 28, 22, 0.7);
+          background: rgba(24, 28, 22, 0.75);
           color: #ffffff;
           display: flex;
           align-items: center;
           justify-content: center;
           cursor: pointer;
-          z-index: 10;
+          z-index: 20;
           transition: var(--transition);
-          border: 1px solid rgba(255, 255, 255, 0.25);
+          border: 1px solid rgba(255, 255, 255, 0.3);
           backdrop-filter: blur(6px);
         }
         .promo-modal-close-btn:hover {
@@ -254,60 +297,52 @@ export default function PromotionalModal({ forceOpen = false, previewData = null
           transform: scale(1.08);
         }
 
-        /* Image Media Container - Always Fit & Auto Adjust */
+        /* Image Media Container - ALWAYS FITS FULL PROPORTIONS WITHOUT CLIPPING */
         .promo-media-container {
           width: 100%;
-          background: #141712;
+          background: transparent;
           position: relative;
           display: flex;
           align-items: center;
           justify-content: center;
-          overflow: hidden;
+          overflow: visible;
+          padding: 0;
+          margin: 0;
         }
 
-        /* Default: Always Fit & Auto Adjust (Contain - never cut off) */
-        .promo-media-container.fit-contain,
-        .promo-media-container {
-          max-height: min(60vh, 480px);
-        }
         .promo-image-link {
           display: flex;
           align-items: center;
           justify-content: center;
           width: 100%;
-          height: 100%;
           text-decoration: none;
         }
+
         .promo-image-element {
-          width: 100%;
+          max-width: 100%;
+          max-height: 72vh;
+          width: auto;
           height: auto;
-          max-height: min(60vh, 480px);
           object-fit: contain;
           display: block;
           margin: 0 auto;
+          border-radius: var(--radius-xl) var(--radius-xl) 0 0;
           transition: transform 0.35s ease;
         }
+        .promo-modal-card.flyer-mode .promo-image-element {
+          border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+        }
         .promo-image-link:hover .promo-image-element {
-          transform: scale(1.015);
+          transform: scale(1.012);
         }
 
-        /* Mode: Cover (Crop to fixed banner height) */
-        .promo-media-container.fit-cover {
-          height: 280px;
-        }
-        .promo-media-container.fit-cover .promo-image-element {
-          height: 100%;
-          max-height: 280px;
-          object-fit: cover;
-        }
-
-        /* Mode: Natural (Full unconstrained height with scroll) */
-        .promo-media-container.fit-natural {
-          max-height: none;
-        }
-        .promo-media-container.fit-natural .promo-image-element {
-          max-height: none;
-          object-fit: contain;
+        .promo-flyer-actions {
+          padding: 16px 24px 22px 24px;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          background: #ffffff;
+          border-radius: 0 0 var(--radius-xl) var(--radius-xl);
         }
 
         /* Animation Script Container */
