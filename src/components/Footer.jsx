@@ -148,7 +148,7 @@ export default function Footer() {
           {/* Bottom Bar */}
           <div className="footer-bottom-bar">
             <div className="copyright-text">
-              © {new Date().getFullYear()} Revere Massage and Wellness Centre. All rights reserved. Registered RMTs regulated under CCHPBC.
+              © {new Date().getFullYear()} Revere Massage and Wellness Centre. All rights reserved. Registered RMTs regulated under CCHPBC. • <Link to="/admin" className="staff-admin-link" title="Clinic Staff & Settings Portal">Staff Portal</Link>
             </div>
             <button 
               className="scroll-top-btn" 

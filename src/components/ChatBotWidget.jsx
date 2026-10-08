@@ -9,17 +9,22 @@ import {
   CheckCircle2, 
   ShieldCheck,
   Bot,
-  ExternalLink
+  ExternalLink,
+  MessageCircle,
+  Clock,
+  ArrowRight
 } from 'lucide-react';
 import { submitInquiry } from '../lib/supabase';
+import { getClinicSettings, getWhatsAppUrl } from '../lib/settings';
 
 export default function ChatBotWidget() {
   const [isOpen, setIsOpen] = useState(false);
+  const [settings, setSettings] = useState(getClinicSettings());
   const [messages, setMessages] = useState([
     {
       id: 1,
       sender: 'bot',
-      text: "Hello! 👋 Welcome to Revere Massage & Wellness in Surrey. How can our clinical team help you today?",
+      text: "Hello! 👋 Welcome to Revere Massage & Wellness in Surrey. You can message our reception team directly on WhatsApp or ask any questions below!",
       time: 'Just now'
     }
   ]);
@@ -30,25 +35,52 @@ export default function ChatBotWidget() {
   const [submitted, setSubmitted] = useState(false);
 
   const messagesEndRef = useRef(null);
-  const JANEAPP_URL = "https://reverewellness.janeapp.com/";
+
+  // Listen for dynamic settings changes from /admin
+  useEffect(() => {
+    const handleSettingsUpdate = (e) => {
+      if (e.detail) {
+        setSettings(e.detail);
+      } else {
+        setSettings(getClinicSettings());
+      }
+    };
+    window.addEventListener('revere-settings-updated', handleSettingsUpdate);
+    return () => window.removeEventListener('revere-settings-updated', handleSettingsUpdate);
+  }, []);
 
   useEffect(() => {
     if (isOpen) {
       messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
     }
-  }, [messages, isOpen]);
+  }, [messages, isOpen, contactMode]);
+
+  const whatsappUrl = getWhatsAppUrl(settings.whatsappNumber, settings.whatsappGreeting);
 
   const handleQuickChip = (action) => {
-    if (action === 'book') {
-      window.open(JANEAPP_URL, '_blank');
+    if (action === 'whatsapp') {
+      window.open(whatsappUrl, '_blank');
+      setMessages(prev => [
+        ...prev,
+        { id: Date.now(), sender: 'user', text: 'Chat on WhatsApp' },
+        { 
+          id: Date.now() + 1, 
+          sender: 'bot', 
+          text: "Opening WhatsApp chat with our clinic reception! If you don't have WhatsApp, you can also leave your contact info below for a phone or email callback.",
+          actionUrl: whatsappUrl,
+          actionLabel: 'Open WhatsApp Chat'
+        }
+      ]);
+    } else if (action === 'book') {
+      window.open(settings.janeAppUrl, '_blank');
       setMessages(prev => [
         ...prev,
         { id: Date.now(), sender: 'user', text: 'I want to book an appointment' },
         { 
           id: Date.now() + 1, 
           sender: 'bot', 
-          text: "Opening our online booking portal! You can select your practitioner (RMT, Physiotherapist, or Kinesiologist), choose 30, 45, or 60 min sessions, and confirm your time instantly.",
-          actionUrl: JANEAPP_URL,
+          text: "Opening our secure online booking portal! You can choose your therapist, treatment duration, and confirm your time instantly.",
+          actionUrl: settings.janeAppUrl,
           actionLabel: 'Go to Online Booking'
         }
       ]);
@@ -59,7 +91,7 @@ export default function ChatBotWidget() {
         { 
           id: Date.now() + 1, 
           sender: 'bot', 
-          text: "You are pre-approved for immediate ICBC care (RMT and Physiotherapy) within the first 12 weeks of your motor vehicle accident! Just provide your ICBC Claim Number and accident date when booking."
+          text: "You are pre-approved for immediate ICBC care (RMT and Physiotherapy) within the first 12 weeks of your motor vehicle accident! No doctor referral required. We bill ICBC directly so you pay $0 upfront."
         }
       ]);
     } else if (action === 'parking') {
@@ -69,18 +101,20 @@ export default function ChatBotWidget() {
         { 
           id: Date.now() + 1, 
           sender: 'bot', 
-          text: "We have free reserved parking stalls (#36, #37, and #38) in the underground basement parkade at Suite 210 - 7110 120 St, Surrey. If the gate is closed on Sundays or after 6 PM, call (604) 503-0855 to buzz in!"
+          text: "We provide free reserved clinic parking in stalls #36, #37, and #38 in the underground parkade at Suite 210 - 7110 120 St, Surrey. If the gate is down on Sundays or after 6 PM, call (604) 503-0855 to buzz in!"
         }
       ]);
+    } else if (action === 'call') {
+      window.location.href = `tel:${settings.receptionPhone.replace(/\D/g, '')}`;
     } else if (action === 'message') {
       setContactMode(true);
       setMessages(prev => [
         ...prev,
-        { id: Date.now(), sender: 'user', text: 'I would like to send a direct message' },
+        { id: Date.now(), sender: 'user', text: 'I would like to leave a note / request callback' },
         { 
           id: Date.now() + 1, 
           sender: 'bot', 
-          text: "Please leave your contact info below and our reception team will get right back to you!"
+          text: "Please enter your name and phone number or email below. Our reception team will reach out to you promptly!"
         }
       ]);
     }
@@ -100,12 +134,23 @@ export default function ChatBotWidget() {
 
     // Bot response logic
     setTimeout(() => {
+      const lower = userMsg.toLowerCase();
+      let replyText = "Thank you for reaching out! Would you like an instant reply on WhatsApp, or would you prefer our reception team to call you back?";
+
+      if (lower.includes('price') || lower.includes('cost') || lower.includes('fee')) {
+        replyText = "RMT sessions start from $138 (60 mins, taxes included). Physiotherapy initial visits are $135. We also offer direct billing to ICBC and 30+ extended health providers.";
+      } else if (lower.includes('hour') || lower.includes('open') || lower.includes('time')) {
+        replyText = "We are open 7 days a week from 6:30 AM to 8:00 PM to accommodate your busy schedule!";
+      } else if (lower.includes('book') || lower.includes('appointment')) {
+        replyText = "You can schedule your appointment in under 60 seconds with instant confirmation on JaneApp, or chat directly with our reception on WhatsApp.";
+      }
+
       setMessages(prev => [
         ...prev,
         { 
           id: Date.now() + 1, 
           sender: 'bot', 
-          text: "Thank you for your message! If this is regarding an appointment, you can schedule instantly online. Would you like to leave your phone or email so our staff can follow up directly?",
+          text: replyText,
           isFollowUp: true
         }
       ]);
@@ -122,8 +167,8 @@ export default function ChatBotWidget() {
         fullName: contactData.name,
         email: contactData.phoneOrEmail.includes('@') ? contactData.phoneOrEmail : 'phone_contact@reverewellness.ca',
         phone: contactData.phoneOrEmail,
-        subject: 'Chat Widget Inquiry',
-        message: contactData.note || 'Inquiry sent via live chat widget'
+        subject: 'Chat Widget Inquiry (Non-WhatsApp)',
+        message: contactData.note || 'Callback request via website chat'
       });
 
       setSubmitted(true);
@@ -132,7 +177,7 @@ export default function ChatBotWidget() {
         { 
           id: Date.now(), 
           sender: 'bot', 
-          text: `Thank you, ${contactData.name}! Your message has been received by our reception team. We will contact you at ${contactData.phoneOrEmail} promptly.` 
+          text: `Thank you, ${contactData.name}! Your message has been received by our reception team. We will contact you at ${contactData.phoneOrEmail} shortly.` 
         }
       ]);
     } catch (err) {
@@ -154,11 +199,15 @@ export default function ChatBotWidget() {
         >
           <div className="launcher-pulse"></div>
           <div className="launcher-icon-box">
-            <MessageSquare size={24} className="launcher-icon" />
+            {settings.enableWhatsApp ? (
+              <MessageCircle size={24} className="launcher-icon" />
+            ) : (
+              <MessageSquare size={24} className="launcher-icon" />
+            )}
           </div>
           <div className="launcher-label">
             <span className="label-title">Questions?</span>
-            <span className="label-sub">Chat with Us</span>
+            <span className="label-sub">{settings.enableWhatsApp ? 'Chat on WhatsApp' : 'Chat with Us'}</span>
           </div>
         </button>
       )}
@@ -173,9 +222,9 @@ export default function ChatBotWidget() {
                 <Bot size={20} />
               </div>
               <div className="bot-info">
-                <strong>Revere Care Assistant</strong>
+                <strong>Revere Care Support</strong>
                 <span className="bot-status-online">
-                  <span className="online-dot"></span> Active • Surrey Clinic Team
+                  <span className="online-dot"></span> Open 7 Days: 6:30 AM – 8:00 PM
                 </span>
               </div>
             </div>
@@ -187,6 +236,31 @@ export default function ChatBotWidget() {
               <X size={20} />
             </button>
           </div>
+
+          {/* Dedicated WhatsApp Fast Action Bar */}
+          {settings.enableWhatsApp && (
+            <div className="whatsapp-banner-cta">
+              <div className="wa-banner-left">
+                <div className="wa-badge-icon">
+                  <MessageCircle size={18} />
+                </div>
+                <div>
+                  <strong>Chat with Reception on WhatsApp</strong>
+                  <p>Instant answers from our clinic staff</p>
+                </div>
+              </div>
+              <a 
+                href={whatsappUrl} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="btn-wa-action"
+                title="Open WhatsApp chat with reception"
+              >
+                <span>Chat</span>
+                <ExternalLink size={12} />
+              </a>
+            </div>
+          )}
 
           {/* Messages Body */}
           <div className="chatbot-body">
@@ -207,25 +281,43 @@ export default function ChatBotWidget() {
                     </a>
                   )}
                   {msg.isFollowUp && !contactMode && (
-                    <button 
-                      className="bubble-action-btn secondary"
-                      onClick={() => setContactMode(true)}
-                    >
-                      <span>Leave Contact Details</span>
-                    </button>
+                    <div className="bubble-actions-group">
+                      {settings.enableWhatsApp && (
+                        <a 
+                          href={whatsappUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="bubble-action-btn whatsapp-highlight"
+                        >
+                          <MessageCircle size={14} />
+                          <span>Reply on WhatsApp</span>
+                        </a>
+                      )}
+                      <button 
+                        className="bubble-action-btn secondary"
+                        onClick={() => setContactMode(true)}
+                      >
+                        <span>Request Phone Callback</span>
+                      </button>
+                    </div>
                   )}
                 </div>
               </div>
             ))}
 
-            {/* In-chat contact inquiry form if triggered */}
+            {/* In-chat contact inquiry form for non-WhatsApp users */}
             {contactMode && !submitted && (
               <form onSubmit={handleContactSubmit} className="chat-contact-form">
-                <span className="form-header-text">Leave a Quick Note:</span>
+                <div className="form-header-row">
+                  <span className="form-header-text">Leave a Callback Request:</span>
+                  <button type="button" onClick={() => setContactMode(false)} className="close-form-mini">
+                    <X size={14} />
+                  </button>
+                </div>
                 <input
                   type="text"
                   required
-                  placeholder="Your Name *"
+                  placeholder="Your Full Name *"
                   value={contactData.name}
                   onChange={(e) => setContactData(p => ({ ...p, name: e.target.value }))}
                 />
@@ -238,12 +330,12 @@ export default function ChatBotWidget() {
                 />
                 <textarea
                   rows="2"
-                  placeholder="How can we help? (Optional)"
+                  placeholder="Your question or preferred callback time (Optional)"
                   value={contactData.note}
                   onChange={(e) => setContactData(p => ({ ...p, note: e.target.value }))}
                 ></textarea>
                 <button type="submit" className="form-submit-mini" disabled={isSubmitting}>
-                  {isSubmitting ? 'Sending...' : 'Submit Message'}
+                  {isSubmitting ? 'Sending...' : 'Submit to Reception'}
                 </button>
               </form>
             )}
@@ -253,17 +345,25 @@ export default function ChatBotWidget() {
 
           {/* Quick Action Suggestion Chips */}
           <div className="chatbot-chips-bar">
+            {settings.enableWhatsApp && (
+              <button className="chip-btn wa-chip" onClick={() => handleQuickChip('whatsapp')}>
+                <MessageCircle size={13} /> WhatsApp
+              </button>
+            )}
             <button className="chip-btn" onClick={() => handleQuickChip('book')}>
-              <Calendar size={13} /> Book Appointment
+              <Calendar size={13} /> Book Online
+            </button>
+            <button className="chip-btn" onClick={() => handleQuickChip('message')}>
+              ✉️ Non-WhatsApp Note
             </button>
             <button className="chip-btn" onClick={() => handleQuickChip('icbc')}>
               <ShieldCheck size={13} /> ICBC Claims
             </button>
             <button className="chip-btn" onClick={() => handleQuickChip('parking')}>
-              🚗 Parking Stalls
+              🚗 Free Parking
             </button>
-            <button className="chip-btn" onClick={() => handleQuickChip('message')}>
-              ✉️ Send Note
+            <button className="chip-btn" onClick={() => handleQuickChip('call')}>
+              <Phone size={13} /> Call Reception
             </button>
           </div>
 
@@ -271,7 +371,7 @@ export default function ChatBotWidget() {
           <form onSubmit={handleSendMessage} className="chatbot-input-bar">
             <input
               type="text"
-              placeholder="Type your question..."
+              placeholder="Ask a question or type message..."
               value={inputText}
               onChange={(e) => setInputText(e.target.value)}
             />
@@ -317,12 +417,12 @@ export default function ChatBotWidget() {
           width: 44px;
           height: 44px;
           border-radius: 50%;
-          background: var(--primary-700);
+          background: #25d366;
           display: flex;
           align-items: center;
           justify-content: center;
-          color: #f8efe4;
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+          color: #ffffff;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
         }
 
         .launcher-label {
@@ -349,23 +449,23 @@ export default function ChatBotWidget() {
           position: absolute;
           inset: -3px;
           border-radius: 9999px;
-          background: var(--primary-400);
-          opacity: 0.3;
+          background: #25d366;
+          opacity: 0.35;
           z-index: -1;
           animation: pulse-ring 2.5s infinite;
         }
 
         @keyframes pulse-ring {
-          0% { transform: scale(0.95); opacity: 0.4; }
+          0% { transform: scale(0.95); opacity: 0.45; }
           70% { transform: scale(1.1); opacity: 0; }
           100% { transform: scale(0.95); opacity: 0; }
         }
 
         /* Chat Dialog */
         .chatbot-dialog {
-          width: 380px;
+          width: 400px;
           max-width: calc(100vw - 36px);
-          height: 540px;
+          height: 560px;
           max-height: calc(100vh - 120px);
           background: #ffffff;
           border-radius: var(--radius-xl);
@@ -426,7 +526,7 @@ export default function ChatBotWidget() {
           width: 7px;
           height: 7px;
           border-radius: 50%;
-          background: var(--primary-400);
+          background: #10b981;
         }
 
         .chatbot-close-btn {
@@ -440,10 +540,64 @@ export default function ChatBotWidget() {
           background: rgba(255, 255, 255, 0.15);
         }
 
+        /* WhatsApp Top Action Bar */
+        .whatsapp-banner-cta {
+          background: #e7f7ed;
+          border-bottom: 1px solid #bbf7d0;
+          padding: 12px 16px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          gap: 12px;
+        }
+        .wa-banner-left {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+        }
+        .wa-badge-icon {
+          width: 32px;
+          height: 32px;
+          border-radius: 50%;
+          background: #25d366;
+          color: #ffffff;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+        }
+        .wa-banner-left strong {
+          display: block;
+          font-size: 0.84rem;
+          color: #065f46;
+          line-height: 1.25;
+        }
+        .wa-banner-left p {
+          font-size: 0.72rem;
+          color: #047857;
+          margin: 1px 0 0 0;
+        }
+        .btn-wa-action {
+          display: inline-flex;
+          align-items: center;
+          gap: 4px;
+          padding: 6px 14px;
+          background: #25d366;
+          color: #ffffff;
+          font-size: 0.78rem;
+          font-weight: 700;
+          border-radius: var(--radius-full);
+          transition: var(--transition);
+        }
+        .btn-wa-action:hover {
+          background: #1eb956;
+          transform: translateY(-1px);
+        }
+
         /* Chat Body */
         .chatbot-body {
           flex: 1;
-          padding: 18px 16px;
+          padding: 16px;
           overflow-y: auto;
           display: flex;
           flex-direction: column;
@@ -459,7 +613,7 @@ export default function ChatBotWidget() {
         .chat-bubble-row.user { justify-content: flex-end; }
 
         .chat-bubble {
-          max-width: 84%;
+          max-width: 86%;
           padding: 12px 16px;
           border-radius: 16px;
           font-size: 0.88rem;
@@ -480,11 +634,17 @@ export default function ChatBotWidget() {
           border-bottom-right-radius: 4px;
         }
 
+        .bubble-actions-group {
+          display: flex;
+          flex-direction: column;
+          gap: 6px;
+          margin-top: 10px;
+        }
+
         .bubble-action-btn {
           display: inline-flex;
           align-items: center;
           gap: 6px;
-          margin-top: 10px;
           padding: 7px 14px;
           border-radius: 8px;
           font-size: 0.8rem;
@@ -492,9 +652,17 @@ export default function ChatBotWidget() {
           background: var(--primary-700);
           color: #f8efe4;
           transition: var(--transition);
+          justify-content: center;
         }
         .bubble-action-btn:hover {
           background: var(--primary-800);
+        }
+        .bubble-action-btn.whatsapp-highlight {
+          background: #25d366;
+          color: #ffffff;
+        }
+        .bubble-action-btn.whatsapp-highlight:hover {
+          background: #1eb956;
         }
         .bubble-action-btn.secondary {
           background: var(--primary-100);
@@ -504,18 +672,27 @@ export default function ChatBotWidget() {
 
         .chat-contact-form {
           background: #ffffff;
-          border: 1px solid var(--primary-200);
+          border: 1px solid var(--primary-300);
           border-radius: 12px;
           padding: 14px;
           display: flex;
           flex-direction: column;
           gap: 8px;
+          box-shadow: 0 6px 16px rgba(51, 50, 19, 0.08);
         }
-
+        .form-header-row {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
         .form-header-text {
-          font-size: 0.8rem;
+          font-size: 0.82rem;
           font-weight: 700;
-          color: var(--primary-950);
+          color: var(--primary-900);
+        }
+        .close-form-mini {
+          color: var(--neutral-400);
+          cursor: pointer;
         }
 
         .chat-contact-form input,
@@ -527,15 +704,24 @@ export default function ChatBotWidget() {
           font-size: 0.84rem;
           font-family: inherit;
         }
+        .chat-contact-form input:focus,
+        .chat-contact-form textarea:focus {
+          outline: none;
+          border-color: var(--primary-600);
+        }
 
         .form-submit-mini {
           background: var(--primary-900);
           color: #f8efe4;
-          padding: 8px;
+          padding: 9px;
           border-radius: 6px;
           font-size: 0.84rem;
           font-weight: 700;
           cursor: pointer;
+          transition: var(--transition);
+        }
+        .form-submit-mini:hover {
+          background: var(--primary-700);
         }
 
         /* Chips Bar */
@@ -562,11 +748,23 @@ export default function ChatBotWidget() {
           border: 1px solid var(--primary-200);
           cursor: pointer;
           transition: var(--transition);
+          flex-shrink: 0;
         }
         .chip-btn:hover {
           background: var(--primary-900);
           color: #f8efe4;
           border-color: var(--primary-900);
+        }
+        .chip-btn.wa-chip {
+          background: #e7f7ed;
+          color: #047857;
+          border-color: #a7f3d0;
+          font-weight: 700;
+        }
+        .chip-btn.wa-chip:hover {
+          background: #25d366;
+          color: #ffffff;
+          border-color: #25d366;
         }
 
         /* Input Bar */
