@@ -22,36 +22,49 @@ export default function PromotionalModal({ forceOpen = false, previewData = null
       return;
     }
 
+    // Do not show popup on admin page unless opened via preview
+    if (typeof window !== 'undefined' && window.location.pathname.startsWith('/admin')) {
+      setIsOpen(false);
+      return;
+    }
+
+    let activeTimer = null;
+
     const checkAndTrigger = () => {
       const current = getClinicSettings();
       setSettings(current);
 
       const promo = current.promoModal;
-      const { active } = getPromoModalStatus(promo);
+      if (!promo || !promo.enabled) {
+        setIsOpen(false);
+        return;
+      }
 
+      const { active } = getPromoModalStatus(promo);
       if (!active) {
         setIsOpen(false);
         return;
       }
 
       // Check if user has already dismissed this promotion in the current session
-      const dismissKey = `revere_promo_dismissed_${promo.title || 'active'}`;
-      const dismissed = sessionStorage.getItem(dismissKey);
-      if (dismissed === 'true' && !forceOpen) {
-        setIsOpen(false);
-        return;
+      if (promo.showOncePerSession !== false) {
+        const dismissKey = `revere_promo_dismissed_${promo.title || 'active'}`;
+        const dismissed = sessionStorage.getItem(dismissKey);
+        if (dismissed === 'true' && !forceOpen) {
+          setIsOpen(false);
+          return;
+        }
       }
 
       // Set timeout delay
-      const delay = (promo.delaySeconds || 3) * 1000;
-      const timer = setTimeout(() => {
+      const delay = Math.max(0, (promo.delaySeconds !== undefined ? promo.delaySeconds : 2)) * 1000;
+      if (activeTimer) clearTimeout(activeTimer);
+      activeTimer = setTimeout(() => {
         setIsOpen(true);
       }, delay);
-
-      return timer;
     };
 
-    const timer = checkAndTrigger();
+    checkAndTrigger();
 
     const handleUpdate = (e) => {
       if (e.detail) {
@@ -62,7 +75,7 @@ export default function PromotionalModal({ forceOpen = false, previewData = null
 
     window.addEventListener('revere-settings-updated', handleUpdate);
     return () => {
-      if (timer) clearTimeout(timer);
+      if (activeTimer) clearTimeout(activeTimer);
       window.removeEventListener('revere-settings-updated', handleUpdate);
     };
   }, [forceOpen]);

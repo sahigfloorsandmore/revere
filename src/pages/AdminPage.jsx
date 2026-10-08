@@ -37,7 +37,8 @@ import {
   resetClinicSettings, 
   cleanPhoneForWhatsApp, 
   getWhatsAppUrl,
-  getPromoModalStatus
+  getPromoModalStatus,
+  formatLocalDateTime
 } from '../lib/settings';
 import PromotionalModal from '../components/PromotionalModal';
 
@@ -106,6 +107,21 @@ export default function AdminPage() {
     setTimeout(() => setSaveToast(false), 3500);
   };
 
+  // Instant Auto-Save for Enable/Disable Toggle
+  const handleTogglePromoEnabled = (newVal) => {
+    const updated = {
+      ...settings,
+      promoModal: {
+        ...settings.promoModal,
+        enabled: newVal
+      }
+    };
+    setSettings(updated);
+    saveClinicSettings(updated);
+    setSaveToast(true);
+    setTimeout(() => setSaveToast(false), 3000);
+  };
+
   const handleResetDefaults = () => {
     if (window.confirm('Reset all settings to initial defaults?')) {
       const defaults = resetClinicSettings();
@@ -115,7 +131,7 @@ export default function AdminPage() {
     }
   };
 
-  // Image Upload handler (reads as base64 data URL)
+  // Image Upload handler with Canvas auto-compression to avoid localStorage quota issues
   const handleImageFileChange = (e) => {
     const file = e.target.files[0];
     if (!file) return;
@@ -125,65 +141,111 @@ export default function AdminPage() {
       return;
     }
 
-    // Limit to 4MB
-    if (file.size > 4 * 1024 * 1024) {
-      alert('Image file is larger than 4MB. Please use a compressed image.');
-      return;
-    }
-
     const reader = new FileReader();
     reader.onload = (event) => {
-      setSettings(prev => ({
-        ...prev,
-        promoModal: {
-          ...prev.promoModal,
-          imageUrl: event.target.result,
-          contentType: 'image'
+      const img = new Image();
+      img.onload = () => {
+        const maxWidth = 1200;
+        const maxHeight = 1200;
+        let width = img.width;
+        let height = img.height;
+
+        if (width > maxWidth || height > maxHeight) {
+          if (width > height) {
+            height = Math.round((height * maxWidth) / width);
+            width = maxWidth;
+          } else {
+            width = Math.round((width * maxHeight) / height);
+            height = maxHeight;
+          }
         }
-      }));
+
+        const canvas = document.createElement('canvas');
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, width, height);
+
+        const compressedDataUrl = canvas.toDataURL('image/jpeg', 0.85);
+        const updated = {
+          ...settings,
+          promoModal: {
+            ...settings.promoModal,
+            imageUrl: compressedDataUrl,
+            contentType: 'image'
+          }
+        };
+        setSettings(updated);
+        saveClinicSettings(updated);
+        setSaveToast(true);
+        setTimeout(() => setSaveToast(false), 3000);
+      };
+      img.src = event.target.result;
     };
     reader.readAsDataURL(file);
   };
 
   const handleRemoveImage = () => {
-    setSettings(prev => ({
-      ...prev,
+    const updated = {
+      ...settings,
       promoModal: {
-        ...prev.promoModal,
+        ...settings.promoModal,
         imageUrl: ''
       }
-    }));
+    };
+    setSettings(updated);
+    saveClinicSettings(updated);
     if (fileInputRef.current) fileInputRef.current.value = '';
   };
 
   const handleSetQuickSchedule = (days) => {
     const now = new Date();
-    // format as YYYY-MM-DDTHH:mm
-    const startStr = now.toISOString().slice(0, 16);
-    
+    const startStr = formatLocalDateTime(now);
     const end = new Date(now.getTime() + days * 24 * 60 * 60 * 1000);
-    const endStr = end.toISOString().slice(0, 16);
+    const endStr = formatLocalDateTime(end);
 
-    setSettings(prev => ({
-      ...prev,
+    const updated = {
+      ...settings,
       promoModal: {
-        ...prev.promoModal,
+        ...settings.promoModal,
         startDateTime: startStr,
         endDateTime: endStr,
         enabled: true
       }
-    }));
+    };
+    setSettings(updated);
+    saveClinicSettings(updated);
+    setSaveToast(true);
+    setTimeout(() => setSaveToast(false), 3000);
   };
 
   const handleClearSchedule = () => {
-    setSettings(prev => ({
-      ...prev,
+    const updated = {
+      ...settings,
       promoModal: {
-        ...prev.promoModal,
+        ...settings.promoModal,
         startDateTime: '',
-        endDateTime: ''
+        endDateTime: '',
+        enabled: true
       }
-    }));
+    };
+    setSettings(updated);
+    saveClinicSettings(updated);
+    setSaveToast(true);
+    setTimeout(() => setSaveToast(false), 3000);
+  };
+
+  const handleClearSessionDismissal = () => {
+    try {
+      Object.keys(sessionStorage).forEach(k => {
+        if (k.startsWith('revere_promo_dismissed')) {
+          sessionStorage.removeItem(k);
+        }
+      });
+      alert('Visitor dismissal cache cleared! The popup modal will show on your next visit to the website.');
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   const handleDeleteInquiry = (id) => {
@@ -460,12 +522,33 @@ export default function AdminPage() {
                   <div>
                     <div className="title-row">
                       <h2 className="card-title">Promotional Popup & Announcement Ads</h2>
-                      <span className={`promo-status-badge ${promoStatus.status}`}>
-                        {promoStatus.status === 'active' && '🟢 Active on Website'}
-                        {promoStatus.status === 'upcoming' && '🟡 Scheduled (Upcoming)'}
-                        {promoStatus.status === 'expired' && '🔴 Expired (Ended)'}
-                        {promoStatus.status === 'disabled' && '⚪ Disabled'}
-                      </span>
+                      <div className="status-and-test-group">
+                        <span className={`promo-status-badge ${promoStatus.status}`}>
+                          {promoStatus.status === 'active' && '🟢 Active on Website'}
+                          {promoStatus.status === 'upcoming' && '🟡 Scheduled (Upcoming)'}
+                          {promoStatus.status === 'expired' && '🔴 Expired (Ended)'}
+                          {promoStatus.status === 'disabled' && '⚪ Disabled'}
+                        </span>
+                        <a 
+                          href="/" 
+                          target="_blank" 
+                          rel="noopener noreferrer" 
+                          className="btn-quick-test"
+                          title="Open website homepage in new tab to see popup"
+                        >
+                          <ExternalLink size={14} />
+                          <span>View Live Site</span>
+                        </a>
+                        <button 
+                          type="button" 
+                          onClick={handleClearSessionDismissal}
+                          className="btn-quick-reset-cache"
+                          title="If you dismissed the popup earlier, click this to reset visitor memory so it shows immediately"
+                        >
+                          <RotateCcw size={13} />
+                          <span>Reset Test Dismissal</span>
+                        </button>
+                      </div>
                     </div>
                     <p className="card-subtitle">
                       Configure a targeted popup modal to display seasonal discounts, gift cards, or special events. Upload an image banner or embed an animation script with automated appearance & disappearance scheduling.
@@ -474,20 +557,22 @@ export default function AdminPage() {
                 </div>
 
                 <div className="form-fields-group">
-                  {/* Master Toggle */}
+                  {/* Master Toggle with Instant Auto-Save */}
                   <div className="promo-enable-card">
                     <div className="enable-info">
-                      <strong>Enable Promotional Popup Modal</strong>
+                      <div className="enable-status-line">
+                        <strong>Enable Promotional Popup Modal</strong>
+                        <span className={`state-tag ${settings.promoModal?.enabled ? 'tag-enabled' : 'tag-disabled'}`}>
+                          {settings.promoModal?.enabled ? '✓ Enabled & Saved' : '✕ Disabled'}
+                        </span>
+                      </div>
                       <p>When enabled and within the scheduled dates, visitors will see this popup on the website.</p>
                     </div>
                     <label className="switch">
                       <input 
                         type="checkbox"
-                        checked={settings.promoModal.enabled}
-                        onChange={(e) => setSettings(prev => ({
-                          ...prev,
-                          promoModal: { ...prev.promoModal, enabled: e.target.checked }
-                        }))}
+                        checked={settings.promoModal?.enabled || false}
+                        onChange={(e) => handleTogglePromoEnabled(e.target.checked)}
                       />
                       <span className="slider round"></span>
                     </label>
@@ -1332,6 +1417,74 @@ export default function AdminPage() {
         .promo-status-badge.upcoming { background: #fef9c3; color: #a16207; border: 1px solid #fde047; }
         .promo-status-badge.expired { background: #fee2e2; color: #b91c1c; border: 1px solid #fca5a5; }
         .promo-status-badge.disabled { background: var(--neutral-200); color: var(--neutral-600); }
+
+        .status-and-test-group {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          flex-wrap: wrap;
+        }
+        .btn-quick-test {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          padding: 4px 12px;
+          background: var(--primary-700);
+          color: #ffffff;
+          border-radius: var(--radius-full);
+          font-size: 0.78rem;
+          font-weight: 600;
+          text-decoration: none;
+          transition: var(--transition);
+        }
+        .btn-quick-test:hover {
+          background: var(--primary-900);
+          color: #ffffff;
+          transform: translateY(-1px);
+        }
+        .btn-quick-reset-cache {
+          display: inline-flex;
+          align-items: center;
+          gap: 5px;
+          padding: 4px 12px;
+          background: #ffffff;
+          color: var(--neutral-700);
+          border: 1px solid var(--neutral-300);
+          border-radius: var(--radius-full);
+          font-size: 0.76rem;
+          font-weight: 600;
+          cursor: pointer;
+          transition: var(--transition);
+        }
+        .btn-quick-reset-cache:hover {
+          background: var(--neutral-100);
+          color: var(--primary-800);
+          border-color: var(--primary-600);
+        }
+
+        .enable-status-line {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          margin-bottom: 2px;
+        }
+        .state-tag {
+          font-size: 0.72rem;
+          font-weight: 700;
+          padding: 2px 8px;
+          border-radius: var(--radius-full);
+          text-transform: uppercase;
+          letter-spacing: 0.04em;
+        }
+        .state-tag.tag-enabled {
+          background: #dcfce7;
+          color: #15803d;
+          border: 1px solid #86efac;
+        }
+        .state-tag.tag-disabled {
+          background: var(--neutral-200);
+          color: var(--neutral-600);
+        }
 
         .header-icon-box {
           width: 48px;

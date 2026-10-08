@@ -41,6 +41,22 @@ export const DEFAULT_SETTINGS = {
 };
 
 /**
+ * Format Date to local YYYY-MM-DDTHH:mm string suitable for <input type="datetime-local">
+ */
+export function formatLocalDateTime(date) {
+  if (!date) return '';
+  const d = new Date(date);
+  if (isNaN(d.getTime())) return '';
+  const pad = (n) => String(n).padStart(2, '0');
+  const year = d.getFullYear();
+  const month = pad(d.getMonth() + 1);
+  const day = pad(d.getDate());
+  const hours = pad(d.getHours());
+  const minutes = pad(d.getMinutes());
+  return `${year}-${month}-${day}T${hours}:${minutes}`;
+}
+
+/**
  * Determine if the promotional modal is currently active based on schedule
  */
 export function getPromoModalStatus(promo) {
@@ -50,14 +66,14 @@ export function getPromoModalStatus(promo) {
 
   const now = new Date();
 
-  if (promo.startDateTime) {
+  if (promo.startDateTime && typeof promo.startDateTime === 'string' && promo.startDateTime.trim() !== '') {
     const start = new Date(promo.startDateTime);
     if (!isNaN(start.getTime()) && now < start) {
       return { status: 'upcoming', label: 'Scheduled (Upcoming)', active: false, start };
     }
   }
 
-  if (promo.endDateTime) {
+  if (promo.endDateTime && typeof promo.endDateTime === 'string' && promo.endDateTime.trim() !== '') {
     const end = new Date(promo.endDateTime);
     if (!isNaN(end.getTime()) && now > end) {
       return { status: 'expired', label: 'Expired (Ended)', active: false, end };
@@ -95,7 +111,7 @@ export function getWhatsAppUrl(phone, customText) {
 }
 
 /**
- * Get current clinic settings from localStorage or defaults
+ * Get current clinic settings from localStorage or defaults with deep merge
  */
 export function getClinicSettings() {
   if (typeof window === 'undefined') return DEFAULT_SETTINGS;
@@ -104,7 +120,14 @@ export function getClinicSettings() {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) return DEFAULT_SETTINGS;
     const parsed = JSON.parse(raw);
-    return { ...DEFAULT_SETTINGS, ...parsed };
+    return { 
+      ...DEFAULT_SETTINGS, 
+      ...parsed,
+      promoModal: {
+        ...DEFAULT_SETTINGS.promoModal,
+        ...(parsed.promoModal || {})
+      }
+    };
   } catch (e) {
     console.error('Error loading clinic settings:', e);
     return DEFAULT_SETTINGS;
@@ -112,17 +135,35 @@ export function getClinicSettings() {
 }
 
 /**
- * Save clinic settings and notify active components
+ * Save clinic settings and notify active components with deep merge & storage safety
  */
 export function saveClinicSettings(newSettings) {
   if (typeof window === 'undefined') return newSettings;
 
   try {
     const current = getClinicSettings();
-    const merged = { ...current, ...newSettings };
+    const merged = { 
+      ...current, 
+      ...newSettings,
+      promoModal: {
+        ...current.promoModal,
+        ...(newSettings.promoModal || {})
+      }
+    };
     localStorage.setItem(STORAGE_KEY, JSON.stringify(merged));
 
-    // Dispatch event so ChatBotWidget and other components update immediately
+    // Clear session dismissal cache so changes can be tested immediately in the browser
+    try {
+      if (typeof sessionStorage !== 'undefined') {
+        Object.keys(sessionStorage).forEach(k => {
+          if (k.startsWith('revere_promo_dismissed')) {
+            sessionStorage.removeItem(k);
+          }
+        });
+      }
+    } catch (_) {}
+
+    // Dispatch event so ChatBotWidget and PromotionalModal update immediately
     window.dispatchEvent(new CustomEvent('revere-settings-updated', { detail: merged }));
     return merged;
   } catch (e) {
@@ -137,6 +178,13 @@ export function saveClinicSettings(newSettings) {
 export function resetClinicSettings() {
   if (typeof window !== 'undefined') {
     localStorage.removeItem(STORAGE_KEY);
+    try {
+      Object.keys(sessionStorage).forEach(k => {
+        if (k.startsWith('revere_promo_dismissed')) {
+          sessionStorage.removeItem(k);
+        }
+      });
+    } catch (_) {}
     window.dispatchEvent(new CustomEvent('revere-settings-updated', { detail: DEFAULT_SETTINGS }));
   }
   return DEFAULT_SETTINGS;
