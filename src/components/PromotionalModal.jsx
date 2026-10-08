@@ -108,7 +108,7 @@ export default function PromotionalModal({ forceOpen = false, previewData = null
 
         {/* Media / Image Banner */}
         {promo.contentType === 'image' && promo.imageUrl && (
-          <div className="promo-media-container">
+          <div className={`promo-media-container fit-${promo.imageFit || 'contain'}`}>
             <a 
               href={promo.ctaUrl || 'https://reverewellness.janeapp.com/'} 
               target="_blank" 
@@ -118,7 +118,7 @@ export default function PromotionalModal({ forceOpen = false, previewData = null
               <img 
                 src={promo.imageUrl} 
                 alt={promo.title || 'Special Promotion'} 
-                className="promo-image-element"
+                className={`promo-image-element fit-${promo.imageFit || 'contain'}`}
               />
             </a>
           </div>
@@ -133,58 +133,62 @@ export default function PromotionalModal({ forceOpen = false, previewData = null
         )}
 
         {/* Modal Text & Action Content */}
-        <div className="promo-body-content">
-          {promo.badgeText && (
-            <div className="promo-badge-tag">
-              <Sparkles size={14} className="tag-sparkle" />
-              <span>{promo.badgeText}</span>
+        {(promo.title || promo.subtitle || promo.bodyText || promo.ctaUrl || promo.secondaryCtaPhone) && (
+          <div className="promo-body-content">
+            {promo.badgeText && (
+              <div className="promo-badge-tag">
+                <Sparkles size={14} className="tag-sparkle" />
+                <span>{promo.badgeText}</span>
+              </div>
+            )}
+
+            {promo.title && (
+              <h2 className="promo-title">{promo.title}</h2>
+            )}
+            
+            {promo.subtitle && (
+              <div className="promo-subtitle">{promo.subtitle}</div>
+            )}
+
+            {promo.bodyText && (
+              <p className="promo-description">{promo.bodyText}</p>
+            )}
+
+            {/* Action CTAs */}
+            <div className="promo-actions-row">
+              {promo.ctaUrl && (
+                <a 
+                  href={promo.ctaUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-promo-primary"
+                  onClick={handleDismiss}
+                >
+                  <Calendar size={17} />
+                  <span>{promo.ctaText || 'Claim Offer & Book Online'}</span>
+                  <ExternalLink size={13} />
+                </a>
+              )}
+
+              {promo.secondaryCtaPhone && (
+                <a 
+                  href={`tel:${promo.secondaryCtaPhone}`}
+                  className="btn-promo-secondary"
+                  onClick={handleDismiss}
+                >
+                  <Phone size={16} />
+                  <span>{promo.secondaryCtaText || 'Call Reception'}</span>
+                </a>
+              )}
             </div>
-          )}
 
-          <h2 className="promo-title">{promo.title || 'Special Clinic Promotion'}</h2>
-          
-          {promo.subtitle && (
-            <div className="promo-subtitle">{promo.subtitle}</div>
-          )}
-
-          {promo.bodyText && (
-            <p className="promo-description">{promo.bodyText}</p>
-          )}
-
-          {/* Action CTAs */}
-          <div className="promo-actions-row">
-            {promo.ctaUrl && (
-              <a 
-                href={promo.ctaUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-promo-primary"
-                onClick={handleDismiss}
-              >
-                <Calendar size={17} />
-                <span>{promo.ctaText || 'Claim Offer & Book Online'}</span>
-                <ExternalLink size={13} />
-              </a>
-            )}
-
-            {promo.secondaryCtaPhone && (
-              <a 
-                href={`tel:${promo.secondaryCtaPhone}`}
-                className="btn-promo-secondary"
-                onClick={handleDismiss}
-              >
-                <Phone size={16} />
-                <span>{promo.secondaryCtaText || 'Call Reception'}</span>
-              </a>
-            )}
+            <div className="promo-footer-dismiss">
+              <button className="dismiss-link" onClick={handleDismiss}>
+                No thanks, continue browsing
+              </button>
+            </div>
           </div>
-
-          <div className="promo-footer-dismiss">
-            <button className="dismiss-link" onClick={handleDismiss}>
-              No thanks, continue browsing
-            </button>
-          </div>
-        </div>
+        )}
       </div>
 
       <style>{`
@@ -210,9 +214,10 @@ export default function PromotionalModal({ forceOpen = false, previewData = null
         .promo-modal-card {
           width: 100%;
           max-width: 520px;
+          max-height: 92vh;
+          overflow-y: auto;
           background: #ffffff;
           border-radius: var(--radius-xl);
-          overflow: hidden;
           box-shadow: 0 30px 70px -15px rgba(0, 0, 0, 0.5);
           border: 1.5px solid rgba(216, 178, 141, 0.45);
           position: relative;
@@ -249,29 +254,60 @@ export default function PromotionalModal({ forceOpen = false, previewData = null
           transform: scale(1.08);
         }
 
-        /* Image Media Container */
+        /* Image Media Container - Always Fit & Auto Adjust */
         .promo-media-container {
           width: 100%;
-          max-height: 280px;
-          overflow: hidden;
-          background: #181c16;
+          background: #141712;
           position: relative;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          overflow: hidden;
+        }
+
+        /* Default: Always Fit & Auto Adjust (Contain - never cut off) */
+        .promo-media-container.fit-contain,
+        .promo-media-container {
+          max-height: min(60vh, 480px);
         }
         .promo-image-link {
-          display: block;
+          display: flex;
+          align-items: center;
+          justify-content: center;
           width: 100%;
           height: 100%;
+          text-decoration: none;
         }
         .promo-image-element {
           width: 100%;
+          height: auto;
+          max-height: min(60vh, 480px);
+          object-fit: contain;
+          display: block;
+          margin: 0 auto;
+          transition: transform 0.35s ease;
+        }
+        .promo-image-link:hover .promo-image-element {
+          transform: scale(1.015);
+        }
+
+        /* Mode: Cover (Crop to fixed banner height) */
+        .promo-media-container.fit-cover {
+          height: 280px;
+        }
+        .promo-media-container.fit-cover .promo-image-element {
           height: 100%;
           max-height: 280px;
           object-fit: cover;
-          display: block;
-          transition: transform 0.5s ease;
         }
-        .promo-image-link:hover .promo-image-element {
-          transform: scale(1.03);
+
+        /* Mode: Natural (Full unconstrained height with scroll) */
+        .promo-media-container.fit-natural {
+          max-height: none;
+        }
+        .promo-media-container.fit-natural .promo-image-element {
+          max-height: none;
+          object-fit: contain;
         }
 
         /* Animation Script Container */

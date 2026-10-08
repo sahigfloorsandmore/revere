@@ -760,6 +760,75 @@ export default function AdminPage() {
                             className="form-input"
                           />
                         </div>
+
+                        {/* Image Sizing & Fit Mode Options */}
+                        <div className="image-fit-control">
+                          <label className="field-label-sm">Image Sizing & Display Fit:</label>
+                          <div className="fit-options-group">
+                            <label className={`fit-pill ${settings.promoModal.imageFit === 'contain' || !settings.promoModal.imageFit ? 'active' : ''}`}>
+                              <input 
+                                type="radio" 
+                                name="imageFit" 
+                                value="contain"
+                                checked={settings.promoModal.imageFit === 'contain' || !settings.promoModal.imageFit}
+                                onChange={() => {
+                                  const updated = {
+                                    ...settings,
+                                    promoModal: { ...settings.promoModal, imageFit: 'contain' }
+                                  };
+                                  setSettings(updated);
+                                  saveClinicSettings(updated);
+                                }}
+                              />
+                              <div className="fit-pill-text">
+                                <strong>Always Fit Entire Graphic (Recommended)</strong>
+                                <span>Auto-adjusts so 100% of the image is visible without ever being cut off or cropped.</span>
+                              </div>
+                            </label>
+
+                            <label className={`fit-pill ${settings.promoModal.imageFit === 'cover' ? 'active' : ''}`}>
+                              <input 
+                                type="radio" 
+                                name="imageFit" 
+                                value="cover"
+                                checked={settings.promoModal.imageFit === 'cover'}
+                                onChange={() => {
+                                  const updated = {
+                                    ...settings,
+                                    promoModal: { ...settings.promoModal, imageFit: 'cover' }
+                                  };
+                                  setSettings(updated);
+                                  saveClinicSettings(updated);
+                                }}
+                              />
+                              <div className="fit-pill-text">
+                                <strong>Crop & Fill Banner (Cover)</strong>
+                                <span>Fills the banner box completely (may crop top/bottom on tall flyers).</span>
+                              </div>
+                            </label>
+
+                            <label className={`fit-pill ${settings.promoModal.imageFit === 'natural' ? 'active' : ''}`}>
+                              <input 
+                                type="radio" 
+                                name="imageFit" 
+                                value="natural"
+                                checked={settings.promoModal.imageFit === 'natural'}
+                                onChange={() => {
+                                  const updated = {
+                                    ...settings,
+                                    promoModal: { ...settings.promoModal, imageFit: 'natural' }
+                                  };
+                                  setSettings(updated);
+                                  saveClinicSettings(updated);
+                                }}
+                              />
+                              <div className="fit-pill-text">
+                                <strong>Natural Tall Poster Height</strong>
+                                <span>Displays full portrait height, with scrolling inside the popup card if needed.</span>
+                              </div>
+                            </label>
+                          </div>
+                        </div>
                       </div>
                     )}
 
@@ -1712,14 +1781,17 @@ export default function AdminPage() {
           border: 1px solid var(--neutral-300);
           border-radius: var(--radius-md);
           overflow: hidden;
-          background: #181c16;
+          background: #141712;
           display: flex;
           flex-direction: column;
         }
         .image-preview-thumb {
           width: 100%;
-          max-height: 220px;
-          object-fit: cover;
+          height: auto;
+          max-height: 280px;
+          object-fit: contain;
+          display: block;
+          margin: 0 auto;
         }
         .image-preview-controls {
           padding: 12px 16px;
@@ -1727,6 +1799,7 @@ export default function AdminPage() {
           display: flex;
           justify-content: space-between;
           align-items: center;
+          border-top: 1px solid var(--neutral-200);
         }
         .preview-status-text {
           font-size: 0.84rem;
@@ -1754,7 +1827,56 @@ export default function AdminPage() {
           font-weight: 600;
           color: var(--neutral-600);
           display: block;
-          margin-bottom: 4px;
+          margin-bottom: 6px;
+        }
+
+        /* Image Sizing & Fit Mode Options */
+        .image-fit-control {
+          margin-top: 18px;
+          padding-top: 16px;
+          border-top: 1px dashed var(--neutral-300);
+        }
+        .fit-options-group {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+        }
+        .fit-pill {
+          display: flex;
+          align-items: flex-start;
+          gap: 12px;
+          padding: 10px 14px;
+          border-radius: var(--radius-md);
+          background: var(--neutral-50);
+          border: 1.5px solid var(--neutral-200);
+          cursor: pointer;
+          transition: var(--transition);
+        }
+        .fit-pill:hover {
+          border-color: var(--primary-400);
+          background: #ffffff;
+        }
+        .fit-pill.active {
+          background: var(--primary-50);
+          border-color: var(--primary-600);
+        }
+        .fit-pill input {
+          margin-top: 3px;
+          accent-color: var(--primary-700);
+        }
+        .fit-pill-text {
+          display: flex;
+          flex-direction: column;
+          gap: 2px;
+        }
+        .fit-pill-text strong {
+          font-size: 0.86rem;
+          color: var(--primary-900);
+        }
+        .fit-pill-text span {
+          font-size: 0.78rem;
+          color: var(--neutral-600);
+          line-height: 1.35;
         }
 
         .code-textarea {

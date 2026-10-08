@@ -25,6 +25,7 @@ export const DEFAULT_SETTINGS = {
     badgeText: 'Special Announcement',
     contentType: 'image', // 'image' | 'script'
     imageUrl: '', // Uploaded image data URL or external URL
+    imageFit: 'contain', // 'contain' (Always Fit - never cut off) | 'cover' (Crop & Fill) | 'natural' (Full Natural Height)
     animationScript: '', // Custom animation code, embed script, or SVG/Lottie/HTML
     ctaText: 'Book Appointment Now',
     ctaUrl: 'https://reverewellness.janeapp.com/',
