@@ -16,9 +16,56 @@ export const DEFAULT_SETTINGS = {
   enableCallbackForm: true,
   enableJaneBookingShortcut: true,
 
+  // Promotional Popup / Ads Modal Settings
+  promoModal: {
+    enabled: false,
+    title: 'Seasonal Wellness Special',
+    subtitle: 'Exclusive Clinic Offer • Revere Massage & Wellness',
+    bodyText: 'Experience deep restorative relief. Book your Registered Massage Therapy, Physiotherapy, or Active Rehab session online with instant confirmation.',
+    badgeText: 'Special Announcement',
+    contentType: 'image', // 'image' | 'script'
+    imageUrl: '', // Uploaded image data URL or external URL
+    animationScript: '', // Custom animation code, embed script, or SVG/Lottie/HTML
+    ctaText: 'Book Appointment Now',
+    ctaUrl: 'https://reverewellness.janeapp.com/',
+    secondaryCtaText: 'Call (604) 503-0855',
+    secondaryCtaPhone: '6045030855',
+    startDateTime: '', // e.g. "2026-10-01T09:00"
+    endDateTime: '',   // e.g. "2026-10-31T20:00"
+    delaySeconds: 3,   // seconds before showing popup
+    showOncePerSession: true
+  },
+
   // Admin security
   adminPin: 'revere2026'
 };
+
+/**
+ * Determine if the promotional modal is currently active based on schedule
+ */
+export function getPromoModalStatus(promo) {
+  if (!promo || !promo.enabled) {
+    return { status: 'disabled', label: 'Disabled', active: false };
+  }
+
+  const now = new Date();
+
+  if (promo.startDateTime) {
+    const start = new Date(promo.startDateTime);
+    if (!isNaN(start.getTime()) && now < start) {
+      return { status: 'upcoming', label: 'Scheduled (Upcoming)', active: false, start };
+    }
+  }
+
+  if (promo.endDateTime) {
+    const end = new Date(promo.endDateTime);
+    if (!isNaN(end.getTime()) && now > end) {
+      return { status: 'expired', label: 'Expired (Ended)', active: false, end };
+    }
+  }
+
+  return { status: 'active', label: 'Active Now (Visible)', active: true };
+}
 
 const STORAGE_KEY = 'revere_clinic_settings';
 

@@ -9,6 +9,7 @@ import ServicesPage from './pages/ServicesPage';
 import PractitionersPage from './pages/PractitionersPage';
 import PractitionerDetailPage from './pages/PractitionerDetailPage';
 import AdminPage from './pages/AdminPage';
+import PromotionalModal from './components/PromotionalModal';
 
 export default function App() {
   return (
@@ -28,6 +29,7 @@ export default function App() {
         </main>
         <Footer />
         <ChatBotWidget />
+        <PromotionalModal />
       </div>
     </BrowserRouter>
   );
