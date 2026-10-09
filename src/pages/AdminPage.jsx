@@ -1356,14 +1356,45 @@ export default function AdminPage() {
                           type="number"
                           min="0"
                           max="30"
-                          value={settings.promoModal.delaySeconds || 3}
+                          value={settings.promoModal.delaySeconds !== undefined ? settings.promoModal.delaySeconds : 2}
                           onChange={(e) => setSettings(prev => ({
                             ...prev,
                             promoModal: { ...prev.promoModal, delaySeconds: parseInt(e.target.value) || 0 }
                           }))}
                           className="form-input"
                         />
-                        <span className="field-hint">Time before modal appears after page load (default: 3s).</span>
+                        <span className="field-hint">Time before modal appears after page load (default: 2s).</span>
+                      </div>
+
+                      <div className="form-field">
+                        <label className="field-label">Display Frequency & Refresh Behavior</label>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '14px', marginTop: '6px' }}>
+                          <label className="switch">
+                            <input 
+                              type="checkbox"
+                              checked={settings.promoModal.showOncePerSession !== false}
+                              onChange={(e) => {
+                                const updated = {
+                                  ...settings,
+                                  promoModal: { ...settings.promoModal, showOncePerSession: e.target.checked }
+                                };
+                                setSettings(updated);
+                                saveClinicSettings(updated);
+                              }}
+                            />
+                            <span className="slider round"></span>
+                          </label>
+                          <div>
+                            <strong style={{ fontSize: '0.92rem', color: 'var(--neutral-800)' }}>
+                              {settings.promoModal.showOncePerSession !== false ? 'Show Once Per Visitor Session' : 'Show on Every Page Refresh (Testing Mode)'}
+                            </strong>
+                            <p style={{ margin: '2px 0 0', fontSize: '0.78rem', color: 'var(--neutral-500)', lineHeight: '1.4' }}>
+                              {settings.promoModal.showOncePerSession !== false 
+                                ? 'Visitors only see it once until they restart browser (prevents annoying patients).' 
+                                : 'Pop-up will appear every single time you refresh the page (ideal for testing).'}
+                            </p>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
