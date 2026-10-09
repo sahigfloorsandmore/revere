@@ -8,13 +8,52 @@ import {
   Tag, 
   Clock, 
   ArrowRight,
-  ShieldCheck
+  ShieldCheck,
+  Volume2,
+  VolumeX,
+  Play
 } from 'lucide-react';
-import { getClinicSettings, getPromoModalStatus } from '../lib/settings';
+import { 
+  getClinicSettings, 
+  getPromoModalStatus, 
+  getMediaItem, 
+  formatVideoEmbedUrl 
+} from '../lib/settings';
 
 export default function PromotionalModal({ forceOpen = false, previewData = null, onClose = null }) {
   const [isOpen, setIsOpen] = useState(forceOpen);
   const [settings, setSettings] = useState(getClinicSettings());
+  const [videoBlobUrl, setVideoBlobUrl] = useState('');
+  const [isMuted, setIsMuted] = useState(true);
+
+  // Use preview data if provided (for Admin live preview)
+  const promo = previewData || settings.promoModal;
+
+  // Resolve video blob URL if stored in IndexedDB or direct link
+  useEffect(() => {
+    let activeUrl = null;
+    if (promo?.contentType === 'video' && promo?.videoUrl) {
+      if (promo.videoUrl.startsWith('idb:')) {
+        const key = promo.videoUrl.replace('idb:', '');
+        getMediaItem(key).then(blob => {
+          if (blob) {
+            activeUrl = URL.createObjectURL(blob);
+            setVideoBlobUrl(activeUrl);
+          }
+        });
+      } else {
+        setVideoBlobUrl(promo.videoUrl);
+      }
+    } else {
+      setVideoBlobUrl('');
+    }
+
+    return () => {
+      if (activeUrl && activeUrl.startsWith('blob:')) {
+        URL.revokeObjectURL(activeUrl);
+      }
+    };
+  }, [promo?.contentType, promo?.videoUrl]);
 
   useEffect(() => {
     if (forceOpen) {
@@ -34,21 +73,21 @@ export default function PromotionalModal({ forceOpen = false, previewData = null
       const current = getClinicSettings();
       setSettings(current);
 
-      const promo = current.promoModal;
-      if (!promo || !promo.enabled) {
+      const currentPromo = current.promoModal;
+      if (!currentPromo || !currentPromo.enabled) {
         setIsOpen(false);
         return;
       }
 
-      const { active } = getPromoModalStatus(promo);
+      const { active } = getPromoModalStatus(currentPromo);
       if (!active) {
         setIsOpen(false);
         return;
       }
 
       // Check if user has already dismissed this promotion in the current session
-      if (promo.showOncePerSession !== false) {
-        const dismissKey = `revere_promo_dismissed_${promo.title || 'active'}`;
+      if (currentPromo.showOncePerSession !== false) {
+        const dismissKey = `revere_promo_dismissed_${currentPromo.title || 'active'}`;
         const dismissed = sessionStorage.getItem(dismissKey);
         if (dismissed === 'true' && !forceOpen) {
           setIsOpen(false);
@@ -57,7 +96,7 @@ export default function PromotionalModal({ forceOpen = false, previewData = null
       }
 
       // Set timeout delay
-      const delay = Math.max(0, (promo.delaySeconds !== undefined ? promo.delaySeconds : 2)) * 1000;
+      const delay = Math.max(0, (currentPromo.delaySeconds !== undefined ? currentPromo.delaySeconds : 2)) * 1000;
       if (activeTimer) clearTimeout(activeTimer);
       activeTimer = setTimeout(() => {
         setIsOpen(true);
@@ -79,9 +118,6 @@ export default function PromotionalModal({ forceOpen = false, previewData = null
       window.removeEventListener('revere-settings-updated', handleUpdate);
     };
   }, [forceOpen]);
-
-  // Use preview data if provided (for Admin live preview)
-  const promo = previewData || settings.promoModal;
 
   if (!isOpen || !promo) return null;
 
@@ -124,6 +160,45 @@ export default function PromotionalModal({ forceOpen = false, previewData = null
                 className="promo-image-element"
               />
             </a>
+          </div>
+        )}
+
+        {/* Media / Video Player (MP4 / WebM / Reel / YouTube / Vimeo) */}
+        {promo.contentType === 'video' && (videoBlobUrl || promo.videoUrl) && (
+          <div className="promo-media-container promo-video-container">
+            {(promo.videoUrl?.includes('youtube') || promo.videoUrl?.includes('youtu.be') || promo.videoUrl?.includes('vimeo')) ? (
+              <div className="promo-video-iframe-wrapper">
+                <iframe
+                  src={formatVideoEmbedUrl(promo.videoUrl)}
+                  title={promo.title || 'Clinic Promotional Video'}
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                  className="promo-video-iframe"
+                />
+              </div>
+            ) : (
+              <div className="promo-video-wrapper">
+                <video
+                  src={videoBlobUrl || promo.videoUrl}
+                  autoPlay={promo.videoAutoplay !== false}
+                  muted={isMuted}
+                  loop={promo.videoLoop !== false}
+                  controls={promo.videoControls !== false}
+                  playsInline
+                  className="promo-video-element"
+                />
+                <button
+                  type="button"
+                  className="promo-sound-toggle-btn"
+                  onClick={() => setIsMuted(!isMuted)}
+                  title={isMuted ? 'Unmute Sound' : 'Mute Sound'}
+                >
+                  {isMuted ? <VolumeX size={15} /> : <Volume2 size={15} />}
+                  <span>{isMuted ? 'Tap for Sound' : 'Mute'}</span>
+                </button>
+              </div>
+            )}
           </div>
         )}
 
@@ -343,6 +418,70 @@ export default function PromotionalModal({ forceOpen = false, previewData = null
           gap: 10px;
           background: #ffffff;
           border-radius: 0 0 var(--radius-xl) var(--radius-xl);
+        }
+
+        /* Video Container & Player */
+        .promo-video-container {
+          background: #0b0d0a;
+          position: relative;
+        }
+        .promo-video-wrapper {
+          position: relative;
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: #0b0d0a;
+        }
+        .promo-video-element {
+          max-width: 100%;
+          max-height: 72vh;
+          width: auto;
+          height: auto;
+          object-fit: contain;
+          display: block;
+          margin: 0 auto;
+          border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+        }
+        .promo-sound-toggle-btn {
+          position: absolute;
+          bottom: 16px;
+          right: 16px;
+          background: rgba(18, 20, 16, 0.82);
+          color: #ffffff;
+          border: 1px solid rgba(255, 255, 255, 0.35);
+          border-radius: var(--radius-full);
+          padding: 6px 14px;
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          font-size: 0.76rem;
+          font-weight: 600;
+          cursor: pointer;
+          backdrop-filter: blur(8px);
+          transition: var(--transition);
+          z-index: 10;
+        }
+        .promo-sound-toggle-btn:hover {
+          background: #000000;
+          transform: scale(1.05);
+        }
+        .promo-video-iframe-wrapper {
+          width: 100%;
+          position: relative;
+          padding-bottom: 56.25%; /* 16:9 ratio */
+          height: 0;
+          overflow: hidden;
+          background: #000000;
+          border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+        }
+        .promo-video-iframe {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          border: 0;
         }
 
         /* Animation Script Container */

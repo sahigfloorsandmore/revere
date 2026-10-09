@@ -29,7 +29,11 @@ import {
   Layers,
   Play,
   X,
-  FileText
+  FileText,
+  Film,
+  Video as VideoIcon,
+  Volume2,
+  VolumeX
 } from 'lucide-react';
 import { 
   getClinicSettings, 
@@ -38,7 +42,11 @@ import {
   cleanPhoneForWhatsApp, 
   getWhatsAppUrl,
   getPromoModalStatus,
-  formatLocalDateTime
+  formatLocalDateTime,
+  saveMediaItem,
+  getMediaItem,
+  deleteMediaItem,
+  formatVideoEmbedUrl
 } from '../lib/settings';
 import PromotionalModal from '../components/PromotionalModal';
 
@@ -62,6 +70,33 @@ export default function AdminPage() {
   const [inquiries, setInquiries] = useState([]);
 
   const fileInputRef = useRef(null);
+  const videoFileInputRef = useRef(null);
+  const [adminVideoPreviewUrl, setAdminVideoPreviewUrl] = useState('');
+
+  // Resolve video preview if stored in IndexedDB or direct link
+  useEffect(() => {
+    let activeUrl = null;
+    const vUrl = settings.promoModal?.videoUrl;
+    if (vUrl?.startsWith('idb:')) {
+      const key = vUrl.replace('idb:', '');
+      getMediaItem(key).then(blob => {
+        if (blob) {
+          activeUrl = URL.createObjectURL(blob);
+          setAdminVideoPreviewUrl(activeUrl);
+        }
+      });
+    } else if (vUrl) {
+      setAdminVideoPreviewUrl(vUrl);
+    } else {
+      setAdminVideoPreviewUrl('');
+    }
+
+    return () => {
+      if (activeUrl && activeUrl.startsWith('blob:')) {
+        URL.revokeObjectURL(activeUrl);
+      }
+    };
+  }, [settings.promoModal?.videoUrl]);
 
   useEffect(() => {
     // Check if already authenticated this session
@@ -196,6 +231,53 @@ export default function AdminPage() {
     setSettings(updated);
     saveClinicSettings(updated);
     if (fileInputRef.current) fileInputRef.current.value = '';
+  };
+
+  const handleVideoFileChange = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    if (!file.type.startsWith('video/')) {
+      alert('Please select a valid video file (MP4, WebM, MOV).');
+      return;
+    }
+
+    if (file.size > 50 * 1024 * 1024) {
+      alert('Video file is larger than 50MB. Please use a compressed clip or paste an external video link.');
+      return;
+    }
+
+    await saveMediaItem('promo_video_blob', file);
+    const blobUrl = URL.createObjectURL(file);
+    setAdminVideoPreviewUrl(blobUrl);
+
+    const updated = {
+      ...settings,
+      promoModal: {
+        ...settings.promoModal,
+        videoUrl: 'idb:promo_video_blob',
+        contentType: 'video'
+      }
+    };
+    setSettings(updated);
+    saveClinicSettings(updated);
+    setSaveToast(true);
+    setTimeout(() => setSaveToast(false), 3000);
+  };
+
+  const handleRemoveVideo = async () => {
+    await deleteMediaItem('promo_video_blob');
+    setAdminVideoPreviewUrl('');
+    const updated = {
+      ...settings,
+      promoModal: {
+        ...settings.promoModal,
+        videoUrl: ''
+      }
+    };
+    setSettings(updated);
+    saveClinicSettings(updated);
+    if (videoFileInputRef.current) videoFileInputRef.current.value = '';
   };
 
   const handleSetQuickSchedule = (days) => {
@@ -670,15 +752,41 @@ export default function AdminPage() {
                           name="contentType" 
                           value="image"
                           checked={settings.promoModal.contentType === 'image'}
-                          onChange={() => setSettings(prev => ({
-                            ...prev,
-                            promoModal: { ...prev.promoModal, contentType: 'image' }
-                          }))}
+                          onChange={() => {
+                            const updated = {
+                              ...settings,
+                              promoModal: { ...settings.promoModal, contentType: 'image' }
+                            };
+                            setSettings(updated);
+                            saveClinicSettings(updated);
+                          }}
                         />
                         <ImageIcon size={20} />
                         <div>
                           <strong>Upload Image Banner</strong>
-                          <p>Upload a promotional poster, coupon banner, or photo.</p>
+                          <p>Upload a promotional poster, flyer, or photo.</p>
+                        </div>
+                      </label>
+
+                      <label className={`type-card ${settings.promoModal.contentType === 'video' ? 'active' : ''}`}>
+                        <input 
+                          type="radio" 
+                          name="contentType" 
+                          value="video"
+                          checked={settings.promoModal.contentType === 'video'}
+                          onChange={() => {
+                            const updated = {
+                              ...settings,
+                              promoModal: { ...settings.promoModal, contentType: 'video' }
+                            };
+                            setSettings(updated);
+                            saveClinicSettings(updated);
+                          }}
+                        />
+                        <Film size={20} />
+                        <div>
+                          <strong>Video Clip / Reel Ad</strong>
+                          <p>Upload MP4 video (Canva, Reel) or paste a video link.</p>
                         </div>
                       </label>
 
@@ -688,10 +796,14 @@ export default function AdminPage() {
                           name="contentType" 
                           value="script"
                           checked={settings.promoModal.contentType === 'script'}
-                          onChange={() => setSettings(prev => ({
-                            ...prev,
-                            promoModal: { ...prev.promoModal, contentType: 'script' }
-                          }))}
+                          onChange={() => {
+                            const updated = {
+                              ...settings,
+                              promoModal: { ...settings.promoModal, contentType: 'script' }
+                            };
+                            setSettings(updated);
+                            saveClinicSettings(updated);
+                          }}
                         />
                         <Code size={20} />
                         <div>
@@ -866,6 +978,201 @@ export default function AdminPage() {
                             <div className="enable-info">
                               <strong>Show Text Headline & Details Below Image</strong>
                               <p>Turn this OFF if your uploaded image is already a complete flyer that has all the headline text designed into it.</p>
+                            </div>
+                            <label className="switch">
+                              <input 
+                                type="checkbox"
+                                checked={settings.promoModal.showTextDetails !== false}
+                                onChange={(e) => {
+                                  const updated = {
+                                    ...settings,
+                                    promoModal: { ...settings.promoModal, showTextDetails: e.target.checked }
+                                  };
+                                  setSettings(updated);
+                                  saveClinicSettings(updated);
+                                }}
+                              />
+                              <span className="slider round"></span>
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* VIDEO UPLOAD & CONFIG UI */}
+                    {settings.promoModal.contentType === 'video' && (
+                      <div className="creative-panel">
+                        <label className="field-label">Promotional Video Ad</label>
+
+                        {adminVideoPreviewUrl ? (
+                          <div className="image-preview-box video-admin-preview-box">
+                            {(settings.promoModal.videoUrl?.includes('youtube') || settings.promoModal.videoUrl?.includes('youtu.be') || settings.promoModal.videoUrl?.includes('vimeo')) ? (
+                              <div className="promo-video-iframe-wrapper">
+                                <iframe
+                                  src={formatVideoEmbedUrl(settings.promoModal.videoUrl)}
+                                  title="Admin Video Preview"
+                                  frameBorder="0"
+                                  className="promo-video-iframe"
+                                />
+                              </div>
+                            ) : (
+                              <video 
+                                src={adminVideoPreviewUrl} 
+                                controls 
+                                className="video-admin-player"
+                              />
+                            )}
+                            <div className="image-preview-controls">
+                              <span className="preview-status-text">✓ Video Clip Ready</span>
+                              <button 
+                                type="button" 
+                                className="btn-remove-image"
+                                onClick={handleRemoveVideo}
+                              >
+                                <Trash2 size={14} /> Remove Video
+                              </button>
+                            </div>
+                          </div>
+                        ) : (
+                          <div 
+                            className="upload-dropzone"
+                            onClick={() => videoFileInputRef.current?.click()}
+                          >
+                            <Film size={34} className="upload-icon" />
+                            <strong>Click to Upload Promotional Video File</strong>
+                            <p>Supports MP4, WebM, MOV (Canva Video, Instagram Reel, Promo Clip - Max 50MB)</p>
+                            <button type="button" className="btn-browse-file">
+                              Choose Video File
+                            </button>
+                          </div>
+                        )}
+
+                        <input 
+                          type="file"
+                          ref={videoFileInputRef}
+                          style={{ display: 'none' }}
+                          accept="video/mp4,video/webm,video/quicktime,video/*"
+                          onChange={handleVideoFileChange}
+                        />
+
+                        {/* Or Video URL input */}
+                        <div className="url-alternative">
+                          <label className="field-label-sm">Or Enter Direct Video / YouTube / Vimeo URL:</label>
+                          <input 
+                            type="text"
+                            placeholder="https://example.com/promo.mp4 or YouTube / Vimeo link"
+                            value={settings.promoModal.videoUrl?.startsWith('idb:') ? '' : (settings.promoModal.videoUrl || '')}
+                            onChange={(e) => {
+                              const updated = {
+                                ...settings,
+                                promoModal: { ...settings.promoModal, videoUrl: e.target.value }
+                              };
+                              setSettings(updated);
+                              saveClinicSettings(updated);
+                            }}
+                            className="form-input"
+                          />
+                        </div>
+
+                        {/* Video Playback Options */}
+                        <div className="image-fit-control">
+                          <label className="field-label-sm">Video Playback Settings:</label>
+                          <div className="fit-options-group">
+                            <label className="fit-pill">
+                              <input 
+                                type="checkbox"
+                                checked={settings.promoModal.videoAutoplay !== false}
+                                onChange={(e) => {
+                                  const updated = {
+                                    ...settings,
+                                    promoModal: { ...settings.promoModal, videoAutoplay: e.target.checked }
+                                  };
+                                  setSettings(updated);
+                                  saveClinicSettings(updated);
+                                }}
+                              />
+                              <div className="fit-pill-text">
+                                <strong>Autoplay When Popup Appears</strong>
+                                <span>Starts playing automatically (muted by default to comply with browser policies).</span>
+                              </div>
+                            </label>
+
+                            <label className="fit-pill">
+                              <input 
+                                type="checkbox"
+                                checked={settings.promoModal.videoLoop !== false}
+                                onChange={(e) => {
+                                  const updated = {
+                                    ...settings,
+                                    promoModal: { ...settings.promoModal, videoLoop: e.target.checked }
+                                  };
+                                  setSettings(updated);
+                                  saveClinicSettings(updated);
+                                }}
+                              />
+                              <div className="fit-pill-text">
+                                <strong>Loop Video Continuously</strong>
+                                <span>Replays the video seamlessly from start to finish.</span>
+                              </div>
+                            </label>
+
+                            <label className="fit-pill">
+                              <input 
+                                type="checkbox"
+                                checked={settings.promoModal.videoControls !== false}
+                                onChange={(e) => {
+                                  const updated = {
+                                    ...settings,
+                                    promoModal: { ...settings.promoModal, videoControls: e.target.checked }
+                                  };
+                                  setSettings(updated);
+                                  saveClinicSettings(updated);
+                                }}
+                              />
+                              <div className="fit-pill-text">
+                                <strong>Show Video Player Bar</strong>
+                                <span>Allows visitors to pause, seek, and adjust volume on the video.</span>
+                              </div>
+                            </label>
+                          </div>
+                        </div>
+
+                        {/* Popup Modal Width Selector */}
+                        <div className="image-fit-control">
+                          <label className="field-label-sm">Popup Modal Card Width:</label>
+                          <div className="card-width-pills">
+                            {[
+                              { id: 'compact', label: 'Compact (440px)', desc: 'Best for 9:16 vertical video reels' },
+                              { id: 'standard', label: 'Standard (540px)', desc: 'Balanced for 1:1 or 4:5 videos' },
+                              { id: 'wide', label: 'Wide (680px)', desc: 'Best for 16:9 landscape videos' }
+                            ].map((w) => (
+                              <button
+                                key={w.id}
+                                type="button"
+                                className={`width-option-btn ${(settings.promoModal.cardWidth || 'standard') === w.id ? 'active' : ''}`}
+                                onClick={() => {
+                                  const updated = {
+                                    ...settings,
+                                    promoModal: { ...settings.promoModal, cardWidth: w.id }
+                                  };
+                                  setSettings(updated);
+                                  saveClinicSettings(updated);
+                                }}
+                              >
+                                <strong>{w.label}</strong>
+                                <span>{w.desc}</span>
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* Toggle to show/hide text below video */}
+                        <div className="image-fit-control">
+                          <label className="field-label-sm">Popup Display Layout:</label>
+                          <div className="display-layout-toggle-card">
+                            <div className="enable-info">
+                              <strong>Show Text Headline & Details Below Video</strong>
+                              <p>Turn this OFF if your video already contains all text and offers, and you just want the video and booking button.</p>
                             </div>
                             <label className="switch">
                               <input 
@@ -1762,8 +2069,8 @@ export default function AdminPage() {
         /* Content Type Selector */
         .content-type-selector {
           display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 16px;
+          grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+          gap: 14px;
         }
         .type-card {
           display: flex;
@@ -1841,6 +2148,17 @@ export default function AdminPage() {
           align-items: center;
           justify-content: center;
           overflow: hidden;
+        }
+        .video-admin-preview-box {
+          background: #0d0f0c;
+        }
+        .video-admin-player {
+          max-width: 100%;
+          max-height: 360px;
+          width: auto;
+          height: auto;
+          display: block;
+          margin: 0 auto;
         }
         .image-preview-thumb {
           max-width: 100%;

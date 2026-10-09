@@ -23,11 +23,16 @@ export const DEFAULT_SETTINGS = {
     subtitle: 'Exclusive Clinic Offer • Revere Massage & Wellness',
     bodyText: 'Experience deep restorative relief. Book your Registered Massage Therapy, Physiotherapy, or Active Rehab session online with instant confirmation.',
     badgeText: 'Special Announcement',
-    contentType: 'image', // 'image' | 'script'
+    contentType: 'image', // 'image' | 'video' | 'script'
     imageUrl: '', // Uploaded image data URL or external URL
+    videoUrl: '', // Uploaded video (IndexedDB/blob/dataURL) or external MP4/WebM/YouTube/Vimeo link
+    videoAutoplay: true, // Autoplay video (muted)
+    videoLoop: true, // Loop video continuously
+    videoMuted: true, // Start muted to satisfy browser autoplay policies
+    videoControls: true, // Show video player controls
     imageFit: 'contain', // 'contain' (Always Fit - never cut off) | 'cover' (Crop & Fill) | 'natural' (Full Natural Height)
     cardWidth: 'standard', // 'compact' (440px) | 'standard' (540px) | 'wide' (660px)
-    showTextDetails: true, // Toggle text block below image
+    showTextDetails: true, // Toggle text block below image/video
     animationScript: '', // Custom animation code, embed script, or SVG/Lottie/HTML
     ctaText: 'Book Appointment Now',
     ctaUrl: 'https://reverewellness.janeapp.com/',
@@ -42,6 +47,90 @@ export const DEFAULT_SETTINGS = {
   // Admin security
   adminPin: 'revere2026'
 };
+
+/**
+ * IndexedDB helper for storing larger media files (such as MP4/WebM videos up to 50MB)
+ * to avoid localStorage 5MB quota restrictions
+ */
+const DB_NAME = 'RevereMediaDB';
+const STORE_NAME = 'media';
+
+export function openMediaDB() {
+  return new Promise((resolve) => {
+    if (typeof window === 'undefined' || !window.indexedDB) {
+      resolve(null);
+      return;
+    }
+    const request = indexedDB.open(DB_NAME, 1);
+    request.onupgradeneeded = (e) => {
+      const db = e.target.result;
+      if (!db.objectStoreNames.contains(STORE_NAME)) {
+        db.createObjectStore(STORE_NAME);
+      }
+    };
+    request.onsuccess = (e) => resolve(e.target.result);
+    request.onerror = () => resolve(null);
+  });
+}
+
+export async function saveMediaItem(key, data) {
+  const db = await openMediaDB();
+  if (!db) return false;
+  return new Promise((resolve) => {
+    try {
+      const tx = db.transaction(STORE_NAME, 'readwrite');
+      const store = tx.objectStore(STORE_NAME);
+      store.put(data, key);
+      tx.oncomplete = () => resolve(true);
+      tx.onerror = () => resolve(false);
+    } catch (_) {
+      resolve(false);
+    }
+  });
+}
+
+export async function getMediaItem(key) {
+  const db = await openMediaDB();
+  if (!db) return null;
+  return new Promise((resolve) => {
+    try {
+      const tx = db.transaction(STORE_NAME, 'readonly');
+      const store = tx.objectStore(STORE_NAME);
+      const req = store.get(key);
+      req.onsuccess = () => resolve(req.result || null);
+      req.onerror = () => resolve(null);
+    } catch (_) {
+      resolve(null);
+    }
+  });
+}
+
+export async function deleteMediaItem(key) {
+  const db = await openMediaDB();
+  if (!db) return;
+  try {
+    const tx = db.transaction(STORE_NAME, 'readwrite');
+    tx.objectStore(STORE_NAME).delete(key);
+  } catch (_) {}
+}
+
+/**
+ * Format YouTube or Vimeo links into embeddable autoplay iframe URLs
+ */
+export function formatVideoEmbedUrl(url) {
+  if (!url) return '';
+  // Check YouTube
+  const ytMatch = url.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([\w-]{11})/);
+  if (ytMatch && ytMatch[1]) {
+    return `https://www.youtube-nocookie.com/embed/${ytMatch[1]}?autoplay=1&mute=1&loop=1&playlist=${ytMatch[1]}&playsinline=1&rel=0`;
+  }
+  // Check Vimeo
+  const vimeoMatch = url.match(/vimeo\.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|album\/(\d+)\/video\/|)(\d+)/);
+  if (vimeoMatch && vimeoMatch[3]) {
+    return `https://player.vimeo.com/video/${vimeoMatch[3]}?autoplay=1&muted=1&loop=1&autopause=0`;
+  }
+  return url;
+}
 
 /**
  * Format Date to local YYYY-MM-DDTHH:mm string suitable for <input type="datetime-local">
