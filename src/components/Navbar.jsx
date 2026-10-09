@@ -91,22 +91,22 @@ export default function Navbar() {
                 <span className="badge-text-desktop">ICBC Approved & Direct Billing</span>
                 <span className="badge-text-mobile">ICBC Direct Billing</span>
               </span>
-              <span className="banner-divider banner-hide-tablet">•</span>
-              <span className="banner-item banner-hide-tablet">
+              <span className="banner-divider banner-hide-1380">•</span>
+              <span className="banner-item banner-hide-1380">
                 <Clock size={13} /> Open 7 Days: <strong>6:30 AM – 8:00 PM</strong>
               </span>
             </div>
             <div className="banner-right">
-              <a href="tel:6045030855" className="banner-link">
+              <a href="tel:6045030855" className="banner-link banner-phone">
                 <Phone size={13} /> (604) 503-0855
               </a>
-              <span className="banner-divider">|</span>
-              <a href="mailto:info@reverewellness.ca" className="banner-link">
+              <span className="banner-divider banner-hide-1280">|</span>
+              <a href="mailto:info@reverewellness.ca" className="banner-link banner-hide-1280">
                 <Mail size={13} /> info@reverewellness.ca
               </a>
-              <span className="banner-divider">|</span>
-              <Link to="/location" className="banner-link">
-                <MapPin size={13} /> Suite 210 - 7110 120 St, Surrey, BC
+              <span className="banner-divider banner-hide-tablet">|</span>
+              <Link to="/location" className="banner-link banner-hide-tablet" title="Suite 210 - 7110 120 St, Surrey, BC">
+                <MapPin size={13} /> Suite 210, Surrey BC
               </Link>
             </div>
           </div>
@@ -354,30 +354,37 @@ export default function Navbar() {
         }
 
         .top-banner {
-          font-size: 0.82rem;
+          font-size: 0.81rem;
           padding: 8px 0;
           background: #181c16;
           border-bottom: 1px solid rgba(216, 178, 141, 0.25);
           color: #ffffff;
+          white-space: nowrap !important;
         }
 
         .banner-content {
           display: flex;
           justify-content: space-between;
           align-items: center;
+          gap: 16px;
+          white-space: nowrap !important;
         }
         .banner-left, .banner-right {
           display: flex;
           align-items: center;
-          gap: 14px;
+          gap: 12px;
+          white-space: nowrap !important;
+          flex-shrink: 0;
         }
         .banner-google-rating {
           display: inline-flex;
           align-items: center;
-          gap: 7px;
+          gap: 6px;
           color: #ffffff;
           font-weight: 500;
           transition: var(--transition);
+          white-space: nowrap !important;
+          flex-shrink: 0;
         }
         .banner-google-rating:hover {
           color: #d8b28d;
@@ -386,9 +393,11 @@ export default function Navbar() {
           display: inline-flex;
           align-items: center;
           gap: 2px;
+          flex-shrink: 0;
         }
         .banner-rating-text {
           color: #ffffff;
+          white-space: nowrap !important;
         }
         .banner-rating-text strong {
           color: #e0a96d;
@@ -396,12 +405,15 @@ export default function Navbar() {
         }
         .banner-rating-text-mobile {
           display: none;
+          white-space: nowrap !important;
         }
         .badge-text-desktop {
           display: inline;
+          white-space: nowrap !important;
         }
         .badge-text-mobile {
           display: none;
+          white-space: nowrap !important;
         }
         .banner-badge {
           display: inline-flex;
@@ -409,15 +421,20 @@ export default function Navbar() {
           gap: 6px;
           color: #d8b28d;
           font-weight: 600;
+          white-space: nowrap !important;
+          flex-shrink: 0;
         }
         .banner-divider {
           opacity: 0.35;
+          flex-shrink: 0;
         }
         .banner-item {
           display: inline-flex;
           align-items: center;
           gap: 6px;
           opacity: 0.95;
+          white-space: nowrap !important;
+          flex-shrink: 0;
         }
         .banner-item strong {
           color: #ffffff;
@@ -428,9 +445,14 @@ export default function Navbar() {
           gap: 6px;
           color: var(--primary-100);
           transition: var(--transition);
+          white-space: nowrap !important;
+          flex-shrink: 0;
         }
         .banner-link:hover {
           color: #ffffff;
+        }
+        .banner-hide-1380, .banner-hide-1280 {
+          display: inline-flex;
         }
         .icon-gold {
           color: #d8b28d;
@@ -499,8 +521,8 @@ export default function Navbar() {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          height: 92px;
-          gap: 20px;
+          height: 86px;
+          gap: 16px;
         }
 
         /* Official Brand Logo */
@@ -509,7 +531,7 @@ export default function Navbar() {
           align-items: center;
           background: var(--primary-700);
           border: 1px solid rgba(216, 178, 141, 0.4);
-          padding: 9px 20px;
+          padding: 8px 16px;
           border-radius: 12px;
           box-shadow: 0 4px 16px rgba(51, 50, 19, 0.35);
           transition: var(--transition);
@@ -522,9 +544,9 @@ export default function Navbar() {
           box-shadow: 0 8px 22px rgba(51, 50, 19, 0.45);
         }
         .brand-logo-img {
-          height: 48px;
+          height: 44px;
           width: auto;
-          max-width: 260px;
+          max-width: 240px;
           object-fit: contain;
           display: block;
         }
@@ -533,15 +555,16 @@ export default function Navbar() {
         .desktop-nav {
           display: flex;
           align-items: center;
-          gap: 22px;
+          gap: clamp(10px, 1.3vw, 18px);
           flex-wrap: nowrap;
+          flex-shrink: 1;
         }
         .nav-link {
-          font-size: 0.94rem;
+          font-size: clamp(0.85rem, 0.9vw, 0.92rem);
           font-weight: 600;
           color: var(--primary-900);
           white-space: nowrap;
-          padding: 8px 0;
+          padding: 6px 0;
           position: relative;
           transition: var(--transition);
           display: inline-flex;
@@ -675,10 +698,10 @@ export default function Navbar() {
         .btn-book-header {
           display: inline-flex;
           align-items: center;
-          gap: 9px;
-          padding: 13px 26px;
+          gap: 8px;
+          padding: 11px 22px;
           border-radius: 9999px;
-          font-size: 0.96rem;
+          font-size: 0.91rem;
           font-weight: 700;
           background: linear-gradient(135deg, var(--primary-700) 0%, var(--primary-900) 100%);
           color: #ffffff;
@@ -785,30 +808,40 @@ export default function Navbar() {
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes slideLeft { from { transform: translateX(100%); } to { transform: translateX(0); } }
 
-        @media (max-width: 1240px) {
-          .desktop-nav {
-            gap: 14px;
-          }
-          .nav-link {
-            font-size: 0.88rem;
-          }
-          .brand-logo-img {
-            height: 44px;
+        @media (max-width: 1380px) {
+          .banner-hide-1380 {
+            display: none !important;
           }
         }
 
-        @media (max-width: 1040px) {
+        @media (max-width: 1260px) {
+          .banner-hide-1280 {
+            display: none !important;
+          }
           .desktop-nav {
-            display: none;
+            gap: 11px;
+          }
+          .nav-link {
+            font-size: 0.86rem;
+          }
+          .btn-book-header {
+            padding: 10px 16px;
+            font-size: 0.88rem;
+          }
+        }
+
+        @media (max-width: 1140px) {
+          .desktop-nav {
+            display: none !important;
           }
           .mobile-toggle-btn {
-            display: block;
+            display: block !important;
           }
           .nav-container {
-            height: 82px;
+            height: 80px;
           }
           .brand-logo-img {
-            height: 42px;
+            height: 40px;
           }
           .banner-hide-tablet {
             display: none !important;
