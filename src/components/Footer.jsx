@@ -95,12 +95,12 @@ export default function Footer() {
               <ul className="footer-links">
                 <li><Link to="/practitioners">Our Practitioners & Bios</Link></li>
                 <li><Link to="/services">All Services & Durations</Link></li>
-                <li><Link to="/#about">About Our Clinic</Link></li>
+                <li><Link to="/about">About Our Clinic</Link></li>
                 <li><Link to="/#insurance">ICBC & Direct Billing</Link></li>
-                <li><Link to="/#policies">24-Hour Cancellation Policy</Link></li>
-                <li><Link to="/#location">Free Basement Parking</Link></li>
-                <li><Link to="/#faqs">Frequently Asked Questions</Link></li>
-                <li><Link to="/#contact">Contact & Location</Link></li>
+                <li><Link to="/policies">Clinic Policies (24h Cancellation)</Link></li>
+                <li><Link to="/location">Free Basement Parking & Location</Link></li>
+                <li><Link to="/faq">Frequently Asked Questions</Link></li>
+                <li><Link to="/contact">Contact Us</Link></li>
               </ul>
             </div>
 

@@ -59,6 +59,9 @@ export default function Navbar() {
 
   const isServicesPage = location.pathname === '/services';
   const isPractitionersPage = location.pathname.startsWith('/practitioners');
+  const isContactPage = location.pathname === '/contact';
+  const isFaqPage = location.pathname === '/faq';
+  const isAboutPage = ['/about', '/location', '/policies'].includes(location.pathname);
   const isHomePage = location.pathname === '/';
   const isTransparent = isHomePage && !isScrolled;
 
@@ -102,7 +105,7 @@ export default function Navbar() {
                 <Mail size={13} /> info@reverewellness.ca
               </a>
               <span className="banner-divider">|</span>
-              <Link to="/#location" className="banner-link">
+              <Link to="/location" className="banner-link">
                 <MapPin size={13} /> Suite 210 - 7110 120 St, Surrey, BC
               </Link>
             </div>
@@ -189,7 +192,7 @@ export default function Navbar() {
               onMouseEnter={handleAboutEnter}
               onMouseLeave={handleAboutLeave}
             >
-              <Link to="/#about" className="nav-link dropdown-trigger">
+              <Link to="/about" className={`nav-link dropdown-trigger ${isAboutPage ? 'active-nav-link' : ''}`}>
                 <span>About Us</span>
                 <ChevronDown size={14} className={`chevron ${aboutDropdownOpen ? 'rotate' : ''}`} />
               </Link>
@@ -202,7 +205,7 @@ export default function Navbar() {
                       <p>Meet our 18 licensed therapists & bios</p>
                     </div>
                   </Link>
-                  <Link to="/#about" className="dropdown-item" onClick={() => setAboutDropdownOpen(false)}>
+                  <Link to="/about" className="dropdown-item" onClick={() => setAboutDropdownOpen(false)}>
                     <div className="dropdown-icon-box sage"><FileText size={16} /></div>
                     <div>
                       <strong>Our Story & Clinic</strong>
@@ -216,21 +219,21 @@ export default function Navbar() {
                       <p>4.8 ★ Rating • 672+ Patient Reviews</p>
                     </div>
                   </Link>
-                  <Link to="/#location" className="dropdown-item" onClick={() => setAboutDropdownOpen(false)}>
+                  <Link to="/location" className="dropdown-item" onClick={() => setAboutDropdownOpen(false)}>
                     <div className="dropdown-icon-box dark"><MapPin size={16} /></div>
                     <div>
                       <strong>Parking & Location</strong>
                       <p>Free stalls #36–38 & driving directions</p>
                     </div>
                   </Link>
-                  <Link to="/#policies" className="dropdown-item" onClick={() => setAboutDropdownOpen(false)}>
+                  <Link to="/policies" className="dropdown-item" onClick={() => setAboutDropdownOpen(false)}>
                     <div className="dropdown-icon-box sage"><FileText size={16} /></div>
                     <div>
                       <strong>Clinic Policies</strong>
                       <p>24-hour cancellation & terms of care</p>
                     </div>
                   </Link>
-                  <Link to="/#contact" className="dropdown-item" onClick={() => setAboutDropdownOpen(false)}>
+                  <Link to="/contact" className="dropdown-item" onClick={() => setAboutDropdownOpen(false)}>
                     <div className="dropdown-icon-box green"><Mail size={16} /></div>
                     <div>
                       <strong>Contact Us</strong>
@@ -242,7 +245,8 @@ export default function Navbar() {
             </div>
 
             <Link to="/#insurance" className="nav-link">Direct Billing & ICBC</Link>
-            <Link to="/#faqs" className="nav-link">FAQs</Link>
+            <Link to="/faq" className={`nav-link ${isFaqPage ? 'active-nav-link' : ''}`}>FAQs</Link>
+            <Link to="/contact" className={`nav-link ${isContactPage ? 'active-nav-link' : ''}`}>Contact Us</Link>
           </nav>
 
           {/* Right Action: Single Big Book Appointment Button */}
@@ -301,15 +305,15 @@ export default function Navbar() {
                 
                 <div className="mobile-nav-group-title" style={{ marginTop: '12px' }}>About Us & Clinic Info</div>
                 <Link to="/practitioners" onClick={() => setMobileMenuOpen(false)}>• Meet Our Practitioners & Bios</Link>
-                <Link to="/#about" onClick={() => setMobileMenuOpen(false)}>• Our Story & Clinic</Link>
+                <Link to="/about" onClick={() => setMobileMenuOpen(false)}>• Our Story & Clinic</Link>
                 <Link to="/#reviews" onClick={() => setMobileMenuOpen(false)}>• Google Reviews (4.8 ★ • 672+ Reviews)</Link>
-                <Link to="/#location" onClick={() => setMobileMenuOpen(false)}>• Free Parking & Location (Stalls 36-38)</Link>
-                <Link to="/#policies" onClick={() => setMobileMenuOpen(false)}>• Clinic Policies (24h Cancellation)</Link>
-                <Link to="/#contact" onClick={() => setMobileMenuOpen(false)}>• Contact Us</Link>
+                <Link to="/location" onClick={() => setMobileMenuOpen(false)}>• Free Parking & Location (Stalls 36-38)</Link>
+                <Link to="/policies" onClick={() => setMobileMenuOpen(false)}>• Clinic Policies (24h Cancellation)</Link>
 
-                <div className="mobile-nav-group-title" style={{ marginTop: '12px' }}>Insurance & Questions</div>
+                <div className="mobile-nav-group-title" style={{ marginTop: '12px' }}>Help & Contact</div>
                 <Link to="/#insurance" onClick={() => setMobileMenuOpen(false)}>Direct Billing & ICBC</Link>
-                <Link to="/#faqs" onClick={() => setMobileMenuOpen(false)}>FAQs</Link>
+                <Link to="/faq" onClick={() => setMobileMenuOpen(false)}>Frequently Asked Questions (FAQ)</Link>
+                <Link to="/contact" onClick={() => setMobileMenuOpen(false)} style={{ fontWeight: '600', color: 'var(--color-primary)' }}>Contact Us</Link>
               </nav>
 
               <div className="drawer-footer">
